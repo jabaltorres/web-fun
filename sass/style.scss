@@ -12,7 +12,29 @@
 @import "buttons";
 @import "forms";
 
+%color-warning{
+  background-color: red;
+}
 
+%color-success{
+  background-color: green;
+}
+
+%color-info{
+  background-color: #eee;
+}
+
+.warning{
+  @extend %color-warning;
+}
+
+.success{
+  @extend %color-success;
+}
+
+.info{
+  @extend %color-info;
+}
 
 
 body{
@@ -42,19 +64,41 @@ header{
 }
 
 .container{
-  background-color: #eee;
+  // background-color: #eee;
   width:80%;
   margin: 20px 10% 20px;
   padding:20px;
   @include medium-screen{
-    background-color: red;
+    // background-color: red;
   }
   @include large-screen{
-    background-color: yellow;
+    // background-color: yellow;
   }
 }
 section{
   // background-color: yellow;
+  border:solid thick $color-accent;
+  @extend %margin-bottom;
+  padding:20px;
+  hgroup{
+    background-color: yellow;
+    @extend %margin-bottom;
+  }
+}
+
+.swatches{
+  li{
+    width:100px;
+    height:100px;
+    // background-color: orange;
+    text-align: center;
+    list-style:none;
+  }
+  @include medium-screen{
+    li{
+      display: inline-block;
+    }
+  }
 }
 article{
   // width:400px;
@@ -66,10 +110,4 @@ article{
   footer{
     border-top: solid thin black;
   }
-}
-
-button{
-  padding: 10px 20px;
-  background-color: #ccc;
-  margin-bottom: 20px;
 }

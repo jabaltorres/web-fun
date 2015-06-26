@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box; }
 
-nav, .hero, form, form label, form textarea, ul, header, article {
+nav, .hero, form, form label, form textarea, ul, header, section, section hgroup, article {
   margin-bottom: 20px; }
 
 a {
@@ -31,20 +31,26 @@ h1 {
   line-height: 1em; }
 
 nav {
-  border-top: solid thin rgba(0, 0, 0, 0.2);
-  border-bottom: solid thin rgba(0, 0, 0, 0.2);
-  height: 60px; }
+  border-top: solid thin rgba(0, 0, 0, 0.2); }
   nav li {
-    display: inline-block; }
+    display: block;
+    border-bottom: solid thin rgba(0, 0, 0, 0.2); }
   nav a {
-    padding: 20px 20px 15px 20px;
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
+    padding: 20px;
+    display: block;
     text-decoration: none; }
     nav a:hover {
-      border-bottom: solid 5px #d8a32a;
       background-color: rgba(0, 0, 0, 0.2); }
+  @media only screen and (min-width: 40.063em) {
+    nav {
+      height: 60px;
+      border-bottom: solid thin rgba(0, 0, 0, 0.2); }
+      nav li {
+        display: inline-block;
+        border-bottom: none; }
+      nav a {
+        margin-left: 5px;
+        margin-right: 5px; } }
 
 .hero {
   border: solid thick #0c1335; }
@@ -55,11 +61,9 @@ nav {
 
 button, .button {
   width: 100%;
-  display: block; }
-  button.warning, .button.warning {
-    background-color: red; }
-  button.success, .button.success {
-    background-color: green; }
+  display: block;
+  padding: 10px 20px;
+  margin-bottom: 20px; }
 
 .btn-med {
   max-width: 50%; }
@@ -85,6 +89,15 @@ form {
       margin-left: auto;
       margin-right: auto; } }
 
+.warning {
+  background-color: red; }
+
+.success {
+  background-color: green; }
+
+.info {
+  background-color: #eee; }
+
 body {
   font-family: 'Gudea', sans-serif; }
 
@@ -99,16 +112,24 @@ header {
   text-align: center; }
 
 .container {
-  background-color: #eee;
   width: 80%;
   margin: 20px 10% 20px;
   padding: 20px; }
-  @media only screen and (min-width: 40.063em) {
-    .container {
-      background-color: red; } }
-  @media only screen and (min-width: 64.063em) {
-    .container {
-      background-color: yellow; } }
+
+section {
+  border: solid thick #d8a32a;
+  padding: 20px; }
+  section hgroup {
+    background-color: yellow; }
+
+.swatches li {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  list-style: none; }
+@media only screen and (min-width: 40.063em) {
+  .swatches li {
+    display: inline-block; } }
 
 article {
   display: block;
@@ -117,8 +138,3 @@ article {
   border: solid thin black; }
   article footer {
     border-top: solid thin black; }
-
-button {
-  padding: 10px 20px;
-  background-color: #ccc;
-  margin-bottom: 20px; }

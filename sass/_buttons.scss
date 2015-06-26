@@ -1,16 +1,9 @@
 button, .button{
   width:100%;
   display: block;
-
-  &.warning{
-    background-color: red;
-  }
-  &.success{
-    background-color: green;
-  }
+  padding: 10px 20px;
+  margin-bottom: 20px;
 }
 .btn-med{
   max-width:50%;
 }
-
-
