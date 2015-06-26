@@ -1,0 +1,21 @@
+nav{
+  // background-color: green;
+  border-top:solid thin $color-light-shade;
+  border-bottom:solid thin $color-light-shade;
+  height:60px;
+  @extend %margin-bottom;
+  li{
+    display: inline-block;
+  }
+  a{
+    padding:20px 20px 15px 20px;
+    display: inline-block;
+    margin-left:5px;
+    margin-right:5px;
+    text-decoration: none;
+    &:hover{
+      border-bottom:solid 5px $color-accent;
+      background-color: $color-light-shade;
+    }
+  }
+}

@@ -1,0 +1,175 @@
+$black: rgba(0,0,0,0.9);
+$gold: #d8a32a;
+$navy: rgb(12,19,53);
+$pale-sky: #6b717f;
+$onyx: #353839;
+
+$color-shadow: rgba($black, .125);
+$color-light-shade: rgba($black, .2);
+$color-dark-shade: $onyx;
+$color-primary: $navy;
+$color-accent: $gold;
+// $color-text: ;
+
+$spacing-value: 20px;
+
+%block{
+  display:block;
+}
+
+%margin-bottom{
+  margin-bottom:$spacing-value;
+}
+%uppercase{
+  text-transform: uppercase;
+}
+%transition {
+  -webkit-transition: all 0.3s ease-in-out;
+     -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+       -o-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+}
+%img-flex{
+  width:100%;
+  height:auto;
+}
+%round{
+  border-radius: 100%;
+}
+%m-lr-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+@mixin rotate( $val: 90deg ) {
+  -webkit-transform: rotate($val);
+     -moz-transform: rotate($val);
+      -ms-transform: rotate($val);
+       -o-transform: rotate($val);
+          transform: rotate($val);
+}
+@mixin flexbox{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -ms-flex-align: stetch;
+}
+@mixin flexbox-val($val:1) {
+  -webkit-box-flex: $val;
+     -moz-box-flex: $val;
+      -webkit-flex: $val;
+         -moz-flex: $val;
+          -ms-flex: $val;
+              flex: $val;
+}
+// a mixin for height and line-height
+@mixin ht-lh($Value) {
+    height: ($Value) + px;
+    line-height: ($Value) + px;
+}
+// a mixin for height, width
+@mixin ht-w($Value) {
+    height: ($Value) + px;
+    width: ($Value) + px;
+}
+// a mixin for height, width, and line-height
+@mixin ht-w-lh($Value) {
+    height: ($Value) + px;
+    width: ($Value) + px;
+    line-height: ($Value) + px;
+}
+
+//this is used within the botttom-cta component
+//I believe this was used in the the Training Center project
+@mixin vertical-center{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+// a mixin for the social-search sliding effect within the header
+@mixin header-expand{
+  height:0;
+  overflow-y: hidden;
+  -webkit-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
+     -moz-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
+      -ms-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
+       -o-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
+          transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
+}
+// $h = horizontal length
+// $v = vertical length
+// $b = blur radius
+// $s = spread radius
+// $c = shadow color
+@mixin box-shadow($h: 0px, $v:6px, $b: 24px, $s: -01px, $c: rgba(0,0,0,0.2)){
+  -webkit-box-shadow: $h $v $b $s $c;
+     -moz-box-shadow: $h $v $b $s $c;
+          box-shadow: $h $v $b $s $c;
+}
+a{
+  color:$gold;
+  &:focus{
+    color:$gold;
+  }
+  @extend %transition;
+  // &:link{}
+  // &:visited{}
+  // &:active{}
+  &:hover{
+    color: $color-primary;
+  }
+}
+
+time{
+  color:$color-dark-shade;
+}
+// Media Query Mixins
+@mixin small-screen{
+  @media only screen and (max-width: 40em) {
+    @content;
+  }
+}
+@mixin medium-screen{
+  @media only screen and (min-width: 40.063em) {
+    @content;
+  }
+}
+@mixin medium-screen-only{
+  @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+    @content;
+  }
+}
+@mixin large-screen{
+  @media only screen and (min-width: 64.063em) {
+    @content;
+  }
+}
+@mixin large-screen-only{
+  @media only screen and (min-width: 64.063em) and (max-width: 90em) {
+    @content;
+  }
+}
+@mixin xlarge-screen{
+  @media only screen and (min-width: 90.063em) {
+    @content;
+  }
+}
+@mixin xlarge-screen-only{
+  @media only screen and (min-width: 90.063em) and (max-width: 120em) {
+    @content;
+  }
+}
+@mixin xxlarge-screen{
+  @media only screen and (min-width: 120.063em) {
+    @content;
+  }
+}

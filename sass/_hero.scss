@@ -1,0 +1,9 @@
+.hero{
+  border:solid thick $color-primary;
+  @extend %margin-bottom;
+  img{
+    width:100%;
+    height:auto;
+    display: inline-block;
+  }
+}

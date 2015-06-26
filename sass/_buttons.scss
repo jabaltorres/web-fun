@@ -1,0 +1,16 @@
+button, .button{
+  width:100%;
+  display: block;
+
+  &.warning{
+    background-color: red;
+  }
+  &.success{
+    background-color: green;
+  }
+}
+.btn-med{
+  max-width:50%;
+}
+
+

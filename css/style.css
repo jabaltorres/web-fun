@@ -3,8 +3,25 @@
   padding: 0;
   box-sizing: border-box; }
 
-body {
-  font-family: 'Gudea', sans-serif; }
+nav, .hero, form, form label, form textarea, ul, header, article {
+  margin-bottom: 20px; }
+
+a {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+
+a {
+  color: #d8a32a; }
+  a:focus {
+    color: #d8a32a; }
+  a:hover {
+    color: #0c1335; }
+
+time {
+  color: #353839; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Old Standard TT', serif; }
@@ -13,28 +30,89 @@ h1 {
   font-size: 3em;
   line-height: 1em; }
 
+nav {
+  border-top: solid thin rgba(0, 0, 0, 0.2);
+  border-bottom: solid thin rgba(0, 0, 0, 0.2);
+  height: 60px; }
+  nav li {
+    display: inline-block; }
+  nav a {
+    padding: 20px 20px 15px 20px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-decoration: none; }
+    nav a:hover {
+      border-bottom: solid 5px #d8a32a;
+      background-color: rgba(0, 0, 0, 0.2); }
+
+.hero {
+  border: solid thick #0c1335; }
+  .hero img {
+    width: 100%;
+    height: auto;
+    display: inline-block; }
+
+button, .button {
+  width: 100%;
+  display: block; }
+  button.warning, .button.warning {
+    background-color: red; }
+  button.success, .button.success {
+    background-color: green; }
+
+.btn-med {
+  max-width: 50%; }
+
+form {
+  border: solid thin black;
+  padding: 20px; }
+  form label {
+    display: block; }
+  form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px; }
+  form textarea {
+    width: 100%;
+    min-height: 6em;
+    padding: 1em;
+    line-height: 1.6em; }
+  @media only screen and (min-width: 40.063em) {
+    form {
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto; } }
+
+body {
+  font-family: 'Gudea', sans-serif; }
+
 ul {
   display: inline-block;
-  padding: 10px;
-  margin-bottom: 20px; }
+  padding: 10px; }
 
 p {
   margin-bottom: 2em; }
 
 header {
-  text-align: center;
-  margin-bottom: 20px; }
+  text-align: center; }
 
 .container {
   background-color: #eee;
   width: 80%;
   margin: 20px 10% 20px;
   padding: 20px; }
+  @media only screen and (min-width: 40.063em) {
+    .container {
+      background-color: red; } }
+  @media only screen and (min-width: 64.063em) {
+    .container {
+      background-color: yellow; } }
 
 article {
-  width: 400px;
   display: block;
-  margin: 0 auto 20px;
+  margin: 0 auto;
   padding: 20px;
   border: solid thin black; }
   article footer {

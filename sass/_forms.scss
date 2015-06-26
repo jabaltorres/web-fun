@@ -1,0 +1,27 @@
+form{
+  border:solid thin black;
+  padding:20px;
+  @extend %margin-bottom;
+  label{
+    display: block;
+    @extend %margin-bottom;
+  }
+  input{
+    display: block;
+    width:100%;
+    padding:10px;
+    margin-bottom: 20px;
+  }
+  textarea{
+    width:100%;
+    min-height:6em;
+    padding:1em;
+    line-height: 1.6em;
+    @extend %margin-bottom;
+  }
+  @include medium-screen{
+    max-width:400px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
