@@ -123,15 +123,15 @@ header {
   width: 80%;
   margin: 20px 10% 20px;
   padding: 20px; }
-  @media only screen and (min-width: 64.063em) {
+  @media only screen and (min-width: 40.063em) {
     .container {
-      max-width: 90em; } }
+      max-width: 70em;
+      margin-left: auto;
+      margin-right: auto; } }
 
 section {
   border: solid thick #d8a32a;
   padding: 20px; }
-  section hgroup {
-    background-color: yellow; }
 
 .swatches li {
   width: 100px;
@@ -149,3 +149,11 @@ article {
   border: solid thin black; }
   article footer {
     border-top: solid thin black; }
+
+footer {
+  background-color: #eee;
+  padding: 20px; }
+
+.maintainers li {
+  display: block;
+  margin-bottom: 20px; }
