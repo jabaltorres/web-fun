@@ -13,11 +13,11 @@
 				<h2>Creating Truly Awesome Shit</h2>
 			</header>
 			<nav>
-				<li><a href="#" alt="" title="" target="">HOME</a></li>
-				<li><a href="#" alt="" title="" target="">ABOUT</a></li>
-				<li><a href="#" alt="" title="" target="">WORK</a></li>
-				<li><a href="#" alt="" title="" target="">BLOG</a></li>
-				<li><a href="#" alt="" title="" target="">CONTACT</a></li>
+				<li><a href="#" alt="" title="" target="">Link 1</a></li>
+				<li><a href="#" alt="" title="" target="">Link 2</a></li>
+				<li><a href="#" alt="" title="" target="">Link 3</a></li>
+				<li><a href="#" alt="" title="" target="">Link 4</a></li>
+				<li><a href="#" alt="" title="" target="">Link 5</a></li>
 			</nav>
 			<div class="hero">
 				<img src="http://placehold.it/640x360&text=16:9" alt="Image Title">
@@ -32,11 +32,19 @@
 					<p>I think it would be a good idea to make this a journal style web project. Type out my crazy thoughts and treat them as issues that need to be resolved. Gotta remember to take it one step at a time. That's the only way that I'm going to see progress here</p>
 					<p>This should be my project that I blog about. I should keep track of updates and changes</p>
 					
-					<form name="contactform" method="post" action="send_form_email.php">
-						<label for="">Magic Box</label>
-						<input type="text" placeholder="This is a text input">
-						<textarea placeholder="This is a textarea"></textarea>
-						<button class="info">Submit</button>
+					<form method="post" action="acknowledge.php">
+						<label for="name">Name:</label>
+					  <input type="text" name="name" id="name">
+
+
+					  <label for="email">Email:</label>
+					  <input type="email" name="email" id="email">
+
+
+					  <label for="comments">Comments:</label>
+					  <textarea name="comments" id="comments"></textarea>
+
+						<input type="submit" name="send" value="Send Message" class="button">
 					</form>
 
 					<ul>
@@ -78,3 +86,4 @@
 	</body>
 
 </html>
+

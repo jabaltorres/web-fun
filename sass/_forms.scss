@@ -25,3 +25,7 @@ form{
     margin-right:auto;
   }
 }
+
+input, textarea{
+  border:solid thin $color-primary;
+}

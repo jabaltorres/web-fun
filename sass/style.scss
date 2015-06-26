@@ -73,6 +73,7 @@ header{
   }
   @include large-screen{
     // background-color: yellow;
+    max-width: 90em;
   }
 }
 section{
