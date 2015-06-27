@@ -1,6 +1,7 @@
 <?php include 'includes/head.php';?>
 <div class="container">
   <?php include 'includes/masthead.php';?>
+  <?php include 'includes/navigation.php';?>
   <section class="about">
     <hgroup>
       <h1>About</h1>

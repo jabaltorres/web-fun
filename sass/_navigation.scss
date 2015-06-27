@@ -1,23 +1,22 @@
 nav{
-  // background-color: green;
-  border-top:solid thin $color-light-shade;
+  border-top:solid thin $color-shadow;
   @extend %margin-bottom;
   li{
     display: block;
-    border-bottom:solid thin $color-light-shade;
+    border-bottom:solid thin $color-shadow;
   }
   a{
     padding:20px;
     display: block;
     text-decoration: none;
     &:hover{
-      // border-bottom:solid 5px $color-accent;
-      background-color: $color-light-shade;
+      background-color: $color-shadow;
+      // background-color: red;
     }
   }
   @include medium-screen{
-    height:60px;
-    border-bottom:solid thin $color-light-shade;
+    height:56px;
+    border-bottom:solid thin $color-shadow;
     li{
       display: inline-block;
       border-bottom: none;
@@ -26,5 +25,12 @@ nav{
       margin-left:5px;
       margin-right:5px;
     }
+  }
+}
+
+.main-navigation{
+  display:none;
+  @include medium-screen{
+    display: block !important;
   }
 }

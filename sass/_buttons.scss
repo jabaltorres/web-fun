@@ -3,6 +3,13 @@ button, .button{
   display: block;
   padding: 10px 20px;
   margin-bottom: 20px;
+  border:none;
+  &.radius{
+    @extend %radius;
+  }
+  &.round{
+    @extend %round;
+  }
 }
 .btn-med{
   max-width:50%;

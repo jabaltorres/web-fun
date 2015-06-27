@@ -1,61 +1,47 @@
-*{
-  margin: 0;
-  padding:0;
-  box-sizing: border-box;
-}
+// Sharethrough Web Designer Test
+// http://capitaljt.github.io/Sharethrough-Test/
+//
+// Table of Contents
+//
+// a. Header Styles
+// b. Section Styles
+// c. Aside Styles
+// d. Footer Styles
+// e. Media Queries
 
 
+@import "reset";
 @import "base";
 @import "typography";
 @import "navigation";
+@import "nav-icon";
 @import "hero";
 @import "buttons";
 @import "forms";
+@import "slick-carousel";
 
-%color-warning{
-  background-color: red;
-}
-
-%color-success{
-  background-color: green;
-}
-
-%color-info{
-  background-color: #eee;
-}
-
-.warning{
-  @extend %color-warning;
-}
-
-.success{
-  @extend %color-success;
-}
-
-.info{
-  @extend %color-info;
+%position-absolute{
+  position:absolute;
 }
 
 
 body{
-	// color:red;
   font-family: 'Gudea', sans-serif;
-
 }
 
 ul{
-  // background-color: purple;
   display: inline-block;
   padding:10px;
   @extend %margin-bottom;
 }
 
-li{
-  // background-color: pink;
+p{
+  margin-bottom: 1.5em;
 }
 
-p{
-  margin-bottom: 2em;
+img{
+  width:100%;
+  height:auto;
 }
 
 header{
@@ -64,13 +50,10 @@ header{
 }
 
 .container{
-  // background-color: #eee;
-  width:80%;
-  margin: 20px 10% 20px;
   padding:20px;
   @include medium-screen{
     // background-color: red;
-    max-width: 70em;
+    max-width: 60em;
     margin-left: auto;
     margin-right: auto;
   }
@@ -89,21 +72,36 @@ section{
     @extend %margin-bottom;
   }
 }
+.main-header{
+  a{
+    display: inline-block;
+    padding:10px;
+    margin-bottom: 10px;
+  }
+}
 
 .swatches{
+  // background-color: red;
+  ul{
+    // background-color: green;
+    display: block;
+  }
   li{
-    width:100px;
+    display: block;
     height:100px;
-    // background-color: orange;
     text-align: center;
     list-style:none;
+    line-height: 100px;
   }
   @include medium-screen{
     li{
       display: inline-block;
+      width: 140px;
     }
   }
 }
+
+
 article{
   // width:400px;
   display: block;
@@ -117,7 +115,8 @@ article{
 }
 
 footer{
-  background-color: #eee;
+  // background-color: #eee;
+  border:solid thin $color-shadow;
   padding:20px;
 }
 

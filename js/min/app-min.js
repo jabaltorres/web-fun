@@ -1,1 +1,1 @@
-$("button").click(function(){});
+$("#nav-menu-icon").click(function(){$(this).toggleClass("open"),$(".main-navigation").stop(!0).slideToggle("fast")}),$(".carousel-wrapper").slick({autoplay:!0,mobileFirst:!0,dots:!0});
