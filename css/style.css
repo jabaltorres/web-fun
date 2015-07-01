@@ -342,3 +342,6 @@ footer {
 .maintainers li {
   display: block;
   margin-bottom: 20px; }
+
+.email-db-list li {
+  margin-bottom: 20px; }
