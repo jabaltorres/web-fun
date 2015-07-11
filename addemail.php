@@ -4,6 +4,7 @@
   <?php include 'includes/navigation.php';?>
   <?php include 'includes/email-db-nav.php';?>
   <section>
+    <h2>Add Email</h2>
     <?php
       if (isset($_POST['submit'])) {
         $first_name = $_POST['firstname'];
@@ -45,8 +46,83 @@
         <input type="text" id="lastname" name="lastname" /><br />
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" /><br />
-        <input type="submit" name="submit" value="Submit" />
+        <input type="submit" name="submit" value="Submit" id="button" />
       </form>
+      <script>
+        // var button = document.getElementById('button');
+
+        // function valid8(){
+        //   var emailVal = document.getElementById('email').value;
+          
+        //   if(emailVal != "1"){
+        //     alert("bullshit");
+        //     event.preventDefault();
+        //   }
+        // };
+
+        // button.addEventListener("click", function(){
+        //   valid8();
+        // });
+      </script>
+
+
+      <script>
+        // var check_name = /^[A-Za-z0-9 ]{3,20}$/;
+        // var check_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i; 
+
+        // function validate(form){
+        //   var name =  document.getElementById('firstname').value;
+        //   var email = document.getElementById('email').value;
+        //   var errors = [];
+       
+        //   if (!check_name.test(name)) {
+        //     errors[errors.length] = "You valid Name .";
+        //   }
+        //   if (!check_email.test(email)) {
+        //     errors[errors.length] = "You must enter a valid email address.";
+        //   }
+        //   if (errors.length > 0) {
+        //     reportErrors(errors);
+        //     return false;
+        //   }
+
+        //   return true;
+        // }
+
+        // function reportErrors(errors){
+        //   var msg = "Please Enter Valide Data...\n";
+
+        //   for (var i = 0; i < errors.length; i++) {
+        //     var numError = i + 1;
+        //     msg += "\n" + numError + ". " + errors[i];
+        //   }
+
+        //   alert(msg);
+        // }
+
+        
+        function validateEmail(email) { 
+          // http://stackoverflow.com/a/46181/11236
+
+          var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(email);
+        }
+
+        function validate(el){
+          var email = document.getElementById('email').value;
+
+          if (validateEmail(email)) {
+            alert('god is good');
+          } else {
+            alert('Invalid Email Address');
+            el.preventDefault();
+          }
+        }
+
+        var button = document.getElementById('button');
+        button.addEventListener("click", validate);
+
+      </script>
 
     <?php
       }
