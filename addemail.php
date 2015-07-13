@@ -3,7 +3,7 @@
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
   <?php include 'includes/email-db-nav.php';?>
-  <section>
+  <section id="form-section">
     <h2>Add Email</h2>
     <?php
       if (isset($_POST['submit'])) {
@@ -39,7 +39,7 @@
       if ($output_form == 'yes') {
     ?>
 
-      <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+      <form id="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label for="firstname">First name:</label>
         <input type="text" id="firstname" name="firstname" /><br />
         <label for="lastname">Last name:</label>
@@ -100,7 +100,34 @@
         //   alert(msg);
         // }
 
-        
+        function createDiv(){
+
+          var errorMessage = "There was an error";
+          // Create new div
+          var newDiv = document.createElement("div");
+          newDiv.className = "error";
+
+          // Create text node
+          var newContent = document.createTextNode(errorMessage);
+
+          // Insert the created text node into the new div 
+          newDiv.appendChild(newContent);
+
+          // get the element with id of "form-section"
+          var formSection = document.getElementById("form-section");
+
+          // get the element with id of "form"
+          var form = document.getElementById("form");
+
+          // This is the same as "prepending"
+          formSection.insertBefore(newDiv, form);
+
+        }
+
+        var button = document.getElementById('button');
+        button.addEventListener("click", validate);
+
+
         function validateEmail(email) { 
           // http://stackoverflow.com/a/46181/11236
 
@@ -109,18 +136,19 @@
         }
 
         function validate(el){
-          var email = document.getElementById('email').value;
+          var target = document.getElementById('email');
+
+          var email = target.value;
 
           if (validateEmail(email)) {
             alert('god is good');
           } else {
-            alert('Invalid Email Address');
+            target.className = "error";
             el.preventDefault();
+            target.value = "";
+            createDiv();
           }
         }
-
-        var button = document.getElementById('button');
-        button.addEventListener("click", validate);
 
       </script>
 

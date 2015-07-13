@@ -127,6 +127,15 @@ $radius-value: 4px;
        -o-transform: rotate($val);
           transform: rotate($val);
 }
+
+@mixin scaleX($val) {
+  -webkit-transform: scaleX($val);
+     -moz-transform: scaleX($val);
+      -ms-transform: scaleX($val);
+       -o-transform: scaleX($val);
+          transform: scaleX($val);
+}
+
 @mixin flexbox{
   display: -webkit-box;
   display: -moz-box;

@@ -129,7 +129,9 @@ footer{
 }
 
 
-
+.error{
+  border:solid thick red;
+}
 
 
 .email-db-list{
@@ -137,3 +139,37 @@ footer{
     margin-bottom: 20px;
   }
 }
+
+
+
+
+// This is where I'm testing the hover link effect
+.text-link {
+  position: relative;
+  color: $color-accent;
+  text-decoration: none;
+  &:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: -5px;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    @include scaleX( $val: 0 );
+    @extend %transition;
+  }
+  &:hover:before{
+    visibility: visible;
+    @include scaleX( $val: 1 );
+  }
+}
+
+
+
+
+
+
+
+

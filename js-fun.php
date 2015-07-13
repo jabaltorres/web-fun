@@ -2,12 +2,12 @@
   <div class="container">
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
-  <section class="swatches">
+  <section class="js-fun">
     <hgroup>
       <h1>JS Playground</h1>
       <h2>Sub headline</h2>
     </hgroup>
-    <p>For the time being I'm just going to steal some colors from <a href="http://flatuicolors.com" alt="" title="" target="_blank">flatuicolors.com</a></p>
+    <p>This is where I'm going to list some web-fun</p>
 
     <ul>
       <li class="">Alert</li>
@@ -21,5 +21,10 @@
       <li class="primary">Primary Color</li>
       <li class="accent">Accent Color</li>
     </ul>
+
+    <div>
+      <h2>Link Test</h2>
+      <a href="#" class="text-link">This is a test</a>
+    </div>
   </section>
 <?php include 'includes/feet.php';?>
