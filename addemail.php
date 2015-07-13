@@ -154,7 +154,9 @@
 
     <?php
       }
-    ?>    
+    ?>
+
+    <!-- This is to test a stash comment. Let's images this is the third stash-->
   </section>
 
 <?php include 'includes/feet.php';?>
