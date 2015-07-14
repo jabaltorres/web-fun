@@ -74,7 +74,7 @@ table {
 nav, .hero, form, form label, form textarea, ul, header, section, section hgroup, article {
   margin-bottom: 20px; }
 
-a, #nav-menu-icon, #nav-menu-icon span, .text-link:before {
+a, #nav-menu-icon, #nav-menu-icon span, .text-link:before, #pop-up #close-btn {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -388,12 +388,15 @@ footer {
     display: inline-block;
     top: 20px;
     right: 20px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.8);
     color: white;
     width: 35px;
     height: 35px;
     line-height: 35px;
     text-align: center; }
+    #pop-up #close-btn:hover {
+      cursor: pointer;
+      background-color: black; }
   #pop-up #img-container {
     box-sizing: border-box;
     padding: 20px;
