@@ -9,3 +9,16 @@ $('.carousel-wrapper').slick({
     dots: true
     // arrows:false
 });
+
+
+
+var Avil = Avil || {};
+Avil.PopUp = (function() {
+   var popUpContainer = document.getElementById('pop-up');
+
+   popUpContainer.addEventListener("click", function(){
+    this.style.display = "none";
+   });
+});
+
+Avil.PopUp();

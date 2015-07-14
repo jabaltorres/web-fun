@@ -2,6 +2,10 @@
   <div class="container">
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
+
+  <?php include 'includes/aivl-pop-up.php'; ?>
+
+
   <section class="js-fun">
     <hgroup>
       <h1>JS Playground</h1>
@@ -15,11 +19,6 @@
       <li class="">Info</li>
       <li class="">Warning</li>
       <li class="">Default</li>
-    </ul>
-
-    <ul>
-      <li class="primary">Primary Color</li>
-      <li class="accent">Accent Color</li>
     </ul>
 
     <div>
