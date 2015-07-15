@@ -433,3 +433,10 @@ footer {
       height: 174px; }
     #pop-up img {
       width: 100px; } }
+
+.example-container {
+  max-width: 400px;
+  margin: 0 auto; }
+
+.border {
+  border: solid thick red; }

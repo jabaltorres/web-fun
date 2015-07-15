@@ -14,11 +14,7 @@
     <p>This is where I'm going to list some web-fun</p>
 
     <ul>
-      <li class="">Alert</li>
-      <li class="">Success</li>
-      <li class="">Info</li>
-      <li class="">Warning</li>
-      <li class="">Default</li>
+      <li class=""><a href="tooltip.php">Tooltip</a></li>
     </ul>
 
     <div>
