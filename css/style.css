@@ -209,7 +209,10 @@ button, .button {
 
 form label {
   display: block; }
-form input {
+form input[type="checkbox"] {
+  border: solid thin red;
+  margin: 10px; }
+form input[type="text"], form input[type="button"], form input[type="email"], form input[type="password"] {
   display: block;
   width: 100%;
   padding: 10px;

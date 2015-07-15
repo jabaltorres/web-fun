@@ -10,7 +10,9 @@
       <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
         <?php
-          $dbc = mysqli_connect('localhost', 'root', 'root', 'email_db')
+          require_once('connectvars.php');
+
+          $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
             or die('Error connecting to MySQL server.');
 
           // Delete the customer rows (only if the form has been submitted)
@@ -38,7 +40,7 @@
           mysqli_close($dbc);
         ?>
 
-        <input type="submit" name="submit" value="Remove" />
+        <input type="submit" name="submit" value="Remove" class="button btn-med default radius" />
       </form>
   </section>
 

@@ -7,7 +7,9 @@
   <section>
     <ul class="email-db-list">
       <?php
-        $dbc = mysqli_connect('localhost', 'root', 'root', 'email_db')
+        require_once('connectvars.php');
+
+        $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
           or die('Error connecting to MySQL server.');
         $query = "SELECT * FROM email_list";
         $result = mysqli_query($dbc, $query);

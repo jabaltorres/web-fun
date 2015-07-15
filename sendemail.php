@@ -8,8 +8,10 @@
     <p><strong>Private:</strong> For Elmer's use ONLY<br />Write and send an email to mailing list members.</p>
 
     <?php
+      require_once('connectvars.php');
+      
       if (isset($_POST['submit'])) {
-        $from = 'elmer@makemeelvis.com';
+        $from = 'jt@makemeelvis.com';
         $subject = $_POST['subject'];
         $text = $_POST['elvismail'];
         $output_form = false;
@@ -35,7 +37,7 @@
       }
 
       if ((!empty($subject)) && (!empty($text))) {
-        $dbc = mysqli_connect('localhost', 'root', 'root', 'email_db')
+        $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
           or die('Error connecting to MySQL server.');
 
         $query = "SELECT * FROM email_list";

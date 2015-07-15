@@ -6,6 +6,9 @@
   <section id="form-section">
     <h2>Add Email</h2>
     <?php
+
+      require_once('connectvars.php');
+
       if (isset($_POST['submit'])) {
         $first_name = $_POST['firstname'];
         $last_name = $_POST['lastname'];
@@ -23,7 +26,7 @@
       }
 
       if (!empty($first_name) && !empty($last_name) && !empty($email)) {
-        $dbc = mysqli_connect('localhost', 'root', 'root', 'email_db')
+        $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
           or die('Error connecting to MySQL server.');
 
         $query = "INSERT INTO email_list (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
@@ -46,7 +49,7 @@
         <input type="text" id="lastname" name="lastname" /><br />
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" /><br />
-        <input type="submit" name="submit" value="Submit" id="button" />
+        <input type="submit" name="submit" value="Submit" id="button" class="button" />
       </form>
       <script>
         // var button = document.getElementById('button');
