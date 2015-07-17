@@ -3,9 +3,6 @@
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
 
-  <?php // include 'includes/aivl-pop-up.php'; ?>
-
-
   <section class="js-fun">
     <hgroup>
       <h1>Tooltip</h1>
@@ -30,9 +27,9 @@
         <span class="ship">Enterprise</span> into multiple blatant violations of the
         Prime Directive.</p>
     </div> 
-
   </section>
-<div class="example-container">
+
+  <div class="example-container">
     <a href="http://google.com" id="link" title="Link to google" class="tease">Google Link</a>
     <img src="http://placehold.it/640x360&text=16:9" alt="Image Title">
     <img src="http://placehold.it/640x360&text=16:9" alt="Image Title">
@@ -63,35 +60,25 @@
     };
     Tooltips.init();
 
-    // var link = document.getElementById('link');
-
+// var link = document.getElementById('link');
 // console.log(link.title);
 // console.log(link.className);
 
     var AddBorder = {
       init: function(){
-
-      // give every image a class name
-      var links = document.getElementsByTagName('img');
-
-    //     for (i = 0; i < links.length; i++){
-    //       links[i].className = "pimp";
-    //     }
-    //     console.log(links.length);
-
-      var i = 0;
-      var callback = function () {
-      if (i < links.length) {
-        links[i].className = "border";
-        ++i;
-        setTimeout(callback, 500);
-      }
-    };
-
-    setTimeout(callback, 500);
-
-
-    }
+        // give every image a class name
+        var links = document.getElementsByTagName('img');
+        var i = 0;
+        var doSomething = function () {
+          if (i < links.length) {
+            links[i].className = "border";
+            ++i;
+            setTimeout(doSomething, 250);
+          }
+        };
+        // This says wait half a second before doing something
+        setTimeout(doSomething, 500);
+      }, 
     };
     AddBorder.init();
   </script>

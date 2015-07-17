@@ -41,7 +41,7 @@
     <!-- #img-container is the container for the pop up ad -->
     <span id="img-container">
       <span id="close-btn">X</span>
-        <a href="http://google.com"><img src="<?php echo $path . $img ?>" height="1098" width="640" alt=""></a>
+        <a href="http://google.com" target="_blank"><img src="<?php echo $path . $img ?>" height="1098" width="640" alt=""></a>
     </span>
 </div>
 
