@@ -74,7 +74,7 @@ table {
 nav, .hero, form, form label, form textarea, ul, header, section, section hgroup, article {
   margin-bottom: 20px; }
 
-a, #nav-menu-icon, #nav-menu-icon span, .text-link:before, #pop-up #close-btn {
+a, #nav-menu-icon, #nav-menu-icon span, .text-link:before {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -385,7 +385,8 @@ footer {
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10000; }
+  z-index: 10000;
+  display: none; }
   #pop-up #close-btn {
     position: absolute;
     display: inline-block;
@@ -416,7 +417,8 @@ footer {
       top: 0;
       right: 0; }
     #pop-up #img-container {
-      padding: 0; } }
+      padding: 0;
+      margin-top: -300px; } }
   @media only screen and (max-width: 40em) and (orientation: landscape) {
     #pop-up #close-btn {
       width: 25px;
