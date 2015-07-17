@@ -41,7 +41,7 @@
     <!-- #img-container is the container for the pop up ad -->
     <span id="img-container">
       <span id="close-btn">X</span>
-        <a href="http://google.com" target="_blank"><img src="<?php echo $path . $img ?>" height="1098" width="640" alt=""></a>
+        <a href="http://aivl.org.au/hepcfactsheets/" target="_blank"><img src="<?php echo $path . $img ?>" height="1098" width="640" alt=""></a>
     </span>
 </div>
 
@@ -83,8 +83,8 @@
 
             function setCookie(cname,cvalue,exdays) {
                 var d = new Date();
-                // d.setTime(d.getTime() + (exdays*24*60*60*1000)); // cookie expires in 24 hours
-                d.setTime(d.getTime() + (exdays*30*1000)); // cookie expires in 30 seconds
+                d.setTime(d.getTime() + (exdays*24*60*60*1000)); // cookie expires in 24 hours
+                // d.setTime(d.getTime() + (exdays*10*1000)); // cookie expires in 10 seconds
                 var expires = "expires=" + d.toGMTString();
                 document.cookie = cname+"="+cvalue+"; "+expires;
             }
@@ -121,8 +121,8 @@
                        setCookie("returnvisitor", key, 1);
                     }
 
-                    // delayedPopUp(); // Uncomment this for production
-                    showPopUP(); // Instantly show popups
+                    // delayedPopUp(); // Uncomment production - comment development
+                    showPopUP(); // Uncomment development - comment production
 
                     console.log("This is your first time here");
                 }
@@ -138,6 +138,14 @@
             console.log(allCookies)
         }
     };
-
     AvilPopUp.init();
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-65278732-1', 'auto');
+  ga('send', 'pageview');
 </script>

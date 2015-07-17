@@ -390,27 +390,27 @@ footer {
   #pop-up #close-btn {
     position: absolute;
     display: inline-block;
-    top: 20px;
-    right: 20px;
+    top: 0;
+    right: 0;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     width: 35px;
     height: 35px;
     line-height: 35px;
-    text-align: center; }
+    text-align: center;
+    z-index: 999; }
     #pop-up #close-btn:hover {
       cursor: pointer;
       background-color: black; }
   #pop-up #img-container {
     box-sizing: border-box;
-    padding: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -274px;
-    margin-left: -160px; }
+    margin-top: -215px;
+    margin-left: -125px; }
   #pop-up img {
-    max-width: 320px;
+    max-width: 250px;
     height: auto; }
   @media only screen and (min-width: 40.063em) {
     #pop-up #close-btn {
@@ -418,7 +418,10 @@ footer {
       right: 0; }
     #pop-up #img-container {
       padding: 0;
-      margin-top: -300px; } }
+      margin-top: -250px;
+      margin-left: -160px; }
+    #pop-up img {
+      max-width: 320px; } }
   @media only screen and (max-width: 40em) and (orientation: landscape) {
     #pop-up #close-btn {
       width: 25px;

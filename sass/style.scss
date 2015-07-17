@@ -140,9 +140,6 @@ footer{
   }
 }
 
-
-
-
 // This is where I'm testing the hover link effect
 .text-link {
   position: relative;
@@ -166,6 +163,10 @@ footer{
   }
 }
 
+// ============================================================
+// Popup Styles
+// ============================================================
+
 #pop-up{
   position: fixed;
   top:0;
@@ -178,15 +179,16 @@ footer{
   #close-btn{
     position: absolute;
     display: inline-block;
-    top:20px;
-    right:20px;
+    top:0;
+    right:0;
     background-color: rgba(0,0,0,0.8);
     color:white;
     width:35px;
     height:35px;
     line-height: 35px;
     text-align: center;
-    // @extend %transition;
+    z-index: 999;
+    
     &:hover{
       cursor: pointer;
       background-color: black;
@@ -194,15 +196,16 @@ footer{
   }
   #img-container{
     box-sizing: border-box;
-    padding:20px;
     position: absolute;
     top:50%;
     left:50%;
-    margin-top: -274px; // horizontally centers
-    margin-left: -160px;
+    margin-top: -215px; // horizontally centers
+    margin-left: -125px;
   }
+
   img{
-    max-width: 320px;
+    max-width: 250px;
+    // max-width: 320px;
     height: auto;
   }
   @include medium-screen{
@@ -212,7 +215,11 @@ footer{
     }
     #img-container{
       padding:0;
-      margin-top: -300px; // horizontally centers
+      margin-top: -250px; // make look pretty
+      margin-left: -160px;
+    }
+    img{
+      max-width: 320px;
     }
   }
   @include small-screen-landscape{
@@ -231,7 +238,6 @@ footer{
       margin-left:-51px;
       width:102px;
       height:174px;
-
     }
     img{
       width:100px;
@@ -239,9 +245,11 @@ footer{
   }
 }
 
+// ============================================================
+// End Popup Styles
+// ============================================================
 
 // This is just for playing around with js
-
 .example-container{
   max-width: 400px;
   margin: 0 auto;
@@ -249,5 +257,4 @@ footer{
 .border{
   border: solid thick red;
 }
-
 
