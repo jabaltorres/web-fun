@@ -4,7 +4,11 @@ form{
     display: block;
     @extend %margin-bottom;
   }
-  input{
+  input[type="checkbox"]{
+   border:solid thin red;
+   margin: 10px;
+  }
+  input[type="text"], input[type="button"], input[type="email"], input[type="password"]{
     display: block;
     width:100%;
     padding:10px;

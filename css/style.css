@@ -74,7 +74,7 @@ table {
 nav, .hero, form, form label, form textarea, ul, header, section, section hgroup, article {
   margin-bottom: 20px; }
 
-a, #nav-menu-icon, #nav-menu-icon span {
+a, #nav-menu-icon, #nav-menu-icon span, .text-link:before {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -209,7 +209,10 @@ button, .button {
 
 form label {
   display: block; }
-form input {
+form input[type="checkbox"] {
+  border: solid thin red;
+  margin: 10px; }
+form input[type="text"], form input[type="button"], form input[type="email"], form input[type="password"] {
   display: block;
   width: 100%;
   padding: 10px;
@@ -342,3 +345,103 @@ footer {
 .maintainers li {
   display: block;
   margin-bottom: 20px; }
+
+.error {
+  border: solid thick red; }
+
+.email-db-list li {
+  margin-bottom: 20px; }
+
+.text-link {
+  position: relative;
+  color: #e24d25;
+  text-decoration: none; }
+  .text-link:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: -5px;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    -moz-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    -o-transform: scaleX(0);
+    transform: scaleX(0); }
+  .text-link:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    -moz-transform: scaleX(1);
+    -ms-transform: scaleX(1);
+    -o-transform: scaleX(1);
+    transform: scaleX(1); }
+
+#pop-up {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  display: none; }
+  #pop-up #close-btn {
+    position: absolute;
+    display: inline-block;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center; }
+    #pop-up #close-btn:hover {
+      cursor: pointer;
+      background-color: black; }
+  #pop-up #img-container {
+    box-sizing: border-box;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -274px;
+    margin-left: -160px; }
+  #pop-up img {
+    max-width: 320px;
+    height: auto; }
+  @media only screen and (min-width: 40.063em) {
+    #pop-up #close-btn {
+      top: 0;
+      right: 0; }
+    #pop-up #img-container {
+      padding: 0;
+      margin-top: -300px; } }
+  @media only screen and (max-width: 40em) and (orientation: landscape) {
+    #pop-up #close-btn {
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      top: 0;
+      right: 2px; }
+    #pop-up #img-container {
+      margin-top: 0;
+      padding: 0;
+      top: 0;
+      margin-left: -51px;
+      width: 102px;
+      height: 174px; }
+    #pop-up img {
+      width: 100px; } }
+
+.example-container {
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: solid thick green; }
+  .example-container img {
+    float: left; }
+  .example-container .active {
+    box-sizing: border-box; }

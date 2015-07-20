@@ -1,4 +1,4 @@
-// Sharethrough Web Designer Test
+ // Sharethrough Web Designer Test
 // http://capitaljt.github.io/Sharethrough-Test/
 //
 // Table of Contents
@@ -127,3 +127,139 @@ footer{
     // background-color: red;
   }
 }
+
+
+.error{
+  border:solid thick red;
+}
+
+
+.email-db-list{
+  li{
+    margin-bottom: 20px;
+  }
+}
+
+
+
+
+// This is where I'm testing the hover link effect
+.text-link {
+  position: relative;
+  color: $color-accent;
+  text-decoration: none;
+  &:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: -5px;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    @include scaleX( $val: 0 );
+    @extend %transition;
+  }
+  &:hover:before{
+    visibility: visible;
+    @include scaleX( $val: 1 );
+  }
+}
+
+#pop-up{
+  position: fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 10000;
+<<<<<<< HEAD
+  // display: none;
+=======
+  display:none;
+>>>>>>> origin/db-test
+  #close-btn{
+    position: absolute;
+    display: inline-block;
+    top:20px;
+    right:20px;
+    background-color: rgba(0,0,0,0.8);
+    color:white;
+    width:35px;
+    height:35px;
+    line-height: 35px;
+    text-align: center;
+    // @extend %transition;
+    &:hover{
+      cursor: pointer;
+      background-color: black;
+    }
+  }
+  #img-container{
+    box-sizing: border-box;
+    padding:20px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top: -274px; // horizontally centers
+    margin-left: -160px;
+  }
+  img{
+    max-width: 320px;
+    height: auto;
+  }
+  @include medium-screen{
+    #close-btn{
+      top:0;
+      right:0;
+    }
+    #img-container{
+      padding:0;
+      margin-top: -300px; // horizontally centers
+    }
+  }
+  @include small-screen-landscape{
+    #close-btn{
+      width:25px;
+      height:25px;
+      line-height: 25px;
+      top:0;
+      right:2px;
+    }
+    #img-container{
+      // border:solid thin black;
+      margin-top: 0;
+      padding:0;
+      top:0;
+      margin-left:-51px;
+      width:102px;
+      height:174px;
+
+    }
+    img{
+      width:100px;
+    }
+  }
+}
+
+
+// This is just for playing around with js
+
+.example-container{
+  // max-width: 400px;
+  max-width: 400px;
+  margin: 0 auto;
+  overflow:hidden;
+  border: solid thick green;
+  img{
+    float: left;
+  }
+  .active{
+    
+    box-sizing: border-box;
+  }
+}
+
+
+
