@@ -12,13 +12,19 @@ $('.carousel-wrapper').slick({
 
 
 
-var Avil = Avil || {};
-Avil.PopUp = (function() {
-   var popUpContainer = document.getElementById('pop-up');
 
-   popUpContainer.addEventListener("click", function(){
+
+var Aivl = {
+  init: function(){
+
+    var popUpContainer = document.getElementById('pop-up');
+
+    if ( popUpContainer ){
+      popUpContainer.addEventListener("click", Aivl.hidePopUp);
+    }
+  },
+  hidePopUp: function(){
     this.style.display = "none";
-   });
-});
-
-Avil.PopUp();
+  }
+};
+Aivl.init();

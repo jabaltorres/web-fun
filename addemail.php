@@ -43,7 +43,7 @@
     ?>
 
       <form id="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <label for="firstname">First name:</label>
+        <label for="firstname" id="name-label">First name:</label>
         <input type="text" id="firstname" name="firstname" /><br />
         <label for="lastname">Last name:</label>
         <input type="text" id="lastname" name="lastname" /><br />
@@ -103,28 +103,29 @@
         //   alert(msg);
         // }
 
-        function createDiv(){
+        function displayError(){
 
           var errorMessage = "There was an error";
-          // Create new div
-          var newDiv = document.createElement("div");
-          newDiv.className = "error";
-
+          
           // Create text node
           var newContent = document.createTextNode(errorMessage);
 
-          // Insert the created text node into the new div 
+          // Create new div
+          var newDiv = document.createElement("div");
+
+          // Give it a class
+          newDiv.className = "error";
+
+          var elementExists = document.getElementsByClassName("error")
+
+
+          // Insert the created text node into the new div  
           newDiv.appendChild(newContent);
 
-          // get the element with id of "form-section"
-          var formSection = document.getElementById("form-section");
-
-          // get the element with id of "form"
+          var label = document.getElementById("name-label");          
           var form = document.getElementById("form");
 
-          // This is the same as "prepending"
-          formSection.insertBefore(newDiv, form);
-
+          form.insertBefore(newDiv,label);
         }
 
         var button = document.getElementById('button');
@@ -138,7 +139,7 @@
           return re.test(email);
         }
 
-        function validate(el){
+        function validate(event){
           var target = document.getElementById('email');
 
           var email = target.value;
@@ -147,9 +148,9 @@
             alert('god is good');
           } else {
             target.className = "error";
-            el.preventDefault();
+            event.preventDefault();
             target.value = "";
-            createDiv();
+            displayError();
           }
         }
 

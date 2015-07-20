@@ -43,3 +43,6 @@
       <img src="<?php echo $path . $img ?>" height="1098" width="640" alt="">
     </span>
   </div>
+  <script>
+    
+  </script>

@@ -436,7 +436,10 @@ footer {
 
 .example-container {
   max-width: 400px;
-  margin: 0 auto; }
-
-.border {
-  border: solid thick red; }
+  margin: 0 auto;
+  overflow: hidden;
+  border: solid thick green; }
+  .example-container img {
+    float: left; }
+  .example-container .active {
+    box-sizing: border-box; }

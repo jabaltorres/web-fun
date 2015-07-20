@@ -174,6 +174,7 @@ footer{
   left:0;
   background-color: rgba(0,0,0,0.8);
   z-index: 10000;
+  // display: none;
   #close-btn{
     position: absolute;
     display: inline-block;
@@ -241,11 +242,19 @@ footer{
 // This is just for playing around with js
 
 .example-container{
+  // max-width: 400px;
   max-width: 400px;
   margin: 0 auto;
+  overflow:hidden;
+  border: solid thick green;
+  img{
+    float: left;
+  }
+  .active{
+    
+    box-sizing: border-box;
+  }
 }
-.border{
-  border: solid thick red;
-}
+
 
 
