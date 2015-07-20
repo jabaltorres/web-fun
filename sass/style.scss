@@ -1,4 +1,4 @@
-// Sharethrough Web Designer Test
+ // Sharethrough Web Designer Test
 // http://capitaljt.github.io/Sharethrough-Test/
 //
 // Table of Contents
@@ -174,7 +174,11 @@ footer{
   left:0;
   background-color: rgba(0,0,0,0.8);
   z-index: 10000;
+<<<<<<< HEAD
   // display: none;
+=======
+  display:none;
+>>>>>>> origin/db-test
   #close-btn{
     position: absolute;
     display: inline-block;
@@ -186,7 +190,7 @@ footer{
     height:35px;
     line-height: 35px;
     text-align: center;
-    @extend %transition;
+    // @extend %transition;
     &:hover{
       cursor: pointer;
       background-color: black;
@@ -198,7 +202,7 @@ footer{
     position: absolute;
     top:50%;
     left:50%;
-    margin-top: -274px;
+    margin-top: -274px; // horizontally centers
     margin-left: -160px;
   }
   img{
@@ -212,6 +216,7 @@ footer{
     }
     #img-container{
       padding:0;
+      margin-top: -300px; // horizontally centers
     }
   }
   @include small-screen-landscape{

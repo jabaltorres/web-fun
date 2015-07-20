@@ -3,9 +3,6 @@
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
 
-  <?php // include 'includes/aivl-pop-up.php'; ?>
-
-
   <section class="js-fun">
     <hgroup>
       <h1>Tooltip</h1>

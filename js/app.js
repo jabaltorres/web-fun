@@ -10,21 +10,3 @@ $('.carousel-wrapper').slick({
     // arrows:false
 });
 
-
-
-
-
-var Aivl = {
-  init: function(){
-
-    var popUpContainer = document.getElementById('pop-up');
-
-    if ( popUpContainer ){
-      popUpContainer.addEventListener("click", Aivl.hidePopUp);
-    }
-  },
-  hidePopUp: function(){
-    this.style.display = "none";
-  }
-};
-Aivl.init();
