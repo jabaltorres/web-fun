@@ -83,8 +83,8 @@
 
             function setCookie(cname,cvalue,exdays) {
                 var d = new Date();
-                d.setTime(d.getTime() + (exdays*24*60*60*1000)); // cookie expires in 24 hours
-                // d.setTime(d.getTime() + (exdays*10*1000)); // cookie expires in 10 seconds
+                // d.setTime(d.getTime() + (exdays*24*60*60*1000)); // cookie expires in 24 hours
+                d.setTime(d.getTime() + (exdays*10*1000)); // cookie expires in 10 seconds
                 var expires = "expires=" + d.toGMTString();
                 document.cookie = cname+"="+cvalue+"; "+expires;
             }
