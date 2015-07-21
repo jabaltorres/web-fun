@@ -103,30 +103,41 @@
         //   alert(msg);
         // }
 
+        var tested = false;
+
         function displayError(){
+          if (tested == false){
+            var errorMessage = "There was an error";
 
-          var errorMessage = "There was an error";
-          
-          // Create text node
-          var newContent = document.createTextNode(errorMessage);
+            // Create text node
+            var newContent = document.createTextNode(errorMessage);
 
-          // Create new div
-          var newDiv = document.createElement("div");
+            // Create new div
+            var newDiv = document.createElement("div");
 
-          // Give it a class
-          newDiv.className = "error";
+            // Give it a class
+            newDiv.className = "error";
 
-          var elementExists = document.getElementsByClassName("error")
+            // Insert the created text node into the new div  
+            newDiv.appendChild(newContent);
 
-
-          // Insert the created text node into the new div  
-          newDiv.appendChild(newContent);
-
-          var label = document.getElementById("name-label");          
-          var form = document.getElementById("form");
-
-          form.insertBefore(newDiv,label);
+            var label = document.getElementById("name-label");          
+            var form = document.getElementById("form");
+            form.insertBefore(newDiv,label);
+          }
+          tested =  true;
         }
+
+        // var clicks = 0;
+        // function clickCounter(){
+        //     clicks +=1;
+        //     console.log(clicks);
+
+        //     if (clicks > 5) {
+        //       alert('more than 5 clicks');
+        //     }
+        // }
+
 
         var button = document.getElementById('button');
         button.addEventListener("click", validate);
@@ -150,7 +161,10 @@
             target.className = "error";
             event.preventDefault();
             target.value = "";
+
             displayError();
+            // clickCounter();
+
           }
         }
 
