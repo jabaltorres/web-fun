@@ -14,5 +14,5 @@
 	<!-- <div class="hero">
 		<img src="http://placehold.it/640x360&text=16:9" alt="Image Title">
 	</div> -->
-		
+	<!-- This is a test comment -->
 <?php include 'includes/feet.php';?>
