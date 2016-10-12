@@ -16,7 +16,6 @@
 @import "navigation";
 @import "nav-icon";
 @import "hero";
-@import "buttons";
 @import "forms";
 @import "slick-carousel";
 
@@ -175,11 +174,6 @@ footer{
   left:0;
   background-color: rgba(0,0,0,0.8);
   z-index: 10000;
-<<<<<<< HEAD
-  // display: none;
-=======
-  display:none;
->>>>>>> origin/db-test
   #close-btn{
     position: absolute;
     display: inline-block;

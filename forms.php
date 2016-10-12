@@ -2,7 +2,7 @@
 <div class="container">
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
-  <section clas="forms">
+  <section class="forms">
     <hgroup>
       <h1>Forms</h1>
       <h2>Sub headline</h2>
