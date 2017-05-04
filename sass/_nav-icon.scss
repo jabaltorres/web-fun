@@ -5,14 +5,13 @@
 }
 
 #nav-menu-icon{
-  @include ht-w($Value: 40);
-  margin-top: -100px;
-  position: relative;
-  float: right;
+  @include ht-w($Value: 30);
+  position: absolute;
+  top: 35px;
+  right: 35px;
   cursor: pointer;
   @include rotate($val:0deg);
   @extend %transition;
-
   @include medium-screen{
     display:none;
   }
@@ -31,13 +30,13 @@
   }
  
   & span:nth-child(1) {
-    top: 0px;
+    top: 2px;
   }
   & span:nth-child(2), & span:nth-child(3) {
-    top: 15px;
+    top: 12px;
   }
   & span:nth-child(4) {
-    top: 30px;
+    top: 22px;
   }  
 }
 

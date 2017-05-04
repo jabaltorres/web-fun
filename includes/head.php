@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
 
+    <?php $_SERVER['DOCUMENT_ROOT'] ?>
 
     <link href='http://fonts.googleapis.com/css?family=Gudea|Old+Standard+TT' rel='stylesheet' type='text/css'>
     <link href="https://fontastic.s3.amazonaws.com/mWtd8iTgMRgyWPztf4g6Zh/icons.css" rel="stylesheet">

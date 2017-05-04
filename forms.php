@@ -1,4 +1,5 @@
 <?php include 'includes/head.php';?>
+
 <div class="container">
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
@@ -20,7 +21,7 @@
       <label for="comments">Comments:</label>
       <textarea name="comments" id="comments"></textarea>
 
-      <input type="submit" name="send" value="Send Message" class="button">
+      <input type="submit" name="send" value="Send Message" class="btn">
     </form>
   </section>
 

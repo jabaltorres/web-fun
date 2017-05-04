@@ -1,0 +1,13 @@
+footer{
+  border: $global-border;
+  padding:$global-padding;
+  ul{
+    margin-bottom: 0;
+  }
+  li{
+    display: inline-block;
+    a{
+      padding: 5px;
+    }
+  }
+}

@@ -19,6 +19,9 @@ $color-accent: $orange;
 
 $spacing-value: 20px;
 
-$global-padding: 20px;
-$global-margin: 20px;
+
+// Global Vals
+$global-padding: $spacing-value;
+$global-margin: $spacing-value;
 $global-border: solid thin #ccc;
+$global-border-radius: 4px;

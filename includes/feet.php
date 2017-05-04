@@ -1,8 +1,9 @@
       <footer>
+      <span>&copy; <?php echo date("Y"); ?></span>
         <ul>
-          <li>
-            <a href="https://github.com/capitalJT/web-fun" target="_blank">Git Repo</a>
-          </li>
+          <li><a href="https://github.com/capitalJT/web-fun" target="_blank">Git Repo</a></li>
+          <li><a href="https://github.com/capitalJT/web-fun/issues" target="_blank">Git Issues</a></li>
+          <li><a href="https://github.com/capitalJT/web-fun/wiki" target="_blank">Git Wiki</a></li>
         </ul>
       </footer>
     </div><!-- end .container-->

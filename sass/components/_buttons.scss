@@ -1,8 +1,11 @@
-button{
-  background-color: #ccc; 
+button,
+input[type="submit"]{
+  background-color: $color-accent;
+  color: white;
+  border: none;
 }
 
 .btn{
-  border-radius: 4px;
-  padding: 5px 10px;
+  border-radius: $global-border-radius;
+  padding: 10px 15px;
 }

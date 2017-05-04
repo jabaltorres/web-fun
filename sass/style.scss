@@ -18,6 +18,7 @@
 @import "hero";
 @import "forms";
 @import "components/buttons";
+@import "layouts/footer";
 @import "slick-carousel";
 
 body{
@@ -61,14 +62,16 @@ form{
   //   max-width: 90em;
   // }
 }
+
 section{
-  // background-color: yellow;
   border:solid thick $color-accent;
   @extend %margin-bottom;
-  padding:20px;
+  padding: $global-padding;
   hgroup{
-    // background-color: yellow;
     @extend %margin-bottom;
+  }
+  h1{
+    margin-bottom: $global-margin / 2; 
   }
 }
 
@@ -110,14 +113,6 @@ article{
   border: $global-border;
   footer{
     border-top: $global-border;
-  }
-}
-
-footer{
-  border: $global-border;
-  padding:20px;
-  ul{
-    margin-bottom: 0;
   }
 }
 
