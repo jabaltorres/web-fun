@@ -20,11 +20,6 @@
 @import "components/buttons";
 @import "slick-carousel";
 
-%position-absolute{
-  position:absolute;
-}
-
-
 body{
   font-family: 'Gudea', sans-serif;
 }
@@ -76,6 +71,7 @@ section{
     @extend %margin-bottom;
   }
 }
+
 .main-header{
   a{
     display: inline-block;
@@ -132,12 +128,6 @@ footer{
     // background-color: red;
   }
 }
-
-
-.error{
-  border:solid thick red;
-}
-
 
 .email-db-list{
   li{
@@ -270,6 +260,11 @@ footer{
 }
 
 .home{
-  // background-color: yellow;
+  // background-color: red;
+  border: $global-border;
 }
 
+
+.tagline{
+  // @extend .outlined;
+}
