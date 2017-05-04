@@ -1,53 +1,21 @@
 @import "base/variables.scss";
+@import "base/util-classes.scss";
+@import "base/mixins.scss";
 @import "base/placeholders.scss";
 
-.alert{
-  @extend %color-alert;
-}
-
-.success{
-  @extend %color-success;
-}
-
-.info{
-  @extend %color-info;
-}
-
-.warning{
-  @extend %color-warning;
-}
-
-.default{
-  @extend %color-default;
-}
-
-.primary{
-  @extend %color-primary;
-}
-
-.accent{
-  @extend %color-accent;
-}
 
 $radius-value: 4px;
+
 %radius{
   border-radius: $radius-value;
 }
 
 @mixin rotate( $val: 90deg ) {
-  -webkit-transform: rotate($val);
-     -moz-transform: rotate($val);
-      -ms-transform: rotate($val);
-       -o-transform: rotate($val);
-          transform: rotate($val);
+  transform: rotate($val);
 }
 
 @mixin scaleX($val) {
-  -webkit-transform: scaleX($val);
-     -moz-transform: scaleX($val);
-      -ms-transform: scaleX($val);
-       -o-transform: scaleX($val);
-          transform: scaleX($val);
+  transform: scaleX($val);
 }
 
 @mixin flexbox{
@@ -60,12 +28,7 @@ $radius-value: 4px;
   -ms-flex-align: stetch;
 }
 @mixin flexbox-val($val:1) {
-  -webkit-box-flex: $val;
-     -moz-box-flex: $val;
-      -webkit-flex: $val;
-         -moz-flex: $val;
-          -ms-flex: $val;
-              flex: $val;
+  flex: $val;
 }
 // a mixin for height and line-height
 @mixin ht-lh($Value) {
@@ -103,9 +66,7 @@ $radius-value: 4px;
 // $s = spread radius
 // $c = shadow color
 @mixin box-shadow($h: 0px, $v:6px, $b: 24px, $s: -01px, $c: rgba(0,0,0,0.2)){
-  -webkit-box-shadow: $h $v $b $s $c;
-     -moz-box-shadow: $h $v $b $s $c;
-          box-shadow: $h $v $b $s $c;
+  box-shadow: $h $v $b $s $c;
 }
 
 a{
@@ -144,55 +105,3 @@ $h5-font-size:1.125rem; //18px
 $h6-font-size:1rem; //16px
 
 $small-font-size:80%;
-
-
-//======================================================================
-
-// Media Query Mixins
-@mixin small-screen{
-  @media only screen and (max-width: 40em) {
-    @content;
-  }
-}
-
-@mixin small-screen-landscape{
-  @media only screen and (max-width: 40em) and (orientation: landscape) {
-    @content;
-  }
-}
-
-@mixin medium-screen{
-  @media only screen and (min-width: 40.063em) {
-    @content;
-  }
-}
-@mixin medium-screen-only{
-  @media only screen and (min-width: 40.063em) and (max-width: 64em) {
-    @content;
-  }
-}
-@mixin large-screen{
-  @media only screen and (min-width: 64.063em) {
-    @content;
-  }
-}
-@mixin large-screen-only{
-  @media only screen and (min-width: 64.063em) and (max-width: 90em) {
-    @content;
-  }
-}
-@mixin xlarge-screen{
-  @media only screen and (min-width: 90.063em) {
-    @content;
-  }
-}
-@mixin xlarge-screen-only{
-  @media only screen and (min-width: 90.063em) and (max-width: 120em) {
-    @content;
-  }
-}
-@mixin xxlarge-screen{
-  @media only screen and (min-width: 120.063em) {
-    @content;
-  }
-}

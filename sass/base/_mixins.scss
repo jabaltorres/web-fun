@@ -1,0 +1,50 @@
+//======================================================================
+
+// Media Query Mixins
+@mixin small-screen{
+  @media only screen and (max-width: 40em) {
+    @content;
+  }
+}
+
+@mixin small-screen-landscape{
+  @media only screen and (max-width: 40em) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin medium-screen{
+  @media only screen and (min-width: 40.063em) {
+    @content;
+  }
+}
+@mixin medium-screen-only{
+  @media only screen and (min-width: 40.063em) and (max-width: 64em) {
+    @content;
+  }
+}
+@mixin large-screen{
+  @media only screen and (min-width: 64.063em) {
+    @content;
+  }
+}
+@mixin large-screen-only{
+  @media only screen and (min-width: 64.063em) and (max-width: 90em) {
+    @content;
+  }
+}
+@mixin xlarge-screen{
+  @media only screen and (min-width: 90.063em) {
+    @content;
+  }
+}
+@mixin xlarge-screen-only{
+  @media only screen and (min-width: 90.063em) and (max-width: 120em) {
+    @content;
+  }
+}
+@mixin xxlarge-screen{
+  @media only screen and (min-width: 120.063em) {
+    @content;
+  }
+}
