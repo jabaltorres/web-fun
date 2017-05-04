@@ -30,7 +30,7 @@ body{
 
 ul{
   display: inline-block;
-  padding:10px;
+  padding:15px;
   @extend %margin-bottom;
 }
 
@@ -253,7 +253,7 @@ footer{
   max-width: 400px;
   margin: 0 auto;
   overflow:hidden;
-  border: solid thick green;
+  border: solid thick orange;
   img{
     float: left;
   }
@@ -263,4 +263,6 @@ footer{
   }
 }
 
-
+.home{
+  background-color: yellow;
+}

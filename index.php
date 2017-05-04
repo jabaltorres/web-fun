@@ -6,7 +6,7 @@
 	<section class="home">
 		<hgroup>
       <h1>Welcome</h1>
-      <h2>This is the beginning of something truely amazing</h2>
+      <h2>This is the beginning of something truely amazing!</h2>
   	</hgroup>
   	<p>Some paragraph</p>
   	<button class="btn-med button">Click</button>
