@@ -1,5 +1,7 @@
 $(document).ready(function () {
-  console.log("test");
+  
+  console.log("This is a test");
+
   $('#nav-menu-icon').click(function(){
     $(this).toggleClass('open');
     $('.main-navigation').stop(true).slideToggle("fast");

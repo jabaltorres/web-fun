@@ -1,9 +1,11 @@
 <?php include 'includes/head.php';?>
   <div class="container">
-  <?php include 'includes/masthead.php';?>
-  <?php include 'includes/navigation.php';?>
-
-  <?php include 'includes/aivl-pop-up.php'; ?>
+  
+  <?php 
+    include 'includes/masthead.php';
+    include 'includes/navigation.php';
+    include 'includes/aivl-pop-up.php'; 
+  ?>
 
 
   <section class="js-fun">
@@ -11,7 +13,7 @@
       <h1>JS Playground</h1>
       <h2>Sub headline</h2>
     </hgroup>
-    <p>This is where I'm going to list some web-fun</p>
+    <p>Insert web fun here</p>
 
     <ul>
       <li class=""><a href="tooltip.php">Tooltip</a></li>

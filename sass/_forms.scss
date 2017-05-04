@@ -1,14 +1,16 @@
 form{
-  @extend %margin-bottom;
+  margin-bottom: $global-margin;
   label{
     display: block;
-    @extend %margin-bottom;
   }
   input[type="checkbox"]{
    border:solid thin red;
    margin: 10px;
   }
-  input[type="text"], input[type="button"], input[type="email"], input[type="password"]{
+  input[type="text"], 
+  input[type="button"], 
+  input[type="email"], 
+  input[type="password"]{
     display: block;
     width:100%;
     padding:10px;
@@ -19,9 +21,8 @@ form{
     width:100%;
     min-height:6em;
     padding:1em;
-    line-height: 1.6em;
     box-sizing: border-box;
-    @extend %margin-bottom;
+    margin-bottom: $global-margin;
   }
   @include medium-screen{
     border:solid thin $color-accent;
@@ -32,5 +33,5 @@ form{
 }
 
 input, textarea{
-  border:solid thin $color-primary;
+  border: $global-border;
 }

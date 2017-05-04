@@ -16,12 +16,11 @@
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <meta name="description" content="Web Designer test for Sharethrough">
+    <meta name="description" content="Time for some web fun">
     <meta name="author" content="Jabal Torres">
     <meta name="keywords" content="HTML5, CSS3, SASS, jQuery"> 
-    <meta property="og:title" content="Web Designer test for Sharethrough by Jabal Torres">
+    <meta property="og:title" content="This is my litte happy place">
     <meta property="og:image" content="link_to_image">
-    <meta property="og:description" content="Web Designer test for Sharethrough">
-    
+    <meta property="og:description" content="This is my litte happy place">
   </head>
   <body>

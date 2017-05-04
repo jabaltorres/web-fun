@@ -1,56 +1,5 @@
-$black: rgba(0,0,0,0.9);
-$orange: #e24d25;
-$navy: rgb(12,19,53);
-$pale-sky: #6b717f;
-$onyx: #353839;
-
-$alizarin: #e74c3c;
-$emerald: #2ecc71;
-$silver: #bdc3c7;
-$carrot: #e67e22;
-$peter-river: #3498db;
-
-$color-shadow: rgba($black, .125);
-$color-light-shade: rgba($black, .2);
-$color-dark-shade: $onyx;
-$color-primary: $navy;
-$color-accent: $orange;
-
-$spacing-value: 20px;
-
-
-//======================================================================
-
-
-%color-alert{
-  background-color: $alizarin;
-}
-
-%color-success{
-  background-color: $emerald;
-}
-
-%color-info{
-   background-color: $silver;
-}
-
-%color-warning{
-   background-color: $carrot;
-}
-
-%color-default{
-   background-color: $peter-river;
-}
-
-%color-primary{
-   background-color: $color-primary;
-   color:white;
-}
-
-%color-accent{
-   background-color: $color-accent;
-   color:white;
-}
+@import "base/variables.scss";
+@import "base/placeholders.scss";
 
 .alert{
   @extend %color-alert;
@@ -78,41 +27,6 @@ $spacing-value: 20px;
 
 .accent{
   @extend %color-accent;
-}
-//======================================================================
-
-
-%padding-value{
-  padding:20px;
-}
-
-%block{
-  display:block;
-}
-
-%margin-bottom{
-  margin-bottom:$spacing-value;
-}
-%uppercase{
-  text-transform: uppercase;
-}
-%transition {
-  -webkit-transition: all 0.3s ease-in-out;
-     -moz-transition: all 0.3s ease-in-out;
-      -ms-transition: all 0.3s ease-in-out;
-       -o-transition: all 0.3s ease-in-out;
-          transition: all 0.3s ease-in-out;
-}
-%img-flex{
-  width:100%;
-  height:auto;
-}
-%round{
-  border-radius: 1000px;
-}
-%m-lr-auto{
-  margin-left: auto;
-  margin-right: auto;
 }
 
 $radius-value: 4px;
@@ -173,10 +87,6 @@ $radius-value: 4px;
 //this is used within the botttom-cta component
 //I believe this was used in the the Training Center project
 @mixin vertical-center{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,11 +95,7 @@ $radius-value: 4px;
 @mixin header-expand{
   height:0;
   overflow-y: hidden;
-  -webkit-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
-     -moz-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
-      -ms-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
-       -o-transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
-          transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
+  transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
 }
 // $h = horizontal length
 // $v = vertical length
@@ -239,31 +145,6 @@ $h6-font-size:1rem; //16px
 
 $small-font-size:80%;
 
-
-
-%h1-font-size{
-  font-size: $h1-font-size;
-  line-height: 1.2em;
-  margin: 10px 0;
-}
-%h2-font-size{
-  font-size: $h2-font-size;
-}
-%h3-font-size{
-  font-size: $h3-font-size;
-}
-%h4-font-size{
-  font-size: $h4-font-size;
-}
-%h5-font-size{
-  font-size: $h5-font-size;
-}
-%h6-font-size{
-  font-size: $h6-font-size;
-}
-%small-font-size{
-  font-size: $small-font-size;
-}
 
 //======================================================================
 
