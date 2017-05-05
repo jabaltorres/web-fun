@@ -1,0 +1,44 @@
+{
+  "colors": [
+    { "name" : "White",
+      "hex"  : "#FFFFFF",
+      "rgba" : "rgba(255,255,255,1)"
+    },
+    { "name" : "Coal",
+      "hex"  : "#cccccc",
+      "rgba" : "rgba(255,255,255,0.9)"
+    },
+    { "name" : "Slate",
+      "hex"  : "#cccccc",
+      "rgba" : "rgba(255,255,255,0.8)"
+    },
+    { "name" : "Wolf",
+      "hex"  : "#cccccc",
+      "rgba" : "rgba(255,255,255,0.7)"
+    },
+    { "name" : "Wolf",
+      "hex"  : "#cccccc",
+      "rgba" : "rgba(255,255,255,0.6)"
+    },
+    { "name" : "Wolf",
+      "hex"  : "#cccccc",
+      "rgba" : "rgba(255,255,255,0.5)"
+    },
+    { "name" : "Wolf",
+      "hex"  : "#cccccc",
+      "rgba" : "rgba(255,255,255,0.4)"
+    },
+    { "name" : "Wolf",
+      "hex"  : "#cccccc",
+      "rgba" : "rgba(255,255,255,0.3)"
+    },
+    { "name" : "POMEGRANATE",
+      "hex"  : "#c0392b",
+      "rgba" : "rgba(192,57,43,1)"
+    },
+    { "name" : "Asbestos",
+      "hex"  : "#7f8c8d",
+      "rgba" : "rgba(127,140,141,1)"
+    }
+  ]
+}

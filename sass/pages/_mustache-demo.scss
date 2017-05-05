@@ -1,0 +1,52 @@
+#color-wrapper{
+  // @extend .outlined;
+  background-color: #e3e3e3;
+  padding: $global-padding;
+  .jt-colors{
+    padding: $global-padding;
+    border: $global-border;
+  }
+}
+
+
+#image-wrapper{
+
+  .article{
+    // background-color: #eee;
+    padding:10px;
+    margin-bottom: 20px;
+    display: none;
+    // border: solid thin  red;
+    > span{
+      border: $global-border;
+      display: block;
+      max-width: 420px;
+      margin:0 auto;
+    }
+    img{
+      width:100%;
+      height:auto;
+    }
+    .image{
+      // width: 50%;
+    }
+    .photoCredit{
+      color:rgba(0,0,0,0.5);
+      margin:0;
+    }
+    .title{
+      font-weight: bold;
+      font-size: 2em;
+      margin: 5px 0;
+    }
+    .author, .date, .summary{
+      margin: 0 0 5px;
+    }
+    .date{}
+    .summary{
+      padding: 0 $global-padding;
+    }
+  }  
+}
+
+

@@ -68,6 +68,7 @@ gulp.task('scripts', function() {
     .pipe(sourcemaps.init())
     .pipe(order([
       "vendor/jquery-1.11.3.min.js",
+      "vendor/mustache-2.3.0.min.js",
       "vendor/slick.min.js",
       "app.js"
     ]))

@@ -1,5 +1,3 @@
-@import "dev-util-classes.scss";
-
 .alert{
   @extend %color-alert;
 }
@@ -31,3 +29,9 @@
 .error{
   border:solid thick red;
 }
+
+// .outlined{
+//   border:solid thick red !important;
+//   background-color: pink;
+//   display: block;
+// }

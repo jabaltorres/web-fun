@@ -1,0 +1,41 @@
+{
+  "articles" : [
+    {
+      "id":1,
+      "imgUrl": "images/image-1.jpeg",
+      "photoCredit": "S Zolkin",
+      "title": "Girl with camera",
+      "author": "Tatiana Schlossberg",
+      "date": "21/02/2015",
+      "summary": "The Chance program has started the second round for the participating children. The program aims to discover and develop potential talents of the children who are at pre-college studies, pertaining media professions such as shooting, producing, directing and presenting. The program is the fruit of collaboration between Al Jazeera Media Training and Development Center and Children Cultural Centre."
+    },
+    {
+      "id":2,
+      "imgUrl": "images/image-2.jpeg",
+      "photoCredit": "Nick Diamantidis",
+      "title": "Pretty little lighthouse",
+      "author": "Tatiana Schlossberg",
+      "date": "20/02/2015",
+      "summary": "Hollywood’s well-known cinematographer, Slawomir Idziak, earned high acclaim for his work on Harry Potter film series’ s, won many international awards at Venice, Berlin and Cannes Film Festivals. Idziak was also nominated for Oscar award more than once. Idziak shot more than 30 films most memorably; King Arthur, Three Colors: Blue and Black Hawk Down."
+    },
+    {
+      "id":3,
+      "imgUrl": "images/image-3.jpeg",
+      "photoCredit": "Michael Hirsch",
+      "title": "Bay Bridge Baby",
+      "author": "Tatiana Schlossberg",
+      "date": "19/02/2015",
+      "summary": "Al Jazeera Media Training and Development Center organized an “Introduction to Media” workshop in ASC Doha School. The workshop is the first of such workshops given to children by the training center. Ghassan Abu Hussein, Manager of AJD Programs Acquisition, provided the training of this workshop and said it was his third experience to train children in Qatar."
+    },
+    {
+      "id": "not-id",
+      "imgUrl": "images/image-4.jpeg",
+      "photoCredit": "Danist Soh",
+      "title": "Leaf with a droplet",
+      "author": "Tatiana Schlossberg",
+      "date": "18/02/2015",
+      "summary": "Students will make their films using the Canon 5D. Each student writes, directs, shoots and edits three projects shot on HD and edits on Apple Final Cut Pro stations. Each student works in key crew positions on at least six more films directed by classmates. The program is not for everyone. It requires a total commitment to a challenging curriculum of making films."
+    }
+  ]
+}
+
