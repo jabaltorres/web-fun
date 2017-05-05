@@ -48,3 +48,93 @@
     @content;
   }
 }
+
+
+@mixin animation ($delay, $duration, $animation, $ease:"linear", $dir:"normal", $count:1) {
+  animation-delay: $delay;
+  animation-duration: $duration;
+  animation-name: $animation;
+  animation-timing-function: unquote($ease);
+  animation-direction: $dir;
+  animation-iteration-count: $count;
+  animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+}
+
+@mixin clear-animation () {
+  animation: none;
+}
+
+// keyframes mixin
+/*
+    Example usage:
+@include keyframes(bgcolor) {
+  0% {
+    background-color: #ffccf2;
+  }
+  50% {
+    background-color: #ccffcc;
+  }
+  100% {
+    background-color: #ccffff;
+  }
+}
+*/
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin transform($val) {
+  transform: $val;
+}
+
+@mixin transition($args...) {
+  transition: $args;
+}
+@mixin transition-delay($delay...) {
+  transition-delay: $delay;
+}
+
+@mixin transition-duration ($val...) {
+  transition-duration:$val;
+}
+
+@mixin linear-gradient($element, $angle, $color-stops...) {
+  $_angle-with-vendor-prefix: "";
+  $_angle: "";
+  @if $angle == "to top" or $angle == "bottom" {
+    $_angle-with-vendor-prefix: bottom;
+    $_angle: to top;
+  } @else if $angle == "to right" or $angle == "left" {
+    $_angle-with-vendor-prefix: left;
+    $_angle: to right;
+  } @else if $angle == "to bottom" or $angle == "top" {
+    $_angle-with-vendor-prefix: top;
+    $_angle: to bottom;
+  } @else if $angle == "to left" or $angle == "right" {
+    $_angle-with-vendor-prefix: right;
+    $_angle: to left;
+  } @else if $angle == "to top right" or $angle == "bottom left" {
+    $_angle-with-vendor-prefix: bottom left;
+    $_angle: to top right;
+  } @else if $angle == "to bottom right" or $angle == "top left" {
+    $_angle-with-vendor-prefix: top left;
+    $_angle: to bottom right;
+  } @else if $angle == "to bottom left" or $angle == "top right" {
+    $_angle-with-vendor-prefix: top right;
+    $_angle: to bottom left;
+  } @else if $angle == "to top left" or $angle == "bottom right" {
+    $_angle-with-vendor-prefix: bottom right;
+    $_angle: to top left;
+  } @else {
+    $_angle-with-vendor-prefix: $angle % 360;
+    $_angle: (90 - $angle) % 360;
+  }
+  #{$element}: linear-gradient($_angle, $color-stops);
+}
+
+@mixin user-select ($val) {
+  user-select: $val;
+}

@@ -1,0 +1,19 @@
+.demo-page{
+  .menu{
+    // @extend .outlined;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    border: $global-border;
+    li{
+      a{
+        display: block;
+        border: $global-border;
+        padding: $global-padding;
+        &:hover{
+          background-color: #eee;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,4 @@
- // Sharethrough Web Designer Test
-// http://capitaljt.github.io/Sharethrough-Test/
+// Sharethrough Web Designer Test
 //
 // Table of Contents
 //
@@ -9,10 +8,7 @@
 // d. Footer Styles
 // e. Media Queries
 
-
-@import "reset";
 @import "base";
-@import "typography";
 @import "navigation";
 @import "nav-icon";
 @import "hero";
@@ -20,6 +16,8 @@
 @import "components/buttons";
 @import "layouts/footer";
 @import "pages/mustache-demo";
+@import "pages/demo-page";
+@import "pages/lorem-ipsum-page";
 @import "slick-carousel";
 
 body{
@@ -76,6 +74,15 @@ section{
   }
 }
 
+
+.close-btn{
+  background-color: #ccc;
+  padding: 0.5em 1em;
+  // position: absolute;
+  // top: 0;
+  // right: 0;
+}
+
 .main-header{
   a{
     display: inline-block;
@@ -125,6 +132,9 @@ article{
   }
 }
 
+.tagline{
+  color: black;
+}
 .email-db-list{
   li{
     margin-bottom: 20px;
@@ -189,12 +199,12 @@ article{
     position: absolute;
     top:50%;
     left:50%;
-    margin-top: -215px; // horizontally centers
-    margin-left: -125px;
+    margin-top: -60px; // horizontally centers
+    margin-left: -60px;
   }
 
   img{
-    max-width: 250px;
+    // max-width: 250px;
     // max-width: 320px;
     height: auto;
   }
@@ -203,11 +213,11 @@ article{
       top:0;
       right:0;
     }
-    #img-container{
-      padding:0;
-      margin-top: -250px; // make look pretty
+    // #img-container{
+    //   padding:0;
+      margin-top: -160px; // make look pretty
       margin-left: -160px;
-    }
+    // }
     img{
       max-width: 320px;
     }
@@ -225,9 +235,9 @@ article{
       margin-top: 0;
       padding:0;
       top:0;
-      margin-left:-51px;
+      // margin-left:-51px;
       width:102px;
-      height:174px;
+      // height:174px;
     }
     img{
       width:100px;
@@ -258,9 +268,4 @@ article{
 .home{
   // background-color: red;
   border: $global-border;
-}
-
-
-.tagline{
-  // @extend .outlined;
 }

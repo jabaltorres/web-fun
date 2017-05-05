@@ -1,34 +1,29 @@
-%h1-font-size{
+$h1-font-size: 4em;
+$h2-font-size: 3.5em;
+$h3-font-size: 3em;
+$h4-font-size: 2.5em;
+$h5-font-size: 2em;
+$h6-font-size: 1em;
+
+h1 {
   font-size: $h1-font-size;
-  line-height: 1.2em;
-  margin: 10px 0;
 }
-%h2-font-size{
+h2 {
   font-size: $h2-font-size;
 }
-%h3-font-size{
+h3 {
   font-size: $h3-font-size;
 }
-%h4-font-size{
+h4 {
   font-size: $h4-font-size;
 }
-%h5-font-size{
+h5 {
   font-size: $h5-font-size;
 }
-%h6-font-size{
+h6 {
   font-size: $h6-font-size;
 }
-%small-font-size{
-  font-size: $small-font-size;
-}
-
-
 
 h1,h2,h3,h4,h5,h6{
   font-family: 'Old Standard TT', serif;
-}
-
-h1{
-  font-size: 3em;
-  line-height: 1em;
 }

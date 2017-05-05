@@ -6,7 +6,7 @@
     // use if specifying path from root
     // $root = $_SERVER['DOCUMENT_ROOT'];
 
-    $path = 'images/avil_banner_imgs/';
+    $path = 'images/Facebox/Images-Circle-640px/';
 
     // End of user modified section 
     /////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@
     <!-- #img-container is the container for the pop up ad -->
     <span id="img-container">
       <span id="close-btn">X</span>
-        <a href="http://aivl.org.au/hepcfactsheets/" target="_blank"><img src="<?php echo $path . $img ?>" height="1098" width="640" alt=""></a>
+        <a href="http://jabaltorres.com/demos/web-fun" target="_blank"><img src="<?php echo $path . $img ?>" alt=""></a>
     </span>
 </div>
 

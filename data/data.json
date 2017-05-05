@@ -16,9 +16,9 @@
       "hex"  : "#cccccc",
       "rgba" : "rgba(255,255,255,0.7)"
     },
-    { "name" : "Wolf",
-      "hex"  : "#cccccc",
-      "rgba" : "rgba(255,255,255,0.6)"
+    { "name" : "Turqois",
+      "hex"  : "#1abc9c",
+      "rgba" : "rgba(26, 188, 156,1.0)"
     },
     { "name" : "Wolf",
       "hex"  : "#cccccc",

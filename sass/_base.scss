@@ -1,14 +1,9 @@
+@import "base/reset.scss";
 @import "base/variables.scss";
 @import "base/util-classes.scss";
 @import "base/mixins.scss";
 @import "base/placeholders.scss";
-
-
-$radius-value: 4px;
-
-%radius{
-  border-radius: $radius-value;
-}
+@import "base/typography.scss";
 
 @mixin rotate( $val: 90deg ) {
   transform: rotate($val);
