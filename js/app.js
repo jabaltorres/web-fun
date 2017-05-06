@@ -12,16 +12,6 @@ $(document).ready(function () {
     // arrows:false
   });
 
-  var pathname = window.location.pathname;
-  var location = window.location;
-  var host = window.location.host;
-  var origin = window.location.origin;
-
-  console.log('the pathname: ', pathname);
-  console.log('the location: ', location);
-  console.log('the host: ', host);
-  console.log('the origin: ', origin);
-  
   if ($("#jt-images").length){
     // Using Mustache
     $.getJSON('data/data.json', function(data) {
@@ -69,12 +59,28 @@ $(document).ready(function () {
       },
       statusCode: {
         404: function() {
-          console.log("page not found")
+          console.log("page not found");
         }
       }
     });  
   }
 
+  var pathname = window.location.pathname;
+  var location = window.location;
+  var host = window.location.host;
+  var origin = window.location.origin;
+
+  console.log('the pathname: ', pathname);
+  console.log('the location: ', location);
+  console.log('the host: ', host);
+  console.log('the origin: ', origin);
+
+  if ($("#host-info").length){
+    $("<div>Pathname: " + pathname + "</div>").appendTo("#host-info");
+    $("<div>Location: " + location + "</div>").appendTo("#host-info");
+    $("<div>Host: " + host + "</div>").appendTo("#host-info");
+    $("<div>Origin: " + origin + "</div>").appendTo("#host-info");
+  }
   // $('section').each(function(){
   //   //$(this).css("border", "solid thick yellow");
   //   var closeBtn = $('<span class="close-btn">Close This</span>');

@@ -1,4 +1,4 @@
-<?
+<?php
   require_once 'config.php';
 
   $title = "Home Page"; 
@@ -23,11 +23,8 @@
     include 'includes/navigation.php';
   ?>
 		
-	<section class="home">
-		<hgroup>
-      <h1><?php echo $title; ?></h1>
-      <h2><?php echo $page_subheading; ?></h2>
-  	</hgroup>
+	<section>
+		<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
 	</section>
 
   <?php include 'blocks/hero.php'; ?>

@@ -1,13 +1,31 @@
-<?php include 'includes/head.php';?>
-<div class="container">
+<?
+  require_once 'config.php';
+
+  $title = "Add Email"; 
+  // this is for <title>
+
+  $page_title = "Add an email";
+  // This is for breadcrumbs if I want a custom title other than the default
+
+  $page_subheading = "Test the database functionality"; 
+  // This is the subheading
+
+  $custom_class = "add-email-page"; 
+  //custom CSS for this page only
+
+  include_once('includes/head.php');
+?>
+
+<div class="container <?php echo $custom_class; ?>">
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
   <?php include 'includes/email-db-nav.php';?>
+
   <section id="form-section">
-    <h2>Add Email</h2>
+    <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
     <?php
 
-      require_once('connectvars.php');
+      require_once('config.php');
 
       if (isset($_POST['submit'])) {
         $first_name = $_POST['firstname'];
@@ -29,19 +47,19 @@
         $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
           or die('Error connecting to MySQL server.');
 
-        $query = "INSERT INTO email_list (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
+        $query = "INSERT INTO users (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
         mysqli_query($dbc, $query)
           or die ('Data not inserted.');
 
-        echo 'Customer added. </br>';
+        echo '<h3>Entry added.</h3>';
         echo '<a href="db-test.php">Home</a>';
 
         mysqli_close($dbc);
       }
-
-      if ($output_form == 'yes') {
     ?>
 
+    <?php if ($output_form == 'yes'): ?>
+   
       <form id="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label for="firstname" id="name-label">First name:</label>
         <input type="text" id="firstname" name="firstname" /><br />
@@ -49,7 +67,7 @@
         <input type="text" id="lastname" name="lastname" /><br />
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" /><br />
-        <input type="submit" name="submit" value="Submit" id="button" class="button" />
+        <input type="submit" name="submit" value="Submit" id="button" class="btn" />
       </form>
       <script>
         // var button = document.getElementById('button');
@@ -67,7 +85,6 @@
         //   valid8();
         // });
       </script>
-
 
       <script>
         // var check_name = /^[A-Za-z0-9 ]{3,20}$/;
@@ -156,7 +173,7 @@
           var email = target.value;
 
           if (validateEmail(email)) {
-            alert('god is good');
+            alert('Email is valid');
           } else {
             target.className = "error";
             event.preventDefault();
@@ -167,14 +184,10 @@
 
           }
         }
-
       </script>
 
-    <?php
-      }
-    ?>
+    <?php endif; ?>
 
-    <!-- This is to test a stash comment. Let's images this is the third stash-->
   </section>
 
 <?php include 'includes/feet.php';?>

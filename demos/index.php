@@ -1,8 +1,18 @@
 <?
-  $title = "Demo Index file"; // this is for <title>
-  $page_title = "This is the demo index file"; //this is for breadcrumbs if I want a custom title other than the default
-  $custom_class = "demo-page"; //custom CSS for this page only
   require_once '../config.php';
+
+  $title = "Demo Index"; 
+  // this is for <title>
+
+  $page_title = "Welcome to the demo page";
+  // This is for breadcrumbs if I want a custom title other than the default
+
+  $page_subheading = "This is the Demo page subheading"; 
+  // This is the subheading
+
+  $custom_class = "demo-page"; 
+  //custom CSS for this page only
+
   include_once('../includes/head.php');
 ?>
 
@@ -16,9 +26,8 @@
   <section>
     <hgroup>
       <h1><?php echo $page_title; ?></h1>
-      <h2>Sub headline</h2>
+      <h2><?php echo $page_subheading; ?></h2>
     </hgroup>
-    <p>Insert web fun here</p>
   </section>
 
   <section>

@@ -17,15 +17,23 @@
       <h1>Hand coded "flipper"</h1>
       <h2>Carousel, flipper, whatever!</h2>
     </hgroup>
-    <button id="action-button">Button </button>
+    <article>
+      <h3>Note:</h3>
+
+      <p>Note: The "flipper" fails to reload if you refresh the browser quickly. Maybe I've got a problem with constantly refreshing the browser</p>
+
+      <p>This button is needed for the flipper</p>
+      <button id="action-button" class="btn">CLICK ME</button>
+    </article>
+    
   </section>
 
   <div id="wrapper" class="example-container">
-    <img class="slide" src="../images/janky-carousel-img/placholder-1.png" alt="Image 1">
-    <img class="slide" src="../images/janky-carousel-img/placholder-2.png" alt="Image 2">
-    <img class="slide" src="../images/janky-carousel-img/placholder-3.png" alt="Image 3">
-    <img class="slide" src="../images/janky-carousel-img/placholder-4.png" alt="Image 4">
-    <img class="slide" src="../images/janky-carousel-img/placholder-5.png" alt="Image 5">
+    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-1.png" alt="Image 1">
+    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-2.png" alt="Image 2">
+    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-3.png" alt="Image 3">
+    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-4.png" alt="Image 4">
+    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-5.png" alt="Image 5">
   </div>
 
   <script>
@@ -46,6 +54,7 @@
         // remove rich tooltips after the link
       }
     };
+
     Tooltips.init();
 
     var AddBorder = {

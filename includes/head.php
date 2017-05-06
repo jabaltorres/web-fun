@@ -13,35 +13,13 @@
     <link href='http://fonts.googleapis.com/css?family=Gudea|Old+Standard+TT' rel='stylesheet' type='text/css'>
     <link href="https://fontastic.s3.amazonaws.com/mWtd8iTgMRgyWPztf4g6Zh/icons.css" rel="stylesheet">
     
-    <?php 
-
-      $base_dir = __DIR__;
-
-      // server protocol
-      $protocol = empty($_SERVER['HTTPS']) ? 'http' : 'https';
-
-      // domain name
-      $domain = $_SERVER['SERVER_NAME'];
-      $doc_root = $_SERVER['DOCUMENT_ROOT'];
-
-      // $base_url = preg_replace("!^${doc_root}!", '', $base_dir);
-      $base_url = preg_replace("!^${doc_root}!", '', $base_dir);
-
-      // server port
-      $port = $_SERVER['SERVER_PORT'];
-      $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $port == 443) ? '' : ":$port";
-
-      // put em all together to get the complete base URL
-      // $url = "${protocol}://${domain}${disp_port}${base_url}";
-      $url = "${protocol}://${domain}${disp_port}/web-fun";
-    ?>
-
     <link rel="stylesheet" href="<?php echo $url; ?>/css/slick.css">
     <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css">
 
-    <meta name="description" content="Time for some web fun">
-    <meta name="author" content="Jabal Torres">
-    <meta name="keywords" content="HTML5, CSS3, SASS, jQuery"> 
+    <meta name="description" content="<?php echo $site_description; ?>">
+    <meta name="author" content="<?php echo $site_author; ?>">
+    <meta name="keywords" content="<?php echo $site_keywords; ?>">
+
     <meta property="og:title" content="This is my litte happy place">
     <meta property="og:image" content="link_to_image">
     <meta property="og:description" content="This is my litte happy place">

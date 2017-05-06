@@ -14,7 +14,7 @@
       <h1>Forms</h1>
       <h2>Sub headline</h2>
     </hgroup>
-    <p>This is an example of a contact form</p>
+    <p>This is an example of a contact form. It is not currently functioning</p>
     <form method="post" action="acknowledge.php">
       <label for="name">Name:</label>
       <input type="text" name="name" id="name">

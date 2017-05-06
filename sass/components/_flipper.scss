@@ -1,0 +1,15 @@
+// This is just for playing around with js
+.example-container{
+  // max-width: 400px;
+  max-width: 400px;
+  margin: 0 auto;
+  overflow:hidden;
+  border: solid thick orange;
+  img{
+    float: left;
+  }
+  .active{
+    
+    box-sizing: border-box;
+  }
+}
