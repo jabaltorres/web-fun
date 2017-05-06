@@ -1,0 +1,668 @@
+.icon {
+    font-size: 16px;
+}
+
+.icon:before {
+    content:' ';
+    vertical-align:middle;
+    display: inline-block;
+    background-image: url("../images/svg/ai-svg-sprite.svg");
+    background-repeat: no-repeat;
+    background-size: 4.25em 245.25em;
+}
+
+.no-svg .icon:before {
+    background-image: url("../svg/ai-svg-sprite.png");
+}
+
+
+
+  .icon.analyst-report:before {
+      background-position: 0em 0em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.analyst-report-sm:before {
+      background-position: 0em -4.25em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.balance-sheet:before {
+      background-position: 0em -6.8125em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.balance-sheet-sm:before {
+      background-position: 0em -11.0625em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.best-practices:before {
+      background-position: 0em -13.625em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.best-practices-sm:before {
+      background-position: 0em -17.875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.blog-post:before {
+      background-position: 0em -20.4375em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.blog-post-sm:before {
+      background-position: 0em -24.6875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.brochure:before {
+      background-position: 0em -27.25em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.brochure-sm:before {
+      background-position: 0em -31.5em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.building-1:before {
+      background-position: 0em -34.0625em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.building-1-sm:before {
+      background-position: 0em -38.3125em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.calendar-2:before {
+      background-position: 0em -40.875em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.calendar-2-sm:before {
+      background-position: 0em -45.125em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.calendar-4:before {
+      background-position: 0em -47.6875em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.calendar-4-sm:before {
+      background-position: 0em -51.9375em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.capital-management:before {
+      background-position: 0em -54.5em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.capital-management-sm:before {
+      background-position: 0em -58.75em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.collaborative:before {
+      background-position: 0em -61.3125em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.collaborative-sm:before {
+      background-position: 0em -65.5625em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.comprehensive:before {
+      background-position: 0em -68.125em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.comprehensive-sm:before {
+      background-position: 0em -72.375em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.continuous:before {
+      background-position: 0em -74.9375em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.continuous-sm:before {
+      background-position: 0em -79.1875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.customer-story:before {
+      background-position: 0em -81.75em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.customer-story-sm:before {
+      background-position: 0em -86em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.datasheet:before {
+      background-position: 0em -88.5625em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.datasheet-sm:before {
+      background-position: 0em -92.8125em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.demo:before {
+      background-position: 0em -95.375em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.demo-sm:before {
+      background-position: 0em -99.625em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.disability-insurance:before {
+      background-position: 0em -102.1875em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.disability-insurance-sm:before {
+      background-position: 0em -106.4375em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.donut:before {
+      background-position: 0em -109em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.donut-sm:before {
+      background-position: 0em -113.25em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.easy:before {
+      background-position: 0em -115.8125em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.easy-sm:before {
+      background-position: 0em -120.0625em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.ebook:before {
+      background-position: 0em -122.625em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.ebook-sm:before {
+      background-position: 0em -126.875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.expense-management:before {
+      background-position: 0em -129.4375em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.expense-management-sm:before {
+      background-position: 0em -133.6875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.fast:before {
+      background-position: 0em -136.25em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.fast-sm:before {
+      background-position: 0em -140.5em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.financial-close:before {
+      background-position: 0em -143.0625em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.financial-close-sm:before {
+      background-position: 0em -147.3125em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.generic-money-bill:before {
+      background-position: 0em -149.875em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.generic-money-bill-sm:before {
+      background-position: 0em -154.125em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.hand-and-coins:before {
+      background-position: 0em -156.6875em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.hand-and-coins-sm:before {
+      background-position: 0em -160.9375em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.healthcare:before {
+      background-position: 0em -163.5em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.healthcare-sm:before {
+      background-position: 0em -167.75em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.idea:before {
+      background-position: 0em -170.3125em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.idea-sm:before {
+      background-position: 0em -174.5625em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.in-person-event:before {
+      background-position: 0em -177.125em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.in-person-event-sm:before {
+      background-position: 0em -181.375em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.infographic:before {
+      background-position: 0em -183.9375em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.infographic-sm:before {
+      background-position: 0em -188.1875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.news:before {
+      background-position: 0em -190.75em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.news-sm:before {
+      background-position: 0em -195em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.powerful:before {
+      background-position: 0em -197.5625em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.powerful-sm:before {
+      background-position: 0em -201.8125em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.revenue-management:before {
+      background-position: 0em -204.375em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.revenue-management-sm:before {
+      background-position: 0em -208.625em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.video:before {
+      background-position: 0em -211.1875em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.video-sm:before {
+      background-position: 0em -215.4375em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.webcast:before {
+      background-position: 0em -218em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.webcast-sm:before {
+      background-position: 0em -222.25em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.webinar:before {
+      background-position: 0em -224.8125em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.webinar-sm:before {
+      background-position: 0em -229.0625em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.whitepaper:before {
+      background-position: 0em -231.625em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.whitepaper-sm:before {
+      background-position: 0em -235.875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+  .icon.workforce-management:before {
+      background-position: 0em -238.4375em;
+      width: 4.25em;
+      height: 4.25em;
+  }
+
+
+
+
+  .icon.workforce-management-sm:before {
+      background-position: 0em -242.6875em;
+      width: 2.5625em;
+      height: 2.5625em;
+  }
+
+
+
+
+

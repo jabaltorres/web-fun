@@ -4,9 +4,7 @@
   $block_custom_class = "tooltip";
 ?>
 
-<section class="<?php echo $block_custom_class; ?>">
-
-  <?php include 'incl/block-heading.php'; ?>
+<section class="">
 
   <h3>Tim the Tooltip Taylor</h3>
 

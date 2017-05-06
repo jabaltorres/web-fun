@@ -27,6 +27,7 @@
 @import "pages/lorem-ipsum-page";
 
 @import "slick-carousel";
+@import "svg-icon-sprite";
 
 body{
   font-family: 'Gudea', sans-serif;
@@ -248,7 +249,7 @@ article{
       // height:174px;
     }
     img{
-      width:100px;
+      // width:100px;
     }
   }
 }

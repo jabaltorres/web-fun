@@ -23,22 +23,25 @@ var svg2png     = require('gulp-svg2png');
  * required vars: svgSprite, filter, svg2png
 
  */
+
 gulp.task('sprites', function () {
-  return gulp.src('assets/images/svg/icons/*.svg')
+  return gulp.src('images/svg/icons/*.svg')
     .pipe(svgSprite({
       baseSize: 16,
-      cssFile: "sass/_svg-icon-sprite.scss",
+      svgPath: "../images/svg/ai-svg-sprite.svg",
+      cssFile: "../sass/_svg-icon-sprite.scss",
       svg: {
-          sprite: "images/svg-sprite/ai-svg-sprite.svg"
+          sprite: "svg/ai-svg-sprite.svg"
       },
       preview: {
-          sprite: "svg-test-page.html"
+          sprite: "svg/svg-test-page.html"
+          // sprite: "false"
       }
     }))
-    .pipe(gulp.dest("assets/")) 
+    .pipe(gulp.dest("images"))
     .pipe(filter("**/*.svg"))  // Filter out everything except the SVG file
-    .pipe(svg2png())  
-    .pipe(gulp.dest("assets/"));
+    .pipe(svg2png())
+    .pipe(gulp.dest("images"));
 });
 
 /**

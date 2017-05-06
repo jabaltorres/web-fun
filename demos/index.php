@@ -24,6 +24,7 @@
   ?>
 
   <section>
+  <span class="icon analyst-report"></span>
     <hgroup>
       <h1><?php echo $page_title; ?></h1>
       <h2><?php echo $page_subheading; ?></h2>
