@@ -253,3 +253,18 @@ article{
     }
   }
 }
+
+.db-menu{
+  // background-color: pink;
+  // border: solid thin red;
+  ul{
+    li{
+      display: inline-block;  
+    }
+  }
+  a{
+    padding: 10px 20px;
+    border: $global-border;
+    display: inline-block;
+  }
+}

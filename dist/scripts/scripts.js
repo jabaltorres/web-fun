@@ -39,7 +39,7 @@ $(document).ready(function () {
 
   if ($("#jt-images").length){
     // Using Mustache
-    $.getJSON('data/data.json', function(data) {
+    $.getJSON('../data/data.json', function(data) {
       var colorTemplate = $('#colors-template').html();
       var colorHtml = Mustache.to_html(colorTemplate, data);
       $('#color-wrapper').html(colorHtml);
@@ -51,7 +51,7 @@ $(document).ready(function () {
     // Using Reg Ajax
     console.log("color wrapper is indeed present");
     $.ajax({
-      url: 'data/list.json',
+      url: '../data/list.json',
       dataType: 'json',
       type: 'get',
       cache: false,

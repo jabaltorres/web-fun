@@ -1,15 +1,27 @@
-<?
-  $title = "Mustache"; // this is for <title>
-  $page_title = "This is the mustach file"; //this is for breadcrumbs if I want a custom title other than the default
-  $custom_class = "mustache-page"; //custom CSS for this page only
-  require_once 'config.php';
-  include_once('includes/head.php');
+<?php
+  require_once '../config.php';
+
+  $title = "Mustache Page"; 
+  // this is for <title>
+
+  $page_title = "This is the mustache page";
+  // This is for breadcrumbs if I want a custom title other than the default
+
+  $page_subheading = "Welcome to the mustache"; 
+  // This is the subheading
+
+  $custom_class = "mustache-page"; 
+  //custom CSS for this page only
+
+  include_once(INCLUDES_PATH . '/head.php');
 ?>
-  <div class="container">
+
+
+  <div class="container <?php echo $custom_class; ?>">
   
   <?php 
-    include 'includes/masthead.php';
-    include 'includes/navigation.php';
+    include_once(INCLUDES_PATH . '/masthead.php');
+    include_once(INCLUDES_PATH . '/navigation.php');
   ?>
 
 
@@ -22,8 +34,9 @@
 
     <div id="color-wrapper"></div>
     <script id="colors-template" type="x-tmpl-mustache">
+
       {{#colors}}
-        <div class="jt-colors" style= "background-color: {{rgba}};">
+        <div class="jt-colors col col-xs-4" style= "background-color: {{rgba}};">
           <span>{{name}}</span>
           <span>{{hex}}</span>
           <span>{{rgba}}</span>
@@ -101,4 +114,4 @@
     </div>
   </section>
 
-<?php include 'includes/feet.php';?>
+<?php include_once(INCLUDES_PATH . '/feet.php');?>

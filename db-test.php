@@ -13,25 +13,19 @@
   $custom_class = "db-test-page"; 
   //custom CSS for this page only
 
-  include_once('includes/head.php');
+  include_once(INCLUDES_PATH . '/head.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-
   <?php 
-    include 'includes/masthead.php';
-    include 'includes/navigation.php';
-    include 'includes/email-db-nav.php';
-  ?>
+    include_once(INCLUDES_PATH . '/masthead.php');
+    include_once(INCLUDES_PATH . '/navigation.php');
+    include_once(INCLUDES_PATH . '/email-db-nav.php');
+  ?>  
 
   <section>
     <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
-    
-    <ul>
-      <li><a href="addemail.php">Add Email</a></li>
-      <li><a href="removeemail.php">Remove Email</a></li>
-      <li><a href="sendemail.php">Send Email</a></li>
-    </ul>
+    <?php include_once(INCLUDES_PATH . '/db-menu.php');?>
   </section>
 
   <section>
