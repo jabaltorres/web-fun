@@ -19,6 +19,8 @@
 @import "components/buttons";
 @import "components/flipper";
 
+@import "templates/master-page-template";
+
 @import "layouts/footer";
 
 @import "pages/mustache-demo";
@@ -255,8 +257,6 @@ article{
 }
 
 .db-menu{
-  // background-color: pink;
-  // border: solid thin red;
   ul{
     li{
       display: inline-block;  
@@ -266,5 +266,13 @@ article{
     padding: 10px 20px;
     border: $global-border;
     display: inline-block;
+  }
+}
+
+.svg-icon-list{
+  li{
+    display: inline-block;
+    padding: 20px;
+    border: $global-border;
   }
 }

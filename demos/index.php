@@ -37,6 +37,7 @@
       <li><a href="host-info.php">Host Info</a></li>
       <li><a href="lorem-ipsum.php">Lorem Ipsum</a></li>
       <li><a href="mustache.php">Mustache.js</a></li>
+      <li><a href="icons.php">Icons</a></li>
     </ul>
   </section>
 

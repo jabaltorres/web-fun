@@ -1,0 +1,16 @@
+.master-page-template{
+  .row{
+    border: solid thin red;
+  }
+  .col-4{
+    border: solid thin blue;
+  }
+  .icon-example{
+    .icon{
+      border: solid thin pink;
+      display: block;
+      margin: $global-margin auto;
+      width: 68px;
+    }
+  }
+}

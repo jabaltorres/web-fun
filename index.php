@@ -24,7 +24,6 @@
   ?>
 		
 	<section>
-  <span class="icon analyst-report"></span>
 		<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
 	</section>
 

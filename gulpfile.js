@@ -117,8 +117,10 @@ gulp.task('reload', function () {
  */
 gulp.task('watch', function () {
   gulp.watch(['sass/*.scss', 'sass/**/*.scss'], ['sass']);
-  gulp.watch(['js/jabalscripts/*.js', 'js/app.js'], ['scripts']);
+  
   gulp.watch(['sass/*.scss', 'sass/**/*.scss']).on('change', browserSync.reload);
+
+  gulp.watch(['js/jabalscripts/*.js', 'js/app.js'], ['scripts']);
   gulp.watch(['js/jabalscripts/*.js', 'js/app.js']).on('change', browserSync.reload);
   // gulp.watch('**/*.{php,inc,info}',['reload']);
 });
