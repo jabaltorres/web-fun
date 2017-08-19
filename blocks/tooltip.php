@@ -1,12 +1,12 @@
-<?php 
+<?php
   $block_headline = "Tooltipz";
   $block_subheading = "Tooltip Subheading";
-  $block_custom_class = "tooltip";
+  $block_custom_class = "tool-tip";
 ?>
 
-<section class="">
+<section class="<?php echo $block_custom_class; ?>">
 
-  <h3>Tim the Tooltip Taylor</h3>
+  <?php include(INCL_PATH . '/block-headline.php'); ?>
 
   <p><a class="federation" title="Read more about James T. Kirk at Wikipedia, the free encyclopedia." href="http://en.wikipedia.org/wiki/James_T._Kirk">James Tiberius Kirk</a>
     (2233 - 2293/2371), played by William Shatner, is the leading character in the

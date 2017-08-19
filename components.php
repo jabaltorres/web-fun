@@ -14,5 +14,4 @@
   <?php include "blocks/slick-carousel.php"; ?>
   <?php include "blocks/tooltip.php"; ?>
 
-
 <?php include 'includes/feet.php';?>

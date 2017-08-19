@@ -43,6 +43,8 @@
   defined("TEMPLATES_PATH") or define("TEMPLATES_PATH", realpath(dirname(__FILE__) . '/templates'));
   defined("INCLUDES_PATH") or define("INCLUDES_PATH", realpath(dirname(__FILE__) . '/includes'));
   defined("IMAGES_PATH") or define("IMAGES_PATH", realpath(dirname(__FILE__) . '/images'));
+  // defined("BLOCKS_PATH") or define("BLOCKS_PATH", realpath(dirname(__FILE__) . '/blocks'));
+  defined("INCL_PATH") or define("INCL_PATH", realpath(dirname(__FILE__) . '/incl'));
 
   /* 
     Define database connection constants 

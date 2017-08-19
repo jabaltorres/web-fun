@@ -6,9 +6,8 @@
 
 <section class="<?php echo $block_custom_class; ?>">
 
-  <?php include 'incl/block-heading.php'; ?>
-
-  <h3>Buttons</h3>
+  <?php include(INCL_PATH . '/block-headline.php'); ?>
+  
   <button class="btn">Click Me</button>
   <button class="btn">Click Me</button>
   <button class="btn">Click Me</button>

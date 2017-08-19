@@ -1,12 +1,12 @@
 <?php 
   $block_headline = "Slick Carousel";
-  $block_subheading = "Mic check 1, 2";
+  $block_subheading = "Slick Carousel Subheading";
   $block_custom_class = "slick-carousel";
 ?>
 
 <section class="<?php echo $block_custom_class; ?>">
 
-  <?php include 'incl/block-heading.php'; ?>
+  <?php include(INCL_PATH . '/block-headline.php'); ?>
   
   <p>This is a nice Slick Carousel</p>
 
