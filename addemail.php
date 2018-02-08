@@ -47,7 +47,7 @@
         $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
           or die('Error connecting to MySQL server.');
 
-        $query = "INSERT INTO users (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
+        $query = "INSERT INTO email_list (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
         mysqli_query($dbc, $query)
           or die ('Data not inserted.');
 
@@ -145,15 +145,15 @@
           tested =  true;
         }
 
-        // var clicks = 0;
-        // function clickCounter(){
-        //     clicks +=1;
-        //     console.log(clicks);
+        var clicks = 0;
+        function clickCounter(){
+            clicks +=1;
+            console.log(clicks);
 
-        //     if (clicks > 5) {
-        //       alert('more than 5 clicks');
-        //     }
-        // }
+            if (clicks > 5) {
+              alert('more than 5 clicks');
+            }
+        }
 
 
         var button = document.getElementById('button');
@@ -180,7 +180,7 @@
             target.value = "";
 
             displayError();
-            // clickCounter();
+            clickCounter();
 
           }
         }

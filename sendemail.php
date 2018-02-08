@@ -1,3 +1,7 @@
+<?php
+    require_once('config.php');
+?>
+
 <?php include 'includes/head.php';?>
 <div class="container">
   <?php include 'includes/masthead.php';?>
@@ -8,7 +12,7 @@
     <p><strong>Private:</strong> For Elmer's use ONLY<br />Write and send an email to mailing list members.</p>
 
     <?php
-      require_once('connectvars.php');
+//      require_once('connectvars.php');
       
       if (isset($_POST['submit'])) {
         $from = 'jt@makemeelvis.com';

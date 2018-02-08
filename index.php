@@ -1,4 +1,6 @@
 <?php
+
+  // TODO: Add clear documentation of how to set this up locally.
   require_once 'config.php';
 
   $title = "Home Page"; 
