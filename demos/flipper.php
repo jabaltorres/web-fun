@@ -1,4 +1,4 @@
-<?
+<?php
   $title = "Demo Index file"; // this is for <title>
   $page_title = "This is the demo index file"; //this is for breadcrumbs if I want a custom title other than the default
   $custom_class = "demo-page"; //custom CSS for this page only

@@ -1,4 +1,4 @@
-<?
+<?php
   require_once 'config.php';
   $title = "Form Page"; // this is for <title>
   $page_title = "This is the form page"; //this is for breadcrumbs if I want a custom title other than the default

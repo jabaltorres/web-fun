@@ -1,4 +1,4 @@
-<?
+<?php
   $title = "Icons Page"; 
   // this is for <title>
 

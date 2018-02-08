@@ -1,4 +1,4 @@
-<?
+<?php
   require_once 'config.php';
 
   $title = "DB Page"; 
@@ -32,7 +32,7 @@
     <h4>Database Entries</h4>
     <ul class="email-db-list">
       <?php
-        require_once('config.php');
+//        require_once('config.php');
 
         $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
           or die('Error connecting to MySQL server.');

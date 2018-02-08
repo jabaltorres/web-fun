@@ -1,3 +1,4 @@
+<?php require_once 'config.php';?>
 <?php include 'includes/head.php';?>
 <div class="container">
   <?php include 'includes/masthead.php';?>
@@ -10,7 +11,7 @@
       <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 
         <?php
-          require_once('connectvars.php');
+//          require_once('connectvars.php');
 
           $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
             or die('Error connecting to MySQL server.');
