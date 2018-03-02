@@ -29,7 +29,7 @@
   if ($domain == $enviro_prod){
     $url = "${protocol}://${domain}${disp_port}/demos/${path}";
   } else {
-    $url = "${protocol}://${domain}${disp_port}/${path}";
+    $url = "${protocol}://${domain}${disp_port}";
   }
 
   /*

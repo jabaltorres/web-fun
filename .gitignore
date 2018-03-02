@@ -9,3 +9,6 @@ node_modules/*
 # Ignore bower components
 bower_components
 bower_components/*
+
+.idea
+.idea/*
