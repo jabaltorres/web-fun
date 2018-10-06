@@ -1,4 +1,4 @@
-<?php
+    <?
   $title = "Host Info file"; 
   // this is for <title>
 
@@ -57,8 +57,8 @@
         echo "HTTP Host: " . $http_host . "<br>";
 
         echo "<p>&nbsp;</p>";
-        echo "Base URL - 2: " . BASE_URL . "<br>";
-        echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] .":  ". $_SERVER['SERVER_PORT']. "<br>";
+        echo "Base URL: " . BASE_URL . "<br>";
+        echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
         echo "Path Translated: " . $_SERVER['PATH_TRANSLATED'] . "<br>";
 
         echo "<p>&nbsp;</p>";

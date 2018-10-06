@@ -31,5 +31,4 @@
 
   <?php include 'blocks/hero.php'; ?>
 	<!-- <?php include 'blocks/github-gist.php'; ?> -->
-
 <?php include 'includes/feet.php';?>

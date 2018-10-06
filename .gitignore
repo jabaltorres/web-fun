@@ -10,5 +10,8 @@ node_modules/*
 bower_components
 bower_components/*
 
+# Ignore phpstorm configs
 .idea
 .idea/*
+
+.DS_Store

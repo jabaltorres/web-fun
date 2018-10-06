@@ -27,8 +27,11 @@
   // put em all together to get the complete base URL
   // $url = "${protocol}://${domain}${disp_port}${base_url}";
   if ($domain == $enviro_prod){
+  	// Production Environment
     $url = "${protocol}://${domain}${disp_port}/demos/${path}";
   } else {
+  	// Local Environment
+	// $url = "${protocol}://${domain}${disp_port}/${path}";
     $url = "${protocol}://${domain}${disp_port}";
   }
 
@@ -53,5 +56,3 @@
   define('DB_USER', 'root');
   define('DB_PASSWORD', 'root');
   define('DB_NAME', 'lorem_test_db');
-
-?>
