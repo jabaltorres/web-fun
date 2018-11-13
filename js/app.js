@@ -86,4 +86,25 @@ $(document).ready(function () {
   //   var closeBtn = $('<span class="close-btn">Close This</span>');
   //   $(this).prepend(closeBtn);
   // });
+
+
+    // The bit of code is being used on http://localhost:3000/demos/js-objects.php
+    var jToolTip = $(".jToolTip");
+
+    var pTag = document.createElement("p");
+    var innerSpan = document.createElement("span");
+    pTag.className = "info";
+    pTag.innerHTML = "Window scroll top: ";
+    pTag.appendChild(innerSpan);
+
+    jToolTip.append(pTag);
+
+
+    $(document).on('scroll', function(){
+
+        // update jToolTip
+        var scrollTop = $(window).scrollTop().toFixed(2);
+        $(".info span").text(scrollTop + "px");
+
+    });
 });

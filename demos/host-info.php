@@ -1,4 +1,4 @@
-    <?
+<?php
   $title = "Host Info file"; 
   // this is for <title>
 

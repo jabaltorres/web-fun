@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/capitalJT/web-fun/issues"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "npm-check-updates": "^2.14.2"
+  }
 }
