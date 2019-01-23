@@ -9,15 +9,14 @@
   <?php include 'includes/email-db-nav.php';?>
 
   <section>
-    <p><strong>Private:</strong> For Elmer's use ONLY<br />Write and send an email to mailing list members.</p>
+    <p><strong>Private:</strong> For Test use ONLY<br />Write and send an email to mailing list members.</p>
 
     <?php
-//      require_once('connectvars.php');
       
       if (isset($_POST['submit'])) {
-        $from = 'jt@makemeelvis.com';
+        $from = 'jabaltorre@gmail.com';
         $subject = $_POST['subject'];
-        $text = $_POST['elvismail'];
+        $text = $_POST['emailtext'];
         $output_form = false;
 
         if (empty($subject) && empty($text)) {
@@ -31,7 +30,7 @@
           $output_form = true;
         }
 
-        if ((!empty($subject)) && empty($text)) {
+        if ( (!empty($subject)) && empty($text) ) {
           echo 'You forgot the email body text.<br />';
           $output_form = true;
         }
@@ -66,9 +65,9 @@
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <label for="subject">Subject of email:</label><br />
       <input id="subject" name="subject" type="text" value="<?php echo $subject; ?>" size="30" /><br />
-      <label for="elvismail">Body of email:</label><br />
-      <textarea id="elvismail" name="elvismail" rows="8" cols="40"><?php echo $text; ?></textarea><br />
-      <input type="submit" name="submit" value="Submit" />
+      <label for="emailtext">Body of email:</label><br />
+      <textarea id="email-text" name="emailtext" rows="8" cols="40"><?php echo $text; ?></textarea><br />
+      <input class="btn" type="submit" name="submit" value="Submit" />
     </form>
 
     <?php

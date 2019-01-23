@@ -1,6 +1,6 @@
 <?php 
 
-$_SERVER["DOCUMENT_ROOT"] === /home/user/public_html
+$_SERVER["DOCUMENT_ROOT"] === /home/user/public_html;
 $_SERVER["SERVER_ADDR"]   === 143.34.112.23
 $_SERVER['HTTP_HOST']     === example.com (or with WWW)
 $_SERVER["REQUEST_URI"]   === /folder1/folder2/yourfile.php?var=blabla

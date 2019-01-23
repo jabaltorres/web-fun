@@ -32,7 +32,9 @@
     </hgroup>
     <p>Insert web mustache here</p>
 
+    <!-- The js for this is in the app.js file -->
     <div id="color-wrapper"></div>
+
     <script id="colors-template" type="x-tmpl-mustache">
 
       {{#colors}}

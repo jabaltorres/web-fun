@@ -21,7 +21,8 @@ $(document).ready(function () {
       console.log("The color HTML: ", data.colors[1].name);
     });
   }
-  
+
+  // The example of this code is on mustache.ph page
   if ($("#color-wrapper").length){
     // Using Reg Ajax
     console.log("color wrapper is indeed present");
