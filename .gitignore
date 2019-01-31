@@ -6,10 +6,6 @@ sass/.sass-cache/*
 node_modules
 node_modules/*
 
-# Ignore bower components
-bower_components
-bower_components/*
-
 # Ignore phpstorm configs
 .idea
 .idea/*
