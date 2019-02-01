@@ -3,10 +3,10 @@
   // TODO: Add clear documentation of how to set this up locally.
   require_once 'config.php';
 
-  $title = "Home Page"; 
+  $title = "Home Page";
   // this is for <title>
 
-  $page_title = "This is the home page";
+  $page_heading = "This is the home page";
   // This is for breadcrumbs if I want a custom title other than the default
 
   $page_subheading = "Welcome to the homepage"; 

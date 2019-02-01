@@ -1,3 +1,7 @@
+<?php
+    if(!isset($title)){ $title = 'Web Fun!';}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>

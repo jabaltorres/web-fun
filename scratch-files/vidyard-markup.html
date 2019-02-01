@@ -1,0 +1,94 @@
+<!-- edited vidyard code -->
+<script type='text/javascript' id='vidyard_embed_code_' . $sid .'' src='//play.vidyard.com/' . $sid .js?v=3.1.1&type=lightbox'></script>
+
+<div class='outer_vidyard_wrapper'>
+  <div class='vidyard_wrapper' onclick='fn_vidyard_' . $sid. '();'>
+    <img width="360" src="//play.vidyard.com/'. $sid.'jpg?" >
+    <div class="vidyard_play_button">
+      <a href="javascript:void(0);"></a>
+    </div>
+  </div>
+</div>'
+
+<a class="fancybox fancybox.iframe" id="trigger" href="http://play.vidyard.com/'.$sid.'.html">watch</a>
+
+
+
+<!-- Original code -->
+<a href="http://play.vidyard.com/[field_video_player_uuid].html" class="fancybox fancybox.iframe btn btn-orange [field_gated]" data-nid="[nid]" data-asset="[field_asset_type]" data-uuid="[field_video_player_uuid]">watch</a>
+
+
+
+<!-- Bob's code -->
+<script type='text/javascript' id='vidyard_embed_code_[field_video_player_uuid]' src='//play.vidyard.com/[field_video_player_uuid].js?v=3.1.1&type=lightbox'></script>
+​
+<div class="outer_vidyard_wrapper">
+  <div class="vidyard_wrapper" onclick="fn_vidyard_[field_video_player_uuid]();">
+    <a class="btn btn-orange " href="http://play.vidyard.com/[field_video_player_uuid].html">watch</a>
+    <div class="vidyard_play_button">&nbsp;</div>
+  </div>
+</div>
+
+
+
+<!-- My code -->
+<a href="http://play.vidyard.com/[field_video_player_uuid].html" class="btn btn-orange btn-vidyard [field_gated]" data-nid="[nid]" data-asset="[field_asset_type]" data-uuid="[field_video_player_uuid]">watch</a>
+
+
+
+<!-- 7/1 revised view script -->
+<a href="http://play.vidyard.com/[field_video_player_uuid].html" class="btn btn-orange btn-vidyard [field_gated]" data-nid="[nid]" data-asset="[field_asset_type]">watch</a>
+
+
+
+
+
+
+
+
+<!-- VIDYARD CODE -->
+
+<script type='text/javascript' id='vidyard_embed_code_kO7iXcCukd-qg9sx-zv22A' src='//play.vidyard.com/kO7iXcCukd-qg9sx-zv22A.js?v=3.1.1&type=lightbox'></script>
+<div class='outer_vidyard_wrapper'><div class='vidyard_wrapper' onclick='fn_vidyard_kO7iXcCukd$qg9sx$zv22A();'><img width="360" src="//play.vidyard.com/kO7iXcCukd-qg9sx-zv22A.jpg?" alt="Lincoln Child Center Customer Testimonial "><div class="vidyard_play_button"><a href="javascript:void(0);"></a></div></div></div>
+
+
+
+
+<script>
+    $(document).ready(function(){
+      // check to see if there a .btn-vidyard before loading script
+      if (".btn-vidyard") {
+        $('a[href*="play.vidyard"]').on("click", function(event){
+          // don't go to link
+          event.preventDefault();
+          // save the href into a variable
+          var link = $( this ).attr('href');
+          // get file name
+          var fileNameIndex = link.lastIndexOf("/") + 1;
+          var filename = link.substr(fileNameIndex);
+          // remove file name extension (.html)
+          var uuid = filename.slice(0, -5).toString();
+
+          // console.log("The uuid ",uuid);
+          // 1. Load external vidyard script
+          // 2. After script is loaded run function
+          $.ajax({
+            url: "//play.vidyard.com/" + uuid + ".js?v=3.1.1&type=lightbox",
+            dataType: "script",
+            // data:'id="vidyard_embed_code_' + uuid,
+            success: function() {
+              // create a new function name with uuid
+              // run newly created / named function ex: fn_vidyard_x49Sx5-dNavkRNMLhAtZAw;
+              var vidyardFuncName = "fn_vidyard_" + uuid;
+              vidyardFuncName = vidyardFuncName.replace(/-/g, '$');
+              // console.log(vidyardFuncName);
+              var vidyardFunc = window[vidyardFuncName];
+              // console.log("the function ", vidyardFunc);
+              // function(){window[vidyardFuncName];}
+              vidyardFunc();
+            }
+          });
+        });
+      }
+    });
+  </script>
