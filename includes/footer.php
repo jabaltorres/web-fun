@@ -1,5 +1,9 @@
-    <div>
-      <p>Template page footer</p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Template page footer</p>
+            </div>
+        </div>
     </div>
 
 

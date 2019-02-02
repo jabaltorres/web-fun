@@ -108,4 +108,6 @@ $(document).ready(function () {
         $(".info span").text(scrollTop + "px");
 
     });
+
+    console.log("Test console messages");
 });

@@ -18,7 +18,7 @@
             <h1>Subjects</h1>
 
             <div class="actions">
-                <a href="#" class="action">Create New Subject</a>
+                <a href="<?php echo url_for('/staff/subjects/new.php');?>" class="action">Create New Subject</a>
             </div>
 
             <table class="table list">
@@ -32,20 +32,23 @@
                     <th>&nbsp;</th>
                 </tr>
 
-                <?php foreach ($subjects as $subject) { ?>
+                <?php foreach ($subjects as $subject): ?>
                     <tr>
-                        <td><?php echo $subject['id']; ?></td>
-                        <td><?php echo $subject['position']; ?></td>
+                        <td><?php echo h($subject['id']); ?></td>
+                        <td><?php echo h($subject['position']); ?></td>
                         <td><?php echo $subject['visible'] == 1 ? 'true' : 'false'; ?></td>
-                        <td><?php echo $subject['menu_name']; ?></td>
-                        <td><a class="action" href="<?php echo url_for('/staff/subjects/show.php?id=' . $subject['id']); ?>">View</a></td>
-                        <td><a class="action" href="#">Edit</a></td>
+                        <td><?php echo h($subject['menu_name']); ?></td>
+
+                        <?php /* URL encoding and html escaping the page id */ ?>
+                        <td><a class="action" href="<?php echo url_for('/staff/subjects/show.php?id=' . h(u($subject['id']))); ?>">View</a></td>
+
+                        <td><a class="action" href="<?php echo url_for('/staff/subjects/edit.php?id=' . h(u($subject['id']))); ?>">Edit</a></td>
                         <td><a class="action" href="#">Delete</a></td>
                     </tr>
-                <?php } ?>
+                <?php endforeach; ?>
 
             </table>
-        </div>
-    </div>
+        </div> <!-- end .subjects .listing -->
+    </div><!-- end #content -->
 
 <?php include (SHARED_PATH . '/staff_footer.php');?>

@@ -7,15 +7,15 @@ $id = $_GET['id'] ?? '1'; // PHP > 7.0
 
 ?>
 
-<?php $page_title = 'Show Subject'; ?>
+<?php $page_title = 'Show Page'; ?>
 
 <?php include (SHARED_PATH . '/staff_header.php');?>
 
 <div id="content">
 
-    <a href="<?php echo url_for('/staff/subjects/index.php')?>" class="back-link">&laquo; Back to Subjects List</a>
-    <div class="subject show">
-        <p>Subject ID: <?php echo h($id); ?></p>
+    <a href="<?php echo url_for('/staff/pages/index.php')?>" class="back-link">&laquo; Back to Pages List</a>
+    <div class="page show">
+        <p>Page ID: <?php echo h($id); ?></p>
     </div> <!-- end .subjects .listing -->
 </div><!-- end #content -->
 

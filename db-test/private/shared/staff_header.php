@@ -6,7 +6,7 @@
 
 <html lang="en">
     <head>
-        <title>Web Fun - <?php echo $page_title; ?></title>
+        <title>Web Fun - <?php echo h($page_title); ?></title>
         <meta charset="utf-8">
         <link href='http://fonts.googleapis.com/css?family=Gudea|Old+Standard+TT' rel='stylesheet' type='text/css'>
 

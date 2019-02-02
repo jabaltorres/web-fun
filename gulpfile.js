@@ -71,7 +71,7 @@ gulp.task('scripts', function() {
     .pipe(sourcemaps.init())
     .pipe(order([
       "vendor/jquery-1.11.3.min.js",
-      "../bower_components/bootstrap/dist/bootstrap.js",
+      "../node_modules/bootstrap/dist/js/bootstrap.js",
       "vendor/mustache-2.3.0.min.js",
       "vendor/slick.min.js",
       "app.js"
@@ -120,8 +120,8 @@ gulp.task('watch', function () {
   
   gulp.watch(['sass/*.scss', 'sass/**/*.scss']).on('change', browserSync.reload);
 
-  gulp.watch(['js/jabalscripts/*.js', 'js/app.js'], ['scripts']);
-  gulp.watch(['js/jabalscripts/*.js', 'js/app.js']).on('change', browserSync.reload);
+  gulp.watch(['js/*.js', 'js/app.js'], ['scripts']);
+  gulp.watch(['js/*.js', 'js/app.js']).on('change', browserSync.reload);
   // gulp.watch('**/*.{php,inc,info}',['reload']);
 });
 

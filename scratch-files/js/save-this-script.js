@@ -1,7 +1,7 @@
 /* START Typography test */
 function displayFontSize(){
     if($(".page-node-51736").length){
-        console.log("yolo");
+        console.log("Works");
         var aiH1 = $("#typography-test h1").css('font-size');
         var aiH2 = $("#typography-test h2").css('font-size');
         var aiH3 = $("#typography-test h3").css('font-size');

@@ -79,7 +79,7 @@ section{
   border:solid thick $color-accent;
   @extend %margin-bottom;
   padding: $global-padding;
-  hgroup{
+  hgroup, .hgroup{
     @extend %margin-bottom;
   }
   h1{

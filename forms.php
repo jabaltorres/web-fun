@@ -10,10 +10,12 @@
   <?php include 'includes/masthead.php';?>
   <?php include 'includes/navigation.php';?>
   <section class="forms">
-    <hgroup>
-      <h1>Forms</h1>
-      <h2>Sub headline</h2>
-    </hgroup>
+
+    <div class="hgroup">
+        <h1>Forms</h1>
+        <h2>Sub headline</h2>
+    </div>
+      
     <p>This is an example of a contact form. It is not currently functioning</p>
     <form method="post" action="acknowledge.php">
       <label for="name">Name:</label>
