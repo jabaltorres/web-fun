@@ -24,6 +24,7 @@
 
     } else {
         $page = find_page_by_id($id);
+
         $page_set = find_all_pages();
         $page_count = mysqli_num_rows($page_set);
         mysqli_free_result($page_set);
