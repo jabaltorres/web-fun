@@ -61,7 +61,6 @@ if(is_post_request()) {
                 <input type="submit" value="Edit Page">
             </div>
         </form>
-
     </div>
 </div>
 
