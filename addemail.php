@@ -4,7 +4,7 @@
   $title = "Add Email"; 
   // this is for <title>
 
-  $page_title = "Add an email";
+  $page_heading = "Add an email";
   // This is for breadcrumbs if I want a custom title other than the default
 
   $page_subheading = "Test the database functionality"; 
@@ -51,7 +51,7 @@
         mysqli_query($dbc, $query)
           or die ('Data not inserted.');
 
-        echo '<h3>Entry added.</h3>';
+        echo "<h4>Entry added for: " . $first_name . " " . $last_name .  "</h4>";
         echo '<a href="db-test.php">Home</a>';
 
         mysqli_close($dbc);

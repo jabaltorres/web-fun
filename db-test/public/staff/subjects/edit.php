@@ -31,10 +31,10 @@
 
 <?php $page_title = 'Edit Subject'; ?>
 
-<?php include(SHARED_PATH . '/staff_header.php');?>
+<?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
-    <a href="<?php echo url_for('/staff/subjects/index.php')?>" class="back-link d-block mb-4">&laquo; Back to Subjects List</a>
+    <a href="<?php echo url_for('/staff/subjects/index.php'); ?>" class="back-link d-block mb-4">&laquo; Back to Subjects List</a>
 
     <div class="subject edit">
         <h1>Edit Subject</h1>
@@ -75,4 +75,4 @@
     </div>
 </div>
 
-<?php include(SHARED_PATH . '/staff_footer.php');?>
+<?php include(SHARED_PATH . '/staff_footer.php'); ?>

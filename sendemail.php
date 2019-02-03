@@ -37,6 +37,8 @@
       }
       else {
         $output_form = true;
+        $subject = '';
+        $text = '';
       }
 
       if ((!empty($subject)) && (!empty($text))) {

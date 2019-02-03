@@ -19,12 +19,12 @@
           // Delete the customer rows (only if the form has been submitted)
           if (isset($_POST['submit'])) {
             foreach ($_POST['todelete'] as $delete_id) {
-              $query = "DELETE FROM email_list WHERE id = $delete_id";
+              $query = "DELETE FROM email_list WHERE id='" . $delete_id ."'";
               mysqli_query($dbc, $query)
                 or die('Error querying database.');
             } 
 
-            echo 'Customer(s) removed.<br />';
+            echo "Customer(s) removed.<br />";
           }
 
           // Display the customer rows with checkboxes for deleting
@@ -41,7 +41,7 @@
           mysqli_close($dbc);
         ?>
 
-        <input type="submit" name="submit" value="Remove" class="button btn-med default radius" />
+        <input type="submit" name="submit" value="Remove" class="btn btn-primary" />
       </form>
   </section>
 

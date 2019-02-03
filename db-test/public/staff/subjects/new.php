@@ -16,12 +16,12 @@
 <?php include(SHARED_PATH . '/staff_header.php');?>
 
 <div id="content">
-    <a href="<?php echo url_for('/staff/subjects/index.php')?>" class="back-link">&laquo; Back to Subjects List</a>
+    <a href="<?php echo url_for('/staff/subjects/index.php'); ?>" class="back-link">&laquo; Back to Subjects List</a>
 
     <div class="subjects new">
         <h1>Create Subject</h1>
 
-        <form action="<?php echo url_for('/staff/subjects/create.php') ?>" method="post">
+        <form action="<?php echo url_for('/staff/subjects/create.php'); ?>" method="post">
             <dl>
                 <dt>Menu Name</dt>
                 <dd><input type="text" name="menu_name" value="" /></dd>

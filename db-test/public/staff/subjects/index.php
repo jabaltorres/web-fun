@@ -1,22 +1,19 @@
-<?php require_once ('../../../private/initialize.php');?>
+<?php require_once ('../../../private/initialize.php'); ?>
 
 <?php
-
     $subject_set = find_all_subjects();
-
-
 ?>
 
 <?php $page_title = 'Subjects'; ?>
 
-<?php include (SHARED_PATH . '/staff_header.php');?>
+<?php include (SHARED_PATH . '/staff_header.php'); ?>
 
     <div id="content">
         <div class="subjects listing">
             <h1>Subjects</h1>
 
             <div class="actions mb-4">
-                <a href="<?php echo url_for('/staff/subjects/new.php');?>" class="action">Create New Subject</a>
+                <a href="<?php echo url_for('/staff/subjects/new.php'); ?>" class="action">Create New Subject</a>
             </div>
 
             <table class="table list">
@@ -51,4 +48,4 @@
         </div> <!-- end .subjects .listing -->
     </div><!-- end #content -->
 
-<?php include (SHARED_PATH . '/staff_footer.php');?>
+<?php include (SHARED_PATH . '/staff_footer.php'); ?>

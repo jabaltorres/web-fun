@@ -16,7 +16,6 @@
 
     } else {
         redirect_to(url_for('/staff/subjects/new.php'));
-
     }
 
 ?>
