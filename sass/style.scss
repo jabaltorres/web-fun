@@ -61,20 +61,6 @@ form{
   padding: $global-padding;
 }
 
-.container{
-  padding:20px;
-  @include medium-screen{
-    // background-color: red;
-    max-width: 60em;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  // @include large-screen{
-  //   // background-color: yellow;
-  //   max-width: 90em;
-  // }
-}
-
 section{
   border:solid thick $color-accent;
   @extend %margin-bottom;

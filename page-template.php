@@ -4,7 +4,7 @@
   $title = "Page Template"; 
   // this is for <title>
 
-  $page_title = "This is the master page template";
+  $page_heading = "This is the master page template";
   // This is for breadcrumbs if I want a custom title other than the default
 
   $page_subheading = "This is the subheading"; 
