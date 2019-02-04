@@ -55,8 +55,8 @@
                         <?php
                         $subject_set = find_all_subjects();
                         while($subject = mysqli_fetch_assoc($subject_set)) {
-                            echo "<option value\"" . h($subject['id']) . "\"";
-                            if($page['subject_id'] == $subject['id']) {
+                            echo "<option value=\"" . h($subject['id']) . "\"";
+                            if($page["subject_id"] == $subject['id']) {
                                 echo " selected";
                             }
                             echo ">" . h($subject['menu_name']) . "</option>";
@@ -75,7 +75,7 @@
                 <dd>
                     <select name="position">
                         <?php
-                        for($i=1; $i <= $page_count; $i++){
+                        for($i=1; $i <= $page_count; $i++) {
                             echo "<option value=\"{$i}\"";
                             if($page["position"] == $i) {
                                 echo " selected";
@@ -90,19 +90,20 @@
                 <dt>Visible</dt>
                 <dd>
                     <input type="hidden" name="visible" value="0" />
-                    <input type="checkbox" name="visible" value="1"<?php if($visible = "1") { echo  " checked";} ?> />
+                    <input type="checkbox" name="visible" value="1"<?php if($page['subject_id'] == "1") { echo " checked"; } ?> />
                 </dd>
             </dl>
             <dl>
                 <dt>Content</dt>
                 <dd>
-                    <textarea name="content" rows="5" cols="33"><?php echo h($page['content']); ?></textarea>
+                    <textarea name="content" cols="60" rows="10"><?php echo h($page['content']); ?></textarea>
                 </dd>
             </dl>
             <div id="operations">
-                <input type="submit" value="Edit Page">
+                <input type="submit" value="Edit Page" />
             </div>
         </form>
+
     </div>
 </div>
 

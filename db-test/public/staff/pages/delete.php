@@ -24,22 +24,16 @@
 <div id="content">
     <a href="<?php echo url_for('/staff/pages/index.php'); ?>" class="back-link d-block mb-4">&laquo; Back to Pages List</a>
 
-    <div class="page edit">
+    <div class="page delete">
         <h1>Delete Page</h1>
         <p>Are you sure you want to delete this page?</p>
         <p class="item"><?php echo h($page['menu_name']); ?></p>
-
-        <div>
-            <h4>Content</h4>
-            <?php echo h($page['content']); ?>
-        </div>
 
         <form action="<?php echo url_for('/staff/pages/delete.php?id=' . h(u($page['id']))); ?>" method="post">
             <div id="operations">
                 <input type="submit" name="commit" value="Delete Page" />
             </div>
         </form>
-
     </div>
 </div>
 
