@@ -31,7 +31,7 @@
     </section>
 
     <section>
-        <a href="/db-test/public/staff/index.php">WIP - Webfun Staff Area</a>
+        <a href="/globe-bank/public/staff/index.php">WIP - Globe Bank Staff Area</a>
     </section>
 
     <section>

@@ -19,15 +19,16 @@ if(is_post_request()) {
 
 } else {
   // display the blank form
-  $subject = [];
-  $subject["menu_name"] = '';
-  $subject["position"] = $subject_count;
-  $subject["visible"] = '';
 }
 
 $subject_set = find_all_subjects();
 $subject_count = mysqli_num_rows($subject_set) + 1;
 mysqli_free_result($subject_set);
+
+$subject = [];
+$subject["menu_name"] = '';
+$subject["position"] = $subject_count;
+$subject["visible"] = '';
 
 ?>
 
@@ -43,7 +44,7 @@ mysqli_free_result($subject_set);
 
     <?php echo display_errors($errors); ?>
 
-    <form action="<?php echo url_for('/staff/subjects/new.php'); ?>" method="post">
+    <form class="" action="<?php echo url_for('/staff/subjects/new.php'); ?>" method="post">
       <dl>
         <dt>Menu Name</dt>
         <dd><input type="text" name="menu_name" value="<?php echo $subject['menu_name']; ?>" /></dd>
@@ -68,7 +69,7 @@ mysqli_free_result($subject_set);
         <dt>Visible</dt>
         <dd>
           <input type="hidden" name="visible" value="0" />
-          <input type="checkbox" name="visible" value="1"<?php echo if($subject['visible'] == 1) { echo " checked"}; ?> />
+          <input type="checkbox" name="visible" value="1"<?php if($subject['visible'] == 1) { echo " checked"; } ?> />
         </dd>
       </dl>
       <div id="operations">
