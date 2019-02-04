@@ -82,10 +82,15 @@ section{
   // right: 0;
 }
 
+.site-name{
+  margin: 0;
+  line-height: 1em;
+}
 .main-header{
+  padding-top: 50px;
   a{
     display: inline-block;
-    padding:10px;
+    //padding:10px;
     margin-bottom: 10px;
   }
 }
@@ -141,10 +146,10 @@ article{
 }
 
 // This is where I'm testing the hover link effect
-.text-link {
+.has-hover-effect {
   position: relative;
   color: $color-accent;
-  text-decoration: none;
+  text-decoration: none !important;
   &:before{
     content: "";
     position: absolute;
