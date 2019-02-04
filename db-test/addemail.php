@@ -1,5 +1,5 @@
 <?php
-  require_once 'config.php';
+  require_once '../config.php';
 
   $title = "Add Email"; 
   // this is for <title>
@@ -13,19 +13,19 @@
   $custom_class = "add-email-page"; 
   //custom CSS for this page only
 
-  include_once('includes/head.php');
+  include_once('../includes/head.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-  <?php include 'includes/masthead.php';?>
-  <?php include 'includes/navigation.php';?>
-  <?php include 'includes/email-db-nav.php';?>
+  <?php include '../includes/masthead.php';?>
+  <?php include '../includes/navigation.php';?>
+  <?php include '../includes/email-db-nav.php';?>
 
   <section id="form-section">
     <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
     <?php
 
-      require_once('config.php');
+//      require_once('config.php');
 
       if (isset($_POST['submit'])) {
         $first_name = $_POST['firstname'];
@@ -52,7 +52,7 @@
           or die ('Data not inserted.');
 
         echo "<h4>Entry added for: " . $first_name . " " . $last_name .  "</h4>";
-        echo '<a href="db-test.php">Home</a>';
+        echo '<a href="/db-test/index.php">Home</a>';
 
         mysqli_close($dbc);
       }
@@ -190,4 +190,4 @@
 
   </section>
 
-<?php include 'includes/feet.php';?>
+<?php include '../includes/feet.php';?>

@@ -1,5 +1,5 @@
 <?php
-  require_once 'config.php';
+  require_once '../config.php';
 
   $title = "DB Page"; 
   // this is for <title>
@@ -57,4 +57,4 @@
         </ul>
     </section>
 
-  <?php include 'includes/feet.php';?>
+  <?php include '../includes/feet.php';?>

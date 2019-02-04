@@ -1,9 +1,9 @@
-<?php require_once 'config.php';?>
-<?php include 'includes/head.php';?>
+<?php require_once '../config.php';?>
+<?php include '../includes/head.php';?>
 <div class="container">
-  <?php include 'includes/masthead.php';?>
-  <?php include 'includes/navigation.php';?>
-  <?php include 'includes/email-db-nav.php';?>
+  <?php include '../includes/masthead.php';?>
+  <?php include '../includes/navigation.php';?>
+  <?php include '../includes/email-db-nav.php';?>
   
   <section>
     <h2>Remove Email</h2>
@@ -45,4 +45,4 @@
       </form>
   </section>
 
-<?php include 'includes/feet.php';?>
+<?php include '../includes/feet.php';?>
