@@ -6,7 +6,6 @@
 <div class="container">
   <?php include '../includes/masthead.php';?>
   <?php include '../includes/navigation.php';?>
-  <?php include '../includes/email-db-nav.php';?>
 
   <section>
     <p><strong>Private:</strong> For Test use ONLY<br />Write and send an email to mailing list members.</p>

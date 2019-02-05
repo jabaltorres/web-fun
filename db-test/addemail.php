@@ -19,7 +19,6 @@
 <div class="container <?php echo $custom_class; ?>">
   <?php include '../includes/masthead.php';?>
   <?php include '../includes/navigation.php';?>
-  <?php include '../includes/email-db-nav.php';?>
 
   <section id="form-section">
     <?php include_once(INCLUDES_PATH . '/headline-page.php');?>

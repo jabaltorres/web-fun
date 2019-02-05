@@ -20,7 +20,6 @@
     <?php
         include_once(INCLUDES_PATH . '/masthead.php');
         include_once(INCLUDES_PATH . '/navigation.php');
-        include_once(INCLUDES_PATH . '/email-db-nav.php');
     ?>
 
     <?php //TODO: Put all DB test files in one directory ?>

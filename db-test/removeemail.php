@@ -3,7 +3,6 @@
 <div class="container">
   <?php include '../includes/masthead.php';?>
   <?php include '../includes/navigation.php';?>
-  <?php include '../includes/email-db-nav.php';?>
   
   <section>
     <h2>Remove Email</h2>

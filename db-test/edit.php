@@ -57,7 +57,6 @@
 
     <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
     <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
-    <?php include_once(INCLUDES_PATH . '/email-db-nav.php'); ?>
 
     <section id="form-section">
         <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
