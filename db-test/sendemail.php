@@ -8,7 +8,8 @@
   <?php include '../includes/navigation.php';?>
 
   <section>
-    <p><strong>Private:</strong> For Test use ONLY<br />Write and send an email to mailing list members.</p>
+    <h2 class="h3"><span class="font-weight-bold">Private:</span> For Test use ONLY</h2>
+    <p>Write and send an email to contact list members.</p>
 
     <?php
 
@@ -20,17 +21,17 @@
 
         if (empty($subject) && empty($text)) {
           // We know both $subject AND $text are blank
-          echo 'You forgot the email subject and body text.<br />';
+          echo '<div class="border border-warning p-4 mb-4">You forgot the email subject and body text.</div>';
           $output_form = true;
         }
 
         if (empty($subject) && (!empty($text))) {
-          echo 'You forgot the email subject.<br />';
+            echo '<div class="border border-warning p-4 mb-4">You forgot the email subject.</div>';
           $output_form = true;
         }
 
         if ( (!empty($subject)) && empty($text) ) {
-          echo 'You forgot the email body text.<br />';
+            echo '<div class="border border-warning p-4 mb-4">You forgot the email body text.</div>';
           $output_form = true;
         }
 
