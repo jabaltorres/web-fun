@@ -13,7 +13,7 @@
 
   // Preliminaries
   include_once('../config.php');  
-  include_once(INCLUDES_PATH . '/head.php');
+  include_once(INCLUDES_PATH . '/site-header.php');
 ?>
   <div class="container <?php echo $custom_class; ?>">
     <?php

@@ -4,7 +4,7 @@
   $title = "Add Email"; 
   // this is for <title>
 
-  $page_heading = "Add an email";
+  $page_heading = "Create a new contact";
   // This is for breadcrumbs if I want a custom title other than the default
 
   $page_subheading = "Test the database functionality"; 
@@ -13,7 +13,7 @@
   $custom_class = "add-email-page"; 
   //custom CSS for this page only
 
-  include_once('../includes/head.php');
+  include_once('../includes/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -190,4 +190,4 @@
 
   </section>
 
-<?php include '../includes/feet.php';?>
+<?php include '../includes/site-footer.php';?>

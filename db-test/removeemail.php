@@ -1,5 +1,5 @@
 <?php require_once '../config.php';?>
-<?php include '../includes/head.php';?>
+<?php include '../includes/site-header.php';?>
 <div class="container">
   <?php include '../includes/masthead.php';?>
   <?php include '../includes/navigation.php';?>
@@ -45,4 +45,4 @@
       </form>
   </section>
 
-<?php include '../includes/feet.php';?>
+<?php include '../includes/site-footer.php';?>

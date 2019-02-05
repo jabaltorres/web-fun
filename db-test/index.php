@@ -1,19 +1,23 @@
 <?php
-  require_once '../config.php';
+    require_once('private/initialize.php');
 
-  $title = "DB Page"; 
-  // this is for <title>
+    $title = "DB Page";
+    // this is for <title>
 
-  $page_heading = "This is the home page";
-  // This is for breadcrumbs if I want a custom title other than the default
+    $page_heading = "This is the home page";
+    // This is for breadcrumbs if I want a custom title other than the default
 
-  $page_subheading = "Welcome to the DB test page"; 
-  // This is the subheading
+    $page_subheading = "Welcome to the DB test page";
+    // This is the subheading
 
-  $custom_class = "db-test-page"; 
-  //custom CSS for this page only
+    $custom_class = "db-test-page";
+    //custom CSS for this page only
 
-  include_once(INCLUDES_PATH . '/head.php');
+    $contact_set = find_all_contacts();
+    // From globe_bank tutorial
+
+
+  include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -22,8 +26,6 @@
         include_once(INCLUDES_PATH . '/navigation.php');
         include_once(INCLUDES_PATH . '/email-db-nav.php');
     ?>
-
-    <?php //TODO: Put all DB test files in one directory ?>
 
     <section>
         <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
@@ -35,26 +37,34 @@
     </section>
 
     <section>
-        <h4>Database Entries</h4>
-        <ul class="email-db-list">
-          <?php
-        //        require_once('config.php');
+        <h4 class="mb-4 h4 font-weight-bold">Contact Entries</h4>
 
-            $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
-              or die('Error connecting to MySQL server.');
-            $query = "SELECT * FROM email_list";
-            $result = mysqli_query($dbc, $query);
-            while ($row = mysqli_fetch_array($result)) {
-              echo '<li>';
-              echo $row['first_name'];
-              echo ' ' . $row['last_name'];
-              echo '</br>' . $row['email'];
-              echo '</li>';
-            }
+        <table class="table">
+            <tr>
+                <th class="font-weight-bold">ID</th>
+                <th class="font-weight-bold">First Name</th>
+                <th class="font-weight-bold">Last Name</th>
+                <th class="font-weight-bold">Email</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
 
-            mysqli_close($dbc);
-          ?>
-        </ul>
+            <?php while($contact = mysqli_fetch_assoc($contact_set)): ?>
+                <tr>
+                    <td><?php echo h($contact['id']); ?></td>
+                    <td><?php echo h($contact['first_name']); ?></td>
+                    <td><?php echo h($contact['last_name']); ?></td>
+                    <td><?php echo h($contact['email']); ?></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/subjects/show.php?id=' . h(u($subject['id']))); ?>">View</a></td>
+                    <td><a class="action" href="<?php echo url_for('edit.php?id=' . h(u($contact['id']))); ?>">Edit</a></td>
+                    <td><a class="action" href="<?php echo url_for('/staff/subjects/delete.php?id=' . h(u($subject['id']))); ?>">Delete</a></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+
+        <?php mysqli_free_result($subject_set); ?>
     </section>
 
-  <?php include '../includes/feet.php';?>
+</div><!-- end .container -->
+<?php include '../includes/site-footer.php';?>

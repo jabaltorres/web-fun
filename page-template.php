@@ -13,7 +13,7 @@
   $custom_class = "master-page-template"; 
   //custom CSS for this page only
 
-  include_once('includes/head.php');
+  include_once('includes/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">

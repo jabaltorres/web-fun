@@ -3,7 +3,7 @@
   $page_title = "This is the demo index file"; //this is for breadcrumbs if I want a custom title other than the default
   $custom_class = "demo-page"; //custom CSS for this page only
   require_once '../config.php';
-  include_once('../includes/head.php');
+  include_once('../includes/site-header.php');
 ?>
   <div class="container">
   
@@ -114,4 +114,4 @@
     };
     AddBorder.init();
   </script>
-<?php include '../includes/feet.php';?>
+<?php include '../includes/site-footer.php';?>

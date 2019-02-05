@@ -30,4 +30,14 @@
 
     $db = db_connect();
     $errors = [];
+
+
+
+    // * JT Custom
+    $site_owner = "Jabal Torres";
+    $site_name = "LOREM";
+    $site_tagline = "A place for all of your web ideas";
+    $site_description = "Time for some web fun";
+    $site_author = "Jabal Torres";
+    $site_keywords = "HTML5, CSS3, SASS, jQuery";
 ?>

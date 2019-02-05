@@ -8,10 +8,10 @@
 
   <?php include(INCL_PATH . '/block-headline.php'); ?>
   
-  <button class="btn">Click Me</button>
-  <button class="btn">Click Me</button>
-  <button class="btn">Click Me</button>
-  <button class="btn">Click Me</button>
-  <button class="btn">Click Me</button>
+  <button class="btn btn-primary">Click Me</button>
+  <button class="btn btn-primary">Click Me</button>
+  <button class="btn btn-primary">Click Me</button>
+  <button class="btn btn-primary">Click Me</button>
+  <button class="btn btn-primary">Click Me</button>
 
 </section>

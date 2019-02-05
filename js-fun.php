@@ -13,7 +13,7 @@
   $custom_class = "js-fun-page"; 
   //custom CSS for this page only
 
-  include_once('includes/head.php');
+  include_once('includes/site-header.php');
 ?>
   
   <div class="container <?php echo $custom_class; ?>">
@@ -36,4 +36,4 @@
 
   <?php include 'blocks/github-gist.php'; ?> 
 
-<?php include 'includes/feet.php';?>
+<?php include 'includes/site-footer.php';?>

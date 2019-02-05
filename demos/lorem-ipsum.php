@@ -13,7 +13,7 @@
   $custom_class = "page-lorem-ipsum"; 
   //custom CSS for this page only
 
-  include_once('../includes/head.php');
+  include_once('../includes/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -50,4 +50,4 @@
   
   </section>
 
-<?php include '../includes/feet.php';?>
+<?php include '../includes/site-footer.php';?>

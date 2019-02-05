@@ -2,7 +2,7 @@
     require_once('private/initialize.php');
 
     if(!isset($_GET['id'])) {
-      redirect_to(url_for('/index.php'));
+      redirect_to(url_for('/index-old.php'));
     }
     $id = $_GET['id'];
 
@@ -18,7 +18,7 @@
 
       $result = update_contact($contact);
       if($result === true) {
-        redirect_to(url_for('/index-new.php'));
+        redirect_to(url_for('/index.php'));
       } else {
         $errors = $result;
         //var_dump($errors);
@@ -36,7 +36,7 @@
 
 
 
-
+    // my original code
     $title = "Add Email";
     // this is for <title>
 
@@ -49,7 +49,7 @@
     $custom_class = "add-email-page";
     //custom CSS for this page only
 
-    include_once(INCLUDES_PATH . '/head.php');
+    include_once(INCLUDES_PATH . '/site-header.php');
 
 ?>
 
@@ -75,7 +75,7 @@
         </form>
     </section>
 
-<?php include_once(INCLUDES_PATH . '/feet.php');?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php');?>
 
 
 

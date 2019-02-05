@@ -13,7 +13,7 @@
   $custom_class = "mustache-page"; 
   //custom CSS for this page only
 
-  include_once(INCLUDES_PATH . '/head.php');
+  include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 
@@ -116,4 +116,4 @@
     </div>
   </section>
 
-<?php include_once(INCLUDES_PATH . '/feet.php');?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php');?>

@@ -3,7 +3,7 @@
   $title = "Form Page"; // this is for <title>
   $page_title = "This is the form page"; //this is for breadcrumbs if I want a custom title other than the default
   $addCSS = ""; //custom CSS for this page only
-  include_once('includes/head.php');
+  include_once('includes/site-header.php');
 ?>
 
 <div class="container">
@@ -33,4 +33,4 @@
     </form>
   </section>
 
-<?php include 'includes/feet.php';?>
+<?php include 'includes/site-footer.php';?>
