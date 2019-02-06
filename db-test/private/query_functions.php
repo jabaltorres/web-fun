@@ -1,7 +1,6 @@
 <?php
 
     // Subjects
-
     function find_all_subjects() {
         global $db;
 
@@ -130,8 +129,8 @@
         }
     }
 
-    // Pages
 
+    // Pages
     function find_all_pages() {
         global $db;
 
@@ -277,8 +276,8 @@
         }
     }
 
-    // Contacts
 
+    // Contacts
     function find_all_contacts() {
         global $db;
 
