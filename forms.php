@@ -7,30 +7,31 @@
 ?>
 
 <div class="container">
-  <?php include 'includes/masthead.php';?>
-  <?php include 'includes/navigation.php';?>
-  <section class="forms">
+    <?php include 'includes/masthead.php';?>
+    <?php include 'includes/navigation.php';?>
 
-    <div class="hgroup">
-        <h1>Forms</h1>
-        <h2>Sub headline</h2>
-    </div>
-      
-    <p>This is an example of a contact form. It is not currently functioning</p>
-    <form method="post" action="acknowledge.php">
-      <label for="name">Name:</label>
-      <input type="text" name="name" id="name">
+    <section class="forms">
 
+        <div class="hgroup">
+            <h1>Forms</h1>
+            <h2>Sub headline</h2>
+        </div>
 
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email">
+        <form method="post" action="acknowledge.php">
+            <label for="name">Full Name:</label>
+            <input type="text" name="name" id="name">
 
+            <label for="email">Email Address:</label>
+            <input type="email" name="email" id="email">
 
-      <label for="comments">Comments:</label>
-      <textarea name="comments" id="comments"></textarea>
+            <label for="subject">Subject:</label>
+            <input type="text" name="subject" id="subject">
 
-      <input type="submit" name="send" value="Send Message" class="btn">
-    </form>
-  </section>
+            <label for="message">Message:</label>
+            <textarea name="message" id="message"></textarea>
 
+            <input type="submit" name="send" value="Send Message" class="btn btn-primary">
+        </form>
+    </section>
+</div>
 <?php include 'includes/site-footer.php';?>
