@@ -2,7 +2,7 @@
     require_once('private/initialize.php');
 
     if(!isset($_GET['id'])) {
-      redirect_to(url_for('/index-old.php'));
+      redirect_to(url_for('/index.php'));
     }
     $id = $_GET['id'];
 
@@ -30,23 +30,17 @@
 
     }
 
-    $contact_set = find_all_contacts();
-    $contact_count = mysqli_num_rows($contact_set);
-    mysqli_free_result($contact_set);
-
-
-
     // my original code
-    $title = "Add Email";
+    $title = "Edit Contact";
     // this is for <title>
 
-    $page_heading = "Add an email";
+    $page_heading = "Edit the contact";
     // This is for breadcrumbs if I want a custom title other than the default
 
     $page_subheading = "Test the database functionality";
     // This is the subheading
 
-    $custom_class = "add-email-page";
+    $custom_class = "edit-contact-page";
     //custom CSS for this page only
 
     include_once(INCLUDES_PATH . '/site-header.php');
@@ -63,16 +57,22 @@
 
         <?php echo display_errors($errors); ?>
 
-        <form id="form" method="post" action="<?php echo url_for('/edit.php?id=' . h(u($id))); ?>">
+        <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/index.php'); ?>">&laquo; Back to List</a>
+
+        <form id="form" method="post" action="<?php echo url_for('/contact-edit.php?id=' . h(u($id))); ?>">
             <label for="first_name">First name:</label>
             <input type="text" name="first_name" value="<?php echo h($contact['first_name']); ?>" /><br />
+
             <label for="last_name">Last name:</label>
             <input type="text" name="last_name" value="<?php echo h($contact['last_name']); ?>" /><br />
+
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" value="<?php echo h($contact['email']); ?>" /><br />
-            <input type="submit" name="submit" value="Submit" id="button" class="btn" />
+
+            <input type="submit" name="submit" value="Edit Contact" id="button" class="btn btn-warning" />
         </form>
     </section>
+</div>
 
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>
 

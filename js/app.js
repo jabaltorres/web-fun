@@ -76,6 +76,8 @@ $(document).ready(function () {
   console.log('the host: ', host);
   console.log('the origin: ', origin);
 
+
+  // This is displayed on the `/demos/host-info.php` page
   if ($("#host-info").length){
     $("<div>Pathname: " + pathname + "</div>").appendTo("#host-info");
     $("<div>Location: " + location + "</div>").appendTo("#host-info");
@@ -89,25 +91,25 @@ $(document).ready(function () {
   // });
 
 
-    // The bit of code is being used on http://localhost:3000/demos/js-objects.php
-    var jToolTip = $(".jToolTip");
+  // The bit of code is being used on http://localhost:3000/demos/js-objects.php
+  var jToolTip = $(".jToolTip");
 
-    var pTag = document.createElement("p");
-    var innerSpan = document.createElement("span");
-    pTag.className = "info";
-    pTag.innerHTML = "Window scroll top: ";
-    pTag.appendChild(innerSpan);
+  var pTag = document.createElement("p");
+  var innerSpan = document.createElement("span");
+  pTag.className = "info";
+  pTag.innerHTML = "Window scroll top: ";
+  pTag.appendChild(innerSpan);
 
-    jToolTip.append(pTag);
+  jToolTip.append(pTag);
 
 
-    $(document).on('scroll', function(){
+  $(document).on('scroll', function(){
 
-        // update jToolTip
-        var scrollTop = $(window).scrollTop().toFixed(2);
-        $(".info span").text(scrollTop + "px");
+      // update jToolTip
+      var scrollTop = $(window).scrollTop().toFixed(2);
+      $(".info span").text(scrollTop + "px");
 
-    });
+  });
 
-    console.log("Test console messages");
+  console.log("Test console messages");
 });

@@ -11,6 +11,8 @@
     <h2 class="h3"><span class="font-weight-bold">Private:</span> For Test use ONLY</h2>
     <p>Write and send an email to contact list members.</p>
 
+    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo '/db-test/index.php'; ?>">&laquo; Back to List</a>
+
     <?php
 
       if (isset($_POST['submit'])) {
@@ -73,5 +75,6 @@
     <?php endif; ?>
 
   </section>
+</div>
 
 <?php include '../includes/site-footer.php';?>

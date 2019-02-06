@@ -57,9 +57,9 @@
                         <td class="align-middle"><?php echo h($contact['first_name']); ?></td>
                         <td class="align-middle"><?php echo h($contact['last_name']); ?></td>
                         <td class="align-middle"><?php echo h($contact['email']); ?></td>
-                        <td><a class="action btn btn-sm btn-info d-block mx-auto" href="<?php echo url_for('/staff/subjects/show.php?id=' . h(u($subject['id']))); ?>">View</a></td>
-                        <td><a class="action btn btn-sm btn-warning d-block mx-auto" href="<?php echo url_for('edit.php?id=' . h(u($contact['id']))); ?>">Edit</a></td>
-                        <td><a class="action btn btn-sm btn-danger d-block mx-auto" href="<?php echo url_for('/staff/subjects/delete.php?id=' . h(u($subject['id']))); ?>">Delete</a></td>
+                        <td><a class="action btn btn-sm btn-info d-block mx-auto" href="<?php echo url_for('/contact-show.php?id=' . h(u($contact['id']))); ?>">View</a></td>
+                        <td><a class="action btn btn-sm btn-warning d-block mx-auto" href="<?php echo url_for('contact-edit.php?id=' . h(u($contact['id']))); ?>">Edit</a></td>
+                        <td><a class="action btn btn-sm btn-danger d-block mx-auto" href="<?php echo url_for('/staff/subjects/delete.php?id=' . h(u($contact['id']))); ?>">Delete</a></td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>

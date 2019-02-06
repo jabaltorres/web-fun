@@ -23,7 +23,7 @@
       <p>Note: The "flipper" fails to reload if you refresh the browser quickly. Maybe I've got a problem with constantly refreshing the browser</p>
 
       <p>This button is needed for the flipper</p>
-      <button id="action-button" class="btn">CLICK ME</button>
+      <button id="action-button" class="btn btn-primary">CLICK ME</button>
     </article>
     
   </section>

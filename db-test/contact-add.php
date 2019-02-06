@@ -1,5 +1,5 @@
 <?php
-  require_once '../config.php';
+require_once('private/initialize.php');
 
   $title = "Add Email"; 
   // this is for <title>
@@ -43,19 +43,21 @@
       }
 
       if (!empty($first_name) && !empty($last_name) && !empty($email)) {
-        $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
+        $dbc = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
           or die('Error connecting to MySQL server.');
 
         $query = "INSERT INTO email_list (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
         mysqli_query($dbc, $query)
           or die ('Data not inserted.');
 
-        echo "<h4>Entry added for: " . $first_name . " " . $last_name .  "</h4>";
-        echo '<a href="/db-test/index.php">Home</a>';
+        echo '<h4 class="mb-4">Entry added for: ' . $first_name . ' ' . $last_name .  '</h4>';
 
         mysqli_close($dbc);
       }
     ?>
+
+
+      <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo '/db-test/index.php'; ?>">&laquo; Back to List</a>
 
     <?php if ($output_form == 'yes'): ?>
    
@@ -66,7 +68,7 @@
         <input type="text" id="lastname" name="lastname" /><br />
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" /><br />
-        <input type="submit" name="submit" value="Submit" id="button" class="btn" />
+        <input type="submit" name="submit" value="Submit" id="button" class="btn btn-primary" />
       </form>
       <script>
         // var button = document.getElementById('button');
@@ -172,7 +174,7 @@
           var email = target.value;
 
           if (validateEmail(email)) {
-            alert('Email is valid');
+            // console.log('Email is valid');
           } else {
             target.className = "error";
             event.preventDefault();
@@ -188,5 +190,6 @@
     <?php endif; ?>
 
   </section>
+</div>
 
 <?php include '../includes/site-footer.php';?>

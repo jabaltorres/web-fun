@@ -1,5 +1,5 @@
 <?php
-  $title = "Host Info file"; 
+  $title = "Host Information details";
   // this is for <title>
 
   $page_title = "This is the host index file";
@@ -15,10 +15,9 @@
   include_once('../config.php');  
   include_once(INCLUDES_PATH . '/site-header.php');
 ?>
-  <div class="container">
+<div class="container">
   
   <?php
-
     include_once(INCLUDES_PATH . '/masthead.php');
     include_once(INCLUDES_PATH . '/navigation.php');
   ?>
@@ -37,7 +36,7 @@
         $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $http_host = $_SERVER[HTTP_HOST];
 
-        echo "<h4>Page Title: " . $title . "</h4>";
+        echo '<h4 class="mb-4">Page Title: ' . $title . '</h4>';
 
         echo "Base dir: " . $base_dir . "<br>";
         echo "Protocol: " . $protocol . "<br>";
@@ -62,15 +61,15 @@
         echo "Path Translated: " . $_SERVER['PATH_TRANSLATED'] . "<br>";
 
         echo "<p>&nbsp;</p>";
-        echo $_SERVER['PHP_SELF'];
+        echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
         echo "<br>";
-        echo $_SERVER['SERVER_NAME'];
+        echo "SERVER_NAME: " . $_SERVER['SERVER_NAME'];
         echo "<br>";
-        echo $_SERVER['HTTP_HOST'];
+        echo "HTTP_HOST: " . $_SERVER['HTTP_HOST'];
         echo "<br>";
-        echo $_SERVER['HTTP_REFERER'];
+        echo "HTTP_REFERER: " . $_SERVER['HTTP_REFERER'];
         echo "<br>";
-        echo $_SERVER['HTTP_USER_AGENT'];
+        echo "HTTP_USER_AGENT: " . $_SERVER['HTTP_USER_AGENT'];
         echo "<br>";
         echo "Script name: " . $_SERVER['SCRIPT_NAME'];
       ?>  
@@ -82,5 +81,5 @@
       <div id="host-info" class=""></div>
     </article>
   </section>
-
+</div>
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>
