@@ -70,6 +70,8 @@
             <input type="text" id="email" name="email" value="<?php echo h($contact['email']); ?>" /><br />
 
             <input type="submit" name="submit" value="Edit Contact" id="button" class="btn btn-warning" />
+            <a class="btn btn-danger" href="<?php echo url_for('/contact-remove.php'); ?>">Delete Contact(s)</a>
+
         </form>
     </section>
 </div>

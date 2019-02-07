@@ -34,4 +34,5 @@
         </form>
     </section>
 </div>
+
 <?php include 'includes/site-footer.php';?>

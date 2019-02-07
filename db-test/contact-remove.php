@@ -5,7 +5,7 @@
     <?php include '../includes/navigation.php';?>
 
     <section>
-        <h2>Remove Contact(S)</h2>
+        <h2>Remove Contact(s)</h2>
         <p>Please select the contact(s) to delete from `email_list` and click Remove.</p>
 
         <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo '/db-test/index.php'; ?>">&laquo; Back to List</a>
