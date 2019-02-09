@@ -1,7 +1,7 @@
 <?php
 
   // TODO: Add clear documentation of how to set this up locally.
-  require_once 'config.php';
+  require_once 'private/initialize.php';
 
   $title = "Home Page";
   // this is for <title>
@@ -21,15 +21,15 @@
 <div class="container <?php echo $custom_class; ?>">
   
   <?php 
-    include 'includes/masthead.php';
-    include 'includes/navigation.php';
+    include_once(INCLUDES_PATH . '/masthead.php');
+    include_once(INCLUDES_PATH . '/navigation.php');
   ?>
 		
 	<section>
 		<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
 	</section>
 
-    <?php include 'blocks/hero.php'; ?>
+    <?php include_once(BLOCKS_PATH . '/hero.php'); ?>
 <!--  <?php //include 'blocks/github-gist.php'; ?>  -->
 
     <div class="row">
@@ -77,4 +77,4 @@
         </div>
     </div>
 </div>
-<?php include 'includes/site-footer.php';?>
+<?php include_once('includes/site-footer.php');?>
