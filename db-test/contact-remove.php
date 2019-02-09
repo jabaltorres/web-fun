@@ -1,8 +1,35 @@
-<?php require_once '../config.php';?>
-<?php include '../includes/site-header.php';?>
-<div class="container">
-    <?php include '../includes/masthead.php';?>
-    <?php include '../includes/navigation.php';?>
+<?php
+require_once('private/initialize.php');
+
+require_login();
+
+$title = "DB Test Page";
+// this is for <title>
+
+$page_heading = "This is the DB Test page";
+// This is for breadcrumbs if I want a custom title other than the default
+
+$page_subheading = "Welcome to the DB test page";
+// This is the subheading
+
+$custom_class = "db-test-page";
+//custom CSS for this page only
+
+$contact_set = find_all_contacts();
+// From globe_bank tutorial
+
+include_once(INCLUDES_PATH . '/site-header.php');
+?>
+<div class="container <?php echo $custom_class; ?>">
+    <?php
+        include_once(INCLUDES_PATH . '/masthead.php');
+        include_once(INCLUDES_PATH . '/navigation.php');
+    ?>
+
+    <section>
+        <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
+        <?php include_once(INCLUDES_PATH . '/db-menu.php');?>
+    </section>
 
     <section>
         <h2>Remove Contact(s)</h2>
@@ -11,9 +38,8 @@
         <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo '/db-test/index.php'; ?>">&laquo; Back to List</a>
 
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-
             <?php
-                $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
+                $dbc = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
                 or die('Error connecting to MySQL server.');
 
                 // Delete the customer rows (only if the form has been submitted)
@@ -45,4 +71,4 @@
     </section>
 </div>
 
-<?php include '../includes/site-footer.php';?>
+<?php include_once(INCLUDES_PATH . '/includes/site-footer.php');?>

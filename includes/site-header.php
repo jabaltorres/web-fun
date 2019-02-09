@@ -1,5 +1,6 @@
 <?php
-    if(!isset($title)){ $title = 'Web Fun!';}
+    $title = $title ?? 'Web Fun | Default title;';
+    $url = $url ?? '';
 ?>
 
 <!DOCTYPE html>

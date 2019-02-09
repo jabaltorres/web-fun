@@ -1,6 +1,8 @@
 <?php
     require_once('private/initialize.php');
 
+    require_login();
+
     $title = "DB Test Page";
     // this is for <title>
 
@@ -16,8 +18,7 @@
     $contact_set = find_all_contacts();
     // From globe_bank tutorial
 
-
-  include_once(INCLUDES_PATH . '/site-header.php');
+    include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">

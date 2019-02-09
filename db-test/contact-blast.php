@@ -1,11 +1,26 @@
 <?php
-    require_once('../config.php');
-?>
+require_once('private/initialize.php');
 
-<?php include '../includes/site-header.php';?>
-<div class="container">
-  <?php include '../includes/masthead.php';?>
-  <?php include '../includes/navigation.php';?>
+require_login();
+
+$title = "DB Test Page";
+// this is for <title>
+
+$page_heading = "This is the DB Test page";
+// This is for breadcrumbs if I want a custom title other than the default
+
+$page_subheading = "Welcome to the DB test page";
+// This is the subheading
+
+$custom_class = "db-test-page";
+//custom CSS for this page only
+include_once(INCLUDES_PATH . '/site-header.php');
+?>
+    <div class="container <?php echo $custom_class; ?>">
+        <?php
+        include_once(INCLUDES_PATH . '/masthead.php');
+        include_once(INCLUDES_PATH . '/navigation.php');
+        ?>
 
   <section>
     <h2 class="h3"><span class="font-weight-bold">Private:</span> For Test use ONLY</h2>
@@ -44,7 +59,7 @@
       }
 
       if ( (!empty($subject)) && (!empty($text)) ) {
-        $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME)
+        $dbc = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
           or die('Error connecting to MySQL server.');
 
         $query = "SELECT * FROM email_list";
@@ -70,11 +85,11 @@
             <input id="subject" name="subject" type="text" value="<?php echo $subject; ?>" size="30" /><br />
             <label for="emailtext">Body of email:</label><br />
             <textarea id="email-text" name="emailtext" rows="8" cols="40"><?php echo $text; ?></textarea><br />
-            <input class="btn" type="submit" name="submit" value="Submit" />
+            <input class="btn btn-primary" type="submit" name="submit" value="Submit" />
         </form>
     <?php endif; ?>
 
   </section>
 </div>
 
-<?php include '../includes/site-footer.php';?>
+<?php include_once(INCLUDES_PATH . '/includes/site-footer.php');?>

@@ -1,6 +1,8 @@
 <?php
 require_once('private/initialize.php');
 
+require_login();
+
   $title = "Add Email"; 
   // this is for <title>
 

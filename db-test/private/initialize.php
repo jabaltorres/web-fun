@@ -1,6 +1,8 @@
 <?php
     ob_start(); // output buffering is turned on
 
+    session_start(); // turn on sessions
+
     // Assign file path to PHP constants
     // __FILE__ returns the current path to this file
     // dirname() returns the path to the current directory
@@ -9,6 +11,7 @@
     define("PUBLIC_PATH", PROJECT_PATH . '/public');
     define("SHARED_PATH", PRIVATE_PATH . '/shared');
 
+    // * JT Custom
     defined("INCLUDES_PATH") or define("INCLUDES_PATH", realpath(dirname(__FILE__) . '/../../includes'));
 
 
@@ -27,6 +30,7 @@
     require_once('database.php');
     require_once('query_functions.php');
     require_once('validation_functions.php');
+    require_once('auth_functions.php');
 
     $db = db_connect();
     $errors = [];
