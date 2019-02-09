@@ -5,6 +5,19 @@ $errors = [];
 $username = '';
 $password = '';
 
+
+$title = "DB Test | Login";
+// this is for <title>
+
+$page_heading = "Log In";
+// This is for breadcrumbs if I want a custom title other than the default
+
+$page_subheading = "User authentication required";
+// This is the subheading
+
+$custom_class = "db-test-login";
+
+
 if(is_post_request()) {
 
   $username = $_POST['username'] ?? '';
@@ -44,22 +57,32 @@ if(is_post_request()) {
 
 }
 
+include_once(INCLUDES_PATH . '/site-header.php');
+
 ?>
 
+<div class="container <?php echo $custom_class; ?>">
+    <?php
+    include_once(INCLUDES_PATH . '/masthead.php');
+    include_once(INCLUDES_PATH . '/navigation.php');
+    ?>
 
-<div id="content">
-  <h1>Log in</h1>
+    <section>
+        <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
+    </section>
 
-  <?php echo display_errors($errors); ?>
+    <div id="content">
 
-  <form action="login.php" method="post">
-    Username:<br />
-    <input type="text" name="username" value="<?php echo h($username); ?>" /><br />
-    Password:<br />
-    <input type="password" name="password" value="" /><br />
-    <input type="submit" name="submit" value="Submit"  />
-  </form>
+      <?php echo display_errors($errors); ?>
 
-</div>
+      <form action="login.php" method="post">
+        Username:<br />
+        <input type="text" name="username" value="<?php echo h($username); ?>" /><br />
+        Password:<br />
+        <input type="password" name="password" value="" /><br />
+        <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
+      </form>
 
-
+    </div><!-- end .container -->
+</div><!-- end .container -->
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
