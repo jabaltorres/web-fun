@@ -46,9 +46,9 @@ function is_get_request() {
 function display_errors($errors=array()) {
     $output = '';
     if(!empty($errors)) {
-        $output .= "<div class=\"errors\">";
-        $output .= "Please fix the following errors:";
-        $output .= "<ul>";
+        $output .= "<div class=\"errors border border-warning p-4 mb-4\">";
+        $output .= "<div class=\"d-block\">Please fix the following errors:</div>";
+        $output .= "<ul class=\"mb-0\">";
         foreach($errors as $error) {
             $output .= "<li>" . h($error) . "</li>";
         }
@@ -72,4 +72,5 @@ function display_session_message() {
         return '<div id="message">' . h($msg) . '</div>';
     }
 }
+
 ?>

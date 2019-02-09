@@ -13,5 +13,5 @@
   <?php include "blocks/buttons.php"; ?>
   <?php include "blocks/slick-carousel.php"; ?>
   <?php include "blocks/tooltip.php"; ?>
-
+</div>
 <?php include 'includes/site-footer.php';?>

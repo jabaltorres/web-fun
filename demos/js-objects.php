@@ -144,4 +144,5 @@
 
 </script>
 
+</div>
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>

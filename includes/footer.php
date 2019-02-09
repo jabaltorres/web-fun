@@ -6,7 +6,6 @@
         </div>
     </div>
 
-
     <footer>
       <span>&copy; <?php echo date("Y") . "&nbsp;" . $site_owner; ?></span>
       <ul>

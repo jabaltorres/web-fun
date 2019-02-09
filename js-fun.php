@@ -16,7 +16,7 @@
   include_once('includes/site-header.php');
 ?>
   
-  <div class="container <?php echo $custom_class; ?>">
+<div class="container <?php echo $custom_class; ?>">
   
   <?php 
     include 'includes/masthead.php';
@@ -35,5 +35,6 @@
   <?php include 'blocks/hero.php'; ?>
 
   <?php include 'blocks/github-gist.php'; ?> 
+</div>
 
 <?php include 'includes/site-footer.php';?>

@@ -34,40 +34,52 @@
 </div>
 
 <div class="container <?php echo $custom_class; ?>">
-  <div class="row">
+    <div class="row">
     <div class="col-4">
-      <h3>Heading 3</h3>
-      <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+    <div class="card p-4 mb-4">
+        <h3>Heading 3</h3>
+        <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+    </div>
     </div>
     <div class="col-4">
-      <h3>Heading 3</h3>
-      <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+      <div class="card p-4 mb-4">
+          <h3>Heading 3</h3>
+          <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+      </div>
     </div>
     <div class="col-4">
-      <h3>Heading 3</h3>
-      <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+      <div class="card p-4 mb-4">
+          <h3>Heading 3</h3>
+          <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+      </div>
     </div>
-  </div>
+    </div>
 
-  <div class="row icon-example">
-    <div class="col-4 card">
-      <span class="icon analyst-report"></span>
-      <h3>Heading 3</h3>
-      <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+    <div class="row icon-example">
+        <div class="col-4">
+        <div class="card p-4 mb-4">
+            <span class="icon analyst-report"></span>
+            <h3>Heading 3</h3>
+            <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+        </div>
+        </div>
+        <div class="col-4">
+          <div class="card p-4 mb-4">
+              <span class="icon analyst-report"></span>
+              <h3>Heading 3</h3>
+              <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="card p-4 mb-4">
+              <span class="icon analyst-report"></span>
+              <h3>Heading 3</h3>
+              <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+          </div>
+        </div>
     </div>
-    <div class="col-4 card">
-      <span class="icon analyst-report"></span>
-      <h3>Heading 3</h3>
-      <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
-    </div>
-    <div class="col-4 card">
-      <span class="icon analyst-report"></span>
-      <h3>Heading 3</h3>
-      <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
-    </div>
-  </div>
 </div>
 
 <!-- end .container-->
 
-<?php include 'includes/footer.php';?>
+<?php include 'includes/site-footer.php';?>

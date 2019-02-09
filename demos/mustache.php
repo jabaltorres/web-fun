@@ -15,9 +15,7 @@
 
   include_once(INCLUDES_PATH . '/site-header.php');
 ?>
-
-
-  <div class="container <?php echo $custom_class; ?>">
+<div class="container <?php echo $custom_class; ?>">
   
   <?php 
     include_once(INCLUDES_PATH . '/masthead.php');
@@ -33,12 +31,12 @@
     <p>Insert web mustache here</p>
 
     <!-- The js for this is in the app.js file -->
-    <div id="color-wrapper"></div>
+    <div id="color-wrapper" class="row"></div>
 
     <script id="colors-template" type="x-tmpl-mustache">
 
       {{#colors}}
-        <div class="jt-colors col col-xs-4" style= "background-color: {{rgba}};">
+        <div class="jt-colors col col-sm-3" style= "background-color: {{rgba}};">
           <span>{{name}}</span>
           <span>{{hex}}</span>
           <span>{{rgba}}</span>
@@ -116,4 +114,5 @@
     </div>
   </section>
 
+</div>
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>

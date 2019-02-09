@@ -74,12 +74,14 @@
         echo "Script name: " . $_SERVER['SCRIPT_NAME'];
       ?>  
     </article>
+
     <article>
       <h3>Host information courtesy of JavaScript</h3>
       
       <!-- being used by javascript-->
       <div id="host-info" class=""></div>
     </article>
+
   </section>
 </div>
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>

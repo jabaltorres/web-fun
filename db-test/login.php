@@ -5,19 +5,6 @@ $errors = [];
 $username = '';
 $password = '';
 
-
-$title = "DB Test | Login";
-// this is for <title>
-
-$page_heading = "Log In";
-// This is for breadcrumbs if I want a custom title other than the default
-
-$page_subheading = "User authentication required";
-// This is the subheading
-
-$custom_class = "db-test-login";
-
-
 if(is_post_request()) {
 
   $username = $_POST['username'] ?? '';
@@ -56,10 +43,23 @@ if(is_post_request()) {
   }
 
 }
+?>
 
-include_once(INCLUDES_PATH . '/site-header.php');
+<?php
+
+// this is for <title>
+$title = "DB Test | Login";
+
+// This is for breadcrumbs if I want a custom title other than the default
+$page_heading = "Log In";
+
+// This is the subheading
+$page_subheading = "User authentication required";
+
+$custom_class = "db-test-login";
 
 ?>
+<?php include_once(INCLUDES_PATH . '/site-header.php'); ?>
 
 <div class="container <?php echo $custom_class; ?>">
     <?php
@@ -71,18 +71,20 @@ include_once(INCLUDES_PATH . '/site-header.php');
         <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
     </section>
 
-    <div id="content">
+    <section id="content">
 
-      <?php echo display_errors($errors); ?>
+        <?php echo display_errors($errors); ?>
 
-      <form action="login.php" method="post">
-        Username:<br />
-        <input type="text" name="username" value="<?php echo h($username); ?>" /><br />
-        Password:<br />
-        <input type="password" name="password" value="" /><br />
-        <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
-      </form>
+        <form action="login.php" method="post">
+            <label for="userName">Username:</label>
+            <input id="userName" class="form-control" type="text" name="username" value="<?php echo h($username); ?>" />
 
-    </div><!-- end .container -->
+            <label for="passWord">Password:</label>
+            <input id="passWord" class="form-control" type="password" name="password" value="" />
+
+            <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
+        </form>
+
+    </section><!-- end #content -->
 </div><!-- end .container -->
 <?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>

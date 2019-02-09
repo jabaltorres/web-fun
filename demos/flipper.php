@@ -114,4 +114,5 @@
     };
     AddBorder.init();
   </script>
+  </div>
 <?php include '../includes/site-footer.php';?>

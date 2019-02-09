@@ -105,4 +105,4 @@
     </section>
   </div><!-- end .container -->
 
-<?php include_once(INCLUDES_PATH . '/footer.php');?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php');?>
