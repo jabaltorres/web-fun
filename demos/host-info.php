@@ -12,7 +12,7 @@
   //custom CSS for this page only
 
   // Preliminaries
-  include_once('../config.php');  
+  include_once('../private/initialize.php');
   include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 <div class="container">
@@ -31,47 +31,39 @@
       <p>This is supposed to be some sort of domain dash board.</p>
       
       <?php
-        // echo $url; // = http://example.com/path/directory
 
-        $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        $http_host = $_SERVER[HTTP_HOST];
+      echo "<p>Paths: </p>";
+      echo '<div class="">Private Path: ' . PRIVATE_PATH . '</div>';
+      echo '<div class="">Project Path: ' . PROJECT_PATH . '</div>';
+      echo '<div class="">Public Path: ' . PUBLIC_PATH . '</div>';
+      echo '<div class="">Shared Path: ' . SHARED_PATH . '</div>';
+      echo '<div class="">Includes Path: ' . INCLUDES_PATH . '</div>';
+      echo '<div class="">Images Path: ' . IMAGES_PATH . '</div>';
+      echo '<div class="">Blocks Path: ' . BLOCKS_PATH . '</div>';
+      echo '<div class="">Incl Path: ' . INLC_PATH . '</div>';
+      echo '<div class="">Enviro Prod: ' . $enviro_prod . '</div>';
 
-        echo '<h4 class="mb-4">Page Title: ' . $title . '</h4>';
+      echo "<p>Other Vars: </p>";
+      echo "Base dir: " . $base_dir . "<br>";
+      echo "Protocol: " . $protocol . "<br>";
+      echo "Server Name: " . $server_name . "<br>";
+      echo "Script Name: " . $script_name . "<br>";
+      echo "Doc Root: " . $doc_root . "<br>";
+      echo "Base URL: " . $base_url . "<br>";
+      echo "Port: " . $port . "<br>";
+      echo "Created URL: " . $url . "<br>";
 
-        echo "Base dir: " . $base_dir . "<br>";
-        echo "Protocol: " . $protocol . "<br>";
-        echo "Domain: " . $domain . "<br>";
-        echo "Doc Root: " . $doc_root . "<br>";
-        echo "Base URL: " . $base_url . "<br>";
-        echo "Port: " . $port . "<br>";
-        echo "Created URL: " . $url . "<br>";
 
-        echo "<p>&nbsp;</p>";
+      echo "<p>&nbsp;</p>";
+      echo "Actual Link: " . $actual_link . "<br>";
+      echo "HTTP Host: " . $http_host . "<br>";
+      echo "HTTP USER AGENT: " . $user_agent . "<br>";
+      echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
 
-        echo "Base Path: " . BASE_PATH . "<br>";
-        echo "Library Path: " . LIBRARY_PATH . "<br>";
-        echo "Templates Path: " . TEMPLATES_PATH . "<br>";
-        echo "Images Path: " . IMAGES_PATH . "<br>";
-        echo "Actual URL: " . $actual_link . "<br>";
-        echo "HTTP Host: " . $http_host . "<br>";
+      echo "<p>&nbsp;</p>";
+      echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
 
-        echo "<p>&nbsp;</p>";
-        echo "Base URL: " . BASE_URL . "<br>";
-        echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
-        echo "Path Translated: " . $_SERVER['PATH_TRANSLATED'] . "<br>";
 
-        echo "<p>&nbsp;</p>";
-        echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
-        echo "<br>";
-        echo "SERVER_NAME: " . $_SERVER['SERVER_NAME'];
-        echo "<br>";
-        echo "HTTP_HOST: " . $_SERVER['HTTP_HOST'];
-        echo "<br>";
-        echo "HTTP_REFERER: " . $_SERVER['HTTP_REFERER'];
-        echo "<br>";
-        echo "HTTP_USER_AGENT: " . $_SERVER['HTTP_USER_AGENT'];
-        echo "<br>";
-        echo "Script name: " . $_SERVER['SCRIPT_NAME'];
       ?>  
     </article>
 

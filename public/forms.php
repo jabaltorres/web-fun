@@ -1,14 +1,14 @@
 <?php
-  require_once 'config.php';
-  $title = "Form Page"; // this is for <title>
-  $page_title = "This is the form page"; //this is for breadcrumbs if I want a custom title other than the default
-  $addCSS = ""; //custom CSS for this page only
-  include_once('includes/site-header.php');
+    require_once '../private/initialize.php';
+    $title = "Form Page"; // this is for <title>
+    $page_title = "This is the form page"; //this is for breadcrumbs if I want a custom title other than the default
+    $addCSS = ""; //custom CSS for this page only
+    include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container">
-    <?php include 'includes/masthead.php';?>
-    <?php include 'includes/navigation.php';?>
+    <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
+    <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
 
     <section class="forms">
 
@@ -35,4 +35,4 @@
     </section>
 </div>
 
-<?php include 'includes/site-footer.php';?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>

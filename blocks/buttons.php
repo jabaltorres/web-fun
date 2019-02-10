@@ -1,4 +1,4 @@
-<?php 
+<?php
   $block_headline = "Buttons";
   $block_subheading = "Buttons Subheading";
   $block_custom_class = "buttons-section";

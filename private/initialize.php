@@ -56,7 +56,7 @@ define("SHARED_PATH", PRIVATE_PATH . '/shared');
 define("INCLUDES_PATH", PROJECT_PATH . '/includes');
 define("IMAGES_PATH", PROJECT_PATH . '/images');
 define("BLOCKS_PATH", PROJECT_PATH . '/blocks');
-define("INLC_PATH", PROJECT_PATH . '/incl');
+define("INCL_PATH", PROJECT_PATH . '/incl');
 
 
 // Assign the root URL to a PHP constant

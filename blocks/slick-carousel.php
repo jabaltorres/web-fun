@@ -13,19 +13,19 @@
   <div class="carousel">
     <div class="carousel-wrapper">
       <div class="carousel-slide">
-        <img src="images/placeholder-16-x-9.png">
+        <img src="<?php echo url_for('/images/placeholder-16-x-9.png'); ?>">
         <div class="blurb">
           <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni recusandae veritatis molestias in repudiandae praesentium.</span>
         </div>
       </div>
       <div class="carousel-slide">
-        <img src="images/placeholder-16-x-9.png">
+        <img src="<?php echo url_for('/images/placeholder-16-x-9.png'); ?>">
         <div class="blurb">
           <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni recusandae veritatis molestias in repudiandae praesentium.</span>
         </div>
       </div>
       <div class="carousel-slide">
-        <img src="images/placeholder-16-x-9.png">
+        <img src="<?php echo url_for('/images/placeholder-16-x-9.png'); ?>">
         <div class="blurb">
           <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni recusandae veritatis molestias in repudiandae praesentium.</span>
         </div>

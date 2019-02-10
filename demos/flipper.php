@@ -29,11 +29,11 @@
   </section>
 
   <div id="wrapper" class="example-container">
-    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-1.png" alt="Image 1">
-    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-2.png" alt="Image 2">
-    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-3.png" alt="Image 3">
-    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-4.png" alt="Image 4">
-    <img class="slide" src="<?php echo $url; ?>/images/janky-carousel-img/placholder-5.png" alt="Image 5">
+    <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-1.png" alt="Image 1">
+    <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-2.png" alt="Image 2">
+    <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-3.png" alt="Image 3">
+    <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-4.png" alt="Image 4">
+    <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-5.png" alt="Image 5">
   </div>
 
   <script>
