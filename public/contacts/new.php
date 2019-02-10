@@ -1,6 +1,6 @@
 <?php
 
-require_once('private/initialize.php');
+require_once('../../private/initialize.php');
 
 require_login();
 
@@ -63,14 +63,10 @@ include_once(INCLUDES_PATH . '/site-header.php');
         <?php include_once(INCLUDES_PATH . '/db-menu.php');?>
     </section>
 
-    <section>
-        <a href="/globe-bank/public/staff/index.php">WIP - Globe Bank Staff Area</a>
-    </section>
-
 
     <div id="content">
 
-      <a class="back-link" href="<?php echo url_for('/staff/admins/index.php'); ?>">&laquo; Back to List</a>
+        <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
       <div class="admin new">
         <h1>Create Admin</h1>

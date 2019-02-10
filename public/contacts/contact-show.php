@@ -1,5 +1,5 @@
 <?php
-    require_once('private/initialize.php');
+require_once('../../private/initialize.php');
 
 require_login();
 
@@ -40,7 +40,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
         <div class="col">
             <section>
                 <div id="content" class="">
-                    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/index.php'); ?>">&laquo; Back to List</a>
+                    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
                     <div class="contact show mb-4">
                         <h1 class="h3">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name'] ); ?></h1>
@@ -61,8 +61,8 @@ include_once(INCLUDES_PATH . '/site-header.php');
                         </div><!-- end .attributes -->
                     </div><!-- end .contact -->
 
-                    <a class="btn btn-warning font-weight-bold" href="<?php echo url_for('/contact-edit.php?id=' . h(u($contact['id']))); ?>">Edit Contact</a>
-                    <a class="btn btn-success font-weight-bold" href="<?php echo url_for('/contact-message.php?id=' . h(u($contact['id']))); ?>">Send Message &raquo;</a>
+                    <a class="btn btn-warning font-weight-bold" href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>">Edit Contact</a>
+                    <a class="btn btn-success font-weight-bold" href="<?php echo url_for('/contacts/contact-message.php?id=' . h(u($contact['id']))); ?>">Send Message &raquo;</a>
 
                 </div><!-- end #content -->
             </section>

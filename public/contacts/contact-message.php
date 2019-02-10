@@ -1,5 +1,5 @@
 <?php
-    require_once('private/initialize.php');
+require_once('../../private/initialize.php');
 
 require_login();
 
@@ -97,7 +97,7 @@ require_login();
 
                 <div class="content w-75 mx-auto">
 
-                    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/index.php'); ?>">&laquo; Back to List</a>
+                    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
                     <?php if ($output_form): ?>
                         <form method="post" action="<?php echo url_for('/contact-message.php?id=' . h(u($contact['id']))); ?>">

@@ -1,5 +1,5 @@
 <?php
-require_once('private/initialize.php');
+require_once('../../private/initialize.php');
 
 require_login();
 
@@ -15,12 +15,12 @@ require_login();
   $custom_class = "add-email-page"; 
   //custom CSS for this page only
 
-  include_once('../includes/site-header.php');
+include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-  <?php include '../includes/masthead.php';?>
-  <?php include '../includes/navigation.php';?>
+ <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
+    <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
 
   <section id="form-section">
     <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
@@ -59,7 +59,7 @@ require_login();
     ?>
 
 
-      <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo '/db-test/index.php'; ?>">&laquo; Back to List</a>
+      <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
     <?php if ($output_form == 'yes'): ?>
    
@@ -194,4 +194,4 @@ require_login();
   </section>
 </div>
 
-<?php include '../includes/site-footer.php';?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php');?>

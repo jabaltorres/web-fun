@@ -1,5 +1,5 @@
 <?php
-require_once('private/initialize.php');
+require_once('../../private/initialize.php');
 
 require_login();
 
@@ -26,7 +26,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
     <h2 class="h3"><span class="font-weight-bold">Private:</span> For Test use ONLY</h2>
     <p>Write and send an email to contact list members.</p>
 
-    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo '/db-test/index.php'; ?>">&laquo; Back to List</a>
+      <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
     <?php
 

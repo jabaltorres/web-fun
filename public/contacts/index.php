@@ -1,5 +1,5 @@
 <?php
-    require_once('private/initialize.php');
+    require_once('../../private/initialize.php');
 
     require_login();
 
@@ -33,10 +33,6 @@
     </section>
 
     <section>
-        <a href="/globe-bank/public/staff/index.php">WIP - Globe Bank Staff Area</a>
-    </section>
-
-    <section>
         <h4 class="mb-4 h4 font-weight-bold">Contact Entries</h4>
 
         <table class="table table-striped border">
@@ -58,9 +54,9 @@
                         <td class="align-middle"><?php echo h($contact['first_name']); ?></td>
                         <td class="align-middle"><?php echo h($contact['last_name']); ?></td>
                         <td class="align-middle"><?php echo h($contact['email']); ?></td>
-                        <td><a class="action btn btn-sm btn-info d-block mx-auto" href="<?php echo url_for('/contact-show.php?id=' . h(u($contact['id']))); ?>">View</a></td>
-                        <td><a class="action btn btn-sm btn-warning d-block mx-auto" href="<?php echo url_for('contact-edit.php?id=' . h(u($contact['id']))); ?>">Edit</a></td>
-                        <td><a class="action btn btn-sm btn-danger d-block mx-auto" href="<?php echo url_for('/contact-delete.php?id=' . h(u($contact['id']))); ?>">Delete</a></td>
+                        <td><a class="action btn btn-sm btn-info d-block mx-auto" href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>">View</a></td>
+                        <td><a class="action btn btn-sm btn-warning d-block mx-auto" href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>">Edit</a></td>
+                        <td><a class="action btn btn-sm btn-danger d-block mx-auto" href="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>">Delete</a></td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>

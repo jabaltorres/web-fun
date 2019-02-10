@@ -1,4 +1,8 @@
 <?php
+ob_start(); // output buffering is turned on
+
+session_start(); // turn on sessions
+
 
 $site_owner = "Jabal Torres";
 $site_name = "LOREM";
@@ -15,7 +19,7 @@ $protocol = empty($_SERVER['HTTPS']) ? 'http' : 'https';
 $server_name = $_SERVER['SERVER_NAME'];
 $script_name = $_SERVER['SCRIPT_NAME'];
 $http_host = $_SERVER['HTTP_HOST'];
-$doc_root = $_SERVER['DOCUMENT_ROOT'];
+//$doc_root = $_SERVER['DOCUMENT_ROOT'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
 $base_url = preg_replace("!^${doc_root}!", '', $base_dir);
 $port = $_SERVER['SERVER_PORT'];
@@ -61,9 +65,9 @@ define("INLC_PATH", PROJECT_PATH . '/incl');
 // define("WWW_ROOT", '/~jabaltorres/web-fun/db-test/public');
 // define("WWW_ROOT", '');
 // * Can dynamically find everything in the URL up to "public"
-//$public_end = strpos($_SERVER['SCRIPT_NAME'], '/db-test') + 8;
-//$doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
-//define("WWW_ROOT", $doc_root);
+$public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;
+$doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
+define("WWW_ROOT", $doc_root);
 //echo '<div class="">WWW root: ' . WWW_ROOT . '</div>';
 
 

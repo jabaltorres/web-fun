@@ -1,5 +1,5 @@
 <?php
-  require_once '../config.php';
+  require_once '../private/initialize.php';
 
   $title = "Demo Index"; 
   // this is for <title>
@@ -32,7 +32,7 @@
 
     <section>
         <ul class="menu">
-            <li><a href="/db-test/index.php">DB Test</a></li>
+            <li><a href="/public/contacts/index.php">DB Test</a></li>
             <li><a href="js-objects.php">JS Objects</a></li>
             <li><a href="flipper.php">Flipper</a></li>
             <li><a href="host-info.php">Host Info</a></li>
