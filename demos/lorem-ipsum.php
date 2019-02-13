@@ -1,31 +1,30 @@
 <?php
-  require_once '../config.php';
+    require_once '../private/initialize.php';
+    // this is for <title>
+    $title = "Lorem Ipsum";
 
-  $title = "Lorem Ipsum"; 
-  // this is for <title>
+    // This is for breadcrumbs if I want a custom title other than the default
+    $page_title = "Lorem ipsum playground";
 
-  $page_title = "Lorem ipsum playground";
-  // This is for breadcrumbs if I want a custom title other than the default
+    // This is the subheading
+    $page_subheading = "Make your own bacon ipsum";
 
-  $page_subheading = "Make your own bacon ipsum"; 
-  // This is the subheading
+    //custom CSS for this page only
+    $custom_class = "page-lorem-ipsum";
 
-  $custom_class = "page-lorem-ipsum"; 
-  //custom CSS for this page only
-
-  include_once('../includes/site-header.php');
+    include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-  
-  <?php include '../includes/masthead.php';?>
-  <?php include '../includes/navigation.php';?>
+
+  <?php include_once(INCLUDES_PATH . '/masthead.php');?>
+  <?php include_once(INCLUDES_PATH . '/navigation.php');?>
 
   <section>
 
     <header>
-      <h1><?php echo $title; ?></h1>
-      <h2><?php echo $page_subheading; ?></h2>
+      <h1 class="h2"><?php echo $title; ?></h1>
+      <h2 class="h3"><?php echo $page_subheading; ?></h2>
     </header>
 
     <article>
@@ -51,4 +50,4 @@
   </section>
 </div>
 
-<?php include '../includes/site-footer.php';?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php');?>

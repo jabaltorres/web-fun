@@ -6,7 +6,7 @@
 
 <section class="<?php echo $block_custom_class; ?>">
 
-  <?php include(INCL_PATH . '/block-headline.php'); ?>
+  <?php include( INCL_PATH . '/block-headline.php' ); ?>
 
   <p><a class="federation" title="Read more about James T. Kirk at Wikipedia, the free encyclopedia." href="http://en.wikipedia.org/wiki/James_T._Kirk">James Tiberius Kirk</a>
     (2233 - 2293/2371), played by William Shatner, is the leading character in the

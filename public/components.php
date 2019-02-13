@@ -11,6 +11,7 @@
     <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
 
     <?php include(BLOCKS_PATH . '/buttons.php'); ?>
+    <?php include(BLOCKS_PATH . '/headings.php'); ?>
     <?php include(BLOCKS_PATH . '/slick-carousel.php'); ?>
     <?php include(BLOCKS_PATH . '/tooltip.php'); ?>
 </div>

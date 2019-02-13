@@ -37,20 +37,20 @@ $(document).ready(function () {
     // arrows:false
   });
 
-  if ($("#jt-images").length){
     // Using Mustache
-    $.getJSON('../data/data.json', function(data) {
-      var colorTemplate = $('#colors-template').html();
-      var colorHtml = Mustache.to_html(colorTemplate, data);
-      $('#color-wrapper').html(colorHtml);
-      console.log("The color HTML: ", data.colors[1].name);
-    });
-  }
+    if ($("#jt-images").length){
+        $.getJSON('../data/data.json', function(data) {
+            var colorTemplate = $('#colors-template').html();
+            var colorHtml = Mustache.to_html(colorTemplate, data);
+            $('#color-wrapper').html(colorHtml);
+            console.log("The color HTML: ", data.colors[1].name);
+        });
+    }
 
   // The example of this code is on mustache.ph page
   if ($("#color-wrapper").length){
     // Using Reg Ajax
-    console.log("color wrapper is indeed present");
+    console.log(" div with id of color-wrapper is indeed present");
     $.ajax({
       url: '../data/list.json',
       dataType: 'json',
@@ -91,6 +91,7 @@ $(document).ready(function () {
     });  
   }
 
+
   var pathname = window.location.pathname;
   var location = window.location;
   var host = window.location.host;
@@ -109,11 +110,6 @@ $(document).ready(function () {
     $("<div>Host: " + host + "</div>").appendTo("#host-info");
     $("<div>Origin: " + origin + "</div>").appendTo("#host-info");
   }
-  // $('section').each(function(){
-  //   //$(this).css("border", "solid thick yellow");
-  //   var closeBtn = $('<span class="close-btn">Close This</span>');
-  //   $(this).prepend(closeBtn);
-  // });
 
 
   // The bit of code is being used on http://localhost:3000/demos/js-objects.php
@@ -121,15 +117,13 @@ $(document).ready(function () {
 
   var pTag = document.createElement("p");
   var innerSpan = document.createElement("span");
-  pTag.className = "info";
+  pTag.className = "info p-4";
   pTag.innerHTML = "Window scroll top: ";
   pTag.appendChild(innerSpan);
 
   jToolTip.append(pTag);
 
-
   $(document).on('scroll', function(){
-
       // update jToolTip
       var scrollTop = $(window).scrollTop().toFixed(2);
       $(".info span").text(scrollTop + "px");

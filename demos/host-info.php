@@ -32,37 +32,36 @@
       
       <?php
 
-      echo "<p>Paths: </p>";
-      echo '<div class="">Private Path: ' . PRIVATE_PATH . '</div>';
-      echo '<div class="">Project Path: ' . PROJECT_PATH . '</div>';
-      echo '<div class="">Public Path: ' . PUBLIC_PATH . '</div>';
-      echo '<div class="">Shared Path: ' . SHARED_PATH . '</div>';
-      echo '<div class="">Includes Path: ' . INCLUDES_PATH . '</div>';
-      echo '<div class="">Images Path: ' . IMAGES_PATH . '</div>';
-      echo '<div class="">Blocks Path: ' . BLOCKS_PATH . '</div>';
-      echo '<div class="">Incl Path: ' . INLC_PATH . '</div>';
-      echo '<div class="">Enviro Prod: ' . $enviro_prod . '</div>';
+          echo "<p>Paths: </p>";
+          echo '<div class="">Private Path: ' . PRIVATE_PATH . '</div>';
+          echo '<div class="">Project Path: ' . PROJECT_PATH . '</div>';
+          echo '<div class="">Public Path: ' . PUBLIC_PATH . '</div>';
+          echo '<div class="">Shared Path: ' . SHARED_PATH . '</div>';
+          echo '<div class="">Includes Path: ' . INCLUDES_PATH . '</div>';
+          echo '<div class="">Images Path: ' . IMAGES_PATH . '</div>';
+          echo '<div class="">Blocks Path: ' . BLOCKS_PATH . '</div>';
+          echo '<div class="">Incl Path: ' . INCL_PATH . '</div>';
+          echo '<div class="">Enviro Prod: ' . $enviro_prod . '</div>';
 
-      echo "<p>Other Vars: </p>";
-      echo "Base dir: " . $base_dir . "<br>";
-      echo "Protocol: " . $protocol . "<br>";
-      echo "Server Name: " . $server_name . "<br>";
-      echo "Script Name: " . $script_name . "<br>";
-      echo "Doc Root: " . $doc_root . "<br>";
-      echo "Base URL: " . $base_url . "<br>";
-      echo "Port: " . $port . "<br>";
-      echo "Created URL: " . $url . "<br>";
+          echo "<p>Other Vars: </p>";
+          echo "Base dir: " . $base_dir . "<br>";
+          echo "Protocol: " . $protocol . "<br>";
+          echo "Server Name: " . $server_name . "<br>";
+          echo "Script Name: " . $script_name . "<br>";
+          echo "Doc Root: " . $doc_root . "<br>";
+          echo "Base URL: " . $base_url . "<br>";
+          echo "Port: " . $port . "<br>";
+          echo "Created URL: " . $url . "<br>";
 
 
-      echo "<p>&nbsp;</p>";
-      echo "Actual Link: " . $actual_link . "<br>";
-      echo "HTTP Host: " . $http_host . "<br>";
-      echo "HTTP USER AGENT: " . $user_agent . "<br>";
-      echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
+          echo "<p>&nbsp;</p>";
+          echo "Actual Link: " . $actual_link . "<br>";
+          echo "HTTP Host: " . $http_host . "<br>";
+          echo "HTTP USER AGENT: " . $user_agent . "<br>";
+          echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
 
-      echo "<p>&nbsp;</p>";
-      echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
-
+          echo "<p>&nbsp;</p>";
+          echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
 
       ?>  
     </article>

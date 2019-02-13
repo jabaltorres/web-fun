@@ -1,4 +1,4 @@
-<hgroup>
-  <h1 class="block-headline"><?php echo $block_headline; ?></h1>
-  <h2 class="block-subheading"><?php echo $block_subheading; ?></h2>
-</hgroup>
+<div class="hgroup">
+  <h1 class="block-headline h3"><?php echo $block_headline; ?></h1>
+  <h2 class="block-subheading h4"><?php echo $block_subheading; ?></h2>
+</div>

@@ -6,7 +6,7 @@
 
 <section class="<?php echo $block_custom_class; ?>">
 
-  <?php include(INCL_PATH . '/block-headline.php'); ?>
+  <?php include( INCL_PATH . '/block-headline.php' ); ?>
   
   <p>This is a nice Slick Carousel</p>
 

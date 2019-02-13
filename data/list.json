@@ -2,7 +2,7 @@
   "articles" : [
     {
       "id":1,
-      "imgUrl": "../images/image-1.jpeg",
+      "imgUrl": "../public/images/image-1.jpeg",
       "photoCredit": "S Zolkin",
       "title": "Girl with camera",
       "author": "Tatiana Schlossberg",
@@ -11,7 +11,7 @@
     },
     {
       "id":2,
-      "imgUrl": "../images/image-2.jpeg",
+      "imgUrl": "../public/images/image-2.jpeg",
       "photoCredit": "Nick Diamantidis",
       "title": "Pretty little lighthouse",
       "author": "Tatiana Schlossberg",
@@ -20,7 +20,7 @@
     },
     {
       "id":3,
-      "imgUrl": "../images/image-3.jpeg",
+      "imgUrl": "../public/images/image-3.jpeg",
       "photoCredit": "Michael Hirsch",
       "title": "Bay Bridge Baby",
       "author": "Tatiana Schlossberg",
@@ -29,7 +29,7 @@
     },
     {
       "id": "not-id",
-      "imgUrl": "../images/image-4.jpeg",
+      "imgUrl": "../public/images/image-4.jpeg",
       "photoCredit": "Danist Soh",
       "title": "Leaf with a droplet",
       "author": "Tatiana Schlossberg",

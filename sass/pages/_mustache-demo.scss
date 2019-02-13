@@ -23,6 +23,7 @@
     // border: solid thin  red;
     > span{
       border: $global-border;
+      padding: 20px;
       display: block;
       max-width: 420px;
       margin:0 auto;
@@ -47,8 +48,6 @@
       margin: 0 0 5px;
     }
     .date{}
-    .summary{
-      padding: 0 $global-padding;
-    }
+    .summary{}
   }  
 }
