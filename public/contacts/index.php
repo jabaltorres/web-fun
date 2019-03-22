@@ -22,6 +22,7 @@
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
+
     <?php
         include_once(INCLUDES_PATH . '/masthead.php');
         include_once(INCLUDES_PATH . '/navigation.php');
@@ -37,15 +38,15 @@
 
         <table class="table table-striped border">
             <thead class="thead-dark">
-            <tr>
-                <th scope="col" class="font-weight-bold">ID</th>
-                <th scope="col" class="font-weight-bold">First Name</th>
-                <th scope="col" class="font-weight-bold">Last Name</th>
-                <th scope="col" class="font-weight-bold">Email</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-            </tr>
+                <tr>
+                    <th scope="col" class="font-weight-bold">ID</th>
+                    <th scope="col" class="font-weight-bold">First Name</th>
+                    <th scope="col" class="font-weight-bold">Last Name</th>
+                    <th scope="col" class="font-weight-bold">Email</th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
             </thead>
             <tbody>
                 <?php while($contact = mysqli_fetch_assoc($contact_set)): ?>
