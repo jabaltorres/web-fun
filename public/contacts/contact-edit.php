@@ -20,7 +20,7 @@
 
       $result = update_contact($contact);
       if($result === true) {
-        redirect_to(url_for('/index.php'));
+        redirect_to(url_for('/contacts/index.php'));
       } else {
         $errors = $result;
         //var_dump($errors);
@@ -61,7 +61,7 @@
 
         <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
-        <form id="form" method="post" action="<?php echo url_for('/contact-edit.php?id=' . h(u($id))); ?>">
+        <form id="form" method="post" action="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($id))); ?>">
             <label for="first_name">First name:</label>
             <input type="text" name="first_name" value="<?php echo h($contact['first_name']); ?>" /><br />
 
@@ -72,7 +72,7 @@
             <input type="text" id="email" name="email" value="<?php echo h($contact['email']); ?>" /><br />
 
             <input type="submit" name="submit" value="Edit Contact" id="button" class="btn btn-warning" />
-            <a class="btn btn-danger" href="<?php echo url_for('/contact-remove.php'); ?>">Delete Contact(s)</a>
+            <a class="btn btn-danger" href="<?php echo url_for('/contacts/contact-remove.php'); ?>">Delete Contact(s)</a>
 
         </form>
     </section>

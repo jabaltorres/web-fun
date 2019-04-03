@@ -63,7 +63,25 @@
           echo "<p>&nbsp;</p>";
           echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
 
-      ?>  
+      ?>
+        <div class="border mt-5 p-4">
+	        <?php
+		        if ($server_name == $enviro_prod){
+			        // Production Environment
+//		      $url = "${protocol}://${server_name}${disp_port}/demos/${path}";
+			        echo "${protocol}://${server_name}${disp_port}/demos/${path}";
+			        echo "<br>Environment: Prod";
+		        } else {
+			        // Local Environment
+			        // $url = "${protocol}://${domain}${disp_port}/${path}";
+//		      $url = "${protocol}://${server_name}${disp_port}";
+			        echo "${protocol}://${server_name}${disp_port}";
+			        echo "<br>Environment: Local Dev";
+		        }
+
+	        ?>
+        </div>
+
     </article>
 
     <article>
