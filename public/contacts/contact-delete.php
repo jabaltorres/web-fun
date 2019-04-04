@@ -11,7 +11,7 @@ require_login();
     if(is_post_request()) {
 
         $result = delete_contact($id);
-        redirect_to(url_for('/index.php'));
+        redirect_to(url_for('/contacts/index.php'));
 
     } else {
         $subject = find_contact_by_id($id);
@@ -57,7 +57,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
                         <h1 class="h3 text-danger font-weight-bold">Delete Contact</h1>
                         <p>Are you sure you want to delete this contact?</p>
 
-                        <form action="<?php echo url_for('/contact-delete.php?id=' . h(u($contact['id']))); ?>" method="post">
+                        <form action="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>" method="post">
 
                             <p class="h4">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name'] ); ?></p>
 
