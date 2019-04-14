@@ -133,7 +133,7 @@ $(document).ready(function () {
             //     }
             // }
 
-            $("#rendered-sections-list").append('<li class="mb-2"><a href="#'+theId+'">'  + theText + '</a></li>');
+            $("#rendered-sections-list").append('<li class="mb-2"><a href="#'+theId+'" class="sidebar-nav">'  + theText + '</a></li>');
         });
 
         $('.article-list-wrapper').append('<div id="scroll-to-top">Scroll To Top</div>');
@@ -216,7 +216,7 @@ $(document).ready(function () {
 
     // - Smooth scroll sidebar
 
-    $('li a').on('click', function (e) {
+    $('.sidebar-nav').on('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
