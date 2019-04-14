@@ -1,10 +1,11 @@
 <?php
-  $block_headline = "Tooltipz";
-  $block_subheading = "Tooltip Subheading";
-  $block_custom_class = "tool-tip";
+    $block_headline = "Tooltipz";
+    $block_subheading = "Tooltip Subheading";
+    $block_custom_id = "tool-tip";
+    $block_custom_class = "tool-tip";
 ?>
 
-<section class="<?php echo $block_custom_class; ?>">
+<section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
   <?php include( INCL_PATH . '/block-headline.php' ); ?>
 

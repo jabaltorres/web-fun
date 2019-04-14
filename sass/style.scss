@@ -312,3 +312,16 @@ article{
     }
   }
 }
+
+
+.active-nav{
+  font-weight: bold;
+}
+
+#scroll-to-top{
+  padding: 10px;
+  border: solid thin #eee;
+  &:hover{
+    cursor: pointer;
+  }
+}

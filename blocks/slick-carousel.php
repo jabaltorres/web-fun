@@ -1,10 +1,11 @@
 <?php 
-  $block_headline = "Slick Carousel";
-  $block_subheading = "Slick Carousel Subheading";
-  $block_custom_class = "slick-carousel";
+    $block_headline = "Slick Carousel";
+    $block_subheading = "Slick Carousel Subheading";
+    $block_custom_id = "slick-carousel";
+    $block_custom_class = "slick-carousel";
 ?>
 
-<section class="<?php echo $block_custom_class; ?>">
+<section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
   <?php include( INCL_PATH . '/block-headline.php' ); ?>
   

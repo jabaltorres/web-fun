@@ -1,19 +1,19 @@
 <?php
-  require_once '../config.php';
+    require_once '../private/initialize.php';
 
-  $title = "Mustache Page"; 
-  // this is for <title>
+    $title = "Mustache Page";
+    // this is for <title>
 
-  $page_title = "This is the mustache page";
-  // This is for breadcrumbs if I want a custom title other than the default
+    $page_title = "This is the mustache page";
+    // This is for breadcrumbs if I want a custom title other than the default
 
-  $page_subheading = "Welcome to the mustache"; 
-  // This is the subheading
+    $page_subheading = "Welcome to the mustache";
+    // This is the subheading
 
-  $custom_class = "mustache-page"; 
-  //custom CSS for this page only
+    $custom_class = "mustache-page";
+    //custom CSS for this page only
 
-  include_once(INCLUDES_PATH . '/site-header.php');
+    include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 <div class="container <?php echo $custom_class; ?>">
   

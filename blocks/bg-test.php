@@ -1,10 +1,11 @@
 <?php
-  $block_headline = "BG Test";
-  $block_subheading = "BG Test Subheading";
-  $block_custom_class = "bg-test";
+    $block_headline = "Background Colors";
+    $block_subheading = "Example of Background colors";
+    $block_custom_id = "bg-test";
+    $block_custom_class = "bg-test";
 ?>
 
-<section class="<?php echo $block_custom_class; ?>">
+<section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
     <?php include( INCL_PATH . '/block-headline.php' ); ?>
 

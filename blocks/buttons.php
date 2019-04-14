@@ -1,10 +1,11 @@
 <?php
-  $block_headline = "Buttons";
-  $block_subheading = "Examples of Buttons";
-  $block_custom_class = "buttons-section";
+    $block_headline = "Buttons";
+    $block_subheading = "Examples of Buttons";
+    $block_custom_id = "buttons";
+    $block_custom_class = "buttons-section";
 ?>
 
-<section class="<?php echo $block_custom_class; ?>">
+<section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
     <?php include( INCL_PATH . '/block-headline.php' ); ?>
 
