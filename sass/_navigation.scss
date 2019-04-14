@@ -10,7 +10,7 @@ nav{
     display: block;
     text-decoration: none;
     &:hover{
-      background-color: $color-shadow;
+      //background-color: $color-shadow;
       // background-color: red;
     }
   }
@@ -32,5 +32,11 @@ nav{
   display:none;
   @include medium-screen{
     display: block !important;
+  }
+  a{
+    color: $primary;
+    &:hover{
+      color: $secondary;
+    }
   }
 }

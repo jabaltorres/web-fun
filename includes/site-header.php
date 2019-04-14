@@ -15,8 +15,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $url; ?>/public/images/apple-touch-icon-114x114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $url; ?>/public/images/apple-touch-icon-144x144-precomposed.png">
 
-    <link href="//fonts.googleapis.com/css?family=Gudea|Old+Standard+TT" rel="stylesheet" type="text/css">
-    <link href="//fontastic.s3.amazonaws.com/mWtd8iTgMRgyWPztf4g6Zh/icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
     <link rel="stylesheet" href="<?php echo $url; ?>/css/slick.css">
     <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css">

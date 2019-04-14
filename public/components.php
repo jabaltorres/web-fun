@@ -10,6 +10,8 @@
     <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
     <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
 
+    <?php include(BLOCKS_PATH . '/bg-test.php'); ?>
+
     <?php include(BLOCKS_PATH . '/buttons.php'); ?>
     <?php include(BLOCKS_PATH . '/headings.php'); ?>
     <?php include(BLOCKS_PATH . '/slick-carousel.php'); ?>

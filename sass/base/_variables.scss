@@ -2,8 +2,9 @@
 $black: rgba(0,0,0,0.9);
 $orange: #e24d25;
 $navy: rgb(12,19,53);
-$pale-sky: #6b717f;
+//$pale-sky: #6b717f;
 $onyx: #353839;
+$yellow: #FFC422;
 
 $alizarin: #e74c3c;
 $emerald: #2ecc71;
@@ -14,8 +15,9 @@ $peter-river: #3498db;
 $color-shadow: rgba($black, .125);
 $color-light-shade: rgba($black, .2);
 $color-dark-shade: $onyx;
-$color-primary: $navy;
-$color-accent: $orange;
+
+$color-primary: $black;
+$color-accent: $yellow;
 
 $spacing-value: 20px;
 
