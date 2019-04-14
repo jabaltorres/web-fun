@@ -13,5 +13,8 @@
     <!-- <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script> -->
     <!-- <script src="dist/scripts/scripts.min.js"></script> -->
     <script src="<?php echo $url; ?>/dist/scripts/scripts.js"></script>
+    <script>
+        console.log('This is working!');
+    </script>
   </body>
 </html>

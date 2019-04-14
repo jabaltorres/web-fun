@@ -55,7 +55,7 @@ gulp.task('sass', function () {
   .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true })) // pass the file through autoprefixer
   .pipe(sourcemaps.write())
   .pipe(gulp.dest('css')) // output .css file to css folder
-  .pipe(browserSync.reload({stream:true})) // reload the stream
+  .pipe(browserSync.reload({stream:true})); // reload the stream
 });
 
 
@@ -70,11 +70,14 @@ gulp.task('scripts', function() {
   return gulp.src(jsFiles)
     .pipe(sourcemaps.init())
     .pipe(order([
-      "vendor/jquery-1.11.3.min.js",
-      "../node_modules/bootstrap/dist/js/bootstrap.js",
-      "vendor/mustache-2.3.0.min.js",
-      "vendor/slick.min.js",
-      "app.js"
+        "vendor/jquery-3.2.1.min.js",
+        "vendor/modernizr-3.5.0.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "vendor/spin.min.js",
+        "vendor/mustache-2.3.0.min.js",
+        "vendor/slick.min.js",
+        "plugins.js",
+        "app.js"
     ]))
     .pipe(concat('scripts.js'))
     .pipe(gulp.dest(jsDest))
@@ -117,7 +120,6 @@ gulp.task('reload', function () {
  */
 gulp.task('watch', function () {
   gulp.watch(['sass/*.scss', 'sass/**/*.scss'], ['sass']);
-  
   gulp.watch(['sass/*.scss', 'sass/**/*.scss']).on('change', browserSync.reload);
 
   gulp.watch(['js/*.js', 'js/app.js'], ['scripts']);

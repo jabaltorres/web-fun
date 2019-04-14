@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    console.log("This is runnings");
+
   $('#nav-menu-icon').click(function(){
     $(this).toggleClass('open');
     $('.main-navigation').stop(true).slideToggle("fast");
@@ -13,7 +15,7 @@ $(document).ready(function () {
   });
 
     // Using Mustache
-    if ($("#jt-images").length){
+    if ($("#color-wrapper").length){
         $.getJSON('../data/data.json', function(data) {
             var colorTemplate = $('#colors-template').html();
             var colorHtml = Mustache.to_html(colorTemplate, data);
@@ -22,8 +24,8 @@ $(document).ready(function () {
         });
     }
 
-  // The example of this code is on mustache.ph page
-  if ($("#color-wrapper").length){
+  // The example of this code is on mustache.php page
+  if ($("#image-wrapper").length){
     // Using Reg Ajax
     console.log(" div with id of color-wrapper is indeed present");
     $.ajax({

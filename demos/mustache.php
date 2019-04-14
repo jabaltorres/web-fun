@@ -28,13 +28,13 @@
       <h1>Mustache Playground</h1>
       <h2>Sub headline</h2>
     </hgroup>
-    <p>Insert web mustache here</p>
+    <p>These colors were pulled from <a href="https://flatuicolors.com/palette/es" target="_blank">https://flatuicolors.com/palette/es</a></p>
+      <p>The data is coming from `data/data.json`</p>
 
     <!-- The js for this is in the app.js file -->
     <div id="color-wrapper" class="row"></div>
 
     <script id="colors-template" type="x-tmpl-mustache">
-
       {{#colors}}
         <div class="jt-colors col col-sm-3" style= "background-color: {{rgba}};">
           <span>{{name}}</span>
