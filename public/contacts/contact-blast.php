@@ -92,4 +92,4 @@ include_once(INCLUDES_PATH . '/site-header.php');
   </section>
 </div>
 
-<?php include_once(INCLUDES_PATH . '/includes/site-footer.php');?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>

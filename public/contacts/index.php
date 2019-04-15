@@ -62,7 +62,7 @@
                 <?php endwhile; ?>
             </tbody>
         </table>
-        <?php mysqli_free_result($subject_set); ?>
+        <?php mysqli_free_result($contact_set); ?>
     </section>
 
 </div><!-- end .container -->

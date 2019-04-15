@@ -70,4 +70,5 @@ include_once(INCLUDES_PATH . '/site-header.php');
     </div><!-- end .row -->
 
 </div><!-- end .container -->
-<?php include '../includes/site-footer.php';?>
+
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
