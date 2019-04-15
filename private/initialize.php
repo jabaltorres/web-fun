@@ -56,6 +56,7 @@ define("SHARED_PATH", PRIVATE_PATH . '/shared');
 define("INCLUDES_PATH", PROJECT_PATH . '/includes');
 define("IMAGES_PATH", PROJECT_PATH . '/images');
 define("BLOCKS_PATH", PROJECT_PATH . '/blocks');
+define("ELEMENTS_PATH", PROJECT_PATH . '/elements');
 define("INCL_PATH", PROJECT_PATH . '/incl');
 
 

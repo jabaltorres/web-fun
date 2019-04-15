@@ -72,9 +72,9 @@ body{
 }
 
 ul{
-  display: inline-block;
-  padding:15px;
-  @extend %margin-bottom;
+  //display: inline-block;
+  padding-left:20px;
+  //@extend %margin-bottom;
 }
 
 p{
@@ -314,13 +314,14 @@ article{
 }
 
 
-.active-nav{
+#rendered-sections-list .active-nav{
   font-weight: bold;
 }
 
 #scroll-to-top{
   padding: 10px;
   border: solid thin #eee;
+  display: none;
   &:hover{
     cursor: pointer;
   }
