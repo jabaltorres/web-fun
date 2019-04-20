@@ -11,3 +11,6 @@ node_modules/*
 .idea/*
 
 .DS_Store
+
+# Ignore db credentials
+private/db_credentials.php

@@ -1,5 +1,4 @@
 <?php
-
 	if ($server_name == $enviro_prod){
 	    define ("DB_SERVER", "107.180.40.120");
 		define ("DB_USER", "jt");
