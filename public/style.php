@@ -22,6 +22,7 @@
 			    <?php include(STYLE_PATH . '/colors.php'); ?>
 			    <?php include(STYLE_PATH . '/bg-test.php'); ?>
 			    <?php include(STYLE_PATH . '/typography.php'); ?>
+			    <?php include(STYLE_PATH . '/icons.php'); ?>
             </div>
         </div>
     </div>

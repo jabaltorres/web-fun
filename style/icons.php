@@ -1,30 +1,16 @@
 <?php
-  $title = "Icons Page"; 
-  // this is for <title>
-
-  $page_title = "This is the icons page";
-  // This is for breadcrumbs if I want a custom title other than the default
-
-  $page_subheading = "Welcome to the Icons page"; 
-  // This is the subheading
-
-  $custom_class = "icons-page"; 
-  //custom CSS for this page only
-
-  // Preliminaries
-	require_once '../private/initialize.php';
-  include_once(INCLUDES_PATH . '/site-header.php');
+  $block_headline = "Icons";
+  $block_subheading = "Icons Usage Examples";
+  $block_custom_id = "icons-section";
+  $block_custom_class = "icons-section";
 ?>
-  <div class="container <?php echo $custom_class; ?>">
-    <?php
-      include_once(INCLUDES_PATH . '/masthead.php');
-      include_once(INCLUDES_PATH . '/navigation.php');
-      include_once(INCLUDES_PATH . '/headline-page.php');
-    ?>
 
-    <section>
-      <h3>SVG Icon - Regular</h3>
-      <ul class="svg-icon-list">
+<section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
+
+    <?php include( INCL_PATH . '/block-headline.php' ); ?>
+
+    <h3>SVG Icon - Regular</h3>
+    <ul class="svg-icon-list">
         <li><span class="icon analyst-report"></span></li>
         <li><span class="icon balance-sheet"></span></li>
         <li><span class="icon best-practices"></span></li>
@@ -61,10 +47,10 @@
         <li><span class="icon webinar"></span></li>
         <li><span class="icon whitepaper"></span></li>
         <li><span class="icon workforce-management"></span></li>
-      </ul>
+    </ul>
 
-      <h3>SVG Icon - Small</h3>
-      <ul class="svg-icon-list">
+    <h3>SVG Icon - Small</h3>
+    <ul class="svg-icon-list">
         <li><span class="icon analyst-report-sm"></span></li>
         <li><span class="icon balance-sheet-sm"></span></li>
         <li><span class="icon best-practices-sm"></span></li>
@@ -101,8 +87,5 @@
         <li><span class="icon webinar-sm"></span></li>
         <li><span class="icon whitepaper-sm"></span></li>
         <li><span class="icon workforce-management-sm"></span></li>
-      </ul>
-    </section>
-  </div><!-- end .container -->
-
-<?php include_once(INCLUDES_PATH . '/site-footer.php');?>
+    </ul>
+</section>
