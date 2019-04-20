@@ -6,7 +6,8 @@
     // use if specifying path from root
     // $root = $_SERVER['DOCUMENT_ROOT'];
 
-    $path = 'images/Facebox/Images-Circle-640px/';
+    // This is a temp hack
+    $path = '../../public/images/Facebox/Images-Circle-640px/';
 
     // End of user modified section 
     /////////////////////////////////////////////////////////////////////
@@ -32,7 +33,8 @@
     }
 
     // Obtain list of images from directory 
-    $imgList = getImagesFromDir($root . $path);
+//    $imgList = getImagesFromDir($root . $path);
+    $imgList = getImagesFromDir($path);
 
     $img = getRandomFromArray($imgList);
 ?>
@@ -40,7 +42,7 @@
 <div id="pop-up">
     <!-- #img-container is the container for the pop up ad -->
     <span id="img-container">
-      <span id="close-btn">X</span>
+        <span id="close-btn">X</span>
         <a href="http://jabaltorres.com/demos/web-fun" target="_blank"><img src="<?php echo $path . $img ?>" alt=""></a>
     </span>
 </div>
@@ -81,7 +83,7 @@
                 setTimeout(showPopUP, 3000);
             }
 
-            function setCookie(cname,cvalue,exdays) {
+            function setCookie(cname, cvalue, exdays) {
                 var d = new Date();
                 // d.setTime(d.getTime() + (exdays*24*60*60*1000)); // cookie expires in 24 hours
                 d.setTime(d.getTime() + (exdays*10*1000)); // cookie expires in 10 seconds
@@ -106,7 +108,7 @@
             }
 
             function checkCookie() {
-                var key=getCookie("returnvisitor");
+                var key = getCookie("returnvisitor");
                 // if key isn't empty    
                 if (key != "") {
                     // action if user returns within set time
@@ -135,7 +137,7 @@
         },
         popUpConsole: function(){
             var allCookies = document.cookie;
-            console.log(allCookies)
+            console.log("All cookies: " + allCookies)
         }
     };
     AvilPopUp.init();

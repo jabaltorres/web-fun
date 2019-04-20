@@ -54,9 +54,11 @@ define("PROJECT_PATH", dirname(PRIVATE_PATH));
 define("PUBLIC_PATH", PROJECT_PATH . '/public');
 define("SHARED_PATH", PRIVATE_PATH . '/shared');
 define("INCLUDES_PATH", PROJECT_PATH . '/includes');
-define("IMAGES_PATH", PROJECT_PATH . '/images');
+define("IMAGES_PATH", PUBLIC_PATH . '/images');
+define("STYLE_PATH", PROJECT_PATH . '/style');
 define("BLOCKS_PATH", PROJECT_PATH . '/blocks');
 define("ELEMENTS_PATH", PROJECT_PATH . '/elements');
+define("COMPONENTS_PATH", PROJECT_PATH . '/components');
 define("INCL_PATH", PROJECT_PATH . '/incl');
 
 

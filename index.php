@@ -20,47 +20,16 @@
   
 <div class="container <?php echo $custom_class; ?>">
   
-  <?php 
-    include_once(INCLUDES_PATH . '/masthead.php');
-    include_once(INCLUDES_PATH . '/navigation.php');
-  ?>
+    <?php
+        include_once(INCLUDES_PATH . '/masthead.php');
+        include_once(INCLUDES_PATH . '/navigation.php');
+    ?>
 		
 	<section>
 		<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
 	</section>
 
     <?php include_once(BLOCKS_PATH . '/hero.php'); ?>
-<!--  <?php //include 'blocks/github-gist.php'; ?>  -->
-
-    <div class="row">
-        <div class="col-12 col-md-4">
-            <div class="card p-4 mb-4">
-                <h3>Heading 3</h3>
-                <div class="text-center p-4">
-                    <i class="fas fa-thumbs-up"></i>
-                </div>
-                <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
-            </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="card p-4 mb-4 bg-primary text-white">
-                <h3>Heading 3</h3>
-                <div class="text-center p-4">
-                    <i class="fas fa-thumbs-up"></i>
-                </div>
-                <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
-            </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="card p-4 mb-4 bg-secondary">
-                <h3>Heading 3</h3>
-                <div class="text-center p-4">
-                    <i class="fas fa-thumbs-up"></i>
-                </div>
-                <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
-            </div>
-        </div>
-    </div>
 
     <div class="row icon-example">
         <div class="col-12 col-md-4">
@@ -86,4 +55,5 @@
         </div>
     </div>
 </div>
+
 <?php include_once('includes/site-footer.php');?>

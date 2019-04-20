@@ -1,5 +1,5 @@
-<?
-  require_once 'config.php';
+<?php
+	require_once 'private/initialize.php';
 
   $title = "Page Template"; 
   // this is for <title>

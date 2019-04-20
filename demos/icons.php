@@ -12,7 +12,7 @@
   //custom CSS for this page only
 
   // Preliminaries
-  include_once('../config.php');  
+	require_once '../private/initialize.php';
   include_once(INCLUDES_PATH . '/site-header.php');
 ?>
   <div class="container <?php echo $custom_class; ?>">

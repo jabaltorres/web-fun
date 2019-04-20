@@ -2,15 +2,13 @@
   $title = "Demo Index file"; // this is for <title>
   $page_title = "This is the demo index file"; //this is for breadcrumbs if I want a custom title other than the default
   $custom_class = "demo-page"; //custom CSS for this page only
-  require_once '../config.php';
-  include_once('../includes/site-header.php');
+	require_once '../private/initialize.php';
+	include_once(INCLUDES_PATH . '/site-header.php');
 ?>
   <div class="container">
-  
-  <?php 
-    include '../includes/masthead.php';
-    include '../includes/navigation.php';
-  ?>
+
+	  <?php include_once(INCLUDES_PATH . '/masthead.php');?>
+	  <?php include_once(INCLUDES_PATH . '/navigation.php');?>
 
   <section class="js-fun">
     <hgroup>
@@ -115,4 +113,4 @@
     AddBorder.init();
   </script>
   </div>
-<?php include '../includes/site-footer.php';?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php');?>

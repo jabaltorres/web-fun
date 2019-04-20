@@ -1,5 +1,5 @@
 <?php
-    require_once '../private/initialize.php';
+    require_once '../../private/initialize.php';
     $title = "Form Page"; // this is for <title>
     $page_title = "This is the form page"; //this is for breadcrumbs if I want a custom title other than the default
     $addCSS = ""; //custom CSS for this page only
@@ -14,7 +14,7 @@
 
         <div class="hgroup">
             <h1>Forms</h1>
-            <h2>Sub headline</h2>
+            <p class="lead">This would be a great place to test form validation.</p>
         </div>
 
         <form method="post" action="acknowledge.php">

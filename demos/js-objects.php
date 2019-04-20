@@ -34,9 +34,9 @@
             <div id="display-info" class="">
                 <h3 class="mb-2">Going to display jToolTip info here.</h3>
                 <div class="wrapper">
-                    <span class="jToolTip"></span>
+                    <span class="jToolTip bg-info d-block"></span>
                     <div class="object-items">
-                        <h4>vidyardVideos inner objects:</h4>
+                        <h4>Object inner objects:</h4>
                         <ul>
 
                         </ul>
