@@ -31,7 +31,7 @@
   </section>
 
     <section>
-        <ul class="menu">
+        <ul class="menu list-unstyled">
             <li><a href="heroes.php">Heroes</a></li>
             <li><a href="<?php echo $url; ?>/public/contacts/index.php">DB Test</a></li>
             <li><a href="js-objects.php">JS Objects</a></li>
