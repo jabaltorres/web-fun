@@ -1,4 +1,4 @@
-nav{
+nav.main-navigation{
   border-top:solid thin $color-shadow;
   @extend %margin-bottom;
   li{
@@ -15,7 +15,7 @@ nav{
     }
   }
   @include medium-screen{
-    height:56px;
+    //height:56px;
     border-bottom:solid thin $color-shadow;
     li{
       display: inline-block;
@@ -30,7 +30,7 @@ nav{
 
 .main-navigation{
   display:none;
-  @include medium-screen{
+  @include media-breakpoint-up(md){
     display: block !important;
   }
   a{

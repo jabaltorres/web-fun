@@ -81,10 +81,10 @@ include_once(INCLUDES_PATH . '/site-header.php');
 
     <?php if ($output_form): ?>
         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <label for="subject">Subject of email:</label><br />
-            <input id="subject" name="subject" type="text" value="<?php echo $subject; ?>" size="30" /><br />
-            <label for="emailtext">Body of email:</label><br />
-            <textarea id="email-text" name="emailtext" rows="8" cols="40"><?php echo $text; ?></textarea><br />
+            <label for="subject">Subject of email:</label>
+            <input id="subject" name="subject" type="text" value="<?php echo $subject; ?>" size="30" />
+            <label for="emailtext">Body of email:</label>
+            <textarea id="email-text" name="emailtext" rows="8" cols="40"><?php echo $text; ?></textarea>
             <input class="btn btn-primary" type="submit" name="submit" value="Submit" />
         </form>
     <?php endif; ?>

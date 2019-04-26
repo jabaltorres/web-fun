@@ -6,10 +6,10 @@
   $title = "Home Page";
   // this is for <title>
 
-  $page_heading = "This is the home page";
+  $page_heading = "Hello World!";
   // This is for breadcrumbs if I want a custom title other than the default
 
-  $page_subheading = "Welcome to the homepage"; 
+  $page_subheading = "Welcome to my web sandbox. More work to come soon. Stay tuned.";
   // This is the subheading
 
   $custom_class = "home-page"; 
@@ -24,12 +24,16 @@
         include_once(INCLUDES_PATH . '/masthead.php');
         include_once(INCLUDES_PATH . '/navigation.php');
     ?>
-		
-	<section>
-		<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
-	</section>
 
-    <?php include_once(BLOCKS_PATH . '/hero.php'); ?>
+    <div class="jumbotron">
+        <h1 class="display-4"><?php echo $page_heading; ?></h1>
+        <p class="lead"><?php echo $page_subheading; ?></p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="https://github.com/capitalJT/web-fun" role="button">Visit the repo</a>
+        </p>
+    </div>
 
     <div class="row icon-example">
         <div class="col-12 col-md-4">
@@ -56,4 +60,4 @@
     </div>
 </div>
 
-<?php include_once('includes/site-footer.php');?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php');?>

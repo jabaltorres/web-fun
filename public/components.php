@@ -23,6 +23,7 @@
 			    <?php include(COMPONENTS_PATH . '/alerts.php'); ?>
 			    <?php include(COMPONENTS_PATH . '/cards.php'); ?>
 			    <?php include(COMPONENTS_PATH . '/jumbotron.php'); ?>
+			    <?php include(COMPONENTS_PATH . '/nav-bar.php'); ?>
             </div>
         </div>
     </div>

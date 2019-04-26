@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="col-12 col-lg-4">
 			<div class="card p-4 mb-4">
-				<h3>Heading 3</h3>
+				<h3 class="h4">Font Awesome Icon</h3>
 				<div class="text-center p-4">
 					<i class="fas fa-thumbs-up"></i>
 				</div>
@@ -21,7 +21,7 @@
 		</div>
 		<div class="col-12 col-lg-4">
 			<div class="card p-4 mb-4 bg-primary text-white">
-				<h3>Heading 3</h3>
+				<h3 class="h4">Font Awesome Icon</h3>
 				<div class="text-center p-4">
 					<i class="fas fa-thumbs-up"></i>
 				</div>
@@ -30,7 +30,7 @@
 		</div>
 		<div class="col-12 col-lg-4">
 			<div class="card p-4 mb-4 bg-secondary">
-				<h3>Heading 3</h3>
+				<h3 class="h4">Font Awesome Icon</h3>
 				<div class="text-center p-4">
 					<i class="fas fa-thumbs-up"></i>
 				</div>

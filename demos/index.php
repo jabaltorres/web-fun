@@ -1,34 +1,28 @@
 <?php
-  require_once '../private/initialize.php';
+    require_once '../private/initialize.php';
 
-  $title = "Demo Index"; 
-  // this is for <title>
+    $title = "Demo Index";
+    // this is for <title>
 
-  $page_title = "Welcome to the Demos page";
-  // This is for breadcrumbs if I want a custom title other than the default
+    $page_heading = 'Demo Page Heading';
+    $page_subheading = "List of WIP demos";
 
-  $page_subheading = "This is the Demo page subheading"; 
-  // This is the subheading
+    $custom_class = "demo-page";
+    //custom CSS for this page only
 
-  $custom_class = "demo-page"; 
-  //custom CSS for this page only
-
-  include_once('../includes/site-header.php');
+	include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
   
-  <?php 
-    include '../includes/masthead.php';
-    include '../includes/navigation.php';
-  ?>
+    <?php
+	    include_once(INCLUDES_PATH . '/masthead.php');
+	    include_once(INCLUDES_PATH . '/navigation.php');
+    ?>
 
-  <section>
-    <hgroup>
-      <h1><?php echo $page_title; ?></h1>
-      <h2><?php echo $page_subheading; ?></h2>
-    </hgroup>
-  </section>
+    <section>
+        <?php include_once(INCLUDES_PATH . '/headline-page.php'); ?>
+    </section>
 
     <section>
         <ul class="menu list-unstyled">
@@ -46,4 +40,4 @@
 
 </div><!-- end .container -->
 
-<?php include '../includes/site-footer.php';?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>

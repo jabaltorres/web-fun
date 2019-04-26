@@ -1,10 +1,8 @@
 $(document).ready(function () {
 
-    console.log("This is runnings");
-
     $('#nav-menu-icon').click(function(){
-    $(this).toggleClass('open');
-    $('.main-navigation').stop(true).slideToggle("fast");
+        $(this).toggleClass('open');
+        $('.main-navigation').stop(true).slideToggle("fast");
     });
 
     $('.carousel-wrapper').slick({

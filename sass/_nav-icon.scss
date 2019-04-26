@@ -12,7 +12,7 @@
   cursor: pointer;
   @include rotate($val:0deg);
   @extend %transition;
-  @include medium-screen{
+  @include media-breakpoint-up(md){
     display:none;
   }
 

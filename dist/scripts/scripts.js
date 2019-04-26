@@ -54,11 +54,9 @@ null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"
 
 $(document).ready(function () {
 
-    console.log("This is runnings");
-
     $('#nav-menu-icon').click(function(){
-    $(this).toggleClass('open');
-    $('.main-navigation').stop(true).slideToggle("fast");
+        $(this).toggleClass('open');
+        $('.main-navigation').stop(true).slideToggle("fast");
     });
 
     $('.carousel-wrapper').slick({
