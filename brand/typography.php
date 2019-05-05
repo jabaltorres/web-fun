@@ -1,8 +1,8 @@
 <?php
-  $block_headline = "Typography";
-  $block_subheading = "Typography Usage Examples";
-  $block_custom_id = "typography-section";
-  $block_custom_class = "typography-section";
+    $block_headline = "Typography";
+    $block_subheading = "Typography Usage Examples";
+    $block_custom_id = "typography-section";
+    $block_custom_class = "typography-section";
 ?>
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">

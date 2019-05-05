@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-12 col-md-2 lorem-sidebar">
                 <div class="article-list-wrapper sticky-top">
-                    <span class="d-block font-weight-bold py-2">Style</span>
+                    <span class="d-block font-weight-bold py-2">Brand</span>
                 </div>
             </div>
             <div class="col-12 col-md-10">
-			    <?php include(STYLE_PATH . '/colors.php'); ?>
-			    <?php include(STYLE_PATH . '/bg-test.php'); ?>
-			    <?php include(STYLE_PATH . '/typography.php'); ?>
-			    <?php include(STYLE_PATH . '/icons.php'); ?>
+			    <?php include(BRAND_PATH . '/colors.php'); ?>
+			    <?php include(BRAND_PATH . '/bg-test.php'); ?>
+			    <?php include(BRAND_PATH . '/typography.php'); ?>
+			    <?php include(BRAND_PATH . '/icons.php'); ?>
             </div>
         </div>
     </div>

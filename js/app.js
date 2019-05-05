@@ -6,10 +6,10 @@ $(document).ready(function () {
     });
 
     $('.carousel-wrapper').slick({
-    autoplay: true,
-    mobileFirst: true,
-    dots: true
-    // arrows:false
+        autoplay: true,
+        mobileFirst: true,
+        dots: true
+        // arrows:false
     });
 
     // Using Mustache
@@ -66,51 +66,50 @@ $(document).ready(function () {
         });
     }
 
+    if ($(".host-page").length){
+        // console.log("host page");
 
-    var pathname = window.location.pathname;
-    var location = window.location;
-    var host = window.location.host;
-    var origin = window.location.origin;
+        var pathname = window.location.pathname;
+        var location = window.location;
+        var host = window.location.host;
+        var origin = window.location.origin;
 
-    console.log('the pathname: ', pathname);
-    console.log('the location: ', location);
-    console.log('the host: ', host);
-    console.log('the origin: ', origin);
+        console.log('the pathname: ', pathname);
+        console.log('the location: ', location);
+        console.log('the host: ', host);
+        console.log('the origin: ', origin);
 
+    }
 
-  // This is displayed on the `/demos/host-info.php` page
-  if ($("#host-info").length){
-    $("<div>Pathname: " + pathname + "</div>").appendTo("#host-info");
-    $("<div>Location: " + location + "</div>").appendTo("#host-info");
-    $("<div>Host: " + host + "</div>").appendTo("#host-info");
-    $("<div>Origin: " + origin + "</div>").appendTo("#host-info");
-  }
+    // This is displayed on the `/demos/host-info.php` page
+    if ($("#host-info").length){
+        $("<div>Pathname: " + pathname + "</div>").appendTo("#host-info");
+        $("<div>Location: " + location + "</div>").appendTo("#host-info");
+        $("<div>Host: " + host + "</div>").appendTo("#host-info");
+        $("<div>Origin: " + origin + "</div>").appendTo("#host-info");
+    }
 
-
-  // The bit of code is being used on http://localhost:3000/demos/js-objects.php
-  var jToolTip = $(".jToolTip");
-
-  var pTag = document.createElement("p");
-  var innerSpan = document.createElement("span");
-  pTag.className = "info p-4";
-  pTag.innerHTML = "Window scroll top: ";
-  pTag.appendChild(innerSpan);
-
-  jToolTip.append(pTag);
-
-  $(document).on('scroll', function(){
-      // update jToolTip
-      var scrollTop = $(window).scrollTop().toFixed(2);
-      $(".info span").text(scrollTop + "px");
-
-  });
+    if ($(".js-fun").length){
+        console.log("JS Fun Page");
+    }
 
 
+    // The bit of code is being used on http://localhost:3000/demos/js-objects.php
+    var jToolTip = $(".jToolTip");
 
+    var pTag = document.createElement("p");
+    var innerSpan = document.createElement("span");
+    pTag.className = "info p-4";
+    pTag.innerHTML = "Window scroll top: ";
+    pTag.appendChild(innerSpan);
 
+    jToolTip.append(pTag);
 
-
-
+    $(document).on('scroll', function(){
+        // update jToolTip
+        var scrollTop = $(window).scrollTop().toFixed(2);
+        $(".info span").text(scrollTop + "px");
+    });
 
 
     // Dynamic sidebar on components page
@@ -138,10 +137,7 @@ $(document).ready(function () {
 
     }
 
-
-
-
-// calculating some values
+    // calculating some values
     var header_height = $('.main-header').outerHeight(),
         dls_menu = $('.main-navigation').outerHeight(),
         scroll_top_icon = $('#scroll-to-top'),
@@ -155,7 +151,7 @@ $(document).ready(function () {
     $(window).scroll(function(){
         var $scrollTop = $(window).scrollTop();
 
-        if( $scrollTop > header_height ){
+        if ( $scrollTop > header_height ){
             scroll_top_icon.fadeIn();
         } else {
             scroll_top_icon.fadeOut();

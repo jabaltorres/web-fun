@@ -1,8 +1,8 @@
 <?php
-  $block_headline = "Icons";
-  $block_subheading = "Icons Usage Examples";
-  $block_custom_id = "icons-section";
-  $block_custom_class = "icons-section";
+    $block_headline = "Icons";
+    $block_subheading = "Icons Usage Examples";
+    $block_custom_id = "icons-section";
+    $block_custom_class = "icons-section";
 ?>
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">

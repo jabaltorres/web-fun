@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" href="<?php echo $url; ?>/index.php" alt="" title="Home Link" target="">Home</a>
-                <a class="nav-link" href="<?php echo $url; ?>/public/style.php" alt="" title="" target="">Style</a>
+                <a class="nav-link" href="<?php echo $url; ?>/public/brand.php" alt="" title="" target="">Style</a>
                 <a class="nav-link" href="<?php echo $url; ?>/public/elements.php" alt="" title="" target="">Elements</a>
                 <a class="nav-link" href="<?php echo $url; ?>/public/components.php" alt="" title="" target="">Components</a>
                 <a class="nav-link" href="<?php echo $url; ?>/demos/index.php" alt="" title="" target="">Demos</a>

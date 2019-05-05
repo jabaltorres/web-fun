@@ -1,8 +1,8 @@
 <?php
-  $block_headline = "Colors";
-  $block_subheading = "Example of colors used by the theme";
-  $block_custom_id = "colors";
-  $block_custom_class = "colors";
+    $block_headline = "Colors";
+    $block_subheading = "Example of colors used by the theme";
+    $block_custom_id = "colors";
+    $block_custom_class = "colors";
 ?>
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">

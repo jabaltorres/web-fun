@@ -3,7 +3,6 @@ ob_start(); // output buffering is turned on
 
 session_start(); // turn on sessions
 
-
 $site_owner = "Jabal Torres";
 $site_name = "LOREM";
 $site_tagline = "A place for all of your web ideas";
@@ -42,10 +41,6 @@ if ($server_name == $enviro_prod){
 $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 
-
-
-
-
 // Assign file path to PHP constants
 // __FILE__ returns the current path to this file
 // dirname() returns the path to the current directory
@@ -55,7 +50,7 @@ define("PUBLIC_PATH", PROJECT_PATH . '/public');
 define("SHARED_PATH", PRIVATE_PATH . '/shared');
 define("INCLUDES_PATH", PROJECT_PATH . '/includes');
 define("IMAGES_PATH", PUBLIC_PATH . '/images');
-define("STYLE_PATH", PROJECT_PATH . '/style');
+define("BRAND_PATH", PROJECT_PATH . '/brand');
 define("BLOCKS_PATH", PROJECT_PATH . '/blocks');
 define("ELEMENTS_PATH", PROJECT_PATH . '/elements');
 define("COMPONENTS_PATH", PROJECT_PATH . '/components');
@@ -73,29 +68,10 @@ $doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
 define("WWW_ROOT", $doc_root);
 //echo '<div class="">WWW root: ' . WWW_ROOT . '</div>';
 
-
-//echo "<p>Paths: </p>";
-//echo '<div class="">Private Path: ' . PRIVATE_PATH . '</div>';
-//echo '<div class="">Project Path: ' . PROJECT_PATH . '</div>';
-//echo '<div class="">Public Path: ' . PUBLIC_PATH . '</div>';
-//echo '<div class="">Shared Path: ' . SHARED_PATH . '</div>';
-//echo '<div class="">Includes Path: ' . INCLUDES_PATH . '</div>';
-//echo '<div class="">Images Path: ' . IMAGES_PATH . '</div>';
-//echo '<div class="">Blocks Path: ' . BLOCKS_PATH . '</div>';
-//echo '<div class="">Incl Path: ' . INLC_PATH . '</div>';
 //echo '<div class="">Enviro Prod: ' . $enviro_prod . '</div>';
-//
-//echo "<p>Other Vars: </p>";
-//echo "Base dir: " . $base_dir . "<br>";
 //echo "Protocol: " . $protocol . "<br>";
-//echo "Server Name: " . $server_name . "<br>";
-//echo "Script Name: " . $script_name . "<br>";
-//echo "Doc Root: " . $doc_root . "<br>";
 //echo "Base URL: " . $base_url . "<br>";
-//echo "Port: " . $port . "<br>";
 //echo "Created URL: " . $url . "<br>";
-//
-//
 //echo "<p>&nbsp;</p>";
 //echo "Actual Link: " . $actual_link . "<br>";
 //echo "HTTP Host: " . $http_host . "<br>";

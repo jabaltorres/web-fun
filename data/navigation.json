@@ -1,0 +1,16 @@
+{
+  "navigation": [
+    { "text" : "brand",
+      "url"  : "/public/brand.php"
+    },
+    { "text" : "elements",
+      "url"  : "/public/elements.php"
+    },
+    { "text" : "components",
+      "url"  : "/public/components.php"
+    },
+    { "text" : "templates",
+      "url"  : "/public/templates.php"
+    }
+  ]
+}

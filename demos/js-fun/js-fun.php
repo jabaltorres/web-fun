@@ -26,7 +26,7 @@
 			<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
         </section>
 
-		<?php include(BLOCKS_PATH . '/github-gist.php'); ?>
+		<?php //include(BLOCKS_PATH . '/github-gist.php'); ?>
     </div>
 
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>
