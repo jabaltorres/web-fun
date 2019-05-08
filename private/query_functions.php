@@ -601,8 +601,8 @@
 
         if(is_blank($jtMessage['message'])) {
             $errors[] = "Message cannot be blank.";
-        } elseif(!has_length($jtMessage['message'], ['min' => 2, 'max' => 255])) {
-            $errors[] = "Message must be between 2 and 255 characters.";
+        } elseif(!has_length($jtMessage['message'], ['min' => 10, 'max' => 255])) {
+            $errors[] = "Message must be between 10 and 255 characters.";
         }
 
 

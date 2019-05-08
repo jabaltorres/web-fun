@@ -19,7 +19,11 @@
         $errors = validate_jt_test_form($jtMessage);
 
     } else {
-
+        $jtMessage = [];
+        $jtMessage['name'] = $_POST['name'] ?? '';
+        $jtMessage['subject'] = $_POST['subject'] ?? '';
+        $jtMessage['email'] = $_POST['email'] ?? '';
+        $jtMessage['message'] = $_POST['message'] ?? '';
     }
 
     $title = "Form Page"; // this is for <title>
@@ -46,28 +50,28 @@
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">Full Name:</label>
-                <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="John Smith" required>
+                <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="John Smith" value="<?php echo h($jtMessage['name']); ?>" required>
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlInput2">Email address:</label>
-                <input type="email" name="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com" required>
+                <input type="email" name="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example.com" value="<?php echo h($jtMessage['email']); ?>"required>
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Subject</label>
                 <select class="form-control" name="subject" id="exampleFormControlSelect1">
-                    <option>Hello</option>
-                    <option>Compliment</option>
-                    <option>Insult</option>
-                    <option>Inquiry</option>
-                    <option>Sales Pitch</option>
+                    <option <?php if($jtMessage['subject'] == "Hello") echo 'selected="selected"';?>>Hello</option>
+                    <option <?php if($jtMessage['subject'] == "Compliment") echo 'selected="selected"';?>>Compliment</option>
+                    <option <?php if($jtMessage['subject'] == "Insult") echo 'selected="selected"';?>>Insult</option>
+                    <option <?php if($jtMessage['subject'] == "Inquiry") echo 'selected="selected"';?>>Inquiry</option>
+                    <option <?php if($jtMessage['subject'] == "Sales Pitch") echo 'selected="selected"';?>>Sales Pitch</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Message:</label>
-                <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3" required><?php echo h($jtMessage['message']); ?></textarea>
             </div>
 
             <input type="submit" name="send" value="Send Message" class="btn btn-primary">
