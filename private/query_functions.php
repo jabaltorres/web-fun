@@ -584,4 +584,39 @@
         }
     }
 
+
+    // JT Test - being used on demos/forms/forms.php
+    function validate_jt_test_form($jtMessage) {
+        $errors = [];
+
+        if(is_blank($jtMessage['name'])) {
+            $errors[] = "Name cannot be blank.";
+        } elseif(!has_length($jtMessage['name'], ['min' => 2, 'max' => 255])) {
+            $errors[] = "Name must be between 2 and 255 characters.";
+        }
+
+        if (!has_valid_email_format($jtMessage['email'])){
+            $errors[] = "Invalid email format";
+        }
+
+        if(is_blank($jtMessage['message'])) {
+            $errors[] = "Message cannot be blank.";
+        } elseif(!has_length($jtMessage['message'], ['min' => 2, 'max' => 255])) {
+            $errors[] = "Message must be between 2 and 255 characters.";
+        }
+
+
+        if(!empty($errors)) {
+            return $errors;
+        }
+
+        // Testing the return statement.
+        echo '<ul>';
+        foreach($jtMessage as $jtMessageItem) {
+            echo "<li>" . h($jtMessageItem) . "</li>";
+        }
+        echo '</ul>';
+
+    }
+
 ?>

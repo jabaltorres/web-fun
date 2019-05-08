@@ -16,11 +16,8 @@
         // https://php.net/manual/en/function.print-r.php
 //        print_r ($jtMessage);
 
-        echo '<ul>';
-            foreach($jtMessage as $jtMessageItem) {
-                echo "<li>" . h($jtMessageItem) . "</li>";
-            }
-        echo '</ul>';
+        $errors = validate_jt_test_form($jtMessage);
+
     } else {
 
     }
@@ -42,6 +39,8 @@
             <h1 class="h2"><?php echo $page_title; ?></h1>
             <h2 class="h3"><?php echo $page_subheading; ?></h2>
         </header>
+
+        <?php echo display_errors($errors); ?>
 
         <form method="post" action="<?php echo url_for('../forms/forms.php'); ?>">
 
