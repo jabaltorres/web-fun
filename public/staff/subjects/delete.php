@@ -10,6 +10,7 @@ $id = $_GET['id'];
 if(is_post_request()) {
 
   $result = delete_subject($id);
+  $_SESSION['message'] = 'The subject was deleted successfully.';
   redirect_to(url_for('/staff/subjects/index.php'));
 
 } else {

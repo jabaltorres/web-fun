@@ -77,10 +77,7 @@ define("WWW_ROOT", $doc_root);
 //echo "HTTP Host: " . $http_host . "<br>";
 //echo "HTTP USER AGENT: " . $user_agent . "<br>";
 //echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
-//
-//echo "<p>&nbsp;</p>";
 //echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
-
 
 require_once('functions.php');
 require_once('database.php');

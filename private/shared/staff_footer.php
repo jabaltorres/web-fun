@@ -1,10 +1,10 @@
-            <footer>
-                <p>&copy; <?php echo date('Y')?> Web Fun</p>
-            </footer>
-        </div>
-    </body>
+<footer>
+  &copy; <?php echo date('Y'); ?> Globe Bank
+</footer>
+
+</body>
 </html>
 
 <?php
-    db_disconnect($db);
+  db_disconnect($db);
 ?>
