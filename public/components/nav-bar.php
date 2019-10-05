@@ -7,7 +7,7 @@
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
-    <?php include( INCL_PATH . '/block-headline.php' ); ?>
+    <?php include(INCL_PATH . '/block-headline.php'); ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Lorem</a>
@@ -17,9 +17,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" href="<?php echo $url; ?>/index.php" alt="" title="Home Link" target="">Home</a>
-                <a class="nav-link" href="<?php echo $url; ?>/public/brand.php" alt="" title="" target="">Style</a>
-                <a class="nav-link" href="<?php echo $url; ?>/public/elements.php" alt="" title="" target="">Elements</a>
-                <a class="nav-link" href="<?php echo $url; ?>/public/components.php" alt="" title="" target="">Components</a>
+                <a class="nav-link" href="<?php echo $url; ?>/public/brand/index.php" alt="" title="" target="">Style</a>
+                <a class="nav-link" href="<?php echo $url; ?>/public/elements/index.php" alt="" title="" target="">Elements</a>
+                <a class="nav-link" href="<?php echo $url; ?>/public/components/index.php" alt="" title="" target="">Components</a>
                 <a class="nav-link" href="<?php echo $url; ?>/demos/index.php" alt="" title="" target="">Demos</a>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <?php
-    require_once '../private/initialize.php';
-    $title = "Elements Page"; // this is for <title>
-    $page_title = "This is the elements page"; //this is for breadcrumbs if I want a custom title other than the default
+    require_once '../../private/initialize.php';
+    $title = "Components Page"; // this is for <title>
+    $page_title = "This is the components page"; //this is for breadcrumbs if I want a custom title other than the default
     $addCSS = ""; //custom CSS for this page only
     include_once(INCLUDES_PATH . '/site-header.php');
 ?>
@@ -15,18 +15,21 @@
         <div class="row">
             <div class="col-12 col-md-2 lorem-sidebar">
                 <div class="article-list-wrapper sticky-top">
-                    <span class="d-block font-weight-bold py-2">Elements</span>
+                    <span class="d-block font-weight-bold py-2">Components</span>
                 </div>
             </div>
             <div class="col-12 col-md-10">
-			    <?php include(ELEMENTS_PATH . '/images.php'); ?>
-			    <?php include(ELEMENTS_PATH . '/buttons.php'); ?>
-			    <?php include(ELEMENTS_PATH . '/lists.php'); ?>
-			    <?php include(ELEMENTS_PATH . '/labels.php'); ?>
-			    <?php include(ELEMENTS_PATH . '/inputs.php'); ?>
+			    <?php include('slick-carousel.php'); ?>
+			    <?php include('alerts.php'); ?>
+			    <?php include('cards.php'); ?>
+			    <?php include('jumbotron.php'); ?>
+			    <?php include('nav-bar.php'); ?>
             </div>
         </div>
     </div>
+
+
+
 </div>
 
 <?php include_once(INCLUDES_PATH . '/site-footer.php');

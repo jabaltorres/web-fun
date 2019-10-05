@@ -52,7 +52,7 @@ define("INCLUDES_PATH", PROJECT_PATH . '/includes');
 define("IMAGES_PATH", PUBLIC_PATH . '/images');
 define("BRAND_PATH", PROJECT_PATH . '/brand');
 define("BLOCKS_PATH", PROJECT_PATH . '/blocks');
-define("ELEMENTS_PATH", PROJECT_PATH . '/elements');
+define("ELEMENTS_PATH", PUBLIC_PATH . '/elements');
 define("COMPONENTS_PATH", PROJECT_PATH . '/components');
 define("INCL_PATH", PROJECT_PATH . '/incl');
 

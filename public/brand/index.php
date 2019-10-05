@@ -1,5 +1,5 @@
 <?php
-    require_once '../private/initialize.php';
+    require_once '../../private/initialize.php';
     $title = "Elements Page"; // this is for <title>
     $page_title = "This is the elements page"; //this is for breadcrumbs if I want a custom title other than the default
     $addCSS = ""; //custom CSS for this page only
@@ -19,10 +19,11 @@
                 </div>
             </div>
             <div class="col-12 col-md-10">
-			    <?php include(BRAND_PATH . '/colors.php'); ?>
-			    <?php include(BRAND_PATH . '/bg-test.php'); ?>
-			    <?php include(BRAND_PATH . '/typography.php'); ?>
-			    <?php include(BRAND_PATH . '/icons.php'); ?>
+<!--			    --><?php //include(BRAND_PATH . '/colors.php'); ?>
+			    <?php include('colors.php'); ?>
+			    <?php include('bg-test.php'); ?>
+			    <?php include('typography.php'); ?>
+			    <?php include('icons.php'); ?>
             </div>
         </div>
     </div>

@@ -1,8 +1,8 @@
 <?php
     $pages = [
-        ['id' => '1', 'position' => '1', 'visible' => '1', 'menu_name' => 'Brand', 'page_url' => 'public/brand.php'],
-        ['id' => '2', 'position' => '2', 'visible' => '1', 'menu_name' => 'Elements', 'page_url' => 'public/elements.php'],
-        ['id' => '3', 'position' => '3', 'visible' => '1', 'menu_name' => 'Components', 'page_url' => 'public/components.php'],
+        ['id' => '1', 'position' => '1', 'visible' => '1', 'menu_name' => 'Brand', 'page_url' => 'public/brand/index.php'],
+        ['id' => '2', 'position' => '2', 'visible' => '1', 'menu_name' => 'Elements', 'page_url' => 'public/elements/index.php'],
+        ['id' => '3', 'position' => '3', 'visible' => '1', 'menu_name' => 'Components', 'page_url' => 'public/components/index.php'],
         ['id' => '4', 'position' => '4', 'visible' => '1', 'menu_name' => 'Demos', 'page_url' => 'demos/index.php'],
     ];
 ?>
