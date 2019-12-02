@@ -26,6 +26,10 @@
 			<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
         </section>
 
+        <section class="js-append-something">
+
+        </section>
+
 		<?php //include(BLOCKS_PATH . '/github-gist.php'); ?>
     </div>
 
