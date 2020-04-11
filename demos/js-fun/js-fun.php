@@ -20,23 +20,21 @@
 		<?php include(INCLUDES_PATH . '/navigation.php'); ?>
 		<?php include('pop-up.php'); ?>
 
-	    <section class="js-playground">
-		    <div class="entry-content">
-			    <ul></ul>
-		    </div>
-	    </section>
-
-	    <section class="js-fun">
+        <section class="js-fun">
             <p class="lead">This page includes pop up functionality</p>
 
 			<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
         </section>
 
-        <section class="js-append-something">
-
+        <section class="js-playground">
+            <div class="entry-content">
+                <ul></ul>
+            </div>
         </section>
 
-
+        <section class="js-append-something">
+            <h3>This is from the getJSON function in apps.js</h3>
+        </section>
 
 		<?php //include(BLOCKS_PATH . '/github-gist.php'); ?>
     </div>

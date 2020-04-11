@@ -331,6 +331,7 @@ $(document).ready(function () {
 
 
             // using gist as a temporary bandaid
+            // This is used on the JS Fun page
             // https://jabaltorres.com/wp-content/themes/jt-altitude-pro/jt-data.json
             $.getJSON('https://gist.githubusercontent.com/capitalJT/1c7e9304cfb86ffa857c8081b6752366/raw/d2f9a86cc4f550c398c79a4733216cb1938045f9/jt-data.json', function(data) {
                 var items = [];
@@ -388,6 +389,7 @@ $(document).ready(function () {
             // Array example
             var numbers = [9,5,7,9,11,4,3,2,17];
             var mapResult = numbers.map(function(item, index, array){
+                console.log("The index: " + index);
                 return item * 2;
             });
 
@@ -467,8 +469,6 @@ $(document).ready(function () {
 
 
             // document.getElementById('jt-text-input').setAttribute("style", "color:red; border: 1px solid blue;");
-
-
 
 
             // Closures Example
@@ -559,33 +559,34 @@ function checkAge(age) {
 
 function myFullName(firstName, lastName) {
     var fullName = firstName + " " + lastName + " " + firstName;
-
+    console.log("The full name: " + fullName);
     return fullName;
 }
 
-function jayt() {
+
+// END - testing functions that return a value
+
+function jayt(jtFirstName, jtLastName) {
     // this is a test
-    var myName = myFullName("Jabal", "Torres");
+    var myName = myFullName(jtFirstName, jtLastName);
 
     // checkAge(34);
     var youngMessage = "still young";
     var oldMessage = "Old fogey still got it";
 
 
-    if (checkAge(37) == "adult") {
+    if (checkAge(33) == "adult") {
         console.log(youngMessage);
     } else {
         console.log(oldMessage);
     }
 
-    if (myName == "Jabal Torres Jabal") {
+    if (myName === "Jabal Torres Jabal") {
         console.log("True Indeed, Sir");
     } else {
         console.log("False False, Falsie");
     }
 
-    console.log(myName);
+    console.log("This is my name: " + myName);
     return true;
 }
-// END - testing functions that return a value
-

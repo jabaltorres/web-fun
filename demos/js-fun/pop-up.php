@@ -43,12 +43,12 @@
     <!-- #img-container is the container for the pop up ad -->
     <span id="img-container">
         <span id="close-btn">X</span>
-        <a href="http://jabaltorres.com/demos/web-fun" target="_blank"><img src="<?php echo $path . $img ?>" alt=""></a>
+        <a href="https://jabaltorres.com/demos/web-fun" target="_blank"><img src="<?php echo $path . $img ?>" alt=""></a>
     </span>
 </div>
 
 <script>
-    var AvilPopUp = AvilPopUp || {
+    const fiveTwoFivePopUp = fiveTwoFivePopUp || {
         // Init function sets the stage. 
         // Should probably declare all global variables here.
         init: function() {
@@ -131,14 +131,13 @@
             }
 
             // These are the functions that get called within the Init
-
             checkCookie();
-            AvilPopUp.popUpConsole();
+            fiveTwoFivePopUp.popUpConsole();
         },
         popUpConsole: function(){
-            var allCookies = document.cookie;
+            let allCookies = document.cookie;
             console.log("All cookies: " + allCookies)
         }
     };
-    AvilPopUp.init();
+    fiveTwoFivePopUp.init();
 </script>
