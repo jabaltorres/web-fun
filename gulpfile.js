@@ -1,153 +1,177 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync');
-var sass        = require('gulp-sass');
-var prefix      = require('gulp-autoprefixer');
-var shell       = require('gulp-shell');
+const gulp       = require("gulp"),
+    sass         = require("gulp-sass"),
+    postcss      = require("gulp-postcss"),
+    autoprefixer = require("autoprefixer"),
+    cssnano      = require("cssnano"),
+    log          = require('fancy-log'),
+    concat       = require('gulp-concat'),
+    rename       = require('gulp-rename'),
+    uglify       = require('gulp-uglify'),
+    jshint       = require("gulp-jshint"),
+    sourcemaps   = require("gulp-sourcemaps"),
+    imagemin     = require('gulp-imagemin'),
+    browserSync  = require("browser-sync").create();
 
-var order       = require("gulp-order");
-var concat      = require('gulp-concat');  
-var rename      = require('gulp-rename');  
-var uglify      = require('gulp-uglify');
-var jshint      = require("gulp-jshint");
-var sourcemaps  = require('gulp-sourcemaps');
 
-var svgSprite   = require("gulp-svg-sprites");
-var filter      = require('gulp-filter');
-var svg2png     = require('gulp-svg2png');
+const { series, parallel } = require('gulp');
+
+
+let paths = {
+    styles: {
+        // By using styles/**/*.sass we're telling gulp to check all folders for any sass file
+        src: "sass/**/*.scss",
+        // Compiled files will end up in whichever folder it's found in (partials are not compiled)
+        dest: "css"
+    },
+    scripts:{
+        // src: "js/**/*.js",
+        src: [
+            "js/vendor/jquery-3.2.1.min.js",
+            "js/vendor/modernizr-3.5.0.min.js",
+            "js/vendor/mustache-2.3.0.min.js",
+            "js/vendor/bootstrap.js",
+            "js/vendor/slick.min.js",
+            "js/vendor/spin.min.js",
+            "js/plugins.js",
+            "js/app.js",
+        ],
+        dest: "dist/scripts"
+    },
+    maps:{
+        dest: "dist/maps"
+    },
+    images:{
+        src: "public/images/*",
+        dest: "public/images"
+    }
+
+    // Easily add additional paths
+    // ,php: {
+    //  src: '/**/*.php',
+    //  dest: '...'
+    // }
+};
+
 
 /**
- * @task sprites
- * Create SVG sprites or compile to <symbols>
- * https://github.com/shakyShane/gulp-svg-sprites
- * 
- * required vars: svgSprite, filter, svg2png
-
+ * @task defaultTask
+ * Compile files from scss src, run postcss, write sourcemap, send to dest, and refresh browser
  */
+function defaultTask(cb) {
+    // place code for your default task here
+    log('Gulp Running!');
+    cb();
+    watch(); // Setting gulp's default task to watch
+}
 
-gulp.task('sprites', function () {
-  return gulp.src('images/svg/icons/*.svg')
-    .pipe(svgSprite({
-      baseSize: 16,
-      svgPath: "../images/svg/ai-svg-sprite.svg",
-      cssFile: "../sass/_svg-icon-sprite.scss",
-      svg: {
-          sprite: "svg/ai-svg-sprite.svg"
-      },
-      preview: {
-          sprite: "svg/svg-test-page.html"
-          // sprite: "false"
-      }
-    }))
-    .pipe(gulp.dest("images"))
-    .pipe(filter("**/*.svg"))  // Filter out everything except the SVG file
-    .pipe(svg2png())
-    .pipe(gulp.dest("images"));
-});
 
 /**
- * @task sass
- * Compile files from scss
+ * @task style
+ * Compile files from scss src, run postcss, write sourcemap, send to dest, and refresh browser
  */
-gulp.task('sass', function () {
-  return gulp.src('sass/style.scss') // the source .scss file
-  .pipe(sourcemaps.init())
-  .pipe(sass().on('error', sass.logError)) // pass the file through gulp-sass
-  .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true })) // pass the file through autoprefixer
-  .pipe(sourcemaps.write())
-  .pipe(gulp.dest('css')) // output .css file to css folder
-  .pipe(browserSync.reload({stream:true})); // reload the stream
-});
+function style() {
+    return (
+        gulp
+            .src(paths.styles.src)
+            .pipe(sourcemaps.init())
+            .pipe(sass())
+            .on("error", sass.logError)
+            .pipe(postcss([autoprefixer(), cssnano()]))
+            .pipe(sourcemaps.write(paths.maps.dest))
+            .pipe(gulp.dest(paths.styles.dest))
+            // Add browsersync stream pipe after compilation
+            .pipe(browserSync.stream())
+    );
+}
+
+
+/**
+ * @task minify
+ * Minify PNG, JPEG, GIF and SVG images with imagemin
+ */
+function imageminify() {
+    return (
+        gulp
+            .src(paths.images.src)
+            .pipe(imagemin([
+                imagemin.gifsicle({interlaced: true}),
+                imagemin.jpegtran({progressive: true}),
+                imagemin.optipng({optimizationLevel: 5}),
+                imagemin.svgo({
+                    plugins: [
+                        {removeViewBox: true},
+                        {cleanupIDs: false}
+                    ]
+                })
+            ]))
+            .pipe(gulp.dest(paths.images.dest))
+    );
+}
+
+
+/**
+ * @task lint
+ * Detects errors and potential problems in JavaScript code
+ */
+function lint() {
+    return (
+        gulp.src(paths.scripts.src)
+            .pipe(jshint("js/.jshintrc"))
+            .pipe(jshint.reporter("jshint-stylish"))
+    );
+
+}
 
 
 /**
  * @task scripts
  * Concatenate, minify, and send scripts
+ * `scripts` depends on `lint`
  */
-var jsFiles = 'js/**/*.js',  
-    jsDest = 'dist/scripts';
+function scripts() {
+    return (
+        gulp.src(paths.scripts.src)
+            .pipe(sourcemaps.init())
+            .pipe(concat('app.js'))
+            .pipe(gulp.dest(paths.scripts.dest))
+            .pipe(rename('scripts.min.js'))
+            .pipe(uglify().on('error', function(e){
+                console.log(e);
+            }))
+            .pipe(sourcemaps.write(paths.maps.dest))
+            .pipe(gulp.dest(paths.scripts.dest))
+            .pipe(browserSync.stream())
+            .on('end', function(){ log('Scripts Done!'); })
+    );
+}
 
-gulp.task('scripts', function() {  
-  return gulp.src(jsFiles)
-    .pipe(sourcemaps.init())
-    .pipe(order([
-        "vendor/jquery-3.2.1.min.js",
-        "vendor/modernizr-3.5.0.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js",
-        "vendor/spin.min.js",
-        "vendor/mustache-2.3.0.min.js",
-        "vendor/slick.min.js",
-        "plugins.js",
-        "app.js"
-    ]))
-    .pipe(concat('scripts.js'))
-    .pipe(gulp.dest(jsDest))
-    .pipe(rename('scripts.min.js'))
-    // .pipe(uglify())
-    .pipe(uglify().on('error', function(e){
-      console.log(e);
-    }))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(jsDest));
-});
 
-/**
- * @task lint
- * Concatenate, minify, and send scripts
- */
-gulp.task("lint", function() {
-  // gulp.src("assets/js/**/*.js")
-  gulp.src("js/app.js")
-    // .pipe(jshint())
-    .pipe(jshint("js/.jshintrc"))
-    // .pipe(jshint.reporter("default"));
-    .pipe(jshint.reporter("jshint-stylish"));
-});
+// Add browsersync initialization at the start of the watch task
+// We don't have to expose the reload function
+// It's currently only useful in other functions
+function watch() {
+    browserSync.init({
+        // proxy: "adaptive.dev.dd:8083"
+        proxy: "http://web-fun.test/"
+    });
+    gulp.watch(paths.styles.src, style);
+    gulp.watch(paths.scripts.src, series(lint, scripts));
+    // We should tell gulp which files to watch to trigger the reload
+    // This can be html or whatever you're using to develop your website
+    // Note -- you can obviously add the path to the Paths object
+    // gulp.watch("path/to/html/*.html", reload);
+    log('Watch function completed');
+}
 
 
 /**
- * @task reload
- * Refresh the page after clearing cache
+ * Default test task, running just `gulp` will
+ * watch Sass files, compile changes, update sourcemaps, send compiled CSS files to their dest and launch/refresh Browsersync.
+ * watch JS files, lint and report errors, concantinate, minify, report errors (again), update sourcemaps, send compiled JS files to their dest and launch/refresh Browsersync.
  */
-gulp.task('reload', function () {
-  browserSync.reload();
-});
+exports.default = defaultTask;
 
-
-/**
- * @task watch
- * Watch scss files for changes & recompile
- * Clear cache when Drupal related files are changed
- */
-gulp.task('watch', function () {
-  gulp.watch(['sass/*.scss', 'sass/**/*.scss'], ['sass']);
-  gulp.watch(['sass/*.scss', 'sass/**/*.scss']).on('change', browserSync.reload);
-
-  gulp.watch(['js/*.js', 'js/app.js'], ['scripts']);
-  gulp.watch(['js/*.js', 'js/app.js']).on('change', browserSync.reload);
-  // gulp.watch('**/*.{php,inc,info}',['reload']);
-});
-
-
-/**
- * Launch the Server
- */
-gulp.task('browser-sync', ['sass'], function() {
-  browserSync.init({
-    // Change as required
-    proxy: "web-fun.test",
-    socket: {
-      // For local development only use the default Browsersync local URL.
-      domain: 'localhost:3000'
-      // For external development (e.g on a mobile or tablet) use an external URL.
-      // You will need to update this to whatever BS tells you is the external URL when you run Gulp.
-      //domain: '192.168.0.13:3000'
-    }
-  });
-});
-
-
-/**
- * Default task, running just `gulp` will 
- * compile Sass files, launch Browsersync & watch files.
- */
-gulp.task('default', ['browser-sync', 'watch']);
+// Function are exported to be public and can be run with the `gulp` command.
+exports.watch = watch;
+exports.imageminify = imageminify;
+exports.scripts = series(lint, scripts);

@@ -81,7 +81,7 @@ $(document).ready(function () {
 
     }
 
-    // This is displayed on the `/demos/host-info.php` page
+    // This is displayed on the /demos/host-info.php page
     if ($("#host-info").length){
         $("<div>Pathname: " + pathname + "</div>").appendTo("#host-info");
         $("<div>Location: " + location + "</div>").appendTo("#host-info");
@@ -228,7 +228,7 @@ $(document).ready(function () {
 
 
 (function($) {
-    'use strict';
+    // 'use strict';
 
     // This is being used on the heros demo pages
     $(document).ready(function() {
@@ -254,7 +254,7 @@ $(document).ready(function () {
 
 
 (function($) {
-    'use strict';
+    // 'use strict';
 
     // Comment
     $(document).ready(function() {
@@ -362,8 +362,6 @@ $(document).ready(function () {
             });
 
 
-
-
             // $('#menu-primary-nav a').on('click',function (e) {
             //     e.preventDefault();
             //     var target = this.hash;
@@ -377,7 +375,6 @@ $(document).ready(function () {
             // });
 
 
-
             var sum;
             function add(num1, num2){
                 var sum = num1 + num2;
@@ -389,20 +386,20 @@ $(document).ready(function () {
 
 
             // Array example
-            var numbers = [1,2,3,4,5,4,3,2,1];
+            var numbers = [9,5,7,9,11,4,3,2,17];
             var mapResult = numbers.map(function(item, index, array){
                 return item * 2;
             });
 
-            console.log(`The map result: ${mapResult}`);
+            console.log("The map result: " + mapResult);
 
             numbers.forEach(function(item, index, array){
-                let double = item * 2;
-                console.log(`daily double: ${double}`);
+                var double = item * 2;
+                console.log("daily double: " + double);
                 // console.log('<li>' + item + '<\/li>');
 
                 if (double === 10){
-                    console.log("Bingo Bango!");
+                    console.log("Bingo Jango!");
                 }
 
                 if ($('.js-playground').length){
@@ -541,3 +538,54 @@ $(document).ready(function () {
     });
 
 })(jQuery);
+
+
+
+// Start - testing functions that return a value
+// This was a mental blocker for me. I've just learned that functions can only return one value
+function checkAge(age) {
+    var ageMessage;
+    var ageGroup;
+    if (age > 35) {
+        ageMessage = "Dang, you are an old man";
+        ageGroup = "senior";
+    } else {
+        ageMessage = "Hey, young man";
+        ageGroup = "adult";
+    }
+    console.log(ageMessage);
+    return ageGroup;
+}
+
+function myFullName(firstName, lastName) {
+    var fullName = firstName + " " + lastName + " " + firstName;
+
+    return fullName;
+}
+
+function jayt() {
+    // this is a test
+    var myName = myFullName("Jabal", "Torres");
+
+    // checkAge(34);
+    var youngMessage = "still young";
+    var oldMessage = "Old fogey still got it";
+
+
+    if (checkAge(37) == "adult") {
+        console.log(youngMessage);
+    } else {
+        console.log(oldMessage);
+    }
+
+    if (myName == "Jabal Torres Jabal") {
+        console.log("True Indeed, Sir");
+    } else {
+        console.log("False False, Falsie");
+    }
+
+    console.log(myName);
+    return true;
+}
+// END - testing functions that return a value
+

@@ -9,7 +9,7 @@
         </footer>
     </div>
 
-    <script src="<?php echo $url; ?>/dist/scripts/scripts.js"></script>
+    <script src="<?php echo $url; ?>/dist/scripts/scripts.min.js"></script>
 
   </body>
 </html>

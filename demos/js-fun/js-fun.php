@@ -20,7 +20,13 @@
 		<?php include(INCLUDES_PATH . '/navigation.php'); ?>
 		<?php include('pop-up.php'); ?>
 
-        <section class="js-fun">
+	    <section class="js-playground">
+		    <div class="entry-content">
+			    <ul></ul>
+		    </div>
+	    </section>
+
+	    <section class="js-fun">
             <p class="lead">This page includes pop up functionality</p>
 
 			<?php include_once(INCLUDES_PATH . '/headline-page.php');?>
@@ -30,11 +36,7 @@
 
         </section>
 
-        <section class="js-playground">
-            <div class="entry-content">
-                <ul></ul>
-            </div>
-        </section>
+
 
 		<?php //include(BLOCKS_PATH . '/github-gist.php'); ?>
     </div>
