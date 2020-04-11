@@ -27,42 +27,42 @@ $(document).ready(function () {
         // Using Reg Ajax
         console.log(" div with id of color-wrapper is indeed present");
         $.ajax({
-          url: '../data/list.json',
-          dataType: 'json',
-          type: 'get',
-          cache: false,
-          success: function(data){
-            $(data.articles).each(function(index,value){
-              var $articleImage = "<img class=\"image\" src=\"" + value.imgUrl + "\">";
-              var $photoCredit = "<p class=\"photoCredit\">Photo Credit: " + value.photoCredit + "</p>";
-              var $articleTitle = "<h2 class=\"title\">" + value.title + "</h2>";
-              var $articleAuthor = "<p class=\"author\">By: " + value.author + "</p>";
-              var $articleDate = "<p class=\"date\">" + value.date + "</p>";
-              var $articleSummary = "<p class=\"summary\">" + value.summary + "</p>";
+            url: '../data/list.json',
+            dataType: 'json',
+            type: 'get',
+            cache: false,
+            success: function(data){
+                $(data.articles).each(function(index,value){
+                    var $articleImage = "<img class=\"image\" src=\"" + value.imgUrl + "\">";
+                    var $photoCredit = "<p class=\"photoCredit\">Photo Credit: " + value.photoCredit + "</p>";
+                    var $articleTitle = "<h2 class=\"title\">" + value.title + "</h2>";
+                    var $articleAuthor = "<p class=\"author\">By: " + value.author + "</p>";
+                    var $articleDate = "<p class=\"date\">" + value.date + "</p>";
+                    var $articleSummary = "<p class=\"summary\">" + value.summary + "</p>";
 
-              var totalArticle = "<article id=" + value.id + " class=\"article\"><span>" +
-                  $articleImage +
-                  $photoCredit +
-                  $articleTitle +
-                  $articleAuthor +
-                  $articleDate +
-                  $articleSummary + "</span></article>";
+                    var totalArticle = "<article id=" + value.id + " class=\"article\"><span>" +
+                        $articleImage +
+                        $photoCredit +
+                        $articleTitle +
+                        $articleAuthor +
+                        $articleDate +
+                        $articleSummary + "</span></article>";
 
-              // console.log("The value", value);
-              // console.log(index);
+                    // console.log("The value", value);
+                    // console.log(index);
 
-              setTimeout(function(){
-                console.log("the number", index);
-                // $(totalArticle).appendTo("#image-wrapper").fadeIn(200);
-                $(totalArticle).appendTo("#image-wrapper").fadeIn(200);
-              }, 200 * index);
-            });
-          },
-          statusCode: {
-            404: function() {
-              console.log("page not found");
+                    setTimeout(function(){
+                        console.log("the number", index);
+                        // $(totalArticle).appendTo("#image-wrapper").fadeIn(200);
+                        $(totalArticle).appendTo("#image-wrapper").fadeIn(200);
+                    }, 200 * index);
+                });
+            },
+            statusCode: {
+                404: function() {
+                    console.log("page not found");
+                }
             }
-          }
         });
     }
 
@@ -387,23 +387,28 @@ $(document).ready(function () {
             var result = add(12,23);
             console.log('two numbers added together: ' + result);
 
+
+            // Array example
             var numbers = [1,2,3,4,5,4,3,2,1];
             var mapResult = numbers.map(function(item, index, array){
                 return item * 2;
             });
 
-            console.log(mapResult);
+            console.log(`The map result: ${mapResult}`);
 
             numbers.forEach(function(item, index, array){
-                console.log(item * 2);
+                let double = item * 2;
+                console.log(`daily double: ${double}`);
                 // console.log('<li>' + item + '<\/li>');
 
+                if (double === 10){
+                    console.log("Bingo Bango!");
+                }
+
                 if ($('.js-playground').length){
-                    $('.entry-content').append('<li>' + item + '<\/li>');
+                    $('.entry-content ul').append('<li>' + item + '<\/li>');
                 }
             });
-
-
 
 
             function jtCreateInput() {

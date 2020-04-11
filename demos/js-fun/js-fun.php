@@ -4,7 +4,7 @@
     $title = "JS Fun";
 
     // This is for breadcrumbs if I want a custom title other than the default
-    $page_title = "Javascript playground";
+    $page_heading = "Javascript playground";
 
     // This is the subheading
     $page_subheading = "Make your own scripts";
@@ -28,6 +28,12 @@
 
         <section class="js-append-something">
 
+        </section>
+
+        <section class="js-playground">
+            <div class="entry-content">
+                <ul></ul>
+            </div>
         </section>
 
 		<?php //include(BLOCKS_PATH . '/github-gist.php'); ?>
