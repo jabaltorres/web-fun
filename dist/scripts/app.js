@@ -5006,8 +5006,6 @@ $(document).ready(function () {
             });
 
 
-
-
             // $(window).scroll(function(){
             // 	var stickyElement = $('#custom_html-2'),
             //        stickytop = stickyElement.offset().top,
