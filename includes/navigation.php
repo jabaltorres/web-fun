@@ -8,25 +8,7 @@
 ?>
 
 <nav class="main-navigation">
-    <?php
-        foreach ($pages as $page){ ?>
-            <li>
-                <a class="d-inline-block" href="<?php echo $url . '/' . h($page['page_url']); ?>" alt="" title="" target=""><?php echo h($page['menu_name']); ?></a>
-            </li>
-        <?php }
-    ?>
+    <?php foreach ($pages as $page): ?>
+        <li><a class="d-inline-block" href="<?php echo $url . '/' . h($page['page_url']); ?>" alt="" title="" target=""><?php echo h($page['menu_name']); ?></a></li>
+    <?php endforeach; ?>
 </nav>
-
-<!--<nav class="main-navigation">-->
-<!--	--><?php
-//		foreach ($pages as $page){ ?>
-<!--            <li>-->
-<!--                <div class="d-inline-block"> --><?php //echo h($page['id']); ?><!-- </div>-->
-<!--                <div class="d-inline-block"> --><?php //echo h($page['position']); ?><!-- </div>-->
-<!--                <div class="d-inline-block"> --><?php //echo h($page['visible']); ?><!-- </div>-->
-<!--                <div class="d-inline-block"> --><?php //echo h($page['menu_name']); ?><!-- </div>-->
-<!--                <div class="d-inline-block"> --><?php //echo h($page['page_url']); ?><!-- </div>-->
-<!--            </li>-->
-<!--		--><?php //}
-//	?>
-<!--</nav>-->
