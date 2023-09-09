@@ -35,7 +35,7 @@ $(document).ready(function () {
                 $(data.articles).each(function(index,value){
                     var $articleImage = "<img class=\"image\" src=\"" + value.imgUrl + "\">";
                     var $photoCredit = "<p class=\"photoCredit\">Photo Credit: " + value.photoCredit + "</p>";
-                    var $articleTitle = "<h2 class=\"title\">" + value.title + "</h2>";
+                    var $articvaritle = "<h2 class=\"title\">" + value.title + "</h2>";
                     var $articleAuthor = "<p class=\"author\">By: " + value.author + "</p>";
                     var $articleDate = "<p class=\"date\">" + value.date + "</p>";
                     var $articleSummary = "<p class=\"summary\">" + value.summary + "</p>";
@@ -43,7 +43,7 @@ $(document).ready(function () {
                     var totalArticle = "<article id=" + value.id + " class=\"article\"><span>" +
                         $articleImage +
                         $photoCredit +
-                        $articleTitle +
+                        $articvaritle +
                         $articleAuthor +
                         $articleDate +
                         $articleSummary + "</span></article>";
@@ -66,40 +66,40 @@ $(document).ready(function () {
         });
     }
 
-    if ($(".host-page").length){
-        // console.log("host page");
+    let pathname = window.location.pathname;
+    let location = window.location;
+    let host = window.location.host;
+    let origin = window.location.origin;
 
-        var pathname = window.location.pathname;
-        var location = window.location;
-        var host = window.location.host;
-        var origin = window.location.origin;
-
+    // checks if the pathname is equal to /demos/host-info.php
+    if (pathname === "/demos/host-info.php"){
         console.log('the pathname: ', pathname);
         console.log('the location: ', location);
         console.log('the host: ', host);
         console.log('the origin: ', origin);
-
+    } else {
+        console.log('You are NOT on the host-info.php page');
     }
 
     // This is displayed on the /demos/host-info.php page
     if ($("#host-info").length){
-        $("<div>Pathname: " + pathname + "</div>").appendTo("#host-info");
+        $("<div>Pathnames: " + pathname + "</div>").appendTo("#host-info");
         $("<div>Location: " + location + "</div>").appendTo("#host-info");
         $("<div>Host: " + host + "</div>").appendTo("#host-info");
         $("<div>Origin: " + origin + "</div>").appendTo("#host-info");
     }
 
-    if ($(".js-fun").length){
-        console.log("JS Fun Page");
-    }
-
     // The bit of code is being used on http://localhost:3000/demos/js-objects.php
-    var jToolTip = $(".jToolTip");
+    const jToolTip = $(".jToolTip");
+    const pTag = document.createElement("p");
+    const innerSpan = document.createElement("span");
 
-    var pTag = document.createElement("p");
-    var innerSpan = document.createElement("span");
+    // create a variable that sets the initial scroll top value
+    var initScrollTopValue = 0;
+
     pTag.className = "info p-4";
     pTag.innerHTML = "Window scroll top: ";
+    pTag.innerHTML = `Window scroll top: <span>${initScrollTopValue}</span>`;
     pTag.appendChild(innerSpan);
 
     jToolTip.append(pTag);
@@ -110,16 +110,14 @@ $(document).ready(function () {
         $(".info span").text(scrollTop + "px");
     });
 
-
     // Dynamic sidebar on components page
     if ($('.lorem-sidebar').length){
         $('.article-list-wrapper').append('<ul id="rendered-sections-list" class="mb-0"></ul>');
 
-        $( ".component" ).each(function( index ) {
+        $( ".component" ).each(function() {
             var theText = $(this).find('.block-headline').text();
             var theId = $(this).attr('id');
             // var theSbt = $(this).parent().data('sidebarText');
-
 
             // if (theSbt){
             //     if (!$(this).parent().hasClass('article-list-item')){
@@ -226,7 +224,6 @@ $(document).ready(function () {
     });
 });
 
-
 (function($) {
     // 'use strict';
 
@@ -252,7 +249,6 @@ $(document).ready(function () {
 
 })(jQuery);
 
-
 (function($) {
     // 'use strict';
 
@@ -263,7 +259,7 @@ $(document).ready(function () {
 
             // Vidyard Test
 
-            var vidyardVideos = {
+            let vidyardVideos = {
                 video1: {
                     uuid: "Rh2oJsa3HDj1hVPfKDCdeg",
                     hash: "#reports-demo",
@@ -320,14 +316,10 @@ $(document).ready(function () {
             }
 
 
-
-
             // Get header height and use it to set the margin top for another element
             // var header_height = $('.main-header').outerHeight();
             // console.log(header_height);
             // $(".main-navigation").css("margin-top", header_height);
-
-
 
 
             // using gist as a temporary bandaid
@@ -349,10 +341,10 @@ $(document).ready(function () {
                         // var clientName = value.client;
                         var description = value.description;
                         var role = value.role;
-                        var imgSrc = value.imgSrc;
-                        var linkHref = value.linkHref;
+                        // var imgSrc = value.imgSrc;
+                        // var linkHref = value.linkHref;
 
-                        var output = "<li><a href='"+ linkHref +"'"+ aTarget +"><div class=\"text\"><h3>" + description +"</h3><span class=\"role\">"+ role +"</span></div><img src='"+ imgSrc +"'><span class=\"overlay\"></span></a></li>";
+                        var output = "<li><div class='text mb-3'><div>" + description +"</div><span class=\"role\">"+ role +"</span></div></li>";
 
                         items.push( output );
 
@@ -376,41 +368,47 @@ $(document).ready(function () {
             // });
 
 
-            var sum;
-            function add(num1, num2){
-                var sum = num1 + num2;
-                return sum;
-            }
+            /**
+             * Add two numbers together
+             * @param num1
+             * @param num2
+             * @returns {number}
+             */
+            const add = (num1, num2) => {
+                return num1 + num2;
+            };
 
-            var result = add(12,23);
+            let result = add(12,23);
             console.log('two numbers added together: ' + result);
 
 
             // Array example
-            var numbers = [9,5,7,9,11,4,3,2,17];
-            var mapResult = numbers.map(function(item, index, array){
-                console.log("The index: " + index);
-                return item * 2;
-            });
+            let numbers = [9,5,7,9,11,4,3,2,17];
 
-            console.log("The map result: " + mapResult);
+            // Map example
+            // const mapResult = numbers.map(function(item, index, array){
+            //     console.log("The index: " + index);
+            //     console.log(`This is the array: ${array}`);
+            //     return item * 2;
+            // });
+            // console.log("The map result: " + mapResult);
 
-            numbers.forEach(function(item, index, array){
-                var double = item * 2;
-                console.log("daily double: " + double);
-                // console.log('<li>' + item + '<\/li>');
+            // ForEach example
+            numbers.forEach(function(element, index){
+                let double = element * 2;
+                console.log(`The index: ${index}, and the doubled value: ${double}`);
 
                 if (double === 10){
                     console.log("Bingo Jango!");
                 }
 
                 if ($('.js-playground').length){
-                    $('.entry-content ul').append('<li>' + item + '<\/li>');
+                    $('.entry-content ul').append('<li>' + element + '<\/li>');
                 }
             });
 
 
-            function jtCreateInput() {
+            const jtCreateInput = function() {
                 var x = document.createElement("INPUT");
                 x.setAttribute("id", "jt-text-input");
                 x.setAttribute("type", "text");
@@ -421,16 +419,16 @@ $(document).ready(function () {
                 if ($('.js-playground').length){
                     $('.entry-content').append(x);
                 }
-            }
+            };
 
-            function addElement() {
+            const addElement = function() {
                 // create a new div element
                 var newDiv = document.createElement("div");
                 newDiv.setAttribute('id', 'new-div');
                 newDiv.setAttribute('class', 'new-class');
 
                 // and give it some content
-                var newContent = document.createTextNode("Hi there and greetings!");
+                var newContent = document.createTextNode("Hi there, and greetings!");
 
                 // add the text node to the newly created div
                 newDiv.appendChild(newContent);
@@ -440,7 +438,7 @@ $(document).ready(function () {
                 if ($('.js-playground').length) {
                     $('.entry-content').append(newDiv);
                 }
-            }
+            };
 
             addElement();
             jtCreateInput();
@@ -448,7 +446,7 @@ $(document).ready(function () {
 
             // What to do when enter key is pressed
             $("#jt-text-input").on("keydown",function search(e) {
-                if (e.keyCode == 13) {
+                if (e.key === "Enter") {
                     var thisVal = $(this).val();
                     console.log( 'This value: ' + thisVal );
 
@@ -467,15 +465,13 @@ $(document).ready(function () {
             //
             // getWidth();
 
-
             // document.getElementById('jt-text-input').setAttribute("style", "color:red; border: 1px solid blue;");
 
-
             // Closures Example
-            function doSomeMath(a,b){
+            const doSomeMath = function(a,b){
                 // var a = 12;
                 // var b = 32;
-                var c = 3;
+                let c = 3;
 
                 function multiply(){
                     var result = a * b / c;
@@ -484,19 +480,12 @@ $(document).ready(function () {
 
                 console.log("Some math was done");
                 return multiply;
-            }
+            };
 
             var theResult = doSomeMath(12,3);
 
             console.log( 'This is the result of the doSomeMath function: ' + theResult() );
 
-
-
-            // <style>
-            // .hide-me{
-            //         opacity: 0;
-            //     }
-            // </style>
 
             /* Every time the window is scrolled ... */
             $(window).scroll( function(){
@@ -507,7 +496,7 @@ $(document).ready(function () {
                     var bottom_of_object = $(this).position().top + $(this).outerHeight();
                     var bottom_of_window = $(window).scrollTop() + $(window).height();
 
-                    /* If the object is completely visible in the window, fade it in */
+                    /* If the object is compvarely visible in the window, fade it in */
                     if( bottom_of_window > bottom_of_object ){
                         $(this).animate({'opacity':'1'},1000);
                     }
@@ -537,54 +526,42 @@ $(document).ready(function () {
 
 })(jQuery);
 
+// Note: functions can only return one value
+const checkAge = function(age) {
 
+    // check if age is a type of number
+    if (typeof age !== "number") {
+        console.log("You did not enter a number");
+        return false;
+    }
 
-// Start - testing functions that return a value
-// This was a mental blocker for me. I've just learned that functions can only return one value
-function checkAge(age) {
-    var ageMessage;
-    var ageGroup;
+    let ageMessage;
+    let ageGroup;
     if (age > 35) {
-        ageMessage = "Dang, you are an old man";
+        ageMessage = "Dang, you are a wise old man!";
         ageGroup = "senior";
     } else {
-        ageMessage = "Hey, young man";
+        ageMessage = "Hey, young man@!";
         ageGroup = "adult";
     }
     console.log(ageMessage);
     return ageGroup;
-}
+};
 
-function myFullName(firstName, lastName) {
-    var fullName = firstName + " " + lastName + " " + firstName;
-    console.log("The full name: " + fullName);
+/**
+ * @description This function will return the full name
+ * @param firstName
+ * @param lastName
+ * @returns {string}
+ */
+const myFullName = function(firstName, lastName) {
+    let fullName = firstName + " " + lastName;
+    // console.log("The full name: " + fullName);
     return fullName;
-}
+};
 
-
-// END - testing functions that return a value
-
-function jayt(jtFirstName, jtLastName) {
-    // this is a test
-    var myName = myFullName(jtFirstName, jtLastName);
-
-    // checkAge(34);
-    var youngMessage = "still young";
-    var oldMessage = "Old fogey still got it";
-
-
-    if (checkAge(33) == "adult") {
-        console.log(youngMessage);
-    } else {
-        console.log(oldMessage);
-    }
-
-    if (myName === "Jabal Torres Jabal") {
-        console.log("True Indeed, Sir");
-    } else {
-        console.log("False False, Falsie");
-    }
-
-    console.log("This is my name: " + myName);
-    return true;
-}
+// create immediately invoked function expression
+(function(){
+    checkAge(12);
+    myFullName("Jabal", "Torres");
+})();
