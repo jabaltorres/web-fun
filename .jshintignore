@@ -1,1 +1,6 @@
-js/slick.min.js
+js/vendor/bootstrap.js
+js/vendor/jquery-3.2.1.min.js
+js/vendor/modernizr-3.5.0.min.js
+js/vendor/mustache-2.3.0.min.js
+js/vendor/slick.min.js
+js/vendor/spin.min.js
