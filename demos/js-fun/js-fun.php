@@ -18,7 +18,8 @@
     <div class="container <?php echo $custom_class; ?>">
 		<?php include(INCLUDES_PATH . '/masthead.php'); ?>
 		<?php include(INCLUDES_PATH . '/navigation.php'); ?>
-		<?php include('pop-up.php'); ?>
+
+        <?php include('incl/pop-up.php'); ?>
 
         <section class="js-fun">
             <p class="lead">This page includes pop up functionality</p>
@@ -27,7 +28,27 @@
         </section>
 
         <section class="js-playground">
+            <div class="greeting-msg">
+                <?php
+                    // echo the time of day
+                    $time = date("H");
+                    if ($time < "12") {
+                        echo "Good morning";
+                    } elseif ($time >= "12" && $time < "17") {
+                        echo "Good afternoon";
+                    } elseif ($time >= "17" && $time < "19") {
+                        echo "Good evening";
+                    } elseif ($time >= "19") {
+                        echo "Good night";
+                    }
+                ?>
+            </div>
             <div class="entry-content">
+                <?php
+                    /**
+                     * This is just a comment to remind me that content gets rendered here
+                     */
+                ?>
                 <ul></ul>
             </div>
         </section>
@@ -40,3 +61,15 @@
     </div>
 
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>
+
+<script>
+	// this is an IIFE
+    (function () {
+	    // define variables
+	    let name = "John Doe";
+	    let age = 25;
+		console.log( name + " is " + age + " years old." );
+	    console.log('This is from the js-fun.php page');
+    })();
+</script>
+
