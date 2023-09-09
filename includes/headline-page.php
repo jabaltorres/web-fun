@@ -1,6 +1,10 @@
 <?php
-    if(!isset($page_heading)){ $page_heading = 'Default Page Heading';}
-    if(!isset($page_subheading)){ $page_subheading = 'Default Page Subheading';}
+if (!isset($page_heading)) {
+    $page_heading = 'Default Page Heading';
+}
+if (!isset($page_subheading)) {
+    $page_subheading = 'Default Page Subheading';
+}
 ?>
 
 <div class="page-headline mb-4">
