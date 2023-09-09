@@ -6,7 +6,7 @@ const gulp       = require("gulp"),
     log          = require('fancy-log'),
     concat       = require('gulp-concat'),
     rename       = require('gulp-rename'),
-    uglify       = require('gulp-uglify'),
+    terser       = require('gulp-terser');
     jshint       = require("gulp-jshint"),
     sourcemaps   = require("gulp-sourcemaps"),
     imagemin     = require('gulp-imagemin'),
@@ -135,11 +135,11 @@ function scripts() {
             .pipe(concat('app.js'))
             .pipe(gulp.dest(paths.scripts.dest))
             .pipe(rename('scripts.min.js'))
-            .pipe(uglify().on('error', function(e){
+            .pipe(terser().on('error', function(e){
                 console.log(e);
             }))
             .pipe(sourcemaps.write(paths.maps.dest))
-            .pipe(gulp.dest(paths.scripts.dest))
+            .pipe(gulp. dest(paths.scripts.dest))
             .pipe(browserSync.stream())
             .on('end', function(){ log('Scripts Done!'); })
     );
