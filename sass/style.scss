@@ -61,6 +61,7 @@ $secondary:     $yellow;
 @import "pages/demo-heroes";
 @import "pages/db-test-page";
 @import "pages/lorem-ipsum-page";
+@import "pages/page-js-fun";
 
 @import "slick-carousel";
 @import "svg-icon-sprite";
@@ -71,7 +72,7 @@ body{
 
 ul{
   padding-left:20px;
-  //@extend %margin-bottom;
+  @extend %margin-bottom;
 }
 
 p{
