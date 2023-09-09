@@ -14,11 +14,11 @@
     // Preliminaries
     include_once('../private/initialize.php');
 
-    if ( !is_logged_in() ) {
-        redirect_to('../public/contacts/login.php');
-    } else {
-        // Do nothing, let the rest of the page proceed
-    }
+//    if ( !is_logged_in() ) {
+//        redirect_to('../public/contacts/login.php');
+//    } else {
+//        // Do nothing, let the rest of the page proceed
+//    }
 
     include_once(INCLUDES_PATH . '/site-header.php');
 ?>
