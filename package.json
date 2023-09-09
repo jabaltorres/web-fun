@@ -1,22 +1,22 @@
 {
   "name": "sass-splash",
   "version": "0.0.1",
-  "description": "A custom Drupal 7 theme for Adaptive Insights",
+  "description": "A coding sandbox for Sass and Gulp",
   "main": "gulpfile.js",
   "devDependencies": {
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.29.3",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^5.1.0",
     "gulp-jshint": "^2.1.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^4.1.1",
     "gulp-shell": "^0.7.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-svg2png": "^2.0.2",
-    "gulp-uglify": "^3.0.2",
-    "jshint": "^2.12.0",
+    "gulp-terser": "^2.1.0",
+    "jshint": "^2.13.6",
     "jshint-stylish": "^2.2.1"
   },
   "scripts": {
@@ -25,11 +25,11 @@
   "author": "Jabal Torres",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.5.2",
-    "cssnano": "^4.1.10",
+    "bootstrap": "^4.6.2",
+    "cssnano": "^4.1.11",
     "gulp-imagemin": "^5.0.3",
     "gulp-postcss": "^8.0.0",
-    "jquery": "^3.5.1",
+    "jquery": "^3.7.1",
     "popper.js": "^1.15.0"
   }
 }
