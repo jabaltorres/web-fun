@@ -73,4 +73,63 @@ function display_session_message() {
   }
 }
 
+/*
+ * This function is used to check the time of day and echo a greeting
+ */
+function timeOfDayGreeting() {
+  $time = date("H");
+  $greeting = "";
+  if ($time < "12") {
+    $greeting = "Good Morning!";
+  } elseif ($time >= "12" && $time < "17") {
+    $greeting = "Good Afternoon!";
+  } elseif ($time >= "17" && $time < "19") {
+    $greeting = "Good Evening!";
+  } elseif ($time >= "19") {
+    $greeting = "Good Night!";
+  }
+  echo '<div class="greeting-msg mb-4">';
+  echo $greeting . "<br>";
+  echo "The time is " . date("h:i:sa") . "<br>";
+  echo '</div>';
+}
+
+// Helper function: Check for errors
+function check_for_error($error) {
+  $errorMessage = "An error has occurred.";
+  if ($error) {
+    echo $errorMessage;
+  }
+}
+
+// Helper function: remove the file extension from the file name
+function remove_file_extension($file) {
+  // file extension type
+  $fileExtension = ".php";
+  return str_replace($fileExtension, "", $file);
+}
+
+// Helper function: reverse an array
+function reverse_array($array) {
+  $newTempArray = array_reverse($array);
+
+  foreach ($newTempArray as $value) {
+    echo "This is the new template arry value: {$value}<br>";
+  }
+
+  // return $newTempArray;
+}
+
+function printArrayValues($array) {
+  $tempArray = array();
+
+  foreach ($array as $value) {
+    echo "Print Array Values: ". $value . "<br>";
+    array_push($tempArray, $value);
+  }
+
+  // reverse_array($tempArray);
+
+}
+
 ?>
