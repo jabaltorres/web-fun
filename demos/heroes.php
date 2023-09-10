@@ -121,31 +121,4 @@
     </div>
 </div>
 
-<script>
-    (function($) {
-        'use strict';
-
-        $(document).ready(function() {
-
-            if ($('.paragraph--type--hero-jt').length) {
-
-                var sameSize = function () {
-                    var elHeight = $(".hero-background-image-alt").height();
-                    $(".paragraph--type--hero-jt").height(elHeight);
-                };
-
-                $(window).on('resize', function() {
-                    sameSize();
-                });
-
-                sameSize();
-
-            }
-
-        });
-
-    })(jQuery);
-</script>
-
-
 <?php include_once(INCLUDES_PATH . '/site-footer.php');?>

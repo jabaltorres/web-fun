@@ -26,6 +26,7 @@
 
     <section>
         <ul class="menu list-unstyled">
+            <li><a href="js-fun/index.php">JS Fun</a></li>
             <li><a href="heroes.php">Heroes</a></li>
             <li><a href="<?php echo $url; ?>/public/contacts/index.php">Contacts</a></li>
             <li><a href="js-objects.php">JS Objects</a></li>
@@ -34,7 +35,6 @@
             <li><a href="lorem-ipsum.php">Lorem Ipsum</a></li>
             <li><a href="mustache.php">Mustache.js</a></li>
             <li><a href="forms/forms.php">Forms</a></li>
-            <li><a href="js-fun/js-fun.php">JS Fun</a></li>
         </ul>
     </section>
 
