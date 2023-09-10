@@ -21,44 +21,6 @@
                         <div>Just testing some things here!</div>
                         <?php
 
-                            // Helper function: Check for errors
-                            function check_for_error($error) {
-                                $errorMessage = "An error has occurred.";
-                                if ($error) {
-                                    echo $errorMessage;
-                                }
-                            }
-
-                            // Helper function: remove the file extension from the file name
-                            function remove_file_extension($file) {
-                                // file extension type
-                                $fileExtension = ".php";
-                                return str_replace($fileExtension, "", $file);
-                            }
-
-                            // Helper function: reverse an array
-                            function reverse_array($array) {
-                                $newTempArray = array_reverse($array);
-
-                                foreach ($newTempArray as $value) {
-                                    echo "This is the new template arry value: {$value}<br>";
-                                }
-
-                                // return $newTempArray;
-                            }
-
-                            function printArrayValues($array) {
-                                $tempArray = array();
-
-                                foreach ($array as $value) {
-                                    echo "Print Array Values: ". $value . "<br>";
-                                    array_push($tempArray, $value);
-                                }
-
-                                // reverse_array($tempArray);
-
-                            }
-
                             function output_php_files($directory) {
                                 // Check if the directory exists
                                 $directory = dir($directory);
@@ -102,11 +64,7 @@
 
                             $links = output_php_files("./posts");
 
-
-                            // Print the links
-                            echo implode("<br>", $links);
-
-                            echo 'This is the end of the php file.';
+//                            echo 'This is the end of the php file.';
                         ?>
 
 
