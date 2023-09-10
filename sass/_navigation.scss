@@ -9,10 +9,7 @@ nav.main-navigation{
     padding:20px;
     display: block;
     text-decoration: none;
-    &:hover{
-      //background-color: $color-shadow;
-      // background-color: red;
-    }
+    //&:hover{}
   }
   @include medium-screen{
     //height:56px;
@@ -38,5 +35,10 @@ nav.main-navigation{
     &:hover{
       color: $secondary;
     }
+    &.active{
+      color: $secondary;
+      text-decoration: underline;
+    }
   }
+
 }

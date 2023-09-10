@@ -8,7 +8,7 @@
 
 //TODO: Clean this shit up
 
-$white:    #fff !default;
+$white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
 $gray-300: #dee2e6 !default;
@@ -18,28 +18,28 @@ $gray-600: #6c757d !default;
 $gray-700: #495057 !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black:    #000 !default;
+$black: #000 !default;
 
-$blue:    #007bff !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #dc3545 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #FFC422;
-$green:   #28a745 !default;
-$teal:    #20c997 !default;
-$cyan:    #17a2b8 !default;
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #FFC422;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
 
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $gray-100 !default;
-$dark:          $gray-800 !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $yellow !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-800 !default;
 
-$primary:       $dark;
-$secondary:     $yellow;
+$primary: $dark;
+$secondary: $yellow;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -49,128 +49,123 @@ $secondary:     $yellow;
 @import "hero";
 @import "forms";
 
-@import "components/buttons";
-@import "components/flipper";
+@import "components/components";
 
-@import "templates/master-page-template";
+@import "templates/templates";
 
-@import "layouts/footer";
+@import "layouts/layouts";
 
-@import "pages/mustache-demo";
-@import "pages/demo-page";
-@import "pages/demo-heroes";
-@import "pages/db-test-page";
-@import "pages/lorem-ipsum-page";
-@import "pages/page-js-fun";
+@import "pages/pages";
 
 @import "slick-carousel";
 @import "svg-icon-sprite";
 
-body{
+body {
   font-family: 'Gudea', sans-serif;
 }
 
-ul{
-  padding-left:20px;
+ul {
+  padding-left: 20px;
   @extend %margin-bottom;
 }
 
-p{
+p {
   margin-bottom: 1.5em;
 }
 
-img{
-  width:100%;
-  height:auto;
+img {
+  width: 100%;
+  height: auto;
 }
 
-header{
+header {
   text-align: center;
   @extend %margin-bottom;
 }
 
-form{
+form {
   padding: $global-padding;
 }
 
-section{
-  border:solid thick $color-accent;
+section {
+  border: solid thick $color-accent;
   @extend %margin-bottom;
   padding: $global-padding;
-  hgroup, .hgroup{
+
+  hgroup, .hgroup {
     @extend %margin-bottom;
   }
-  h1{
-    margin-bottom: $global-margin / 2; 
+
+  h1 {
+    margin-bottom: $global-margin / 2;
   }
 }
 
-
-.close-btn{
+.close-btn {
   background-color: #ccc;
   padding: 0.5em 1em;
-  // position: absolute;
-  // top: 0;
-  // right: 0;
 }
 
-.site-name{
+.site-name {
   margin: 0;
   line-height: 1em;
 }
-.main-header{
+
+.main-header {
   padding-top: 25px;
-  a{
+
+  a {
     display: inline-block;
-    //padding:10px;
     margin-bottom: 10px;
   }
 }
 
-.swatches{
-  ul{
+.swatches {
+  ul {
     display: block;
   }
-  li{
+
+  li {
     display: block;
-    height:100px;
+    height: 100px;
     text-align: center;
-    list-style:none;
+    list-style: none;
     line-height: 100px;
   }
-  @include medium-screen{
-    li{
+
+  @include medium-screen {
+    li {
       display: inline-block;
       width: 140px;
     }
   }
 }
 
-
-article{
+article {
   display: block;
   margin: 0 auto;
   @extend %margin-bottom;
   padding: $global-padding;
   border: $global-border;
-  footer{
+
+  footer {
     border-top: $global-border;
   }
 }
 
-.maintainers{
-  li{
+.maintainers {
+  li {
     display: block;
     margin-bottom: 20px;
-    // background-color: red;
   }
 }
 
-.tagline{
+.tagline {
   color: black;
 }
-.email-db-list{
-  li{
+
+.email-db-list {
+  li {
     margin-bottom: 20px;
   }
 }
@@ -180,7 +175,8 @@ article{
   position: relative;
   color: $color-accent;
   text-decoration: none !important;
-  &:before{
+
+  &:before {
     content: "";
     position: absolute;
     width: 100%;
@@ -189,12 +185,13 @@ article{
     left: 0;
     background-color: #000;
     visibility: hidden;
-    @include scaleX( $val: 0 );
+    @include scaleX($val: 0);
     @extend %transition;
   }
-  &:hover:before{
+
+  &:hover:before {
     visibility: visible;
-    @include scaleX( $val: 1 );
+    @include scaleX($val: 1);
   }
 }
 
@@ -202,131 +199,125 @@ article{
 // Popup Styles
 // ============================================================
 
-#pop-up{
+#pop-up {
   position: fixed;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-  background-color: rgba(0,0,0,0.8);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 10000;
-  #close-btn{
+
+  #close-btn {
     position: absolute;
     display: inline-block;
-    top:0;
-    right:0;
-    background-color: rgba(0,0,0,0.8);
-    color:white;
-    width:35px;
-    height:35px;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 35px;
+    height: 35px;
     line-height: 35px;
     text-align: center;
     z-index: 999;
-    
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       background-color: black;
     }
   }
-  #img-container{
+
+  #img-container {
     box-sizing: border-box;
     position: absolute;
-    top:50%;
-    left:50%;
+    top: 50%;
+    left: 50%;
     margin-top: -60px; // horizontally centers
     margin-left: -60px;
   }
 
-  img{
+  img {
     // max-width: 250px;
     // max-width: 320px;
     height: auto;
   }
-  @include medium-screen{
-    #close-btn{
-      top:0;
-      right:0;
+
+  @include medium-screen {
+    #close-btn {
+      top: 0;
+      right: 0;
     }
-    // #img-container{
-    //   padding:0;
-      margin-top: -160px; // make look pretty
-      margin-left: -160px;
-    // }
-    img{
+    margin-top: -160px; // make look pretty
+    margin-left: -160px;
+    img {
       max-width: 320px;
     }
   }
-  @include small-screen-landscape{
-    #close-btn{
-      width:25px;
-      height:25px;
+  @include small-screen-landscape {
+    #close-btn {
+      width: 25px;
+      height: 25px;
       line-height: 25px;
-      top:0;
-      right:2px;
+      top: 0;
+      right: 2px;
     }
-    #img-container{
-      // border:solid thin black;
+    #img-container {
       margin-top: 0;
-      padding:0;
-      top:0;
-      // margin-left:-51px;
-      width:102px;
-      // height:174px;
-    }
-    img{
-      // width:100px;
+      padding: 0;
+      top: 0;
+      width: 102px;
     }
   }
 }
 
-.db-menu{
-  ul{
-    li{
+.db-menu {
+  ul {
+    li {
       display: inline-block;
     }
   }
 }
 
-.svg-icon-list{
-  li{
+.svg-icon-list {
+  li {
     display: inline-block;
     padding: 20px;
     border: $global-border;
   }
 }
 
-.card .fas{
+.card .fas {
   font-size: 3rem;
-  &:hover{
+
+  &:hover {
     color: $secondary;
   }
 }
-.card.bg-secondary{
-  .fas{
-    &:hover{
+
+.card.bg-secondary {
+  .fas {
+    &:hover {
       color: $light;
     }
   }
 }
 
-
-#rendered-sections-list .active-nav{
+#rendered-sections-list .active-nav {
   font-weight: bold;
 }
 
-#scroll-to-top{
+#scroll-to-top {
   padding: 10px;
   border: solid thin #eee;
   display: none;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
   }
 }
 
-
-.page-lorem-ipsum{
-  #accordion button[aria-expanded="true"]{
+.page-lorem-ipsum {
+  #accordion button[aria-expanded="true"] {
     background-color: $secondary;
   }
 }
-
