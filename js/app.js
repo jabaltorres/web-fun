@@ -234,7 +234,7 @@
     // Comment
     $(document).ready(function() {
 
-        if ( $('.js-fun-page').length ) {
+        if ( $('.javascript-page').length ) {
 
             // Vidyard Test
 
@@ -539,7 +539,7 @@ const myFullName = function(firstName, lastName) {
     return fullName;
 };
 
-// create immediately invoked function expression
+// IIFE
 (function(){
     checkAge(12);
     myFullName("Jabals", "Torres");
