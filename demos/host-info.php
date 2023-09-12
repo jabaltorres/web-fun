@@ -1,104 +1,106 @@
 <?php
-    $title = "Host Information details";
-    // this is for <title>
+// this is for <title>
+$title = "Host Information details";
 
-    $page_title = "This is the host index file";
-    // This is for breadcrumbs if I want a custom title other than the default
+// This is for breadcrumbs if I want a custom title other than the default
+$page_title = "This is the host index file";
 
-    $page_subheading = "Welcome to the Host Info page";
-    // This is the subheading
+// This is the subheading
+$page_subheading = "Welcome to the Host Info page";
 
-    $custom_class = "host-page";
-    //custom CSS for this page only
+//custom CSS for this page only
+$custom_class = "host-page";
 
-    // Preliminaries
-    include_once('../private/initialize.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
-    // If not logged in, redirect to login page
-    if ( !is_logged_in() ) {
-        redirect_to('../public/contacts/login.php');
-    }
+// If not logged in, redirect to login page
+if (!is_logged_in()) {
+    redirect_to('../public/contacts/login.php');
+}
 
-    include_once(INCLUDES_PATH . '/site-header.php');
+include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
-<div class="container">
-  
-    <?php
+    <div class="container">
+
+        <?php
         include_once(INCLUDES_PATH . '/masthead.php');
         include_once(INCLUDES_PATH . '/navigation.php');
-    ?>
+        ?>
 
-    <section class="<?php echo $custom_class; ?>">
+        <section class="<?php echo $custom_class; ?>">
 
-        <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
+            <?php include_once(INCLUDES_PATH . '/headline-page.php'); ?>
 
-        <article>
-            <h3>Note:</h3>
-            <p>This is supposed to be some sort of domain dash board.</p>
+            <article>
+                <h3>Note:</h3>
+                <p>This is supposed to be some sort of domain dash board.</p>
 
-            <?php
+                <div class="host-page-section">
+                    <?php
+                    echo "<p class='font-weight-bold mb-2'>Paths: </p>";
+                    echo '<div class="">PRIVATE_PATH <pre>' . PRIVATE_PATH . '</pre></div>';
+                    echo '<div class="">PROJECT_PATH <pre>' . PROJECT_PATH . '</pre></div>';
+                    echo '<div class="">PUBLIC_PATH <pre>' . PUBLIC_PATH . '</pre></div>';
+                    echo '<div class="">SHARED_PATH <pre>' . SHARED_PATH . '</pre></div>';
+                    echo '<div class="">Includes Path <pre>' . INCLUDES_PATH . '</pre></div>';
+                    echo '<div class="">INCLUDES_PATH <pre>' . IMAGES_PATH . '</pre></div>';
+                    echo '<div class="">BLOCKS_PATH <pre>' . BLOCKS_PATH . '</pre></div>';
+                    echo '<div class="">INCL_PATH <pre>' . INCL_PATH . '</pre></div>';
+                    echo '<div class="">$enviro_prod <pre>' . $enviro_prod . '</pre></div>';
+                    ?>
+                </div>
 
-                echo "<p>Paths: </p>";
-                echo '<div class="">Private Path: ' . PRIVATE_PATH . '</div>';
-                echo '<div class="">Project Path: ' . PROJECT_PATH . '</div>';
-                echo '<div class="">Public Path: ' . PUBLIC_PATH . '</div>';
-                echo '<div class="">Shared Path: ' . SHARED_PATH . '</div>';
-                echo '<div class="">Includes Path: ' . INCLUDES_PATH . '</div>';
-                echo '<div class="">Images Path: ' . IMAGES_PATH . '</div>';
-                echo '<div class="">Blocks Path: ' . BLOCKS_PATH . '</div>';
-                echo '<div class="">Incl Path: ' . INCL_PATH . '</div>';
-                echo '<div class="">Enviro Prod: ' . $enviro_prod . '</div>';
+                <div class="host-page-section">
+                    <?php
+                    echo "<p class='font-weight-bold mb-2'>Other Vars: </p>";
+                    echo "Base dir: " . $base_dir . "<br>";
+                    echo "Protocol: " . $protocol . "<br>";
+                    echo "Server Name: " . $server_name . "<br>";
+                    echo "Script Name: " . $script_name . "<br>";
+                    echo "Doc Root: " . $doc_root . "<br>";
+                    echo "Base URL: " . $base_url . "<br>";
+                    echo "Port: " . $port . "<br>";
+                    echo "Created URL: " . $url . "<br>";
+                    ?>
+                </div>
 
-                echo "<p>Other Vars: </p>";
-                echo "Base dir: " . $base_dir . "<br>";
-                echo "Protocol: " . $protocol . "<br>";
-                echo "Server Name: " . $server_name . "<br>";
-                echo "Script Name: " . $script_name . "<br>";
-                echo "Doc Root: " . $doc_root . "<br>";
-                echo "Base URL: " . $base_url . "<br>";
-                echo "Port: " . $port . "<br>";
-                echo "Created URL: " . $url . "<br>";
+                <div class="host-page-section">
+                    <?php
+                    echo "Actual Link: <pre>" . $actual_link . "</pre>";
+                    echo "HTTP_HOST : <pre>" . $http_host . "</pre>";
+                    echo "HTTP USER AGENT: <pre>" . $user_agent . "</pre>";
+                    echo "PHP_SELF: <pre>" . $_SERVER['PHP_SELF'] . "</pre>";
+                    echo "Server name + Server port: <pre>" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'] . "</pre>";
+                    ?>
+                </div>
 
+                <div class="host-page-section">
+                    <?php
+                        if ($server_name == $enviro_prod) {
+                            // Production Environment
+                            // $url = "${protocol}://${server_name}${disp_port}/demos/${path}";
+                            echo "${protocol}://${server_name}${disp_port}/demos/${path}";
+                            echo "<br>Current Environment: Prod";
+                        } else {
+                            // Local Environment
+                            // $url = "${protocol}://${domain}${disp_port}/${path}";
+                            // $url = "${protocol}://${server_name}${disp_port}";
+                            echo "${protocol}://${server_name}${disp_port}";
+                            echo "<br>Current Environment: Local Dev";
+                        }
+                    ?>
+                </div>
 
-                echo "<p>&nbsp;</p>";
-                echo "Actual Link: " . $actual_link . "<br>";
-                echo "HTTP Host: " . $http_host . "<br>";
-                echo "HTTP USER AGENT: " . $user_agent . "<br>";
-                echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
+                <div class="host-page-section">
+                    <h3>Host information courtesy of JavaScript</h3>
+                    <!-- being used by javascript-->
+                    <div id="host-info"></div>
+                </div>
 
-                echo "<p>&nbsp;</p>";
-                echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
-            ?>
+            </article>
 
-            <div class="border mt-2 p-4">
-                <?php
-                    if ($server_name == $enviro_prod){
-                        // Production Environment
-                        //		      $url = "${protocol}://${server_name}${disp_port}/demos/${path}";
-                        echo "${protocol}://${server_name}${disp_port}/demos/${path}";
-                        echo "<br>Environment: Prod";
-                    } else {
-                        // Local Environment
-                        // $url = "${protocol}://${domain}${disp_port}/${path}";
-                        //		      $url = "${protocol}://${server_name}${disp_port}";
-                        echo "${protocol}://${server_name}${disp_port}";
-                        echo "<br>Environment: Local Dev";
-                    }
-                ?>
-            </div>
+        </section>
+    </div>
 
-        </article>
-
-        <article>
-            <h3>Host information courtesy of JavaScript</h3>
-
-            <!-- being used by javascript-->
-            <div id="host-info" class=""></div>
-        </article>
-
-    </section>
-</div>
-
-
-<?php include_once(INCLUDES_PATH . '/site-footer.php');?>
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
