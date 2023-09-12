@@ -3,7 +3,7 @@ require_once('../../private/initialize.php');
 
 require_login();
 
-$title = "DB Test Page";
+$title = "Contacts | Remove Contact";
 // this is for <title>
 
 $page_heading = "This is the DB Test page";
