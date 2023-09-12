@@ -10,7 +10,6 @@ $site_description = "Time for some web fun";
 $site_author = "Jabal Torres";
 $site_keywords = "HTML5, CSS3, SASS, jQuery";
 
-// Some server stuff
 $base_dir = __DIR__;
 
 // server protocol
@@ -56,28 +55,10 @@ const ELEMENTS_PATH = PUBLIC_PATH . '/elements';
 const COMPONENTS_PATH = PROJECT_PATH . '/components';
 const INCL_PATH = PROJECT_PATH . '/incl';
 
-
-// Assign the root URL to a PHP constant
-// * Do not need to include the domain
-// * Use same document root as the web server
-// define("WWW_ROOT", '/~jabaltorres/web-fun/db-test/public');
-// define("WWW_ROOT", '');
 // * Can dynamically find everything in the URL up to "public"
 $public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;
 $doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
 define("WWW_ROOT", $doc_root);
-//echo '<div class="">WWW root: ' . WWW_ROOT . '</div>';
-
-//echo '<div class="">Enviro Prod: ' . $enviro_prod . '</div>';
-//echo "Protocol: " . $protocol . "<br>";
-//echo "Base URL: " . $base_url . "<br>";
-//echo "Created URL: " . $url . "<br>";
-//echo "<p>&nbsp;</p>";
-//echo "Actual Link: " . $actual_link . "<br>";
-//echo "HTTP Host: " . $http_host . "<br>";
-//echo "HTTP USER AGENT: " . $user_agent . "<br>";
-//echo "PHP_SELF: " . $_SERVER['PHP_SELF'];
-//echo "Server name + Server port: " . $_SERVER['SERVER_NAME'] . ":  ". $_SERVER['SERVER_PORT']. "<br>";
 
 require_once('functions.php');
 require_once('database.php');
@@ -88,6 +69,7 @@ require_once('auth_functions.php');
 $db = db_connect();
 $errors = [];
 
+// Load class definitions manually
 // -> All classes in directory
 foreach(glob('classes/*.class.php') as $file) {
     require_once($file);
@@ -100,5 +82,3 @@ function lorem_autoload($class) {
     }
 }
 spl_autoload_register('lorem_autoload');
-
-?>
