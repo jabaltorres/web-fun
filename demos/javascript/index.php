@@ -10,7 +10,7 @@
     $page_subheading = "Scripting Sandbox";
 
     //custom CSS for this page only
-	$custom_class = "js-fun-page mb-4";
+	$custom_class = "javascript-page mb-4";
 
     include_once(INCLUDES_PATH . '/site-header.php');
 ?>
