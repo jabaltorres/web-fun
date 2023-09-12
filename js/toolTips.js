@@ -1,3 +1,7 @@
+/*
+* Tooltips -  WIP
+ */
+
 var Tooltips = {
 	init: function(){
 
