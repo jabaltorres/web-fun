@@ -49,6 +49,8 @@ $secondary: $yellow;
 @import "hero";
 @import "forms";
 
+@import "elements/elements";
+
 @import "components/components";
 
 @import "templates/templates";
@@ -76,11 +78,6 @@ p {
 img {
   width: 100%;
   height: auto;
-}
-
-header {
-  text-align: center;
-  @extend %margin-bottom;
 }
 
 form {

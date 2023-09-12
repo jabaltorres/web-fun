@@ -1,15 +1,18 @@
 // This is just for playing around with js
-.example-container{
-  // max-width: 400px;
+#big-flipper-wrapper{
   max-width: 400px;
   margin: 0 auto;
-  overflow:hidden;
+  overflow: hidden;
   border: solid thick orange;
   img{
     float: left;
   }
   .active{
-    
     box-sizing: border-box;
   }
+}
+
+progress#big-flipper-progress {
+  margin: 0 auto;
+  display: block;
 }
