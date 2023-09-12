@@ -33,6 +33,9 @@ let paths = {
             "js/vendor/slick.min.js",
             "js/vendor/spin.min.js",
             "js/plugins.js",
+            "js/bigFlipper.js",
+            "js/hostInfo.js",
+            "js/toolTips.js",
             "js/app.js",
         ],
         dest: "dist/scripts"
