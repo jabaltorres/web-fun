@@ -7,7 +7,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+        <link rel="shortcut icon" type="image/ico" href="<?php echo $url; ?>/favicon.ico" />
         <title><?php echo $title ?></title>
 
         <link rel="apple-touch-icon-precomposed" href="<?php echo $url; ?>/public/images/apple-touch-icon-57x57-precomposed.png">
