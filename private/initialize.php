@@ -46,15 +46,15 @@ $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP
 // dirname() returns the path to the current directory
 define("PRIVATE_PATH", dirname(__FILE__));
 define("PROJECT_PATH", dirname(PRIVATE_PATH));
-define("PUBLIC_PATH", PROJECT_PATH . '/public');
-define("SHARED_PATH", PRIVATE_PATH . '/shared');
-define("INCLUDES_PATH", PROJECT_PATH . '/includes');
-define("IMAGES_PATH", PUBLIC_PATH . '/images');
-define("BRAND_PATH", PROJECT_PATH . '/brand');
-define("BLOCKS_PATH", PROJECT_PATH . '/blocks');
-define("ELEMENTS_PATH", PUBLIC_PATH . '/elements');
-define("COMPONENTS_PATH", PROJECT_PATH . '/components');
-define("INCL_PATH", PROJECT_PATH . '/incl');
+const PUBLIC_PATH = PROJECT_PATH . '/public';
+const SHARED_PATH = PRIVATE_PATH . '/shared';
+const INCLUDES_PATH = PROJECT_PATH . '/includes';
+const IMAGES_PATH = PUBLIC_PATH . '/images';
+const BRAND_PATH = PROJECT_PATH . '/brand';
+const BLOCKS_PATH = PROJECT_PATH . '/blocks';
+const ELEMENTS_PATH = PUBLIC_PATH . '/elements';
+const COMPONENTS_PATH = PROJECT_PATH . '/components';
+const INCL_PATH = PROJECT_PATH . '/incl';
 
 
 // Assign the root URL to a PHP constant
@@ -87,5 +87,18 @@ require_once('auth_functions.php');
 
 $db = db_connect();
 $errors = [];
+
+// -> All classes in directory
+foreach(glob('classes/*.class.php') as $file) {
+    require_once($file);
+}
+
+// Autoload class definitions
+function lorem_autoload($class) {
+    if(preg_match('/\A\w+\Z/', $class)) {
+        include('classes/' . $class . '.class.php');
+    }
+}
+spl_autoload_register('lorem_autoload');
 
 ?>
