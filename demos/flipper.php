@@ -25,19 +25,19 @@
             <button id="action-button" class="btn btn-primary">Increment Flipper</button>
             <button id="reset-button" class="btn btn-secondary">Reset Progress</button>
         </article>
+        <article id="big-flipper" class="text-center">
+            <div id="big-flipper-wrapper">
+                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-1.png" alt="Image 1">
+                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-2.png" alt="Image 2">
+                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-3.png" alt="Image 3">
+                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-4.png" alt="Image 4">
+                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-5.png" alt="Image 5">
+            </div>
+            <div id="big-flipper-progress-value">0%</div>
+            <progress id="big-flipper-progress" max="100" value="0">0%</progress>
+        </article>
     </section>
 
-    <div id="big-flipper" class="text-center">
-        <div id="big-flipper-wrapper">
-            <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-1.png" alt="Image 1">
-            <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-2.png" alt="Image 2">
-            <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-3.png" alt="Image 3">
-            <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-4.png" alt="Image 4">
-            <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-5.png" alt="Image 5">
-        </div>
-        <div id="big-flipper-progress-value">0%</div>
-        <progress id="big-flipper-progress" max="100" value="0">0%</progress>
-    </div>
 
 </div>
 
