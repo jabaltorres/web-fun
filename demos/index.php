@@ -1,16 +1,45 @@
 <?php
-    require_once '../private/initialize.php';
+require_once '../private/initialize.php';
 
-    $title = "Demo Index";
-    // this is for <title>
+$title = "Demo Index";
+// this is for <title>
 
-    $page_heading = 'Demo Page Heading';
-    $page_subheading = "List of WIP demos";
+$page_heading = 'Demo Page Heading';
+$page_subheading = "List of WIP demos";
 
-    $custom_class = "demo-page";
-    //custom CSS for this page only
+$custom_class = "demo-page";
+//custom CSS for this page only
 
-	include_once(INCLUDES_PATH . '/site-header.php');
+include_once(INCLUDES_PATH . '/site-header.php');
+?>
+
+<?php
+
+// Page Header
+$page_demo_header = new LoremElement("h1");
+$page_demo_header->setAttribute("id", "page-heading");
+$page_demo_header->setAttribute("class", "h4 mb-2");
+$page_demo_header->setContent("Demos Page");
+
+// Page Sub Header
+$page_demo_subheader = new LoremElement("h3");
+$page_demo_subheader->setAttribute("id", "page-subheading");
+$page_demo_subheader->setAttribute("class", "h5 mb-0");
+$page_demo_subheader->setContent("This is where I will list all of my demos");
+
+// Links to demo pages
+$page_demo_links = [
+    ['id' => '0', 'visible' => '1', 'demo_page' => 'Audio', 'page_url' => 'audio-player.php'],
+    ['id' => '1', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
+    ['id' => '2', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],
+    ['id' => '3', 'visible' => '1', 'demo_page' => 'Heroes', 'page_url' => 'heroes.php'],
+    ['id' => '4', 'visible' => '1', 'demo_page' => 'Contacts', 'page_url' =>  '/public/contacts/index.php'],
+    ['id' => '5', 'visible' => '1', 'demo_page' => 'JS Objects', 'page_url' => 'js-objects.php'],
+    ['id' => '6', 'visible' => '1', 'demo_page' => 'Host Info', 'page_url' => 'host-info.php'],
+    ['id' => '7', 'visible' => '1', 'demo_page' => 'Lorem Ipsum', 'page_url' => 'lorem-ipsum.php'],
+    ['id' => '8', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
+    ['id' => '9', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/forms.php'],
+];
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -20,21 +49,34 @@
 	    include_once(INCLUDES_PATH . '/navigation.php');
     ?>
 
+
     <section>
-        <?php include_once(INCLUDES_PATH . '/headline-page.php'); ?>
+        <?php
+        // Description: An example of using the LoremCard class
+        $lorem_card = new LoremCard(['id' => 'box', 'classes' => 'card p-4 mb-4', 'content' => 'This is a test of the LoremCard class.', 'dark_mode' => false]);
+        echo $lorem_card->render();
+        ?>
+    </section>
+
+    <section>
+        <?php
+            // Page Header
+            echo $page_demo_header->render();
+
+            // Page Sub Header
+            echo $page_demo_subheader->render();
+        ?>
     </section>
 
     <section>
         <ul class="menu list-unstyled">
-            <li><a href="js-fun/index.php">JS Fun</a></li>
-            <li><a href="heroes.php">Heroes</a></li>
-            <li><a href="<?php echo $url; ?>/public/contacts/index.php">Contacts</a></li>
-            <li><a href="js-objects.php">JS Objects</a></li>
-            <li><a href="flipper.php">Flipper</a></li>
-            <li><a href="host-info.php">Host Info</a></li>
-            <li><a href="lorem-ipsum.php">Lorem Ipsum</a></li>
-            <li><a href="mustache.php">Mustache.js</a></li>
-            <li><a href="forms/forms.php">Forms</a></li>
+            <?php
+            foreach ($page_demo_links as $page_demo_link) {
+                if ($page_demo_link['visible'] == '1') {
+                    echo '<li><a href="'. h($page_demo_link['page_url']) . '">' . h($page_demo_link['demo_page']) . '</a></li>';
+                }
+            }
+            ?>
         </ul>
     </section>
 
