@@ -1,5 +1,8 @@
 <?php
 
+// This turns on error reporting
+ini_set('display_errors','1');
+
 /**
  * This file is for functions that are used throughout the site
  * @param $script_path
@@ -172,8 +175,5 @@ function lorem_print_header_block($array)
     }
     echo '</header>';
 }
-
-// This turns on error reporting
-ini_set('display_errors','1');
 
 ?>
