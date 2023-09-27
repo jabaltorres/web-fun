@@ -15,7 +15,7 @@
         <div class="site-inner">
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-md-8 mx-auto">
                     <div class="article-list-wrapper sticky-top">
                         <span class="d-block font-weight-bold py-2">Blog</span>
                         <div>Just testing some things here!</div>
@@ -34,37 +34,31 @@
                                 // variable to hold the path to the directory
                                 $directoryPath = $directory->path;
 
-                                echo "<ul>";
-
-                                // echo type of $directory
-                                // echo 'The directory variable is this type:' . gettype($directory) . "<br>";
-
                                 $results = array();
 
                                 while (false !== ($entry = $directory->read())) {
-
                                     if ($entry != "." && $entry != ".."){
-
                                         $results[] = $entry;
-
-                                        // remove the file extension from the file name
-                                        $entryPrettyName = remove_file_extension($entry);
-
-                                        echo "<li><a href='{$directoryPath}/{$entry}'>{$entryPrettyName}</a></li>";
                                     }
                                 }
 
-                                echo "</ul>";
-
-                                // print the array values
-                                // printArrayValues($results);
-
                                 $directory->close();
+
+                                // reverse the array
+                                $reversedArray = array_reverse($results);
+
+                                echo "<ul>";
+                                foreach ($reversedArray as $item) {
+                                    $entryPrettyName = remove_file_extension($item);
+                                    echo "<li><a href='{$directoryPath}/{$item}'>{$entryPrettyName}</a></li>";
+                                }
+                                echo "</ul>";
                             }
 
                             $links = output_php_files("./posts");
 
-//                            echo 'This is the end of the php file.';
+
+
                         ?>
 
 
