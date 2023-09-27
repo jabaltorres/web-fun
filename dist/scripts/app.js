@@ -4782,10 +4782,10 @@ Tooltips.init();
 (function($){
     $(document).ready(function () {
 
-        $('#nav-menu-icon').click(function(){
-            $(this).toggleClass('open');
-            $('.main-navigation').stop(true).slideToggle("fast");
-        });
+        // $('#nav-menu-icon').click(function(){
+        //     $(this).toggleClass('open');
+        //     $('.main-navigation').stop(true).slideToggle("fast");
+        // });
 
         $('.carousel-wrapper').slick({
             autoplay: true,
