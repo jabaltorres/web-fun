@@ -4,10 +4,3 @@
   </a>
   <h2 class="tagline h4"><?php echo $site_tagline; ?></h2>
 </header>
-
-<div id="nav-menu-icon">
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
