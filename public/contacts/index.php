@@ -34,7 +34,10 @@
     </section>
 
     <section>
-        <h4 class="mb-4 h4 font-weight-bold">Contact Entries</h4>
+        <div>
+            <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
+            <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
+        </div>
 
         <table class="table table-striped border">
             <thead class="thead-dark">
