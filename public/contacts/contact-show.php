@@ -46,6 +46,17 @@ include_once(INCLUDES_PATH . '/site-header.php');
                         <h1 class="h3">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name'] ); ?></h1>
 
                         <div class="attributes">
+
+                            <?php
+                            if($contact['image'] == '') {
+                                    echo '<img src="uploads/no-image.png" alt="image" style="max-width: 200px;">';
+                                } else {
+                                    echo '<div class="contact-image mb-3">';
+                                    echo '<img src="uploads/' . h($contact['image']) . '" alt="image" style="max-width: 200px;">';
+                                    echo '</div>';
+                                }
+                            ?>
+
                             <dl class="mb-2">
                                 <dt>First Name</dt>
                                 <dd class="font-weight-bold h5"><?php echo h($contact['first_name']); ?></dd>
@@ -55,13 +66,40 @@ include_once(INCLUDES_PATH . '/site-header.php');
                                 <dd class="font-weight-bold h5"><?php echo h($contact['last_name']); ?></dd>
                             </dl>
                             <dl class="mb-2">
+                                <dt>Contact Number</dt>
+
+                                <?php
+                                    if ($contact['contact_number'] == '') {
+                                        echo '<dd class="font-weight-bold">No contact number</dd>';
+                                    } else {
+                                        echo '<dd class="font-weight-bold h5"><a href="tel:' . h($contact['contact_number']) . '">' . h($contact['contact_number']) . '</a></dd>';
+                                    }
+                                ?>
+                            </dl>
+
+                            <dl class="mb-2">
                                 <dt>Email</dt>
-                                <dd class="font-weight-bold h5"><?php echo h($contact['email']); ?></dd>
+
+                                <?php
+                                if ($contact['email'] == '') {
+                                    echo '<dd class="font-weight-bold">No contact email address</dd>';
+                                } else {
+                                    echo '<dd class="font-weight-bold h5"><a href="mailto:' . h($contact['email']) . '">' . h($contact['email']) . '</a></dd>';
+                                }
+                                ?>
+
                             </dl>
 
                             <dl class="mb-2">
                                 <dt>Comments</dt>
-                                <dd class="font-weight-bold"><?php echo h($contact['comments']); ?></dd>
+
+                                <?php
+                                    if ($contact['comments'] == '') {
+                                        echo '<dd class="font-weight-bold">No comments</dd>';
+                                    } else {
+                                        echo '<dd class="font-weight-bold">' . h($contact['comments']) . '</dd>';
+                                    }
+                                ?>
                             </dl>
                         </div><!-- end .attributes -->
                     </div><!-- end .contact -->

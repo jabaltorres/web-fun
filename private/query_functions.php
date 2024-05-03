@@ -396,7 +396,7 @@
         global $db;
 
         $errors = validate_contact($contact);
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             return $errors;
         }
 
@@ -404,21 +404,26 @@
         $sql .= "first_name='" . db_escape($db, $contact['first_name']) . "', ";
         $sql .= "last_name='" . db_escape($db, $contact['last_name']) . "', ";
         $sql .= "email='" . db_escape($db, $contact['email']) . "', ";
-        $sql .= "comments='" . db_escape($db, $contact['comments']) . "' ";
-        $sql .= "WHERE id='" . db_escape($db, $contact['id']) . "' ";
-        $sql .= "LIMIT 1";
+        $sql .= "contact_number='" . db_escape($db, $contact['contact_number']) . "', ";
+        $sql .= "comments='" . db_escape($db, $contact['comments']) . "'";
+
+        // Add the image field only if a new image was uploaded
+        if (!empty($contact['image'])) {
+            $sql .= ", image='" . db_escape($db, $contact['image']) . "'";
+        }
+
+        $sql .= " WHERE id='" . db_escape($db, $contact['id']) . "' LIMIT 1";
 
         $result = mysqli_query($db, $sql);
-        // For UPDATE statements, $result is true/false
-        if($result) {
+        if ($result) {
             return true;
         } else {
-            // UPDATE failed
-            echo mysqli_error($db);
+            // More informative error message for debugging
+            $error = mysqli_error($db);
+            echo "SQL Error: " . $error;
             db_disconnect($db);
             exit;
         }
-
     }
 
     function delete_contact($id) {
