@@ -403,7 +403,8 @@
         $sql = "UPDATE email_list SET ";
         $sql .= "first_name='" . db_escape($db, $contact['first_name']) . "', ";
         $sql .= "last_name='" . db_escape($db, $contact['last_name']) . "', ";
-        $sql .= "email='" . db_escape($db, $contact['email']) . "' ";
+        $sql .= "email='" . db_escape($db, $contact['email']) . "', ";
+        $sql .= "comments='" . db_escape($db, $contact['comments']) . "' ";
         $sql .= "WHERE id='" . db_escape($db, $contact['id']) . "' ";
         $sql .= "LIMIT 1";
 

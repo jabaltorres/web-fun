@@ -17,6 +17,7 @@
       $contact['first_name'] = $_POST['first_name'] ?? '';
       $contact['last_name'] = $_POST['last_name'] ?? '';
       $contact['email'] = $_POST['email'] ?? '';
+      $contact['comments'] = $_POST['comments'] ?? '';
 
       $result = update_contact($contact);
       if($result === true) {
@@ -70,6 +71,9 @@
 
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" value="<?php echo h($contact['email']); ?>" /><br />
+
+            <label for="comments">Comment:</label>
+            <textarea id="comments" name="comments"><?php echo h($contact['comments']); ?></textarea><br />
 
             <input type="submit" name="submit" value="Edit Contact" id="button" class="btn btn-warning" />
             <a class="btn btn-danger" href="<?php echo url_for('/contacts/contact-remove.php'); ?>">Delete Contact(s)</a>

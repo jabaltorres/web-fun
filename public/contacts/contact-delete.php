@@ -74,6 +74,11 @@ include_once(INCLUDES_PATH . '/site-header.php');
                                     <dt>Email</dt>
                                     <dd class="font-weight-bold h5"><?php echo h($contact['email']); ?></dd>
                                 </dl>
+
+                                <dl class="mb-2">
+                                    <dt>Comments</dt>
+                                    <dd class="font-weight-bold h5"><?php echo h($contact['comments']); ?></dd>
+                                </dl>
                             </div><!-- end .attributes -->
 
                             <div id="operations">
