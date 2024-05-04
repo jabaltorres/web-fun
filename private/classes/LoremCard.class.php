@@ -12,21 +12,12 @@ class LoremCard {
     private string $content;
     private bool $dark_mode;
 
-//    public function __construct($id, $classes, $content, $dark_mode = false) {
-//        $this->id = $id;
-//        $this->class = $classes;
-//        $this->content = $content;
-//        $this->dark_mode = $dark_mode;
-//    }
-
     public function __construct($args=[]) {
         $this->id = $args['id'] ?? '';
         $this->classes = $args['classes'] ?? '';
         $this->content = $args['content'] ?? '';
         $this->dark_mode = $args['dark_mode'] ?? false;
     }
-
-    // Description: This function is used to return the id of the object
 
     public function setDarkMode(): string
     {
@@ -37,11 +28,7 @@ class LoremCard {
         }
     }
 
-
-    /**
-     * Description: This function is used to return the class of the object
-     */
-    #[Pure] public function render(): string
+    public function render(): string
     {
         $html = "<div id=\"{$this->id}\" class=\"{$this->classes}\">";
         $html .= "Excuse me, Let me clear my throat. <br>";
