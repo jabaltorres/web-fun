@@ -22,3 +22,5 @@ db_credentials.php has been ignored. It should live in `private/db_credentials` 
         }
     ?>
  
+## Notes
+- Node version: 10 is required to run gulp.
