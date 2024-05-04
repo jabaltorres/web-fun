@@ -316,18 +316,26 @@
 
 
     // Contacts
-    function find_all_contacts() {
+    function find_all_contacts($sort='id') {
         global $db;
 
+        // Define a whitelist of sortable columns
+        $valid_sort_columns = ['id', 'first_name', 'last_name', 'email'];
+        // Ensure the provided sort parameter is in the whitelist
+        if (!in_array($sort, $valid_sort_columns)) {
+            $sort = 'id'; // Default to 'id' if an invalid sort parameter is provided
+        }
+
         $sql = "SELECT * FROM contact_list ";
-        $sql .= "ORDER BY id ASC";
+        $sql .= "ORDER BY " . $sort . " ASC"; // Append the valid sort parameter
         //echo $sql;
         $result = mysqli_query($db, $sql);
         confirm_result_set($result);
         return $result;
     }
 
-    function find_contact_by_id($id) {
+
+function find_contact_by_id($id) {
         global $db;
         $sql = "SELECT contact_list.*, rankings.rank_description FROM contact_list ";
         $sql .= "LEFT JOIN rankings ON contact_list.rank_id = rankings.rank_id ";

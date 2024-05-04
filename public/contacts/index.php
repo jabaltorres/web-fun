@@ -6,25 +6,41 @@ $title = "DB Test Page";
 $page_heading = "This is the DB Test page";
 $page_subheading = "Welcome to the DB test page";
 $custom_class = "db-test-page";
-$contact_set = find_all_contacts();
+
+// Retrieve sort parameter from GET request or default to 'id'
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
+
+// Fetch contacts with the specified sorting
+$contact_set = find_all_contacts($sort);
 
 include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
     <?php
-        include_once(INCLUDES_PATH . '/masthead.php');
-        include_once(INCLUDES_PATH . '/navigation.php');
+    include_once(INCLUDES_PATH . '/masthead.php');
+    include_once(INCLUDES_PATH . '/navigation.php');
     ?>
 
     <section>
         <?php
-            include_once(INCLUDES_PATH . '/headline-page.php');
-            include_once(INCLUDES_PATH . '/db-menu.php');
+        include_once(INCLUDES_PATH . '/headline-page.php');
+        include_once(INCLUDES_PATH . '/db-menu.php');
         ?>
     </section>
 
     <section>
+        <form action="index.php" method="get">
+            <label for="sort">Sort by:</label>
+            <select id="sort" name="sort">
+                <option value="id" <?php echo ($sort == 'id') ? 'selected' : ''; ?>>ID</option>
+                <option value="first_name" <?php echo ($sort == 'first_name') ? 'selected' : ''; ?>>First Name</option>
+                <option value="last_name" <?php echo ($sort == 'last_name') ? 'selected' : ''; ?>>Last Name</option>
+                <option value="email" <?php echo ($sort == 'email') ? 'selected' : ''; ?>>Email</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+
         <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
         <table class="table table-striped border">
