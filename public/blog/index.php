@@ -21,6 +21,11 @@ include_once(INCLUDES_PATH . '/site-header.php'); // Include the site header
                 <div class="article-list-wrapper sticky-top">
                     <span class="d-block font-weight-bold py-2">Blog</span>
                     <div>Just testing some things here!</div>
+
+                    <div class="jt-testing">
+                        <p>Testing</p>
+                    </div>
+
                     <?php
                     /**
                      * Outputs an HTML list of all PHP files in a specified directory, sorted in descending order.
