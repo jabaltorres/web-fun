@@ -204,3 +204,18 @@ a.learnmore {
 a.learnmore:hover {
   text-decoration: underline
 }
+
+/* Webfun link */
+/* This is used on the public_header.php file */
+
+.webfun-link{
+  display: block;
+  background-color: #cccccc;
+    color: #000000;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.webfun-link a {
+  display: block;
+}
