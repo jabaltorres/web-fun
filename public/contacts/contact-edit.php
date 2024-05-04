@@ -32,6 +32,7 @@
             }
 
             if(empty($errors)==true){
+                // TODO: Consider a new way to handle file names
                 $new_filename = uniqid('img_', true) . '.' . $file_ext;
                 $file_destination = 'uploads/' . $new_filename;
                 if(move_uploaded_file($file_tmp, $file_destination)) {
