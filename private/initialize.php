@@ -30,7 +30,7 @@ $enviro_dev = "localhost";
 $path = "web-fun";
 if ($server_name == $enviro_prod){
     // Production Environment
-    $url = "${protocol}://${server_name}${disp_port}";
+    $url = "${protocol}://${server_name}";
 } else {
     // Local Environment
     // $url = "${protocol}://${domain}${disp_port}/${path}";
