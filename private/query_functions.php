@@ -319,7 +319,7 @@
     function find_all_contacts() {
         global $db;
 
-        $sql = "SELECT * FROM email_list ";
+        $sql = "SELECT * FROM contact_list ";
         $sql .= "ORDER BY id ASC";
         //echo $sql;
         $result = mysqli_query($db, $sql);
@@ -329,9 +329,9 @@
 
 function find_contact_by_id($id) {
     global $db;
-    $sql = "SELECT email_list.*, rankings.rank_description FROM email_list ";
-    $sql .= "LEFT JOIN rankings ON email_list.rank_id = rankings.rank_id ";
-    $sql .= "WHERE email_list.id='" . db_escape($db, $id) . "' ";
+    $sql = "SELECT contact_list.*, rankings.rank_description FROM contact_list ";
+    $sql .= "LEFT JOIN rankings ON contact_list.rank_id = rankings.rank_id ";
+    $sql .= "WHERE contact_list.id='" . db_escape($db, $id) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
@@ -373,7 +373,7 @@ function find_contact_by_id($id) {
             return $errors;
         }
 
-        $sql = "INSERT INTO email_list ";
+        $sql = "INSERT INTO contact_list ";
         $sql .= "(first_name, last_name, email) ";
         $sql .= "VALUES (";
         $sql .= "'" . db_escape($db, $contact['first_name']) . "',";
@@ -404,7 +404,7 @@ function find_contact_by_id($id) {
             return $errors;
         }
 
-        $sql = "UPDATE email_list SET ";
+        $sql = "UPDATE contact_list SET ";
         $sql .= "first_name='" . db_escape($db, $contact['first_name']) . "', ";
         $sql .= "last_name='" . db_escape($db, $contact['last_name']) . "', ";
         $sql .= "email='" . db_escape($db, $contact['email']) . "', ";
@@ -434,7 +434,7 @@ function find_contact_by_id($id) {
     function delete_contact($id) {
         global $db;
 
-        $sql = "DELETE FROM email_list ";
+        $sql = "DELETE FROM contact_list ";
         $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
         $sql .= "LIMIT 1";
         $result = mysqli_query($db, $sql);

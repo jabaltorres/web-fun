@@ -48,7 +48,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
         $dbc = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
           or die('Error connecting to MySQL server.');
 
-        $query = "INSERT INTO email_list (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
+        $query = "INSERT INTO contact_list (first_name, last_name, email)  VALUES ('$first_name', '$last_name', '$email')";
         mysqli_query($dbc, $query)
           or die ('Data not inserted.');
 

@@ -62,7 +62,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
         $dbc = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
           or die('Error connecting to MySQL server.');
 
-        $query = "SELECT * FROM email_list";
+        $query = "SELECT * FROM contact_list";
         $result = mysqli_query($dbc, $query)
           or die('Error querying database.');
 

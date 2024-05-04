@@ -33,7 +33,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
 
     <section>
         <h2>Remove Contact(s)</h2>
-        <p>Please select the contact(s) to delete from `email_list` and click Remove.</p>
+        <p>Please select the contact(s) to delete from `contact_list` and click Remove.</p>
 
         <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
@@ -45,7 +45,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
                 // Delete the customer rows (only if the form has been submitted)
                 if (isset($_POST['submit'])) {
                     foreach ($_POST['todelete'] as $delete_id) {
-                        $query = "DELETE FROM email_list WHERE id='" . $delete_id ."'";
+                        $query = "DELETE FROM contact_list WHERE id='" . $delete_id ."'";
                         mysqli_query($dbc, $query)
                         or die('Error querying database.');
                     }
@@ -53,7 +53,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
                 }
 
                 // Display the customer rows with checkboxes for deleting
-                $query = "SELECT * FROM email_list";
+                $query = "SELECT * FROM contact_list";
                 $result = mysqli_query($dbc, $query);
                 while ($row = mysqli_fetch_array($result)) {
                     echo '<input type="checkbox" value="' . $row['id'] . '" name="todelete[]" />';
