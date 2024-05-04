@@ -45,16 +45,17 @@ include_once(INCLUDES_PATH . '/site-header.php');
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
         <table class="table table-striped border">
             <thead class="thead-dark">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-            </tr>
+                <tr>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
             </thead>
+
             <tbody>
             <?php while ($contact = mysqli_fetch_assoc($contact_set)) : ?>
                 <tr>
@@ -72,5 +73,19 @@ include_once(INCLUDES_PATH . '/site-header.php');
         </table>
     </section>
 </div><!-- end .container -->
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		// Attach click event to all elements with class 'sort-header'
+		const sortableHeaders = document.querySelectorAll('.sort-header');
+		sortableHeaders.forEach(function(header) {
+			header.addEventListener('click', function(e) {
+				e.preventDefault(); // Prevent default link behavior
+				const sortKey = this.getAttribute('data-sort'); // Get the sorting key from the data attribute
+				window.location.href = `?sort=${sortKey}`; // Redirect to the same page with the new sort parameter
+			});
+		});
+	});
+</script>
 
 <?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
