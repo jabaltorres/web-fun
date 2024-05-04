@@ -6,39 +6,56 @@ $title = "DB Test Page";
 $page_heading = "This is the DB Test page";
 $page_subheading = "Welcome to the DB test page";
 $custom_class = "db-test-page";
-$contact_set = find_all_contacts();
+
+// Retrieve sort parameter from GET request or default to 'id'
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
+
+// Fetch contacts with the specified sorting
+$contact_set = find_all_contacts($sort);
 
 include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
     <?php
-        include_once(INCLUDES_PATH . '/masthead.php');
-        include_once(INCLUDES_PATH . '/navigation.php');
+    include_once(INCLUDES_PATH . '/masthead.php');
+    include_once(INCLUDES_PATH . '/navigation.php');
     ?>
 
     <section>
         <?php
-            include_once(INCLUDES_PATH . '/headline-page.php');
-            include_once(INCLUDES_PATH . '/db-menu.php');
+        include_once(INCLUDES_PATH . '/headline-page.php');
+        include_once(INCLUDES_PATH . '/db-menu.php');
         ?>
     </section>
 
     <section>
+        <form action="index.php" method="get">
+            <label for="sort">Sort by:</label>
+            <select id="sort" name="sort">
+                <option value="id" <?php echo ($sort == 'id') ? 'selected' : ''; ?>>ID</option>
+                <option value="first_name" <?php echo ($sort == 'first_name') ? 'selected' : ''; ?>>First Name</option>
+                <option value="last_name" <?php echo ($sort == 'last_name') ? 'selected' : ''; ?>>Last Name</option>
+                <option value="email" <?php echo ($sort == 'email') ? 'selected' : ''; ?>>Email</option>
+            </select>
+            <button type="submit">Sort</button>
+        </form>
+
         <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
         <table class="table table-striped border">
             <thead class="thead-dark">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-            </tr>
+                <tr>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
             </thead>
+
             <tbody>
             <?php while ($contact = mysqli_fetch_assoc($contact_set)) : ?>
                 <tr>
@@ -56,5 +73,19 @@ include_once(INCLUDES_PATH . '/site-header.php');
         </table>
     </section>
 </div><!-- end .container -->
+
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		// Attach click event to all elements with class 'sort-header'
+		const sortableHeaders = document.querySelectorAll('.sort-header');
+		sortableHeaders.forEach(function(header) {
+			header.addEventListener('click', function(e) {
+				e.preventDefault(); // Prevent default link behavior
+				const sortKey = this.getAttribute('data-sort'); // Get the sorting key from the data attribute
+				window.location.href = `?sort=${sortKey}`; // Redirect to the same page with the new sort parameter
+			});
+		});
+	});
+</script>
 
 <?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
