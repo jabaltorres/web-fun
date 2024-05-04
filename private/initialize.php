@@ -25,7 +25,7 @@ $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $por
 
 // put em all together to get the complete base URL
 // $url = "${protocol}://${domain}${disp_port}${base_url}";
-$enviro_prod = "web-fun.fivetwofive.com/";
+$enviro_prod = "web-fun.fivetwofive.com";
 $enviro_dev = "localhost";
 $path = "web-fun";
 if ($server_name == $enviro_prod){
