@@ -327,18 +327,18 @@
         return $result;
     }
 
-    function find_contact_by_id($id) {
-        global $db;
-
-        $sql = "SELECT * FROM email_list ";
-        $sql .= "WHERE id='" . db_escape($db, $id) . "'";
-        // echo $sql;
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        $contact = mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
-        return $contact; // returns an assoc. array
-    }
+function find_contact_by_id($id) {
+    global $db;
+    $sql = "SELECT email_list.*, rankings.rank_description FROM email_list ";
+    $sql .= "LEFT JOIN rankings ON email_list.rank_id = rankings.rank_id ";
+    $sql .= "WHERE email_list.id='" . db_escape($db, $id) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $contact = mysqli_fetch_assoc($result);
+    mysqli_free_result($result);
+    return $contact;
+}
 
     function validate_contact($contact) {
         $errors = [];
@@ -395,6 +395,10 @@
     function update_contact($contact) {
         global $db;
 
+
+        $rank_id = empty($contact['rank_id']) ? 'NULL' : db_escape($db, $contact['rank_id']); // Handle empty rank_id
+
+
         $errors = validate_contact($contact);
         if (!empty($errors)) {
             return $errors;
@@ -404,8 +408,9 @@
         $sql .= "first_name='" . db_escape($db, $contact['first_name']) . "', ";
         $sql .= "last_name='" . db_escape($db, $contact['last_name']) . "', ";
         $sql .= "email='" . db_escape($db, $contact['email']) . "', ";
+        $sql .= "comments='" . db_escape($db, $contact['comments']) . "', ";
         $sql .= "contact_number='" . db_escape($db, $contact['contact_number']) . "', ";
-        $sql .= "comments='" . db_escape($db, $contact['comments']) . "'";
+        $sql .= "rank_id=" . $rank_id . " "; // Directly use NULL if rank_id is not set
 
         // Add the image field only if a new image was uploaded
         if (!empty($contact['image'])) {
@@ -661,6 +666,16 @@
         }
         echo '</ul>';
 
+    }
+
+    function find_all_rankings() {
+        global $db;
+        $sql = "SELECT rank_id, rank_description FROM rankings ORDER BY rank_id";
+        $result = mysqli_query($db, $sql);
+        confirm_result_set($result);
+        $rankings = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        mysqli_free_result($result);
+        return $rankings;
     }
 
 ?>

@@ -19,6 +19,7 @@
       $contact['email'] = $_POST['email'] ?? '';
       $contact['comments'] = $_POST['comments'] ?? '';
       $contact['contact_number'] = $_POST['contact_number'] ?? '';
+      $contact['rank_id'] = $_POST['rank_id'] ?? '';
 
         // File upload handling
         if (!empty($_FILES['image']['name'])) {
@@ -104,6 +105,22 @@
 
             <label for="comments">Comment:</label>
             <textarea id="comments" name="comments"><?php echo h($contact['comments']); ?></textarea><br />
+
+            <label for="rank_id">Rank:</label>
+            <select name="rank_id" id="rank_id">
+                <!-- Option for no ranking -->
+                <option value="">No Ranking</option>
+                <?php
+                $rankings = find_all_rankings(); // Assume this function fetches ranking data correctly
+                foreach ($rankings as $ranking) {
+                    echo "<option value=\"" . h($ranking['rank_id']) . "\"";
+                    if (isset($contact['rank_id']) && $ranking['rank_id'] == $contact['rank_id']) {
+                        echo " selected";
+                    }
+                    echo ">" . h($ranking['rank_description']) . "</option>";
+                }
+                ?>
+            </select><br />
 
             <label for="image">Upload Image:</label>
             <input type="file" name="image" id="image"><br />
