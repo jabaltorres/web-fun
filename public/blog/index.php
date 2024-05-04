@@ -1,73 +1,55 @@
 <?php
-    require_once '../../private/initialize.php';
+// Include the necessary configuration and functions
+require_once '../../private/initialize.php';
 
-    $title = "Components Page"; // this is for <title>
-    $page_title = "This is the components page"; //this is for breadcrumbs if I want a custom title other than the default
-    $addCSS = ""; //custom CSS for this page only
-    include_once(INCLUDES_PATH . '/site-header.php');
+// Page metadata
+$title = "Components Page"; // Title for browser title bar
+$page_title = "This is the components page"; // Title for the page, can be used in breadcrumbs or headers
+$addCSS = ""; // Placeholder for page-specific CSS if needed
+include_once(INCLUDES_PATH . '/site-header.php'); // Include the site header
 ?>
 
-    <div class="container">
+<div class="container">
+    <?php
+    include_once(INCLUDES_PATH . '/masthead.php'); // Include the masthead
+    include_once(INCLUDES_PATH . '/navigation.php'); // Include the navigation bar
+    ?>
 
-        <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
-        <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
+    <div class="site-inner">
+        <div class="row">
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="article-list-wrapper sticky-top">
+                    <span class="d-block font-weight-bold py-2">Blog</span>
+                    <div>Just testing some things here!</div>
+                    <?php
+                    /**
+                     * Outputs an HTML list of all PHP files in a specified directory, sorted in descending order.
+                     * @param string $directory Path to the directory to scan for PHP files.
+                     */
+                    function output_php_files($directory) {
+                        $files = glob($directory . "/*.php"); // Retrieve all PHP files in the specified directory
+                        if (!$files) {
+                            echo "No PHP files found in the directory."; // Handle case where no files are found
+                            return;
+                        }
 
-        <div class="site-inner">
+                        rsort($files); // Sort the files array in descending alphabetical order
 
-            <div class="row">
-                <div class="col-12 col-md-8 mx-auto">
-                    <div class="article-list-wrapper sticky-top">
-                        <span class="d-block font-weight-bold py-2">Blog</span>
-                        <div>Just testing some things here!</div>
-                        <?php
+                        echo "<ul>";
+                        foreach ($files as $file) {
+                            $fileBaseName = basename($file); // Extract the filename from the path
+                            $entryPrettyName = htmlspecialchars(remove_file_extension($fileBaseName), ENT_QUOTES, 'UTF-8'); // Remove the extension and escape HTML characters
+                            echo "<li><a href='{$file}'>{$entryPrettyName}</a></li>"; // Output each file as an HTML list item
+                        }
+                        echo "</ul>";
+                    }
 
-                            function output_php_files($directory) {
-                                // Check if the directory exists
-                                $directory = dir($directory);
-
-                                // TODO: fix this error handling
-                                if (!$directory) {
-                                    check_for_error(true);
-                                    echo "The directory does not exist.";
-                                }
-
-                                // variable to hold the path to the directory
-                                $directoryPath = $directory->path;
-
-                                $results = array();
-
-                                while (false !== ($entry = $directory->read())) {
-                                    if ($entry != "." && $entry != ".."){
-                                        $results[] = $entry;
-                                    }
-                                }
-
-                                $directory->close();
-
-                                // reverse the array
-                                $reversedArray = array_reverse($results);
-
-                                echo "<ul>";
-                                foreach ($reversedArray as $item) {
-                                    $entryPrettyName = remove_file_extension($item);
-                                    echo "<li><a href='{$directoryPath}/{$item}'>{$entryPrettyName}</a></li>";
-                                }
-                                echo "</ul>";
-                            }
-
-                            $links = output_php_files("./posts");
-
-
-
-                        ?>
-
-
-
-                    </div>
+                    output_php_files("./posts"); // Call the function with the directory path
+                    ?>
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 
-<?php include_once(INCLUDES_PATH . '/site-footer.php');
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); // Include the site footer ?>
