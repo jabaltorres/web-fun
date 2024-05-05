@@ -27,6 +27,8 @@ include_once(INCLUDES_PATH . '/site-header.php');
                 <div class="contact show mb-4">
                     <h1 class="h3">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name']); ?></h1>
 
+
+
                     <div class="attributes">
                         <?php
                         if ($contact['image'] == '') {
@@ -35,6 +37,10 @@ include_once(INCLUDES_PATH . '/site-header.php');
                             echo '<div class="contact-image mb-3"><img src="uploads/' . h($contact['image']) . '" alt="Contact image" style="max-width: 200px;"></div>';
                         }
                         ?>
+
+                        <?php if ($contact['favorite']): ?>
+                            <p>Favorited</p>
+                        <?php endif; ?>
 
                         <dl class="mb-2">
                             <dt>First Name</dt>
