@@ -1,226 +1,124 @@
 const bigFlipper = {
-	// properties
 	wrapper: document.getElementById('big-flipper-wrapper'),
-	flipperValue: document.getElementById('big-flipper-wrapper-value'),
 	images: document.getElementsByTagName('img'),
+	originalOrder: [],  // Array to hold clones of the original images
 
-	// methods
-	setWrapperHeight: function(){
+	// Set the height of the wrapper to the height of the first image
+	setWrapperHeight: function() {
 		let imageHeight = this.images[0].offsetHeight;
-		this.wrapper.style.height = "" + imageHeight + "px";
-		// console.log('setting wrapper height');
+		this.wrapper.style.height = imageHeight + "px";
 	},
-	makeFirstImageActive: function(){
+
+	// Add 'active' class to the first image and remove from others
+	makeFirstImageActive: function() {
+		Array.from(this.images).forEach(img => img.classList.remove("active"));
 		this.images[0].classList.add("active");
-		// console.log('making first image active');
 	},
-	makeActive: function(){
 
-		// remove active class from all images
-		for (var i = 0; i < this.images.length; i++){
-			this.images[i].classList.remove("active");
-		}
-
-		//add active class to first image
-		this.images[0].classList.add("active");
-
-		// console.log('making image active');
+	// Captures the original order of images on page load
+	captureOriginalOrder: function() {
+		this.originalOrder = Array.from(this.images).map(img => img.cloneNode());
 	},
-	moveImageForward: function(){
 
+	// Restores the images to their original order
+	restoreOriginalOrder: function() {
+		let parent = this.wrapper;
+		parent.innerHTML = ''; // Clear the current images
+		this.originalOrder.forEach(img => parent.appendChild(img));
+		this.images = document.getElementsByTagName('img'); // Reassign the images collection
+		this.makeFirstImageActive();
+	},
+
+	// Moves the first image to the end of the list
+	moveImageForward: function() {
 		let firstImage = this.images[0];
-
 		firstImage.parentNode.appendChild(firstImage);
-
-		// make first image active
-		bigFlipper.makeActive();
-
-		// increment progress
-		bigFlipper.incrementProgress();
-
-		console.log('moving image forward');
+		this.makeFirstImageActive();
+		this.incrementProgress();
 	},
-	moveImageBack: function(){
+
+	// Moves the last image to the beginning of the list
+	moveImageBack: function() {
 		let lastImage = this.images[this.images.length - 1];
 		let firstImage = this.images[0];
-
 		firstImage.parentNode.insertBefore(lastImage, firstImage);
-
-		bigFlipper.makeActive();
-
-		bigFlipper.decrementProgress();
-
-		console.log('moving image back');
+		this.makeFirstImageActive();
+		this.decrementProgress();
 	},
-	autom8: function(){
-		let images = this.images;
-		let i = 1;
-		let loopThroughImages = function () {
-			if (i < images.length) {
-				bigFlipper.moveImageForward();
-				++i;
-				setTimeout(loopThroughImages, 1000);
-			}
-		};
 
-		setTimeout(loopThroughImages, 1000);
-
-	},
-	getProgressElement: function(){
+	// Retrieves the progress element
+	getProgressElement: function() {
 		return document.getElementById('big-flipper-progress');
 	},
-	getProgressTextElement: function(){
+
+	// Retrieves the element that displays the progress text
+	getProgressTextElement: function() {
 		return document.getElementById('big-flipper-progress-value');
 	},
-	setProgress: function(){
-		// get progress element
-		let progress = bigFlipper.getProgressElement();
-		let progressTextValue = bigFlipper.getProgressTextElement();
 
-		// get progress value
-		let progressValue = progress.getAttribute('value');
-
-		// get progress max
+	// Initializes the progress to the first step
+	setProgress: function() {
+		let progress = this.getProgressElement();
 		let progressMaxValue = progress.getAttribute('max');
-
-		// divide progress max by length of images
 		let progressSteps = progressMaxValue / this.images.length;
-
-		// convert progress value to number
-		progressValue = Number(progressValue);
-
-		console.log(`progress: ${progressValue}, and max: ${progressMaxValue}`);
-		console.log(`progress steps: ${progressSteps}`);
-
-		progress.setAttribute('value', progressValue + progressSteps);
-
-		// set progress inner text to progress value
-		progress.innerText = progressValue + progressSteps;
-		let progressTextValueString = progressValue + progressSteps;
-		progressTextValue.innerText = `${progressTextValueString}%`;
-		console.log('setting initial progress value:' + progress.getAttribute('value'));
-	},
-	addNums: function($num1, $num2){
-		// make sure they are numbers
-		$num1 = Number($num1);
-		$num2 = Number($num2);
-		return $num1 + $num2;
-	},
-	subtractNum: function($num1, $num2){
-		$num1 = Number($num1);
-		$num2 = Number($num2);
-		return $num1 - $num2;
-	},
-	incrementProgress: function(){
-		// get progress element
-		let progress = bigFlipper.getProgressElement();
-		let progressTextValue = bigFlipper.getProgressTextElement();
-
-		// get progress value
-		let progressValue = progress.getAttribute('value');
-		progressValue = Number(progressValue);
-
-		// get progress max
-		let progressMaxValue = progress.getAttribute('max');
-		progressMaxValue = Number(progressMaxValue);
-
-		// divide progress max by length of images
-		let progressSteps = progressMaxValue / this.images.length;
-
-		if (progressValue === progressMaxValue) {
-			progressValue = progressSteps;
-			progress.setAttribute('value', progressValue);
-			progressTextValue.innerText = `${progressSteps}%`;
-		} else {
-			let progressNumberValue = bigFlipper.addNums(progressValue, progressSteps)
-			progress.setAttribute('value', progressNumberValue);
-			progressTextValue.innerText = `${progressNumberValue}%`;
-		}
-	},
-	decrementProgress: function(){
-		// get progress element
-		let progress = bigFlipper.getProgressElement();
-		let progressTextValue = bigFlipper.getProgressTextElement();
-
-		// get progress value
-		let progressValue = progress.getAttribute('value');
-		progressValue = Number(progressValue);
-
-		// get progress max
-		let progressMaxValue = progress.getAttribute('max');
-		progressMaxValue = Number(progressMaxValue);
-
-		// divide progress max by length of images
-		let progressSteps = progressMaxValue / this.images.length;
-
-		// if progress value is 0, set it to max value
-		if (progressValue === progressSteps) {
-			progress.setAttribute('value', progressMaxValue);
-			progressTextValue.innerText = `${progressMaxValue}%`;
-
-		} else {
-			progress.setAttribute('value', progressValue - progressSteps);
-			let progressTextValueString = bigFlipper.subtractNum(progressValue, progressSteps);
-			progressTextValue.innerText = `${progressTextValueString}%`;
-		}
-	},
-	resetProgressToOne: function(){
-		// get progress element
-		let progress = bigFlipper.getProgressElement();
-
-		// get progress max
-		let progressMaxValue = progress.getAttribute('max');
-
-		// divide progress max by length of images
-		let progressSteps = progressMaxValue / this.images.length;
-
-		// convert progress value to number
-		progressSteps = Number(progressSteps);
-
 		progress.setAttribute('value', progressSteps);
+		let progressTextValue = this.getProgressTextElement();
+		progressTextValue.innerText = `${progressSteps}%`;
 	},
 
-	// init
-	init: function(){
-		// console.log('init');
-		let actionBtn = document.getElementById('action-button');
-		actionBtn.addEventListener("click", function () {
-			// console.log('button clicked');
-			bigFlipper.moveImageForward();
-		});
+	// Increments the progress based on the total number of images
+	incrementProgress: function() {
+		let progress = this.getProgressElement();
+		let progressValue = Number(progress.getAttribute('value'));
+		let progressMaxValue = Number(progress.getAttribute('max'));
+		let progressSteps = progressMaxValue / this.images.length;
 
-		let resetBtn = document.getElementById('reset-button');
-		resetBtn.addEventListener("click", function () {
-			console.log('reset button clicked');
-			bigFlipper.resetProgressToOne();
-		});
+		progressValue = (progressValue + progressSteps) <= progressMaxValue ? progressValue + progressSteps : progressSteps;
+		progress.setAttribute('value', progressValue);
+		let progressTextValue = this.getProgressTextElement();
+		progressTextValue.innerText = `${progressValue}%`;
+	},
 
-		bigFlipper.setWrapperHeight();
-		bigFlipper.makeFirstImageActive();
-		// bigFlipper.autom8();
-		bigFlipper.setProgress();
+	// Decrements the progress based on the total number of images
+	decrementProgress: function() {
+		let progress = this.getProgressElement();
+		let progressValue = Number(progress.getAttribute('value'));
+		let progressSteps = parseInt(progress.getAttribute('max'), 10) / this.images.length;
 
-		// if right arrow key is press move image
-		document.addEventListener('keydown', function(event) {
+		progressValue = (progressValue - progressSteps) >= 0 ? progressValue - progressSteps : 0;
+		progress.setAttribute('value', progressValue);
+		let progressTextValue = this.getProgressTextElement();
+		progressTextValue.innerText = `${progressValue}%`;
+	},
+
+	// Resets the progress to the initial state and restores the original image order
+	resetProgressToOne: function() {
+		this.setProgress();
+		this.restoreOriginalOrder();
+	},
+
+	// Initializes all functionalities
+	init: function() {
+		this.captureOriginalOrder();
+		this.setWrapperHeight();
+		this.makeFirstImageActive();
+		this.setProgress();
+
+		document.getElementById('action-button').addEventListener("click", () => this.moveImageForward());
+		document.getElementById('reset-button').addEventListener("click", () => this.resetProgressToOne());
+
+		document.addEventListener('keydown', event => {
 			if(event.key === "ArrowRight") {
-				bigFlipper.moveImageForward();
+				this.moveImageForward();
+			} else if(event.key === "ArrowLeft") {
+				this.moveImageBack();
 			}
 		});
-
-		// if left arrow key is press move image back
-		document.addEventListener('keydown', function(event) {
-			if(event.key === "ArrowLeft") {
-				bigFlipper.moveImageBack();
-			}
-		});
-	},
-
+	}
 };
 
-// window.onload = bigFlipper.init();
-
-// onpageload and if element with class of big-flipper exists load bigFlipper
-window.onload = function () {
+// Load bigFlipper when the page loads if the big-flipper class exists
+window.onload = function() {
 	if (document.getElementsByClassName('big-flipper').length > 0) {
 		bigFlipper.init();
 	}
