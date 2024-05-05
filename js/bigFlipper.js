@@ -73,22 +73,34 @@ const bigFlipper = {
 		let progressMaxValue = Number(progress.getAttribute('max'));
 		let progressSteps = progressMaxValue / this.images.length;
 
-		progressValue = (progressValue + progressSteps) <= progressMaxValue ? progressValue + progressSteps : progressSteps;
+		// Ensure we loop back to the start if we exceed the max
+		if (progressValue + progressSteps > progressMaxValue) {
+			progressValue = progressSteps; // Reset to the first step, if looping is desired
+		} else {
+			progressValue += progressSteps;
+		}
 		progress.setAttribute('value', progressValue);
 		let progressTextValue = this.getProgressTextElement();
-		progressTextValue.innerText = `${progressValue}%`;
+		progressTextValue.innerText = `${Math.min(progressValue, progressMaxValue).toFixed(1)}%`; // Ensure it does not display over 100%
 	},
 
 	// Decrements the progress based on the total number of images
 	decrementProgress: function() {
 		let progress = this.getProgressElement();
 		let progressValue = Number(progress.getAttribute('value'));
-		let progressSteps = parseInt(progress.getAttribute('max'), 10) / this.images.length;
+		let progressMaxValue = Number(progress.getAttribute('max'));
+		let progressSteps = progressMaxValue / this.images.length;
 
-		progressValue = (progressValue - progressSteps) >= 0 ? progressValue - progressSteps : 0;
+		// When decrementing, if progressValue is at the first step, wrap around to 100%
+		if (progressValue - progressSteps <= 0) {
+			progressValue = progressMaxValue; // Wrap around to 100%
+		} else {
+			progressValue -= progressSteps;
+		}
+
 		progress.setAttribute('value', progressValue);
 		let progressTextValue = this.getProgressTextElement();
-		progressTextValue.innerText = `${progressValue}%`;
+		progressTextValue.innerText = `${progressValue.toFixed(1)}%`;
 	},
 
 	// Resets the progress to the initial state and restores the original image order
