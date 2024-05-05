@@ -116,9 +116,6 @@ include_once(INCLUDES_PATH . '/site-header.php');
                 ?>
             </select><br />
 
-            <label for="favorite">Favorite:</label>
-            <input type="checkbox" id="favorite" name="favorite" <?php echo ($contact['favorite'] ? 'checked' : ''); ?>><br />
-
             <label for="image">Upload Image:</label>
             <input type="file" name="image" id="image"><br />
 
