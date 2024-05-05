@@ -37,6 +37,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
                 <option value="first_name" <?php echo ($sort == 'first_name') ? 'selected' : ''; ?>>First Name</option>
                 <option value="last_name" <?php echo ($sort == 'last_name') ? 'selected' : ''; ?>>Last Name</option>
                 <option value="email" <?php echo ($sort == 'email') ? 'selected' : ''; ?>>Email</option>
+                <option value="favorite" <?php echo ($sort == 'favorite') ? 'selected' : ''; ?>>Favorite</option>
             </select>
             <button type="submit">Sort</button>
         </form>
@@ -45,15 +46,16 @@ include_once(INCLUDES_PATH . '/site-header.php');
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
         <table class="table table-striped border">
             <thead class="thead-dark">
-                <tr>
-                    <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
-                    <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>
-                    <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
-                    <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
-                    <th scope="col">&nbsp;</th>
-                    <th scope="col">&nbsp;</th>
-                    <th scope="col">&nbsp;</th>
-                </tr>
+            <tr>
+                <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
+                <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>
+                <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
+                <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
+                <th scope="col"><a href="#" class="sort-header" data-sort="favorite">Favorite</a></th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">&nbsp;</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
             </thead>
 
             <tbody>
@@ -63,6 +65,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
                     <td><?php echo h($contact['first_name']); ?></td>
                     <td><?php echo h($contact['last_name']); ?></td>
                     <td><?php echo h($contact['email']); ?></td>
+                    <td><?php echo $contact['favorite'] ? 'Yes' : 'No'; ?></td>
                     <td><a class="action btn d-block mx-auto btn-info" href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>">View</a></td>
                     <td><a class="action btn d-block mx-auto btn-warning" href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>">Edit</a></td>
                     <td><a class="action btn d-block mx-auto btn-danger" href="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>">Delete</a></td>

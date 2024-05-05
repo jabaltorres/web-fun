@@ -316,23 +316,31 @@
 
 
     // Contacts
-    function find_all_contacts($sort='id') {
-        global $db;
+function find_all_contacts($sort='id') {
+    global $db;
 
-        // Define a whitelist of sortable columns
-        $valid_sort_columns = ['id', 'first_name', 'last_name', 'email'];
-        // Ensure the provided sort parameter is in the whitelist
-        if (!in_array($sort, $valid_sort_columns)) {
-            $sort = 'id'; // Default to 'id' if an invalid sort parameter is provided
-        }
-
-        $sql = "SELECT * FROM contact_list ";
-        $sql .= "ORDER BY " . $sort . " ASC"; // Append the valid sort parameter
-        //echo $sql;
-        $result = mysqli_query($db, $sql);
-        confirm_result_set($result);
-        return $result;
+    // Define a whitelist of sortable columns
+    $valid_sort_columns = ['id', 'first_name', 'last_name', 'email', 'favorite'];
+    // Ensure the provided sort parameter is in the whitelist
+    if (!in_array($sort, $valid_sort_columns)) {
+        $sort = 'id'; // Default to 'id' if an invalid sort parameter is provided
     }
+
+    $sql = "SELECT * FROM contact_list ";
+    // Check if the sort parameter is 'favorite', then sort DESC, otherwise sort ASC
+    if ($sort == 'favorite') {
+        $sql .= "ORDER BY " . $sort . " DESC"; // Favorited contacts will appear at the top
+    } else {
+        $sql .= "ORDER BY " . $sort . " ASC"; // Ascending order for other columns
+    }
+
+    // echo $sql; // For debugging
+
+    // Execute the SQL query
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result); // Check the result set
+    return $result;
+}
 
 
 function find_contact_by_id($id) {
@@ -403,9 +411,7 @@ function find_contact_by_id($id) {
     function update_contact($contact) {
         global $db;
 
-
         $rank_id = empty($contact['rank_id']) ? 'NULL' : db_escape($db, $contact['rank_id']); // Handle empty rank_id
-
 
         $errors = validate_contact($contact);
         if (!empty($errors)) {
@@ -418,7 +424,8 @@ function find_contact_by_id($id) {
         $sql .= "email='" . db_escape($db, $contact['email']) . "', ";
         $sql .= "comments='" . db_escape($db, $contact['comments']) . "', ";
         $sql .= "contact_number='" . db_escape($db, $contact['contact_number']) . "', ";
-        $sql .= "rank_id=" . $rank_id . " "; // Directly use NULL if rank_id is not set
+        $sql .= "favorite=" . (int)$contact['favorite'] . ", "; // Update favorite status
+        $sql .= "rank_id=" . $rank_id; // Directly use NULL if rank_id is not set
 
         // Add the image field only if a new image was uploaded
         if (!empty($contact['image'])) {
@@ -439,7 +446,8 @@ function find_contact_by_id($id) {
         }
     }
 
-    function delete_contact($id) {
+
+function delete_contact($id) {
         global $db;
 
         $sql = "DELETE FROM contact_list ";
