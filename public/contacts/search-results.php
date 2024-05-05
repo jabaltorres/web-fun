@@ -37,36 +37,44 @@ include_once(INCLUDES_PATH . '/site-header.php');
 
     <h1><?php echo $page_heading; ?></h1>
 
-    <?php if (mysqli_num_rows($contacts) > 0): ?>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php while ($contact = mysqli_fetch_assoc($contacts)) : ?>
+    <div class="content mb-5">
+        <?php if (mysqli_num_rows($contacts) > 0): ?>
+            <table class="table table-striped">
+                <thead class="thead-dark">
                 <tr>
-                    <td><?php echo h($contact['id']); ?></td>
-                    <td><?php echo h($contact['first_name']); ?></td>
-                    <td><?php echo h($contact['last_name']); ?></td>
-                    <td><?php echo h($contact['email']); ?></td>
-                    <td>
-                        <a href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>" class="btn btn-info btn-sm">View</a>
-                        <a href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>No contacts found matching your search criteria.</p>
-    <?php endif; ?>
+                </thead>
+                <tbody>
+                <?php while ($contact = mysqli_fetch_assoc($contacts)) : ?>
+                    <tr>
+                        <td><?php echo h($contact['id']); ?></td>
+                        <td><?php echo h($contact['first_name']); ?></td>
+                        <td><?php echo h($contact['last_name']); ?></td>
+                        <td><?php echo h($contact['email']); ?></td>
+                        <td>
+                            <a href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>" class="btn btn-info btn-sm">View</a>
+                            <a href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <div class="alert alert-info" role="alert">
+                <p>No contacts found matching your search criteria.</p>
+            </div>
+        <?php endif; ?>
+    </div>
+
+
+
+    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 
     <?php mysqli_free_result($contacts); ?>
 </div>
