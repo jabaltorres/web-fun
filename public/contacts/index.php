@@ -42,6 +42,12 @@ include_once(INCLUDES_PATH . '/site-header.php');
             <button type="submit">Sort</button>
         </form>
 
+        <!-- index.php -->
+        <form action="search-results.php" method="get">
+            <input type="text" name="search" placeholder="Search contacts..." required>
+            <button type="submit">Search</button>
+        </form>
+
         <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
         <table class="table table-striped border">
@@ -52,9 +58,7 @@ include_once(INCLUDES_PATH . '/site-header.php');
                 <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
                 <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
                 <th scope="col"><a href="#" class="sort-header" data-sort="favorite">Favorite</a></th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
-                <th scope="col">&nbsp;</th>
+                <th>Actions</th>
             </tr>
             </thead>
 
@@ -66,10 +70,11 @@ include_once(INCLUDES_PATH . '/site-header.php');
                     <td><?php echo h($contact['last_name']); ?></td>
                     <td><?php echo h($contact['email']); ?></td>
                     <td><?php echo $contact['favorite'] ? 'Yes' : 'No'; ?></td>
-                    <td><a class="action btn d-block mx-auto btn-info" href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>">View</a></td>
-                    <td><a class="action btn d-block mx-auto btn-warning" href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>">Edit</a></td>
-                    <td><a class="action btn d-block mx-auto btn-danger" href="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>">Delete</a></td>
-                </tr>
+                    <td>
+                        <a href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>" class="btn btn-info btn-sm">View</a>
+                        <a href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
             <?php endwhile; ?>
             <?php mysqli_free_result($contact_set); ?>
             </tbody>
