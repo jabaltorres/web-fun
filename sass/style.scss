@@ -313,8 +313,23 @@ article {
   }
 }
 
+// ============================================================
+// Page: Lorem Ipsum
+// ============================================================
 .page-lorem-ipsum {
   #accordion button[aria-expanded="true"] {
     background-color: $secondary;
+  }
+}
+
+// ============================================================
+// Page: Contact Search Results
+// ============================================================
+.search-results-page{
+  .alert.alert-info{
+    // last paragraph
+    p:last-child{
+      margin-bottom: 0;
+    }
   }
 }
