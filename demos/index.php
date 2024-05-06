@@ -41,6 +41,7 @@ $page_demo_links = [
     ['id' => '10', 'visible' => '1', 'demo_page' => 'Lorem Ipsum', 'page_url' => 'lorem-ipsum.php'],
     ['id' => '11', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
     ['id' => '12', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/forms.php'],
+    ['id' => '13', 'visible' => '1', 'demo_page' => 'Scratch', 'page_url' => 'scratch.php'],
 ];
 ?>
 
