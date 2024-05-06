@@ -1,39 +1,50 @@
 <?php
+
+// Turn on PHP error reporting
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Create database connection
-    $conn = new mysqli(DB_SERVER, DB_USER, DB_USER, DB_NAME);
+    $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME); // Fixed typo from DB_USER to DB_PASS
 
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Prepare and bind
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, username, password_hash, role) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $first_name, $last_name, $email, $username, $hashed_password, $role);
-
-    // Set parameters and execute
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password']; // Capture confirm password from form
     $role = $_POST['role'];
 
-    // Hash the password
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    if ($stmt->execute()) {
-        echo "New user added successfully";
+    // Validate password and confirm password
+    if ($password !== $confirm_password) {
+        echo "Passwords do not match.";
     } else {
-        echo "Error: " . $stmt->error;
-    }
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $stmt->close();
+        // Prepare and bind
+        $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, username, password_hash, role) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $first_name, $last_name, $email, $username, $hashed_password, $role);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "New user added successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
     $conn->close();
 }
 ?>
@@ -57,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="text" id="username" name="username" required><br>
     <label for="password">Password:</label><br>
     <input type="password" id="password" name="password" required><br>
+    <label for="confirm_password">Confirm Password:</label><br>
+    <input type="password" id="confirm_password" name="confirm_password" required><br>
     <label for="role">Role:</label><br>
     <select id="role" name="role" required>
         <option value="Administrator">Administrator</option>
