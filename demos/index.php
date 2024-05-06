@@ -29,17 +29,18 @@ $page_demo_subheader->setContent("This is where I will list all of my demos");
 
 // Links to demo pages
 $page_demo_links = [
-    ['id' => '0', 'visible' => '1', 'demo_page' => 'Audio', 'page_url' => 'audio-player.php'],
-    ['id' => '1', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
-    ['id' => '2', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],
-    ['id' => '3', 'visible' => '1', 'demo_page' => 'Heroes', 'page_url' => 'heroes.php'],
-    ['id' => '4', 'visible' => '1', 'demo_page' => 'Contacts', 'page_url' =>  '/public/contacts/index.php'],
-    ['id' => '5', 'visible' => '1', 'demo_page' => 'Globe Bank', 'page_url' =>  '/public/index.php'],
-    ['id' => '6', 'visible' => '1', 'demo_page' => 'JS Objects', 'page_url' => 'js-objects.php'],
-    ['id' => '7', 'visible' => '1', 'demo_page' => 'Host Info', 'page_url' => 'host-info.php'],
-    ['id' => '8', 'visible' => '1', 'demo_page' => 'Lorem Ipsum', 'page_url' => 'lorem-ipsum.php'],
-    ['id' => '9', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
-    ['id' => '10', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/forms.php'],
+    ['id' => '1', 'visible' => '1', 'demo_page' => 'Contacts', 'page_url' =>  '/public/contacts/index.php'],
+    ['id' => '2', 'visible' => '1', 'demo_page' => 'Admin Area', 'page_url' =>  '/public/staff/admins/'],
+    ['id' => '3', 'visible' => '1', 'demo_page' => 'Globe Bank', 'page_url' =>  '/public/index.php'],
+    ['id' => '4', 'visible' => '1', 'demo_page' => 'Audio', 'page_url' => 'audio-player.php'],
+    ['id' => '5', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
+    ['id' => '6', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],
+    ['id' => '7', 'visible' => '1', 'demo_page' => 'Heroes', 'page_url' => 'heroes.php'],
+    ['id' => '8', 'visible' => '1', 'demo_page' => 'JS Objects', 'page_url' => 'js-objects.php'],
+    ['id' => '9', 'visible' => '1', 'demo_page' => 'Host Info', 'page_url' => 'host-info.php'],
+    ['id' => '10', 'visible' => '1', 'demo_page' => 'Lorem Ipsum', 'page_url' => 'lorem-ipsum.php'],
+    ['id' => '11', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
+    ['id' => '12', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/forms.php'],
 ];
 ?>
 

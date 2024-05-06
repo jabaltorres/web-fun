@@ -1,3 +1,6 @@
+<?php
+    $url = $url ?? '';
+?>
 <!doctype html>
 
 <html lang="en">
@@ -8,8 +11,8 @@
             echo ' [PREVIEW]';
         } ?></title>
     <meta charset="utf-8">
-<!--    <link rel="stylesheet" href="/css/style.css">-->
-    <link rel="stylesheet" media="all" href="<?php echo url_for('/stylesheets/public.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css">
+    <link rel="stylesheet" href="<?php echo $url; ?>/css/public.css">
 </head>
 
 <body>
@@ -17,7 +20,7 @@
     <header>
         <h1>
             <a href="<?php echo url_for('/index.php'); ?>">
-                <img src="<?php echo url_for('/images/gbi_logo.png'); ?>" width="298" height="71" alt=""/>
+                <img class="logo" src="<?php echo url_for('/images/gbi_logo.png'); ?>" alt="logo"/>
             </a>
         </h1>
     </header>
