@@ -1,13 +1,11 @@
 <?php
-$servername = "localhost"; // Adjust as necessary
-$username = "root"; // Adjust as necessary
-$password = "root"; // Adjust as necessary
-$dbname = "lorem_test_db"; // Adjust as necessary
+require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+require_login();
 
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Create database connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli(DB_SERVER, DB_USER, DB_USER, DB_NAME);
 
     // Check connection
     if ($conn->connect_error) {
