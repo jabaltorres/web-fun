@@ -2,9 +2,9 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
-$title = "DB Test Page";
-$page_heading = "This is the DB Test page";
-$page_subheading = "Welcome to the DB test page";
+$title = "Contact Page";
+$page_heading = "This is the Contacts Page";
+$page_subheading = "Welcome to the Contacts page";
 $custom_class = "db-test-page";
 
 // Retrieve sort parameter from GET request or default to 'id'
