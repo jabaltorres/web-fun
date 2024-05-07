@@ -26,7 +26,6 @@ form{
   }
   @include medium-screen{
     border:solid thin $color-accent;
-    max-width:400px;
     margin-left:auto;
     margin-right:auto;
   }

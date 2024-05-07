@@ -81,14 +81,14 @@ include_once(INCLUDES_PATH . '/site-header.php');
             <fieldset class="mb-4">
                 <legend>User Role</legend>
                 <label for="role">Role:</label>
-                <select id="role" name="role" required>
+                <select id="role" name="role" class="form-control" required>
                     <option value="Administrator">Administrator</option>
                     <option value="Manager">Manager</option>
                     <option value="Standard User">Standard User</option>
-                    <option value="Guest">Guest</option>
+                    <option value="Guest" selected>Guest</option>
                 </select>
             </fieldset>
-            <input type="submit" value="Add User">
+            <input type="submit" class="btn btn-primary" value="Add User">
         </form>
     </section>
 </div>

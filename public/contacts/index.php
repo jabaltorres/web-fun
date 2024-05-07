@@ -29,24 +29,54 @@ include_once(INCLUDES_PATH . '/site-header.php');
         ?>
     </section>
 
-    <section>
-        <form action="index.php" method="get">
-            <label for="sort">Sort by:</label>
-            <select id="sort" name="sort">
-                <option value="id" <?php echo ($sort == 'id') ? 'selected' : ''; ?>>ID</option>
-                <option value="first_name" <?php echo ($sort == 'first_name') ? 'selected' : ''; ?>>First Name</option>
-                <option value="last_name" <?php echo ($sort == 'last_name') ? 'selected' : ''; ?>>Last Name</option>
-                <option value="email" <?php echo ($sort == 'email') ? 'selected' : ''; ?>>Email</option>
-                <option value="favorite" <?php echo ($sort == 'favorite') ? 'selected' : ''; ?>>Favorite</option>
-            </select>
-            <button type="submit">Sort</button>
-        </form>
+    <div class="row">
+        <div class="col">
+            <form action="index.php" method="get">
+                <div class="form-row">
+                    <div class="col">
+                        <span class="font-weight-bold">Sort</span>
+                    </div>
+                </div>
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <label for="sort" class="sr-only">Sort by:</label>
+                        <select id="sort" class="custom-select" name="sort">
+                            <option value="id" <?php echo ($sort == 'id') ? 'selected' : ''; ?>>ID</option>
+                            <option value="first_name" <?php echo ($sort == 'first_name') ? 'selected' : ''; ?>>First Name</option>
+                            <option value="last_name" <?php echo ($sort == 'last_name') ? 'selected' : ''; ?>>Last Name</option>
+                            <option value="email" <?php echo ($sort == 'email') ? 'selected' : ''; ?>>Email</option>
+                            <option value="favorite" <?php echo ($sort == 'favorite') ? 'selected' : ''; ?>>Favorite</option>
+                        </select>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Sort</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-        <!-- index.php -->
-        <form action="search-results.php" method="get">
-            <input type="text" name="search" placeholder="Search contacts..." required>
-            <button type="submit">Search</button>
-        </form>
+        <div class="col">
+            <form action="search-results.php" method="get">
+                <div class="form-row">
+                    <div class="col">
+                        <span class="font-weight-bold">Search</span>
+                    </div>
+                </div>
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <label for="search" class="sr-only">Search:</label>
+                        <input type="text" id="search" class="form-control" name="search" placeholder="Search contacts..." required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <section>
+
 
         <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
