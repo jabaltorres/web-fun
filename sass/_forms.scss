@@ -2,10 +2,9 @@ form{
   margin-bottom: $global-margin;
   label{
     display: block;
-    margin-bottom: $global-margin / 2;
+    margin-bottom: calc($global-margin / 2);
   }
   input[type="checkbox"]{
-   border:solid thin red;
    margin: 10px;
   }
   input[type="text"], 

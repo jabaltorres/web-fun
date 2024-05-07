@@ -94,7 +94,7 @@ section {
   }
 
   h1 {
-    margin-bottom: $global-margin / 2;
+    margin-bottom: calc($global-margin / 2);
   }
 }
 

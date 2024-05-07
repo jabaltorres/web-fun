@@ -5,7 +5,7 @@ require_login();
 $title = "Contact Page";
 $page_heading = "This is the Contacts Page";
 $page_subheading = "Welcome to the Contacts page";
-$custom_class = "db-test-page";
+$custom_class = "contacts-page";
 
 // Retrieve sort parameter from GET request or default to 'id'
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
@@ -76,8 +76,6 @@ include_once(INCLUDES_PATH . '/site-header.php');
     </div>
 
     <section>
-
-
         <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
         <table class="table table-striped border">
