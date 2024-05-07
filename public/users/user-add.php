@@ -47,37 +47,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $conn->close();
 }
+
+
+include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add New User</title>
-</head>
-<body>
-<h2>Add New User</h2>
-<form action="user-add.php" method="post">
-    <label for="first_name">First Name:</label><br>
-    <input type="text" id="first_name" name="first_name" required><br>
-    <label for="last_name">Last Name:</label><br>
-    <input type="text" id="last_name" name="last_name" required><br>
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br>
-    <label for="username">Username:</label><br>
-    <input type="text" id="username" name="username" required><br>
-    <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password" required><br>
-    <label for="confirm_password">Confirm Password:</label><br>
-    <input type="password" id="confirm_password" name="confirm_password" required><br>
-    <label for="role">Role:</label><br>
-    <select id="role" name="role" required>
-        <option value="Administrator">Administrator</option>
-        <option value="Manager">Manager</option>
-        <option value="Standard User">Standard User</option>
-        <option value="Guest">Guest</option>
-    </select><br><br>
-    <input type="submit" value="Add User">
-</form>
-</body>
-</html>
+
+<div class="container">
+    <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
+    <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
+
+    <h2>Add New User</h2>
+    <section>
+        <form action="user-add.php" method="post">
+            <fieldset class="mb-4">
+                <legend>Personal Information</legend>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </fieldset>
+            <fieldset class="mb-4">
+                <legend>Account Details</legend>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+            </fieldset>
+            <fieldset class="mb-4">
+                <legend>User Role</legend>
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="Administrator">Administrator</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Standard User">Standard User</option>
+                    <option value="Guest">Guest</option>
+                </select>
+            </fieldset>
+            <input type="submit" value="Add User">
+        </form>
+    </section>
+</div>
+
+<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
