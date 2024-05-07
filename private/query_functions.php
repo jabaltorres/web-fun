@@ -316,34 +316,34 @@
 
 
     // Contacts
-function find_all_contacts($sort='id') {
-    global $db;
+    function find_all_contacts($sort='id') {
+        global $db;
 
-    // Define a whitelist of sortable columns
-    $valid_sort_columns = ['id', 'first_name', 'last_name', 'email', 'favorite'];
-    // Ensure the provided sort parameter is in the whitelist
-    if (!in_array($sort, $valid_sort_columns)) {
-        $sort = 'id'; // Default to 'id' if an invalid sort parameter is provided
+        // Define a whitelist of sortable columns
+        $valid_sort_columns = ['id', 'first_name', 'last_name', 'email', 'favorite'];
+        // Ensure the provided sort parameter is in the whitelist
+        if (!in_array($sort, $valid_sort_columns)) {
+            $sort = 'id'; // Default to 'id' if an invalid sort parameter is provided
+        }
+
+        $sql = "SELECT * FROM contact_list ";
+        // Check if the sort parameter is 'favorite', then sort DESC, otherwise sort ASC
+        if ($sort == 'favorite') {
+            $sql .= "ORDER BY " . $sort . " DESC"; // Favorited contacts will appear at the top
+        } else {
+            $sql .= "ORDER BY " . $sort . " ASC"; // Ascending order for other columns
+        }
+
+        // echo $sql; // For debugging
+
+        // Execute the SQL query
+        $result = mysqli_query($db, $sql);
+        confirm_result_set($result); // Check the result set
+        return $result;
     }
 
-    $sql = "SELECT * FROM contact_list ";
-    // Check if the sort parameter is 'favorite', then sort DESC, otherwise sort ASC
-    if ($sort == 'favorite') {
-        $sql .= "ORDER BY " . $sort . " DESC"; // Favorited contacts will appear at the top
-    } else {
-        $sql .= "ORDER BY " . $sort . " ASC"; // Ascending order for other columns
-    }
 
-    // echo $sql; // For debugging
-
-    // Execute the SQL query
-    $result = mysqli_query($db, $sql);
-    confirm_result_set($result); // Check the result set
-    return $result;
-}
-
-
-function find_contact_by_id($id) {
+    function find_contact_by_id($id) {
         global $db;
         $sql = "SELECT contact_list.*, rankings.rank_description FROM contact_list ";
         $sql .= "LEFT JOIN rankings ON contact_list.rank_id = rankings.rank_id ";
@@ -447,7 +447,7 @@ function find_contact_by_id($id) {
     }
 
 
-function delete_contact($id) {
+    function delete_contact($id) {
         global $db;
 
         $sql = "DELETE FROM contact_list ";
