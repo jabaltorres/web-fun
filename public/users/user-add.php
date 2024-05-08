@@ -1,9 +1,4 @@
 <?php
-
-// Turn on PHP error reporting
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login();
 
