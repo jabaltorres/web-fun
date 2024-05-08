@@ -78,7 +78,25 @@ foreach(glob('classes/*.class.php') as $file) {
 // Autoload class definitions
 function lorem_autoload($class) {
     if(preg_match('/\A\w+\Z/', $class)) {
-        include($_SERVER['DOCUMENT_ROOT'] . '/private/classes/' . $class . '.class.php');
+        include('classes/' . $class . '.class.php');
     }
 }
-spl_autoload_register('lorem_autoload');
+
+/**
+ * Autoload function for loading PHP classes dynamically.
+ * Tries to load classes based on namespace first,
+ * then falls back to a simple naming convention if necessary.
+ */
+spl_autoload_register(function ($class) {
+    // Check if the class file exists based on namespace
+    $file = $_SERVER['DOCUMENT_ROOT'] . '/private/classes/' . str_replace('\\', '/', $class) . '.php';
+    if (file_exists($file)) {
+        include $file;
+    } elseif (preg_match('/\A\w+\Z/', $class)) {
+        // If the class file doesn't exist based on namespace, try simple naming convention
+        $file = __DIR__ . '/classes/' . $class . '.class.php';
+        if (file_exists($file)) {
+            include $file;
+        }
+    }
+});
