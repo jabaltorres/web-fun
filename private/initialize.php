@@ -78,7 +78,7 @@ foreach(glob('classes/*.class.php') as $file) {
 // Autoload class definitions
 function lorem_autoload($class) {
     if(preg_match('/\A\w+\Z/', $class)) {
-        include('classes/' . $class . '.class.php');
+        include($_SERVER['DOCUMENT_ROOT'] . '/private/classes/' . $class . '.class.php');
     }
 }
 spl_autoload_register('lorem_autoload');
