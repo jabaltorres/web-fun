@@ -45,28 +45,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-<h1>Login</h1>
-<h4><?= $loggedInMessage ?></h4>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_header.php'); ?>
 
-<?php if (isset($_SESSION['user_id'])): ?>
-    <form method="post">
-        <input type="submit" name="logout" value="Log Out">
-    </form>
-    <a href="index.php">Go to main page</a>
-<?php else: ?>
-    <form method="post">
-        Username: <input type="text" name="username"><br>
-        Password: <input type="password" name="password"><br>
-        <input type="submit" value="Login">
-    </form>
-<?php endif; ?>
+<div class="container">
+    <h1>Login</h1>
+    <h4><?= $loggedInMessage ?></h4>
 
-<?php if (!empty($error)) echo "<p>$error</p>"; ?>
-</body>
-</html>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <form method="post">
+            <input type="submit" name="logout" value="Log Out" class="btn btn-primary">
+        </form>
+        <a href="index.php">Go to main page</a>
+    <?php else: ?>
+        <form method="post">
+            Username: <input type="text" name="username"><br>
+            Password: <input type="password" name="password"><br>
+            <input type="submit" value="Login" class="btn btn-primary">
+        </form>
+    <?php endif; ?>
+
+    <?php if (!empty($error)) echo "<p>$error</p>"; ?>
+</div>
+
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_footer.php'); ?>
