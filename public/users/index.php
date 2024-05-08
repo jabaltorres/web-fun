@@ -1,6 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login(); // Ensure the user is logged in
+//require_login(); // Ensure the user is logged in
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/classes/KrateUserManager.php'); // Ensure this path is correct
 
@@ -19,6 +19,9 @@ $user = new KrateUserManager($conn);
 
 // Fetch all users from the database
 $result = $user->getAllUsers();
+
+// Check if user is logged in
+$loggedIn = isset($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +45,17 @@ $result = $user->getAllUsers();
 </head>
 <body>
 <h2>User List</h2>
+
+<section class="user-content">
+    <?php if ($loggedIn): ?>
+        <p>Welcome, <?= htmlspecialchars($_SESSION['username']) ?>! Here is the exclusive content for logged-in users.</p>
+        <form method="post" action="logout.php"> <!-- Point this form to your logout script -->
+            <input type="submit" value="Log Out">
+        </form>
+    <?php else: ?>
+        <p>Please <a href="login.php">log in</a> to view this section.</p>
+    <?php endif; ?>
+</section>
 
 <?php if ($result && $result->num_rows > 0): ?>
     <table>
