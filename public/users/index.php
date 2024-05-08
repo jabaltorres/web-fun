@@ -1,7 +1,8 @@
 <?php
-
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 require_login(); // Ensure the user is logged in
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/private/classes/KrateUserManager.php'); // Ensure this path is correct
 
 // Create database connection
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -11,9 +12,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query to fetch all users from the database
-$sql = "SELECT user_id, first_name, last_name, email, username, role FROM users";
-$result = $conn->query($sql);
+use FiveTwoFive\KrateCMS\UserManagement\KrateUserManager;
+
+// Now you can instantiate the User class
+$user = new KrateUserManager($conn);
+
+// Fetch all users from the database
+$result = $user->getAllUsers();
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +43,7 @@ $result = $conn->query($sql);
 <body>
 <h2>User List</h2>
 
-<?php if ($result->num_rows > 0): ?>
+<?php if ($result && $result->num_rows > 0): ?>
     <table>
         <thead>
         <tr>
@@ -66,11 +71,6 @@ $result = $conn->query($sql);
 <?php else: ?>
     <p>No users found.</p>
 <?php endif; ?>
-
-<?php
-// Close connection
-$conn->close();
-?>
 
 </body>
 </html>
