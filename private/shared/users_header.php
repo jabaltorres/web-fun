@@ -17,7 +17,7 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
     <div class="container">
-        <a class="navbar-brand" href="/public/users/">KrateCMS</a>
+        <a class="navbar-brand" href="/public/">KrateCMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

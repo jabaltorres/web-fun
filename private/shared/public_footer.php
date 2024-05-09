@@ -1,12 +1,19 @@
-  <footer>
-    <p>Copyright <?php echo date('Y'); ?>, Globe Bank International </p>
-  </footer>
+<footer class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="d-inline-block mx-2">&copy; <?php echo date('Y'); ?> KrateCMS</div>
+                <div class="d-inline-block mx-2">All rights reserved.</div>
+                <div class="d-inline-block mx-2">Made with love by FiveTwoFive</div>
+            </div>
+        </div>
+    </div>
+</footer>
 
-  <p>This is a fictitious company created by <a href="http://linkedin.com">LinkedIn Corporation, or its affiliates</a>, solely for the creation and development of educational training materials. Any resemblance to real products or services is purely coincidental. Information provided about the products or services is also fictitious and should not be construed as representative of actual products or services on the market in a similar product or service category.</p>
-
-  </body>
+<script src="<?php echo $url; ?>/dist/scripts/scripts.min.js"></script>
+</body>
 </html>
 
 <?php
-  db_disconnect($db);
+db_disconnect($db);
 ?>
