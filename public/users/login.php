@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($loginResult) {
         $_SESSION['user_id'] = $loginResult['user_id'];
         $_SESSION['username'] = $loginResult['username'];
+        $_SESSION['first_name'] = $loginResult['first_name'];  // Store first name in session
         header("Location: index.php"); // Redirect to the main page
         exit();
     } else {
@@ -48,8 +49,8 @@ $conn->close();
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_header.php'); ?>
 
 <div class="container">
-    <h1>Login</h1>
-    <h4><?= $loggedInMessage ?></h4>
+    <h1>User Login</h1>
+    <p><?= $loggedInMessage ?></p>
 
     <?php if (isset($_SESSION['user_id'])): ?>
         <form method="post">

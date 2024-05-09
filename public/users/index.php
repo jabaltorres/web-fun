@@ -28,10 +28,7 @@ $loggedIn = isset($_SESSION['user_id']);
 
     <section class="user-content">
         <?php if ($loggedIn): ?>
-            <p>Welcome, <?= htmlspecialchars($_SESSION['username']) ?>! Here is the exclusive content for logged-in users.</p>
-            <form method="post" action="logout.php"> <!-- Point this form to your logout script -->
-                <input type="submit" value="Log Out" class="btn btn-primary">
-            </form>
+            <p>Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
         <?php else: ?>
             <p>Please <a href="login.php">log in</a> to view this section.</p>
         <?php endif; ?>
