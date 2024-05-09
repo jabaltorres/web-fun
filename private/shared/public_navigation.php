@@ -5,7 +5,7 @@
   $visible = $visible ?? true;
 ?>
 
-<navigation>
+<div class="sidebar">
   <?php $nav_subjects = find_all_subjects(['visible' => $visible]); ?>
   <ul class="subjects">
     <?php while($nav_subject = mysqli_fetch_assoc($nav_subjects)) { ?>
@@ -34,4 +34,4 @@
     <?php } // while $nav_subjects ?>
   </ul>
   <?php mysqli_free_result($nav_subjects); ?>
-</navigation>
+</div>
