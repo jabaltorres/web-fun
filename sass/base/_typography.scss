@@ -9,32 +9,34 @@ h1, h2, h3, h4, h5, h6 {
   //font-family: serif;
 }
 
-h1 {
-  font-size: $h1-font-size;
-}
-h2 {
-  font-size: $h2-font-size;
-}
-h3 {
-  font-size: $h3-font-size;
-}
-h4 {
-  font-size: $h4-font-size;
-}
-h5 {
-  font-size: $h5-font-size;
-}
-h6 {
-  font-size: $h6-font-size;
-}
+//h1 {
+//  font-size: $h1-font-size;
+//}
+//h2 {
+//  font-size: $h2-font-size;
+//}
+//h3 {
+//  font-size: $h3-font-size;
+//}
+//h4 {
+//  font-size: $h4-font-size;
+//}
+//h5 {
+//  font-size: $h5-font-size;
+//}
+//h6 {
+//  font-size: $h6-font-size;
+//}
 
 h1,h2,h3,h4,h5,h6{
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
 }
+
 p{
   line-height: 1.5em;
 }
+
 body{
   font-family: 'Open Sans', sans-serif;
 }
