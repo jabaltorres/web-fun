@@ -7,7 +7,7 @@
 
 <html lang="en">
   <head>
-    <title>GBI - <?php echo h($page_title); ?></title>
+    <title>KrateCMS - <?php echo h($page_title); ?></title>
     <meta charset="utf-8">
       <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css">
       <link rel="stylesheet" href="<?php echo $url; ?>/css/staff.css">

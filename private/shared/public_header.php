@@ -28,10 +28,25 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="/public/blog/">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/public/brand/">Brand</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/public/components/">Components</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/public/contacts/">Contacts</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/public/elements/">Elements</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/public/users/">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/public/staff/">Staff</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/public/staff/admins/">Admins</a>

@@ -30,7 +30,7 @@ $loggedIn = isset($_SESSION['user_id']);
         <?php if ($loggedIn): ?>
             <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
         <?php else: ?>
-            <p>Please <a href="login.php">log in</a> to view this section.</p>
+            <p class="mb-0">Please <a href="login.php">log in</a> to view this section.</p>
         <?php endif; ?>
     </section>
 

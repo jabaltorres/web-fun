@@ -7,10 +7,10 @@
 
 <div class="sidebar">
   <?php $nav_subjects = find_all_subjects(['visible' => $visible]); ?>
-  <ul class="subjects">
+  <ul class="list-group subjects">
     <?php while($nav_subject = mysqli_fetch_assoc($nav_subjects)) { ?>
       <?php // if(!$nav_subject['visible']) { continue; } ?>
-      <li class="<?php if($nav_subject['id'] == $subject_id) { echo 'selected'; } ?>">
+      <li class="list-group-item <?php if($nav_subject['id'] == $subject_id) { echo 'selected'; } ?>">
         <a href="<?php echo url_for('index.php?subject_id=' . h(u($nav_subject['id']))); ?>">
           <?php echo h($nav_subject['menu_name']); ?>
         </a>

@@ -18,12 +18,13 @@
   include_once('includes/site-header.php');
 ?>
   
+<?php
+    include_once(INCLUDES_PATH . '/masthead.php');
+    include_once(INCLUDES_PATH . '/navigation.php');
+?>
+
 <div class="container <?php echo $custom_class; ?>">
-  
-    <?php
-        include_once(INCLUDES_PATH . '/masthead.php');
-        include_once(INCLUDES_PATH . '/navigation.php');
-    ?>
+
 
     <div class="jumbotron">
         <h1 class="display-4"><?php echo $page_heading; ?></h1>

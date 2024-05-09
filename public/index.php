@@ -1,4 +1,10 @@
-<?php require_once('../private/initialize.php'); ?>
+<?php
+    require_once('../private/initialize.php');
+
+    // Check if user is logged in
+    $loggedIn = isset($_SESSION['user_id']);
+
+?>
 
 <?php
 
@@ -43,13 +49,20 @@ if(isset($_GET['id'])) {
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
 <div id="main" class="homepage">
-
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <?php include(SHARED_PATH . '/public_navigation.php'); ?>
             </div>
             <div class="col-md-9">
+                <section class="user-content">
+                    <?php if ($loggedIn): ?>
+                        <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
+                    <?php else: ?>
+                        <p class="mb-0">Please <a href="login.php">log in</a> to view this section.</p>
+                    <?php endif; ?>
+                </section>
+
                 <div class="page">
                     <?php
                         if(isset($page)) {
@@ -69,7 +82,6 @@ if(isset($_GET['id'])) {
             </div>
         </div>
     </div>
-
 </div>
 
 <?php include(SHARED_PATH . '/public_footer.php'); ?>

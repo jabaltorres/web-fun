@@ -1,12 +1,11 @@
-<div id="content" class="">
-
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">KrateCMS</h1>
-            <p class="lead">Welcome to KrateCMS, a content management system built with PHP and MySQL.</p>
-        </div>
+<div id="hero" class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">KrateCMS</h1>
+        <p class="lead">Welcome to KrateCMS, a content management system built with PHP and MySQL.</p>
     </div>
+</div>
 
+<div id="content" class="content">
     <div class="row">
         <div class="col-4">
             <img class="mb-3" src="images/homepage_assets/family_buying_home_L30707.jpg" width="250" height="166" alt="Family in front of sold home"/>

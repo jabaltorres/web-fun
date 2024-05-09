@@ -29,16 +29,6 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
                 <li class="nav-item">
                     <a class="nav-link" href="/demos/">Demos</a>
                 </li>
-                <!-- Conditionally display login or logout link -->
-                <?php if ($is_logged_in): ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/public/users/logout.php">Logout</a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/public/users/login.php">Login</a>
-                    </li>
-                <?php endif; ?>
             </ul>
             <!-- Update navbar text to reflect user status -->
             <span class="navbar-text">
