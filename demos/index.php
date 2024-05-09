@@ -29,10 +29,10 @@ $page_demo_subheader->setContent("This is where I will list all of my demos");
 
 // Links to demo pages
 $page_demo_links = [
+    ['id' => 'crate-cms', 'visible' => '1', 'demo_page' => 'KrateCMS', 'page_url' =>  '/public/index.php'],
     ['id' => 'contacts', 'visible' => '1', 'demo_page' => 'Contacts', 'page_url' =>  '/public/contacts/index.php'],
     ['id' => 'users', 'visible' => '1', 'demo_page' => 'Users', 'page_url' =>  '/public/users/index.php'],
     ['id' => 'admin-area', 'visible' => '1', 'demo_page' => 'Admin Area', 'page_url' =>  '/public/staff/admins/'],
-    ['id' => 'globe-bank', 'visible' => '1', 'demo_page' => 'Globe Bank', 'page_url' =>  '/public/index.php'],
     ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio', 'page_url' => 'audio-player.php'],
     ['id' => 'flipper', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
     ['id' => 'javascript', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],
