@@ -28,33 +28,32 @@
     <div class="jumbotron">
         <h1 class="display-4"><?php echo $page_heading; ?></h1>
         <p class="lead"><?php echo $page_subheading; ?></p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="https://github.com/capitalJT/web-fun" role="button">Visit the repo</a>
-        </p>
+        <a class="btn btn-primary btn-lg" href="https://github.com/capitalJT/web-fun" role="button">Visit the repo</a>
     </div>
 
     <div class="row icon-example">
         <div class="col-12 col-md-4">
             <div class="card p-4 mb-4">
                 <span class="icon analyst-report text-center"></span>
-                <h3>Heading 3</h3>
+                <h3>KrateCMS</h3>
                 <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+                <a href="public/index.php" class="btn btn-primary">KrateCMS</a>
             </div>
         </div>
         <div class="col-12 col-md-4">
             <div class="card p-4 mb-4">
                 <span class="icon analyst-report text-center"></span>
-                <h3>Heading 3</h3>
+                <h3>Contacts</h3>
                 <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+                <a href="public/contacts/index.php" class="btn btn-primary">Contacts</a>
             </div>
         </div>
         <div class="col-12 col-md-4">
             <div class="card p-4 mb-4">
                 <span class="icon analyst-report text-center"></span>
-                <h3>Heading 3</h3>
+                <h3>Users</h3>
                 <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank. Picanha chuck shank flank shoulder pancetta ham hock turducken venison tenderloin t-bone.</p>
+                <a href="public/users/index.php" class="btn btn-primary">Users</a>
             </div>
         </div>
     </div>
