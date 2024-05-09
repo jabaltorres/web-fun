@@ -1,7 +1,5 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_login(); // Ensure the user is logged in
-
 require_once($_SERVER['DOCUMENT_ROOT'] . '/private/classes/KrateUserManager.php'); // Ensure this path is correct
 
 // Create database connection
@@ -19,58 +17,53 @@ $user = new KrateUserManager($conn);
 
 // Fetch all users from the database
 $result = $user->getAllUsers();
+
+// Check if user is logged in
+$loggedIn = isset($_SESSION['user_id']);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User List</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-<h2>User List</h2>
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_header.php'); ?>
+<div class="container">
+    <h1>User List</h1>
 
-<?php if ($result && $result->num_rows > 0): ?>
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Role</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php while ($row = $result->fetch_assoc()): ?>
+    <section class="user-content">
+        <?php if ($loggedIn): ?>
+            <p>Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
+        <?php else: ?>
+            <p>Please <a href="login.php">log in</a> to view this section.</p>
+        <?php endif; ?>
+    </section>
+
+    <?php if ($result && $result->num_rows > 0): ?>
+        <h3>All Users</h3>
+        <table class="table table-striped">
+            <thead class="thead-dark">
             <tr>
-                <td><?= htmlspecialchars($row['user_id']) ?></td>
-                <td><?= htmlspecialchars($row['first_name']) ?></td>
-                <td><?= htmlspecialchars($row['last_name']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['username']) ?></td>
-                <td><?= htmlspecialchars($row['role']) ?></td>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Role</th>
             </tr>
-        <?php endwhile; ?>
-        </tbody>
-    </table>
-<?php else: ?>
-    <p>No users found.</p>
-<?php endif; ?>
+            </thead>
+            <tbody>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= htmlspecialchars($row['user_id']) ?></td>
+                    <td><?= htmlspecialchars($row['first_name']) ?></td>
+                    <td><?= htmlspecialchars($row['last_name']) ?></td>
+                    <td><?= htmlspecialchars($row['email']) ?></td>
+                    <td><?= htmlspecialchars($row['username']) ?></td>
+                    <td><?= htmlspecialchars($row['role']) ?></td>
+                </tr>
+            <?php endwhile; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>No users found.</p>
+    <?php endif; ?>
+</div>
 
-</body>
-</html>
+
+<?php include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_footer.php'); ?>

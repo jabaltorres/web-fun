@@ -11,17 +11,17 @@ class KrateUserManager {
 
     public function login($username, $password) {
         // Prepare and execute the SQL query to find the user by username
-        $stmt = $this->db->prepare("SELECT user_id, password_hash FROM users WHERE username = ?");
+        $stmt = $this->db->prepare("SELECT user_id, password_hash, first_name FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows == 1) {
-            $stmt->bind_result($user_id, $hashed_password);
+            $stmt->bind_result($user_id, $hashed_password, $first_name);
             $stmt->fetch();
             if (password_verify($password, $hashed_password)) {
                 // Authentication successful
-                return ['user_id' => $user_id, 'username' => $username];
+                return ['user_id' => $user_id, 'username' => $username, 'first_name' => $first_name];
             } else {
                 // Authentication failed
                 return false;
@@ -75,6 +75,27 @@ class KrateUserManager {
         $stmt->execute();
         $result = $stmt->get_result();
         return $result;
+    }
+
+
+    /**
+     * Logs out the current user by clearing the session.
+     */
+    public function logout() {
+        // Check if a session is started
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            // If it's desired to kill the session, also delete the session cookie.
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000,
+                    $params["path"], $params["domain"],
+                    $params["secure"], $params["httponly"]
+                );
+            }
+
+            session_unset(); // Remove all session variables
+            session_destroy(); // Destroy the session
+        }
     }
 
 }
