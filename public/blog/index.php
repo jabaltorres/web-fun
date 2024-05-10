@@ -9,12 +9,12 @@ $addCSS = ""; // Placeholder for page-specific CSS if needed
 include_once(INCLUDES_PATH . '/site-header.php'); // Include the site header
 ?>
 
-<div class="container">
-    <?php
+<?php
     include_once(INCLUDES_PATH . '/masthead.php'); // Include the masthead
     include_once(INCLUDES_PATH . '/navigation.php'); // Include the navigation bar
-    ?>
+?>
 
+<div class="container">
     <div class="site-inner">
         <div class="row">
             <div class="col-12 col-md-8 mx-auto">

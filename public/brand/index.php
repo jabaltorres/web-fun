@@ -6,11 +6,12 @@
     include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
+
+
+<?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
+<?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
+
 <div class="container">
-
-    <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
-    <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
-
     <div class="site-inner">
         <div class="row">
             <div class="col-12 col-md-2 lorem-sidebar">
