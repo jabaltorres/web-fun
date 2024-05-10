@@ -139,11 +139,7 @@ section {
 }
 
 article {
-  display: block;
-  margin: 0 auto;
   @extend %margin-bottom;
-  padding: $global-padding;
-  border: $global-border;
 
   footer {
     border-top: $global-border;
