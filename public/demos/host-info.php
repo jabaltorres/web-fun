@@ -1,24 +1,24 @@
 <?php
-// this is for <title>
-$title = "Host Information details";
+    // this is for <title>
+    $title = "Host Information details";
 
-// This is for breadcrumbs if I want a custom title other than the default
-$page_title = "This is the host index file";
+    // This is for breadcrumbs if I want a custom title other than the default
+    $page_title = "This is the host index file";
 
-// This is the subheading
-$page_subheading = "Welcome to the Host Info page";
+    // This is the subheading
+    $page_subheading = "Welcome to the Host Info page";
 
-//custom CSS for this page only
-$custom_class = "host-page";
+    //custom CSS for this page only
+    $custom_class = "host-page";
 
-include_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
-// If not logged in, redirect to login page
-if (!is_logged_in()) {
-    redirect_to('../public/contacts/login.php');
-}
+    // If not logged in, redirect to login page
+    if (!is_logged_in()) {
+        redirect_to('/public/contacts/login.php');
+    }
 
-include_once(INCLUDES_PATH . '/site-header.php');
+    include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
     <div class="container">

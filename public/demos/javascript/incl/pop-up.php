@@ -7,7 +7,7 @@ $root = '';
 // $root = $_SERVER['DOCUMENT_ROOT'];
 
 // This is a temp hack
-$path = '../../public/images/Facebox/Images-Circle-640px/';
+$path = '../../images/Facebox/Images-Circle-640px/';
 
 // End of user modified section
 /////////////////////////////////////////////////////////////////////

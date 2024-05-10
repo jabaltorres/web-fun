@@ -27,7 +27,7 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
                     <a class="nav-link" href="/public/users/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/demos/">Demos</a>
+                    <a class="nav-link" href="/public/demos/">Demos</a>
                 </li>
             </ul>
             <!-- Update navbar text to reflect user status -->
