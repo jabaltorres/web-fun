@@ -59,7 +59,7 @@ if(isset($_GET['id'])) {
                     <?php if ($loggedIn): ?>
                         <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
                     <?php else: ?>
-                        <p class="mb-0">Please <a href="login.php">log in</a> to view this section.</p>
+                        <p class="mb-0">Please <a href="users/login.php">log in</a> to view this section.</p>
                     <?php endif; ?>
                 </section>
 
@@ -70,11 +70,6 @@ if(isset($_GET['id'])) {
                             $allowed_tags = '<div><img><h1><h2><p><br><strong><em><ul><li>';
                             echo strip_tags($page['content'], $allowed_tags);
                         } else {
-                            // Show the homepage
-                            // The homepage content could:
-                            // * be static content (here or in a shared file)
-                            // * show the first page from the nav
-                            // * be in the database but add code to hide in the nav
                             include(SHARED_PATH . '/static_homepage.php');
                         }
                     ?>

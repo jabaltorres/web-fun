@@ -50,7 +50,6 @@ const SHARED_PATH = PRIVATE_PATH . '/shared';
 const INCLUDES_PATH = PROJECT_PATH . '/includes';
 const IMAGES_PATH = PUBLIC_PATH . '/images';
 const BRAND_PATH = PROJECT_PATH . '/brand';
-const BLOCKS_PATH = PROJECT_PATH . '/blocks';
 const ELEMENTS_PATH = PUBLIC_PATH . '/elements';
 const COMPONENTS_PATH = PROJECT_PATH . '/components';
 const INCL_PATH = PROJECT_PATH . '/incl';

@@ -7,7 +7,7 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
 
 <html lang="en">
 <head>
-    <title>Globe Bank <?php if (isset($page_title)) {
+    <title>KrateCMS <?php if (isset($page_title)) {
             echo '- ' . h($page_title);
         } ?><?php if (isset($preview) && $preview) {
             echo ' [PREVIEW]';
