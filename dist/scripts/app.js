@@ -4707,7 +4707,7 @@ Tooltips.init();
 
         // Using Mustache
         if ($("#color-wrapper").length){
-            $.getJSON('../data/data.json', function(data) {
+            $.getJSON('/data/data.json', function(data) {
                 var colorTemplate = $('#colors-template').html();
                 var colorHtml = Mustache.to_html(colorTemplate, data);
                 $('#color-wrapper').html(colorHtml);
@@ -4720,7 +4720,7 @@ Tooltips.init();
             // Using Reg Ajax
             console.log(" div with id of color-wrapper is indeed present");
             $.ajax({
-                url: '../data/list.json',
+                url: '/data/list.json',
                 dataType: 'json',
                 type: 'get',
                 cache: false,

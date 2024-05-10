@@ -1,21 +1,21 @@
-<?php require_once('../private/initialize.php'); ?>
-
 <?php
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
-if(is_post_request()) {
-  // Form was submitted
-  $language = $_POST['language'] ?? 'Any';
-  $expire = time() + 60*60*24*365;
-  setcookie('language', $language, $expire);
 
-} else {
-  // Read the stored value (if any)
-  $language = $_COOKIE['language'] ?? 'None';
-}
+    if(is_post_request()) {
+      // Form was submitted
+      $language = $_POST['language'] ?? 'Any';
+      $expire = time() + 60*60*24*365;
+      setcookie('language', $language, $expire);
+
+    } else {
+      // Read the stored value (if any)
+      $language = $_COOKIE['language'] ?? 'None';
+    }
+
+    include(SHARED_PATH . '/public_header.php');
 
 ?>
-
-<?php include(SHARED_PATH . '/public_header.php'); ?>
 
 <div id="main">
 
@@ -28,7 +28,7 @@ if(is_post_request()) {
 
       <p>The currently selected language is: <?php echo $language; ?></p>
 
-      <form action="<?php echo url_for('/language.php'); ?>" method="post">
+      <form action="<?php echo url_for('/demos/language.php'); ?>" method="post">
 
         <select name="language">
           <?php
