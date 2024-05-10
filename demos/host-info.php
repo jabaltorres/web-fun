@@ -78,13 +78,10 @@ include_once(INCLUDES_PATH . '/site-header.php');
                     <?php
                         if ($server_name == $enviro_prod) {
                             // Production Environment
-                            // $url = "${protocol}://${server_name}${disp_port}/demos/${path}";
                             echo "${protocol}://${server_name}${disp_port}/demos/${path}";
                             echo "<br>Current Environment: Prod";
                         } else {
                             // Local Environment
-                            // $url = "${protocol}://${domain}${disp_port}/${path}";
-                            // $url = "${protocol}://${server_name}${disp_port}";
                             echo "${protocol}://${server_name}${disp_port}";
                             echo "<br>Current Environment: Local Dev";
                         }
@@ -93,7 +90,6 @@ include_once(INCLUDES_PATH . '/site-header.php');
 
                 <div class="host-page-section">
                     <h3>Host information courtesy of JavaScript</h3>
-                    <!-- being used by javascript-->
                     <div id="host-info"></div>
                 </div>
 
