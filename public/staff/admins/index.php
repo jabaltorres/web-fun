@@ -1,10 +1,10 @@
 <?php
 
-require_once('../../../private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
-require_login();
+    require_login();
 
-$admin_set = find_all_admins();
+    $admin_set = find_all_admins();
 
 ?>
 
@@ -19,7 +19,7 @@ $admin_set = find_all_admins();
       <a class="action" href="<?php echo url_for('/staff/admins/new.php'); ?>">Create New Admin</a>
     </div>
 
-    <table class="list">
+    <table class="table table-striped">
       <tr>
         <th>ID</th>
         <th>First</th>

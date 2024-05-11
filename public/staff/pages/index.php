@@ -1,8 +1,7 @@
-<?php require_once('../../../private/initialize.php'); ?>
-
 <?php
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
-  $page_set = find_all_pages();
+    $page_set = find_all_pages();
 
 ?>
 
@@ -17,7 +16,7 @@
       <a class="action" href="<?php echo url_for('/staff/pages/new.php'); ?>">Create New Page</a>
     </div>
 
-  	<table class="list">
+  	<table class="table table-striped">
   	  <tr>
         <th>ID</th>
         <th>Subject</th>

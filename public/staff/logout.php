@@ -1,5 +1,5 @@
 <?php
-require_once('../../private/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
 // Todo: udpate Staff log out to reflect contacts log out.
 unset($_SESSION['username']);

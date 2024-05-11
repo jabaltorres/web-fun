@@ -5,47 +5,45 @@ $errors = [];
 $username = '';
 $password = '';
 
-if(is_post_request()) {
+if (is_post_request()) {
 
-  $username = $_POST['username'] ?? '';
-  $password = $_POST['password'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-  // Validations
-  if(is_blank($username)) {
-    $errors[] = "Username cannot be blank.";
-  }
-  if(is_blank($password)) {
-    $errors[] = "Password cannot be blank.";
-  }
-
-  // if there were no errors, try to login
-  if(empty($errors)) {
-    // Using one variable ensures that msg is the same
-    $login_failure_msg = "Log in was unsuccessful.";
-
-    $admin = find_admin_by_username($username);
-    if($admin) {
-
-      if(password_verify($password, $admin['hashed_password'])) {
-        // password matches
-        log_in_admin($admin);
-        redirect_to(url_for('/contacts/index.php'));
-      } else {
-        // username found, but password does not match
-        $errors[] = $login_failure_msg;
-      }
-
-    } else {
-      // no username found
-      $errors[] = $login_failure_msg;
+    // Validations
+    if (is_blank($username)) {
+        $errors[] = "Username cannot be blank.";
+    }
+    if (is_blank($password)) {
+        $errors[] = "Password cannot be blank.";
     }
 
-  }
+    // if there were no errors, try to login
+    if (empty($errors)) {
+        // Using one variable ensures that msg is the same
+        $login_failure_msg = "Log in was unsuccessful.";
+
+        $admin = find_admin_by_username($username);
+        if ($admin) {
+
+            if (password_verify($password, $admin['hashed_password'])) {
+                // password matches
+                log_in_admin($admin);
+                redirect_to(url_for('/contacts/index.php'));
+            } else {
+                // username found, but password does not match
+                $errors[] = $login_failure_msg;
+            }
+
+        } else {
+            // no username found
+            $errors[] = $login_failure_msg;
+        }
+
+    }
 
 }
-?>
 
-<?php
 
 // this is for <title>
 $title = "DB Test | Login";
@@ -58,17 +56,13 @@ $page_subheading = "User authentication required";
 
 $custom_class = "db-test-login";
 
+include_once(INCLUDES_PATH . '/site-header.php');
+include_once(INCLUDES_PATH . '/navigation.php');
 ?>
-<?php include_once(INCLUDES_PATH . '/site-header.php'); ?>
 
 <div class="container <?php echo $custom_class; ?>">
-    <?php
-    include_once(INCLUDES_PATH . '/masthead.php');
-    include_once(INCLUDES_PATH . '/navigation.php');
-    ?>
-
     <section>
-        <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
+        <?php include_once(INCLUDES_PATH . '/headline-page.php'); ?>
     </section>
 
     <section id="content">
@@ -77,12 +71,12 @@ $custom_class = "db-test-login";
 
         <form action="login.php" method="post">
             <label for="userName">Username:</label>
-            <input id="userName" class="form-control" type="text" name="username" value="<?php echo h($username); ?>" />
+            <input id="userName" class="form-control" type="text" name="username" value="<?php echo h($username); ?>"/>
 
             <label for="passWord">Password:</label>
-            <input id="passWord" class="form-control" type="password" name="password" value="" />
+            <input id="passWord" class="form-control" type="password" name="password" value=""/>
 
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
+            <input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
         </form>
 
     </section><!-- end #content -->

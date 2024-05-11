@@ -44,9 +44,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
-?>
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_header.php'); ?>
+include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_header.php');
+include(INCLUDES_PATH . '/navigation.php');
+
+?>
 
 <div class="container">
     <h1>User Login</h1>

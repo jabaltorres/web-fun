@@ -1,8 +1,7 @@
-<?php require_once('../../../private/initialize.php'); ?>
-
 <?php
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
 
-  $subject_set = find_all_subjects();
+    $subject_set = find_all_subjects();
 
 ?>
 
@@ -17,7 +16,7 @@
       <a class="action" href="<?php echo url_for('/staff/subjects/new.php'); ?>">Create New Subject</a>
     </div>
 
-  	<table class="list">
+  	<table class="table table-striped">
   	  <tr>
         <th>ID</th>
         <th>Position</th>
