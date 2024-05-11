@@ -44,14 +44,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-include_once(INCLUDES_PATH . '/site-header.php');
+include(INCLUDES_PATH . '/site-header.php');
+include(INCLUDES_PATH . '/navigation.php');
+
 ?>
 
 
 <div class="container">
-    <?php include_once(INCLUDES_PATH . '/masthead.php'); ?>
-    <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
-
     <h2>Add New User</h2>
     <section>
         <form action="user-add.php" method="post">

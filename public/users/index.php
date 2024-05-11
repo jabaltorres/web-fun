@@ -20,9 +20,11 @@ $result = $user->getAllUsers();
 
 // Check if user is logged in
 $loggedIn = isset($_SESSION['user_id']);
+
+include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_header.php');
+include(INCLUDES_PATH . '/navigation.php');
 ?>
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/private/shared/users_header.php'); ?>
 <div class="container">
 
     <ul class="nav mb-4">

@@ -342,7 +342,6 @@
         return $result;
     }
 
-
     function find_contact_by_id($id) {
         global $db;
         $sql = "SELECT contact_list.*, rankings.rank_description FROM contact_list ";
@@ -445,7 +444,6 @@
             exit;
         }
     }
-
 
     function delete_contact($id) {
         global $db;
