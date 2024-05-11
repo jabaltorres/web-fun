@@ -36,9 +36,7 @@ $pages = [
                     }
                     // check if page is visible
                     if ($page['visible'] == '1') { ?>
-                        <li><a class="nav-link <?php echo $activeStyleClass; ?>"
-                               href="<?php echo $url . '/' . h($page['page_url']); ?>"><?php echo h($page['menu_name']); ?></a>
-                        </li>
+                        <li><a class="nav-link <?php echo $activeStyleClass; ?>" href="<?php echo $url . '/' . h($page['page_url']); ?>"><?php echo h($page['menu_name']); ?></a></li>
                     <?php }
                     ?>
 
