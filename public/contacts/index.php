@@ -14,14 +14,10 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
 $contact_set = find_all_contacts($sort);
 
 include_once(INCLUDES_PATH . '/site-header.php');
+include_once(INCLUDES_PATH . '/navigation.php');
 ?>
 
-<?php
-//    include_once(INCLUDES_PATH . '/masthead.php');
-    include_once(INCLUDES_PATH . '/navigation.php');
-?>
-
-<div class="container <?php echo $custom_class; ?>">
+<div class="<?php echo $custom_class; ?> container">
 
     <section>
         <?php
@@ -81,14 +77,14 @@ include_once(INCLUDES_PATH . '/site-header.php');
         <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
         <table class="table table-striped border">
             <thead class="thead-dark">
-            <tr>
-                <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
-                <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>
-                <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
-                <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
-                <th scope="col"><a href="#" class="sort-header" data-sort="favorite">Favorite</a></th>
-                <th>Actions</th>
-            </tr>
+                <tr>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
+                    <th scope="col"><a href="#" class="sort-header" data-sort="favorite">Favorite</a></th>
+                    <th>Actions</th>
+                </tr>
             </thead>
 
             <tbody>

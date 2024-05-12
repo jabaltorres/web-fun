@@ -52,7 +52,6 @@ const IMAGES_PATH = PUBLIC_PATH . '/images';
 const BRAND_PATH = PROJECT_PATH . '/brand';
 const ELEMENTS_PATH = PUBLIC_PATH . '/elements';
 const COMPONENTS_PATH = PROJECT_PATH . '/components';
-const INCL_PATH = PROJECT_PATH . '/incl';
 
 // * Can dynamically find everything in the URL up to "public"
 $public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;

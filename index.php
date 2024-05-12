@@ -15,12 +15,12 @@ $page_subheading = "Welcome to my web sandbox. More work to come soon. Stay tune
 $custom_class = "home-page";
 //custom CSS for this page only
 
-include_once('includes/site-header.php');
+include_once(INCLUDES_PATH . '/site-header.php');
 include_once(INCLUDES_PATH . '/navigation.php');
 
 ?>
 
-<div class="container <?php echo $custom_class; ?>">
+<div class="<?php echo $custom_class; ?> container pt-4">
     <div class="jumbotron">
         <h1 class="display-4"><?php echo $page_heading; ?></h1>
         <p class="lead"><?php echo $page_subheading; ?></p>

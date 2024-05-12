@@ -17,7 +17,6 @@
                 </div>
             </div>
             <div class="col-12 col-md-10">
-<!--			    --><?php //include(BRAND_PATH . '/colors.php'); ?>
 			    <?php include('colors.php'); ?>
 			    <?php include('bg-test.php'); ?>
 			    <?php include('typography.php'); ?>

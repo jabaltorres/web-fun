@@ -7,7 +7,7 @@
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
-    <?php include(INCL_PATH . '/block-headline.php'); ?>
+    <?php include(INCLUDES_PATH . '/block-headline.php'); ?>
 
     <h3>SVG Icon - Regular</h3>
     <ul class="svg-icon-list">

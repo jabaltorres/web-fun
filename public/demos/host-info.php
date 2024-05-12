@@ -44,7 +44,6 @@
                     echo '<div class="">SHARED_PATH <pre>' . SHARED_PATH . '</pre></div>';
                     echo '<div class="">Includes Path <pre>' . INCLUDES_PATH . '</pre></div>';
                     echo '<div class="">INCLUDES_PATH <pre>' . IMAGES_PATH . '</pre></div>';
-                    echo '<div class="">INCL_PATH <pre>' . INCL_PATH . '</pre></div>';
                     echo '<div class="">$enviro_prod <pre>' . $enviro_prod . '</pre></div>';
                     ?>
                 </div>
