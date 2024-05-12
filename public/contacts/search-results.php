@@ -29,7 +29,6 @@ include_once(INCLUDES_PATH . '/site-header.php');
 <div class="container <?php echo $custom_class; ?>">
 
     <?php
-    include_once(INCLUDES_PATH . '/masthead.php');
     include_once(INCLUDES_PATH . '/navigation.php');
     ?>
 

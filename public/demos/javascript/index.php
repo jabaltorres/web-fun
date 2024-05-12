@@ -16,7 +16,6 @@
 ?>
 
     <div class="container <?php echo $custom_class; ?>">
-		<?php include(INCLUDES_PATH . '/masthead.php'); ?>
 		<?php include(INCLUDES_PATH . '/navigation.php'); ?>
 
         <?php include('incl/pop-up.php'); ?>

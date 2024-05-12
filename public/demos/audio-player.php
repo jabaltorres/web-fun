@@ -32,7 +32,6 @@ $page_audio_subheader->setContent("Testing out building and using an audio playe
     <div class="container <?php echo $custom_class; ?>">
 
         <?php
-        include_once(INCLUDES_PATH . '/masthead.php');
         include_once(INCLUDES_PATH . '/navigation.php');
         ?>
 

@@ -24,7 +24,6 @@
     <div class="container">
 
         <?php
-        include_once(INCLUDES_PATH . '/masthead.php');
         include_once(INCLUDES_PATH . '/navigation.php');
         ?>
 

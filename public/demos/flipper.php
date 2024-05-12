@@ -9,7 +9,6 @@
 
     <div class="container <?php echo $custom_class; ?>">
 
-    <?php include_once(INCLUDES_PATH . '/masthead.php');?>
     <?php include_once(INCLUDES_PATH . '/navigation.php');?>
 
     <section class="js-fun">

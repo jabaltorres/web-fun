@@ -10,7 +10,6 @@ include_once(INCLUDES_PATH . '/site-header.php'); // Include the site header
 ?>
 
 <?php
-    include_once(INCLUDES_PATH . '/masthead.php'); // Include the masthead
     include_once(INCLUDES_PATH . '/navigation.php'); // Include the navigation bar
 ?>
 
