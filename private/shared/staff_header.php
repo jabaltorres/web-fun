@@ -1,7 +1,7 @@
 <?php
 
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/classes/KrateUserManager.php'); // Ensure this path is correct
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/classes/KrateUserManager.php'); // Ensure this path is correct
 
     // Create database connection
     $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -29,8 +29,8 @@
     <head>
         <title>KrateCMS - <?php echo h($page_title); ?></title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css">
-        <link rel="stylesheet" href="<?php echo $url; ?>/css/staff.css">
+        <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
+        <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/staff.css">
     </head>
 
     <body class="users-area">

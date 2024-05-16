@@ -100,7 +100,7 @@ class KrateUserManager {
 
     public function checkLoggedIn() {
         if (!isset($_SESSION['user_id'])) { // Check if the session variable 'user_id' is set
-            header("Location: /public/users/login.php"); // Redirect to the login page
+            header("Location: /users/login.php"); // Redirect to the login page
             exit; // Prevent further execution of the script
         }
     }

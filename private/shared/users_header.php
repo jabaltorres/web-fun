@@ -9,8 +9,8 @@
 <head>
     <title>KrateCMS - <?php echo h($page_title); ?></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css">
-    <link rel="stylesheet" href="<?php echo $url; ?>/css/staff.css">
+    <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
+    <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/staff.css">
 </head>
 
 <body class="users-area">

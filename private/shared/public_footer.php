@@ -10,10 +10,8 @@
     </div>
 </footer>
 
-<script src="<?php echo $url; ?>/dist/scripts/scripts.min.js"></script>
+<script src="<?php echo SCRIPTS_PATH; ?>/scripts.min.js"></script>
 </body>
 </html>
 
-<?php
-db_disconnect($db);
-?>
+<?php db_disconnect($db); ?>

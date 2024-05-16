@@ -17,7 +17,7 @@ const { series, parallel } = require('gulp');
 let paths = {
     styles: {
         src: "sass/**/*.scss",
-        dest: "css"
+        dest: "public/dist/css"
     },
     scripts: {
         src: [
@@ -33,10 +33,10 @@ let paths = {
             "js/toolTips.js",
             "js/app.js",
         ],
-        dest: "dist/scripts"
+        dest: "public/dist/scripts"
     },
     maps: {
-        dest: "dist/maps"
+        dest: "public/dist/maps"
     },
     images: {
         src: "public/images/*",
@@ -102,7 +102,7 @@ function scripts() {
 
 function watch() {
     browserSync.init({
-        proxy: "http://web-fun.test/"
+        proxy: "https://web-fun.ddev.site/"
     });
     gulp.watch(paths.styles.src, style);
     gulp.watch(paths.scripts.src, series(lint, scripts));

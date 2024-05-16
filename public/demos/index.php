@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
 
     $title = "Demo Index";
     // this is for <title>
@@ -26,11 +26,11 @@
 
     // Links to demo pages
     $page_demo_links = [
-        ['id' => 'crate-cms', 'visible' => '1', 'demo_page' => 'KrateCMS', 'page_url' =>  '/public/index.php'],
-        ['id' => 'contacts', 'visible' => '1', 'demo_page' => 'Contacts', 'page_url' =>  '/public/contacts/index.php'],
-        ['id' => 'users', 'visible' => '1', 'demo_page' => 'Users', 'page_url' =>  '/public/users/index.php'],
-        ['id' => 'staff', 'visible' => '1', 'demo_page' => 'Staff', 'page_url' =>  '/public/staff/'],
-        ['id' => 'admin-area', 'visible' => '1', 'demo_page' => 'Staff / Admin', 'page_url' =>  '/public/staff/admins/'],
+        ['id' => 'crate-cms', 'visible' => '1', 'demo_page' => 'KrateCMS', 'page_url' =>  '/index.php'],
+        ['id' => 'contacts', 'visible' => '1', 'demo_page' => 'Contacts', 'page_url' =>  '/contacts/index.php'],
+        ['id' => 'users', 'visible' => '1', 'demo_page' => 'Users', 'page_url' =>  '/users/index.php'],
+        ['id' => 'staff', 'visible' => '1', 'demo_page' => 'Staff', 'page_url' =>  '/staff/'],
+        ['id' => 'admin-area', 'visible' => '1', 'demo_page' => 'Staff / Admin', 'page_url' =>  '/staff/admins/'],
         ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio', 'page_url' => 'audio-player.php'],
         ['id' => 'flipper', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
         ['id' => 'javascript', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],

@@ -3,7 +3,7 @@
     $page_title = "This is the demo index file"; //this is for breadcrumbs if I want a custom title other than the default
     $custom_class = "big-flipper"; //custom CSS for this page only
 
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
     include_once(INCLUDES_PATH . '/site-header.php');
 ?>
 
@@ -26,11 +26,11 @@
         </article>
         <article id="big-flipper" class="text-center">
             <div id="big-flipper-wrapper">
-                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-1.png" alt="Image 1">
-                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-2.png" alt="Image 2">
-                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-3.png" alt="Image 3">
-                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-4.png" alt="Image 4">
-                <img class="slide" src="<?php echo $url; ?>/public/images/janky-carousel-img/placholder-5.png" alt="Image 5">
+                <img class="slide" src="<?php echo IMAGES_PATH; ?>/janky-carousel-img/placholder-1.png" alt="Image 1">
+                <img class="slide" src="<?php echo IMAGES_PATH; ?>/janky-carousel-img/placholder-2.png" alt="Image 2">
+                <img class="slide" src="<?php echo IMAGES_PATH; ?>/janky-carousel-img/placholder-3.png" alt="Image 3">
+                <img class="slide" src="<?php echo IMAGES_PATH; ?>/janky-carousel-img/placholder-4.png" alt="Image 4">
+                <img class="slide" src="<?php echo IMAGES_PATH; ?>/janky-carousel-img/placholder-5.png" alt="Image 5">
             </div>
             <div id="big-flipper-progress-value">0%</div>
             <progress id="big-flipper-progress" max="100" value="0">0%</progress>

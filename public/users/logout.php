@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/private/classes/KrateUserManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/classes/KrateUserManager.php');
 
 use FiveTwoFive\KrateCMS\UserManagement\KrateUserManager;
 

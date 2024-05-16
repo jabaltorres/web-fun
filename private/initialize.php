@@ -34,7 +34,7 @@ if ($server_name == $enviro_prod){
 } else {
     // Local Environment
     // $url = "${protocol}://${domain}${disp_port}/${path}";
-    $url = "${protocol}://${server_name}${disp_port}";
+    $url = "${protocol}://${server_name}";
 }
 
 $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -43,18 +43,18 @@ $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP
 // Assign file path to PHP constants
 // __FILE__ returns the current path to this file
 // dirname() returns the path to the current directory
-define("PRIVATE_PATH", dirname(__FILE__));
+const PRIVATE_PATH = __DIR__;
 define("PROJECT_PATH", dirname(PRIVATE_PATH));
 const PUBLIC_PATH = PROJECT_PATH . '/public';
 const SHARED_PATH = PRIVATE_PATH . '/shared';
 const INCLUDES_PATH = PROJECT_PATH . '/includes';
-const IMAGES_PATH = PUBLIC_PATH . '/images';
-const BRAND_PATH = PROJECT_PATH . '/brand';
-const ELEMENTS_PATH = PUBLIC_PATH . '/elements';
-const COMPONENTS_PATH = PROJECT_PATH . '/components';
+
+define("STYLES_PATH", $url . '/dist/css');
+define("SCRIPTS_PATH", $url . '/dist/scripts');
+define("IMAGES_PATH", $url . '/images');
 
 // * Can dynamically find everything in the URL up to "public"
-$public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;
+$public_end = strpos($_SERVER['SCRIPT_NAME'], '/public');
 $doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
 define("WWW_ROOT", $doc_root);
 

@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
 
     // this is for <title>
     $title = "JavaScripts Objects Obsession";

@@ -61,7 +61,7 @@
                 },
                 statusCode: {
                     404: function() {
-                        console.log("page not found");
+                        console.log("page not found, player");
                     }
                 }
             });

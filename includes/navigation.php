@@ -2,11 +2,11 @@
 $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
 
 $pages = [
-    ['id' => '1', 'position' => '1', 'visible' => '1', 'menu_name' => 'Contacts', 'page_url' => 'public/contacts/'],
-    ['id' => '2', 'position' => '2', 'visible' => '1', 'menu_name' => 'Users', 'page_url' => 'public/users/'],
-    ['id' => '3', 'position' => '3', 'visible' => '1', 'menu_name' => 'Staff', 'page_url' => 'public/staff/'],
-    ['id' => '4', 'position' => '4', 'visible' => '1', 'menu_name' => 'Admins', 'page_url' => 'public/staff/admins/'],
-    ['id' => '5', 'position' => '5', 'visible' => '1', 'menu_name' => 'Demos', 'page_url' => 'public/demos/'],
+    ['id' => '1', 'position' => '1', 'visible' => '1', 'menu_name' => 'Contacts', 'page_url' => 'contacts/'],
+    ['id' => '2', 'position' => '2', 'visible' => '1', 'menu_name' => 'Users', 'page_url' => 'users/'],
+    ['id' => '3', 'position' => '3', 'visible' => '1', 'menu_name' => 'Staff', 'page_url' => 'staff/'],
+    ['id' => '4', 'position' => '4', 'visible' => '1', 'menu_name' => 'Admins', 'page_url' => 'staff/admins/'],
+    ['id' => '5', 'position' => '5', 'visible' => '1', 'menu_name' => 'Demos', 'page_url' => 'demos/'],
 ];
 ?>
 

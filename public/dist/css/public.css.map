@@ -1,0 +1,1 @@
+{"version":3,"sources":["public.scss","public.css"],"names":[],"mappings":"AACE,oBACE,wBAAA,CACA,YCAJ","file":"public.css","sourcesContent":[".homepage{\n  .subjects{\n    background-color: #f4f4f4;\n    padding: 20px\n  }\n}",".homepage .subjects {\n  background-color: #f4f4f4;\n  padding: 20px;\n}"]}

@@ -19,8 +19,8 @@
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="<?php echo $url; ?>/css/slick.css">
-        <link rel="stylesheet" href="<?php echo $url; ?>/css/style.css">
+        <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/slick.css">
+        <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
 
         <meta name="description" content="<?php echo $site_description; ?>">
         <meta name="author" content="<?php echo $site_author; ?>">
