@@ -2,6 +2,7 @@
 ob_start(); // output buffering is turned on
 session_start(); // turn on sessions
 
+
 $site_owner = "Jabal Torres";
 $site_name = "LOREM";
 $site_tagline = "A place for all of your web ideas";
@@ -27,7 +28,7 @@ $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $por
 $enviro_prod = "web-fun.fivetwofive.com";
 $enviro_dev = "localhost";
 $path = "web-fun";
-if ($server_name == $enviro_prod){
+if ($server_name == $enviro_prod) {
     // Production Environment
     $url = "${protocol}://${server_name}";
 } else {
@@ -67,13 +68,14 @@ $errors = [];
 
 // Load class definitions manually
 // -> All classes in directory
-foreach(glob('classes/*.class.php') as $file) {
+foreach (glob('classes/*.class.php') as $file) {
     require_once($file);
 }
 
 // Autoload class definitions
-function lorem_autoload($class) {
-    if(preg_match('/\A\w+\Z/', $class)) {
+function lorem_autoload($class)
+{
+    if (preg_match('/\A\w+\Z/', $class)) {
         include('classes/' . $class . '.class.php');
     }
 }
@@ -83,7 +85,7 @@ function lorem_autoload($class) {
  * Tries to load classes based on namespace first,
  * then falls back to a simple naming convention if necessary.
  */
-spl_autoload_register(function ($class) {
+spl_autoload_register(function($class) {
     // Check if the class file exists based on namespace
     $file = $_SERVER['DOCUMENT_ROOT'] . '/private/classes/' . str_replace('\\', '/', $class) . '.php';
     if (file_exists($file)) {

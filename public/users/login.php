@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 
-include($_SERVER['DOCUMENT_ROOT'] . '/../private/shared/users_header.php');
+include(SHARED_PATH . '/users_header.php');
 include(SHARED_PATH . '/navigation.php');
 
 ?>

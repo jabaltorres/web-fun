@@ -45,13 +45,13 @@ if (isset($_GET['id'])) {
 
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
-<div id="main" class="homepage pt-4">
+<div id="main" class="homepage py-4">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
           <?php include(SHARED_PATH . '/public_navigation.php'); ?>
       </div>
-      <div class="col-md-9">
+      <div class="col-md-9 ">
         <section class="user-content">
             <?php if ($loggedIn): ?>
               <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content

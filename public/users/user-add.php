@@ -43,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-
 include(SHARED_PATH . '/site_header.php');
 include(SHARED_PATH . '/navigation.php');
 
