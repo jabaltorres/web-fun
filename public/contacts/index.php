@@ -22,7 +22,7 @@ include_once(SHARED_PATH . '/navigation.php');
 
   <section>
       <?php
-      include_once(INCLUDES_PATH . '/headline-page.php');
+      include_once(SHARED_PATH . '/headline-page.php');
       include_once(INCLUDES_PATH . '/db-menu.php');
       ?>
   </section>

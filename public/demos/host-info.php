@@ -29,7 +29,7 @@
 
         <section class="<?php echo $custom_class; ?>">
 
-            <?php include_once(INCLUDES_PATH . '/headline-page.php'); ?>
+            <?php include_once(SHARED_PATH . '/headline-page.php'); ?>
 
             <article>
                 <h3>Note:</h3>

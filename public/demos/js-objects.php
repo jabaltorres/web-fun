@@ -19,7 +19,7 @@
 <div class="container <?php echo $custom_class; ?>">
     <?php
         include_once(SHARED_PATH . '/navigation.php');
-        include_once(INCLUDES_PATH . '/headline-page.php');
+        include_once(SHARED_PATH . '/headline-page.php');
     ?>
 
     <section class="mt-4">
