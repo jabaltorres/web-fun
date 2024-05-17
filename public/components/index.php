@@ -3,7 +3,7 @@
     $title = "Components Page"; // this is for <title>
     $page_title = "This is the components page"; //this is for breadcrumbs if I want a custom title other than the default
     $addCSS = ""; //custom CSS for this page only
-    include_once(INCLUDES_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site-header.php');
 ?>
 
 <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>

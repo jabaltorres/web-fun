@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-include(INCLUDES_PATH . '/site-header.php');
+include(SHARED_PATH . '/site-header.php');
 include(INCLUDES_PATH . '/navigation.php');
 
 ?>

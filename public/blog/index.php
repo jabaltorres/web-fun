@@ -6,7 +6,7 @@ require_once '../../private/initialize.php';
 $title = "Components Page"; // Title for browser title bar
 $page_title = "This is the components page"; // Title for the page, can be used in breadcrumbs or headers
 $addCSS = ""; // Placeholder for page-specific CSS if needed
-include_once(INCLUDES_PATH . '/site-header.php'); // Include the site header
+include_once(SHARED_PATH . '/site-header.php'); // Include the site header
 ?>
 
 <?php

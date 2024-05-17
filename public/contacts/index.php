@@ -14,7 +14,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
 // Fetch contacts with the specified sorting
 $contact_set = find_all_contacts($sort);
 
-include_once(INCLUDES_PATH . '/site-header.php');
+include_once(SHARED_PATH . '/site-header.php');
 include_once(INCLUDES_PATH . '/navigation.php');
 ?>
 

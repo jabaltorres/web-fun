@@ -13,7 +13,7 @@
     //custom CSS for this page only
     $custom_class = "object-obsession-page";
 
-    include_once(INCLUDES_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site-header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">

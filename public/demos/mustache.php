@@ -13,7 +13,7 @@
     $custom_class = "mustache-page";
     //custom CSS for this page only
 
-    include_once(INCLUDES_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site-header.php');
 ?>
 <div class="container <?php echo $custom_class; ?>">
   

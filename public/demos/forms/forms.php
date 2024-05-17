@@ -30,7 +30,7 @@
     $page_title = "This is the form page";
     $page_subheading = "Make your own bacon ipsum";
 
-    include_once(INCLUDES_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site-header.php');
 ?>
 
 <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
