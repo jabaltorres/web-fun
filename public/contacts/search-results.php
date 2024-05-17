@@ -23,14 +23,11 @@ function search_contacts($search) {
 $contacts = search_contacts($search);
 
 include_once(SHARED_PATH . '/site-header.php');
+include_once(INCLUDES_PATH . '/navigation.php');
 ?>
 
 
 <div class="container <?php echo $custom_class; ?>">
-
-    <?php
-    include_once(INCLUDES_PATH . '/navigation.php');
-    ?>
 
     <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
 

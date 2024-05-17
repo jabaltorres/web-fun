@@ -15,11 +15,9 @@ $page_subheading = "Welcome to the DB test page";
 $custom_class = "db-test-page";
 //custom CSS for this page only
 include_once(SHARED_PATH . '/site-header.php');
+include_once(INCLUDES_PATH . '/navigation.php');
 ?>
     <div class="container <?php echo $custom_class; ?>">
-        <?php
-        include_once(INCLUDES_PATH . '/navigation.php');
-        ?>
 
   <section>
     <h2 class="h3"><span class="font-weight-bold">Private:</span> For Test use ONLY</h2>

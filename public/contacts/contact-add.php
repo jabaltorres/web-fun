@@ -8,10 +8,10 @@ $page_subheading = "Test the database functionality";
 $custom_class = "add-email-page";
 
 include_once(SHARED_PATH . '/site-header.php');
+include_once(INCLUDES_PATH . '/navigation.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-    <?php include_once(INCLUDES_PATH . '/navigation.php'); ?>
 
     <section id="form-section">
         <?php include_once(INCLUDES_PATH . '/headline-page.php'); ?>

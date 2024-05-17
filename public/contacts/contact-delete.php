@@ -32,13 +32,10 @@ require_login();
     //custom CSS for this page only
 
 include_once(SHARED_PATH . '/site-header.php');
-
+include_once(INCLUDES_PATH . '/navigation.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-    <?php
-        include_once(INCLUDES_PATH . '/navigation.php');
-    ?>
 
     <section>
         <?php include_once(INCLUDES_PATH . '/headline-page.php');?>
