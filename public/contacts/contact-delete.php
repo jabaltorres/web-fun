@@ -39,7 +39,7 @@ include_once(SHARED_PATH . '/navigation.php');
 
     <section>
         <?php include_once(SHARED_PATH . '/headline-page.php');?>
-        <?php include_once(SHARED_PATH . '/db-menu.php');?>
+        <?php include_once(SHARED_PATH . '/nav-contacts.php');?>
     </section>
 
     <div class="row">
