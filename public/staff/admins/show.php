@@ -47,3 +47,5 @@ $admin = find_admin_by_id($id);
   </div>
 
 </div>
+
+<?php include(SHARED_PATH . '/site-footer.php'); ?>

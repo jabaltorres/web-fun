@@ -49,4 +49,4 @@
 
 </div>
 
-<?php include(SHARED_PATH . '/staff_footer.php'); ?>
+<?php include(SHARED_PATH . '/site-footer.php'); ?>

@@ -70,4 +70,4 @@ include(INCLUDES_PATH . '/navigation.php');
     <?php if (!empty($error)) echo "<p>$error</p>"; ?>
 </div>
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . '/../private/shared/users_footer.php'); ?>
+<?php include(SHARED_PATH . '/site-footer.php'); ?>

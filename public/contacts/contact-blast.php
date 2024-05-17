@@ -91,4 +91,4 @@ include_once(INCLUDES_PATH . '/site-header.php');
   </section>
 </div>
 
-<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
+<?php include_once(SHARED_PATH . '/site-footer.php'); ?>

@@ -45,7 +45,7 @@ if (isset($_GET['id'])) {
 
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
-<div id="main" class="homepage">
+<div id="main" class="homepage pt-4">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
@@ -77,4 +77,4 @@ if (isset($_GET['id'])) {
   </div>
 </div>
 
-<?php include(SHARED_PATH . '/public_footer.php'); ?>
+<?php include(SHARED_PATH . '/site-footer.php'); ?>

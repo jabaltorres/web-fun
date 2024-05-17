@@ -51,4 +51,4 @@
 
 </div>
 
-<?php include(SHARED_PATH . '/public_footer.php'); ?>
+<?php include(SHARED_PATH . '/site-footer.php'); ?>

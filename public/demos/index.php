@@ -2,14 +2,9 @@
     require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
 
     $title = "Demo Index";
-    // this is for <title>
-
     $page_heading = 'Demo Page Heading';
     $page_subheading = "List of WIP demos";
-
     $custom_class = "demo-page";
-    //custom CSS for this page only
-
     include_once(INCLUDES_PATH . '/site-header.php');
 
     // Page Header
@@ -81,4 +76,4 @@
 
 </div><!-- end .container -->
 
-<?php include_once(INCLUDES_PATH . '/site-footer.php'); ?>
+<?php include_once(SHARED_PATH . '/site-footer.php'); ?>
