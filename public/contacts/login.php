@@ -57,7 +57,7 @@ $page_subheading = "User authentication required";
 
 $custom_class = "db-test-login";
 
-include_once(SHARED_PATH . '/site-header.php');
+include_once(SHARED_PATH . '/site_header.php');
 include_once(SHARED_PATH . '/navigation.php');
 ?>
 

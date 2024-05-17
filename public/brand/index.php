@@ -3,7 +3,7 @@
     $title = "Elements Page"; // this is for <title>
     $page_title = "This is the elements page"; //this is for breadcrumbs if I want a custom title other than the default
     $addCSS = ""; //custom CSS for this page only
-    include_once(SHARED_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site_header.php');
 ?>
 
 <?php include_once(SHARED_PATH . '/navigation.php'); ?>

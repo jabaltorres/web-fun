@@ -52,7 +52,7 @@ require_login();
     $custom_class = "contact-message-page";
     //custom CSS for this page only
 
-    include_once(SHARED_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site_header.php');
 include_once(SHARED_PATH . '/navigation.php');
 ?>
 

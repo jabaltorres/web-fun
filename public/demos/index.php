@@ -5,7 +5,7 @@
     $page_heading = 'Demo Page Heading';
     $page_subheading = "List of WIP demos";
     $custom_class = "demo-page";
-    include_once(SHARED_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site_header.php');
 
     // Page Header
     $page_demo_header = new LoremElement("h1");

@@ -12,7 +12,7 @@
     //custom CSS for this page only
     $custom_class = "page-lorem-ipsum";
 
-    include_once(SHARED_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site_header.php');
 ?>
 
 <?php include_once(SHARED_PATH . '/navigation.php');?>

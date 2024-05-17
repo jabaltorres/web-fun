@@ -4,7 +4,7 @@
     $custom_class = "big-flipper"; //custom CSS for this page only
 
     require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
-    include_once(SHARED_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site_header.php');
 ?>
 
     <div class="container <?php echo $custom_class; ?>">

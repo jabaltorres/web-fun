@@ -7,7 +7,7 @@ $title = "DB Test Page";
 $page_heading = "This is the DB Test page";
 $page_subheading = "Welcome to the DB test page";
 $custom_class = "db-test-page";
-include_once(SHARED_PATH . '/site-header.php');
+include_once(SHARED_PATH . '/site_header.php');
 include_once(SHARED_PATH . '/navigation.php');
 ?>
 

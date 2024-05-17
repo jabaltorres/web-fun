@@ -18,7 +18,7 @@
         redirect_to('/public/contacts/login.php');
     }
 
-    include_once(SHARED_PATH . '/site-header.php');
+    include_once(SHARED_PATH . '/site_header.php');
 include_once(SHARED_PATH . '/navigation.php');
 ?>
 
