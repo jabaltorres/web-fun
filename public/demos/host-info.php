@@ -11,7 +11,7 @@
     //custom CSS for this page only
     $custom_class = "host-page";
 
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/private/initialize.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
 
     // If not logged in, redirect to login page
     if (!is_logged_in()) {
@@ -19,13 +19,10 @@
     }
 
     include_once(SHARED_PATH . '/site-header.php');
+include_once(SHARED_PATH . '/navigation.php');
 ?>
 
     <div class="container">
-
-        <?php
-        include_once(SHARED_PATH . '/navigation.php');
-        ?>
 
         <section class="<?php echo $custom_class; ?>">
 
@@ -40,9 +37,7 @@
                     echo "<p class='font-weight-bold mb-2'>Paths: </p>";
                     echo '<div class="">PRIVATE_PATH <pre>' . PRIVATE_PATH . '</pre></div>';
                     echo '<div class="">PROJECT_PATH <pre>' . PROJECT_PATH . '</pre></div>';
-                    echo '<div class="">PUBLIC_PATH <pre>' . PUBLIC_PATH . '</pre></div>';
                     echo '<div class="">SHARED_PATH <pre>' . SHARED_PATH . '</pre></div>';
-                    echo '<div class="">Includes Path <pre>' . INCLUDES_PATH . '</pre></div>';
                     echo '<div class="">INCLUDES_PATH <pre>' . IMAGES_PATH . '</pre></div>';
                     echo '<div class="">$enviro_prod <pre>' . $enviro_prod . '</pre></div>';
                     ?>

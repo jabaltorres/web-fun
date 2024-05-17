@@ -7,7 +7,7 @@
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
-    <?php include(INCLUDES_PATH . '/block-headline.php'); ?>
+    <?php include(SHARED_PATH . '/block-headline.php'); ?>
 
     <article class="bg-primary mb-4">
         <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi atque incidunt laboriosam, nisi placeat possimus quas quasi quidem quo quod ratione repellat reprehenderit repudiandae sed sit soluta. Consequatur, quisquam.</p>

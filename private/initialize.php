@@ -45,9 +45,8 @@ $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP
 // dirname() returns the path to the current directory
 const PRIVATE_PATH = __DIR__;
 define("PROJECT_PATH", dirname(PRIVATE_PATH));
-const PUBLIC_PATH = PROJECT_PATH . '/public';
+
 const SHARED_PATH = PRIVATE_PATH . '/shared';
-const INCLUDES_PATH = PROJECT_PATH . '/includes';
 
 define("STYLES_PATH", $url . '/dist/css');
 define("SCRIPTS_PATH", $url . '/dist/scripts');
