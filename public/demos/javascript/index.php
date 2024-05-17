@@ -7,7 +7,7 @@ $page_subheading = "Scripting Sandbox";
 $custom_class = "javascript-page mb-4";
 
 include_once(SHARED_PATH . '/site-header.php');
-include(INCLUDES_PATH . '/navigation.php');
+include(SHARED_PATH . '/navigation.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">

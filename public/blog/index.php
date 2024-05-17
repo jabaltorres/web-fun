@@ -10,7 +10,7 @@ include_once(SHARED_PATH . '/site-header.php'); // Include the site header
 ?>
 
 <?php
-    include_once(INCLUDES_PATH . '/navigation.php'); // Include the navigation bar
+    include_once(SHARED_PATH . '/navigation.php'); // Include the navigation bar
 ?>
 
 <div class="container">

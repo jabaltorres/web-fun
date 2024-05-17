@@ -61,7 +61,7 @@ $page_subheading = "Test the database functionality";
 $custom_class = "edit-contact-page";
 
 include_once(SHARED_PATH . '/site-header.php');
-include_once(INCLUDES_PATH . '/navigation.php');
+include_once(SHARED_PATH . '/navigation.php');
 
 ?>
 

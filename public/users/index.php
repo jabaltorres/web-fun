@@ -22,7 +22,7 @@ $result = $user->getAllUsers();
 $loggedIn = isset($_SESSION['user_id']);
 
 include($_SERVER['DOCUMENT_ROOT'] . '/../private/shared/users_header.php');
-include(INCLUDES_PATH . '/navigation.php');
+include(SHARED_PATH . '/navigation.php');
 ?>
 
 <div class="container">

@@ -58,7 +58,7 @@ $page_subheading = "User authentication required";
 $custom_class = "db-test-login";
 
 include_once(SHARED_PATH . '/site-header.php');
-include_once(INCLUDES_PATH . '/navigation.php');
+include_once(SHARED_PATH . '/navigation.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">

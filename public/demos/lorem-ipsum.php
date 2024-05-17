@@ -15,7 +15,7 @@
     include_once(SHARED_PATH . '/site-header.php');
 ?>
 
-<?php include_once(INCLUDES_PATH . '/navigation.php');?>
+<?php include_once(SHARED_PATH . '/navigation.php');?>
 
 <div class="container <?php echo $custom_class; ?>">
     <section>

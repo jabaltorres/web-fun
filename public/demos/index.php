@@ -40,7 +40,7 @@
 ?>
 
 <?php
-    include_once(INCLUDES_PATH . '/navigation.php');
+    include_once(SHARED_PATH . '/navigation.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">

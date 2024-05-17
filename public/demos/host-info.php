@@ -24,7 +24,7 @@
     <div class="container">
 
         <?php
-        include_once(INCLUDES_PATH . '/navigation.php');
+        include_once(SHARED_PATH . '/navigation.php');
         ?>
 
         <section class="<?php echo $custom_class; ?>">

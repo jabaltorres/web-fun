@@ -16,7 +16,7 @@
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-  <?php include_once(INCLUDES_PATH . '/navigation.php');?>
+  <?php include_once(SHARED_PATH . '/navigation.php');?>
 
   <section>
 
