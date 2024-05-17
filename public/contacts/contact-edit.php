@@ -68,7 +68,7 @@ include_once(SHARED_PATH . '/navigation.php');
 <div class="container <?php echo $custom_class; ?>">
 
     <section id="form-section">
-        <?php include_once(SHARED_PATH . '/headline-page.php');?>
+        <?php include_once(SHARED_PATH . '/headline_page.php');?>
 
         <?php echo display_errors($errors); ?>
 

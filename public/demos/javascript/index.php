@@ -17,7 +17,7 @@ include(SHARED_PATH . '/navigation.php');
   <section class="js-fun">
     <p class="lead">This page includes pop up functionality</p>
 
-      <?php include_once(SHARED_PATH . '/headline-page.php'); ?>
+      <?php include_once(SHARED_PATH . '/headline_page.php'); ?>
   </section>
 
   <section class="js-playground">

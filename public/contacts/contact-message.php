@@ -59,7 +59,7 @@ include_once(SHARED_PATH . '/navigation.php');
 <div class="container <?php echo $custom_class; ?>">
 
     <section>
-        <?php include_once(SHARED_PATH . '/headline-page.php');?>
+        <?php include_once(SHARED_PATH . '/headline_page.php');?>
     </section>
 
     <div class="row">
