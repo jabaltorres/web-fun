@@ -36,28 +36,28 @@
     <body class="users-area">
         <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
             <div class="container">
-                <a class="navbar-brand" href="/public/">KrateCMS</a>
+                <a class="navbar-brand" href="/">KrateCMS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/public/staff/admins">Admins</a>
+                            <a class="nav-link" href="/staff/admins">Admins</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/public/staff/pages">Pages</a>
+                            <a class="nav-link" href="/staff/pages">Pages</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/public/staff/subjects">Subjects</a>
+                            <a class="nav-link" href="/staff/subjects">Subjects</a>
                         </li>
                     </ul>
                     <!-- Update navbar text to reflect user status -->
                     <span class="navbar-text">
                         <?php if ($is_logged_in): ?>
-                            Welcome back, <?= htmlspecialchars($_SESSION['first_name']); ?>! <a href="/public/users/logout.php">Log Out</a>
+                            Welcome back, <?= htmlspecialchars($_SESSION['first_name']); ?>! <a href="/users/logout.php">Log Out</a>
                         <?php else: ?>
-                            Welcome Guest! Please <a href="/public/users/login.php">Log In</a> or <a href="/public/users/register.php">Register</a>.
+                            Welcome Guest! Please <a href="/users/login.php">Log In</a> or <a href="/users/register.php">Register</a>.
                         <?php endif; ?>
                     </span>
                 </div>

@@ -12,7 +12,7 @@ $pages = [
 
 <nav class="main-navigation navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/public/">KrateCMS</a>
+        <a class="navbar-brand" href="/">KrateCMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -47,9 +47,9 @@ $pages = [
             <!-- Update navbar text to reflect user status -->
             <span class="navbar-text">
                 <?php if ($is_logged_in): ?>
-                    Welcome back, <?= htmlspecialchars($_SESSION['first_name']); ?>! <a href="/public/users/logout.php">Log Out</a>
+                    Welcome back, <?= htmlspecialchars($_SESSION['first_name']); ?>! <a href="/users/logout.php">Log Out</a>
                 <?php else: ?>
-                    Welcome Guest! Please <a href="/public/users/login.php">Log In</a> or <a href="/public/users/register.php">Register</a>.
+                    Welcome Guest! Please <a href="/users/login.php">Log In</a> or <a href="/users/register.php">Register</a>.
                 <?php endif; ?>
             </span>
         </div>
