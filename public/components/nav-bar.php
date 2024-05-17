@@ -7,7 +7,7 @@
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
-    <?php include(SHARED_PATH . '/block-headline.php'); ?>
+    <?php include(SHARED_PATH . '/block_headline.php'); ?>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Lorem</a>

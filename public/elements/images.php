@@ -7,7 +7,7 @@
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
-    <?php include(SHARED_PATH . '/block-headline.php'); ?>
+    <?php include(SHARED_PATH . '/block_headline.php'); ?>
 
     <div class="row">
         <div class="col-12 col-md-6">
