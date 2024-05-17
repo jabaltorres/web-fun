@@ -23,7 +23,7 @@ include_once(SHARED_PATH . '/navigation.php');
   <section>
       <?php
       include_once(SHARED_PATH . '/headline-page.php');
-      include_once(SHARED_PATH . '/nav-contacts.php');
+      include_once(SHARED_PATH . '/nav_contacts.php');
       ?>
   </section>
 
