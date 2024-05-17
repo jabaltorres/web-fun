@@ -110,4 +110,4 @@ mysqli_free_result($page_set);
 
 </div>
 
-<?php include(SHARED_PATH . '/site-footer.php'); ?>
+<?php include(SHARED_PATH . '/site_footer.php'); ?>

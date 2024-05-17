@@ -91,4 +91,4 @@ if(is_post_request()) {
 
 </div>
 
-<?php include(SHARED_PATH . '/site-footer.php'); ?>
+<?php include(SHARED_PATH . '/site_footer.php'); ?>

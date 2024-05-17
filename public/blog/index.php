@@ -56,4 +56,4 @@ include_once(SHARED_PATH . '/site_header.php'); // Include the site header
     </div>
 </div>
 
-<?php include_once(SHARED_PATH . '/site-footer.php'); // Include the site footer ?>
+<?php include_once(SHARED_PATH . '/site_footer.php'); // Include the site footer ?>

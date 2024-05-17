@@ -70,4 +70,4 @@ include(SHARED_PATH . '/navigation.php');
     <?php if (!empty($error)) echo "<p>$error</p>"; ?>
 </div>
 
-<?php include(SHARED_PATH . '/site-footer.php'); ?>
+<?php include(SHARED_PATH . '/site_footer.php'); ?>
