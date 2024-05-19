@@ -1,0 +1,20 @@
+{
+    "name": "fivetwofive/krate",
+    "description": "a simple cms app",
+    "type": "project",
+    "require-dev": {
+        "monolog/monolog": "^2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fivetwofive\\Krate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jabal Torres",
+            "email": "jabal@fivetwofive.com"
+        }
+    ],
+    "require": {}
+}
