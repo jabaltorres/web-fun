@@ -7,7 +7,7 @@
 
 <section id="<?php echo $block_custom_id; ?>" class="component <?php echo $block_custom_class; ?>">
 
-    <?php include(SHARED_PATH . '/block_headline.php'); ?>
+    <?php include('../../templates/components/block_headline.php'); ?>
 
     <button type="button" class="btn btn-primary">Primary</button>
     <button type="button" class="btn btn-secondary">Secondary</button>

@@ -13,13 +13,13 @@
       $language = $_COOKIE['language'] ?? 'None';
     }
 
-    include(SHARED_PATH . '/public_header.php');
+include('../../templates/layout/header.php');
 
 ?>
 
 <div id="main">
 
-  <?php include(SHARED_PATH . '/public_navigation.php'); ?>
+    <?php include('../../templates/components/nav_public.php'); ?>
 
   <div id="page">
 
@@ -51,4 +51,4 @@
 
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

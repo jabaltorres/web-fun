@@ -30,10 +30,8 @@
     $page_title = "This is the form page";
     $page_subheading = "Make your own bacon ipsum";
 
-    include_once(SHARED_PATH . '/site_header.php');
+    include('../../../templates/layout/header.php');
 ?>
-
-<?php include_once(SHARED_PATH . '/navigation.php'); ?>
 
 <div class="container">
 
@@ -79,4 +77,4 @@
     </section>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../../templates/layout/footer.php'); ?>

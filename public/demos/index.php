@@ -5,7 +5,6 @@
     $page_heading = 'Demo Page Heading';
     $page_subheading = "List of WIP demos";
     $custom_class = "demo-page";
-    include_once(SHARED_PATH . '/site_header.php');
 
     // Page Header
     $page_demo_header = new LoremElement("h1");
@@ -40,7 +39,7 @@
 ?>
 
 <?php
-    include_once(SHARED_PATH . '/navigation.php');
+    include('../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -76,4 +75,4 @@
 
 </div><!-- end .container -->
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

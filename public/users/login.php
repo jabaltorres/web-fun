@@ -45,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 
-include(SHARED_PATH . '/users_header.php');
-include(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 
 ?>
 
@@ -70,4 +69,4 @@ include(SHARED_PATH . '/navigation.php');
     <?php if (!empty($error)) echo "<p>$error</p>"; ?>
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

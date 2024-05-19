@@ -6,8 +6,7 @@ $page_heading = "Javascript playground";
 $page_subheading = "Scripting Sandbox";
 $custom_class = "javascript-page mb-4";
 
-include_once(SHARED_PATH . '/site_header.php');
-include(SHARED_PATH . '/navigation.php');
+include('../../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -17,7 +16,7 @@ include(SHARED_PATH . '/navigation.php');
   <section class="js-fun">
     <p class="lead">This page includes pop up functionality</p>
 
-      <?php include_once(SHARED_PATH . '/headline_page.php'); ?>
+      <?php include('../../../templates/components/headline.php'); ?>
   </section>
 
   <section class="js-playground">
@@ -49,4 +48,4 @@ include(SHARED_PATH . '/navigation.php');
 
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../../templates/layout/footer.php'); ?>

@@ -28,28 +28,31 @@ $header_block_content = array(
 
     <?php lorem_print_header_block($header_block_content); ?>
 
-    <!-- start .carousel-->
-    <div class="carousel">
-        <div class="carousel-wrapper">
-            <div class="carousel-slide">
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
                 <img src="<?php echo url_for('/images/placeholder-16-x-9.png'); ?>">
-                <div class="blurb">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni recusandae veritatis molestias in repudiandae praesentium.</span>
-                </div>
             </div>
-            <div class="carousel-slide">
+            <div class="carousel-item">
                 <img src="<?php echo url_for('/images/placeholder-16-x-9.png'); ?>">
-                <div class="blurb">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni recusandae veritatis molestias in repudiandae praesentium.</span>
-                </div>
             </div>
-            <div class="carousel-slide">
+            <div class="carousel-item">
                 <img src="<?php echo url_for('/images/placeholder-16-x-9.png'); ?>">
-                <div class="blurb">
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni recusandae veritatis molestias in repudiandae praesentium.</span>
-                </div>
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    <!-- end .carousel-->
 </section>

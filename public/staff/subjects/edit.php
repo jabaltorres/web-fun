@@ -39,7 +39,7 @@ mysqli_free_result($subject_set);
 ?>
 
 <?php $page_title = 'Edit Subject'; ?>
-<?php include(SHARED_PATH . '/staff_header.php'); ?>
+<?php include('../../../templates/layout/header.php');?>
 
 <div id="content">
 
@@ -87,4 +87,4 @@ mysqli_free_result($subject_set);
 
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../../templates/layout/footer.php'); ?>

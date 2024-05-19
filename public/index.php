@@ -43,13 +43,13 @@ if (isset($_GET['id'])) {
 
 ?>
 
-<?php include(SHARED_PATH . '/public_header.php'); ?>
+<?php include('../templates/layout/header.php'); ?>
 
 <div id="main" class="homepage py-4">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-          <?php include(SHARED_PATH . '/public_navigation.php'); ?>
+          <?php include('../templates/components/nav_public.php'); ?>
       </div>
       <div class="col-md-9 ">
         <section class="user-content">
@@ -68,7 +68,7 @@ if (isset($_GET['id'])) {
                 $allowed_tags = '<div><img><h1><h2><p><br><strong><em><ul><li>';
                 echo strip_tags($page['content'], $allowed_tags);
             } else {
-                include(SHARED_PATH . '/static_homepage.php');
+                include('../templates/pages/static_homepage.php');
             }
             ?>
         </div>
@@ -77,4 +77,4 @@ if (isset($_GET['id'])) {
   </div>
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../templates/layout/footer.php'); ?>

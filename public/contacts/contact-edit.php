@@ -60,15 +60,14 @@ $page_heading = "Edit the contact";
 $page_subheading = "Test the database functionality";
 $custom_class = "edit-contact-page";
 
-include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
 
     <section id="form-section">
-        <?php include_once(SHARED_PATH . '/headline_page.php');?>
+        <?php include('../../templates/components/headline.php'); ?>
 
         <?php echo display_errors($errors); ?>
 
@@ -124,4 +123,4 @@ include_once(SHARED_PATH . '/navigation.php');
     </section>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php');?>
+<?php include('../../templates/layout/footer.php'); ?>

@@ -7,14 +7,13 @@ $page_heading = "Create a new contact";
 $page_subheading = "Test the database functionality";
 $custom_class = "add-email-page";
 
-include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
 
     <section id="form-section">
-        <?php include_once(SHARED_PATH . '/headline_page.php'); ?>
+        <?php include('../../templates/components/headline.php'); ?>
 
         <?php
         if (isset($_POST['submit'])) {
@@ -65,4 +64,4 @@ include_once(SHARED_PATH . '/navigation.php');
     </section>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

@@ -13,13 +13,12 @@
     //custom CSS for this page only
     $custom_class = "object-obsession-page";
 
-    include_once(SHARED_PATH . '/site_header.php');
+include('../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
     <?php
-        include_once(SHARED_PATH . '/navigation.php');
-        include_once(SHARED_PATH . '/headline_page.php');
+        include('../../templates/components/headline.php');
     ?>
 
     <section class="mt-4">
@@ -173,4 +172,4 @@
     </script>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php');?>
+<?php include('../../templates/layout/footer.php'); ?>
