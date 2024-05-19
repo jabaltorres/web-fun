@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 $page_title = 'Staff Menu';
 include(SHARED_PATH . '/staff_header.php');

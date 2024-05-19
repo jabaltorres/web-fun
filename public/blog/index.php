@@ -1,6 +1,6 @@
 <?php
 // Include the necessary configuration and functions
-require_once '../../private/initialize.php';
+require_once '../../src/initialize.php';
 
 // Page metadata
 $title = "Components Page"; // Title for browser title bar

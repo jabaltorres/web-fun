@@ -87,7 +87,7 @@ function lorem_autoload($class)
  */
 spl_autoload_register(function($class) {
     // Check if the class file exists based on namespace
-    $file = $_SERVER['DOCUMENT_ROOT'] . '/private/classes/' . str_replace('\\', '/', $class) . '.php';
+    $file = $_SERVER['DOCUMENT_ROOT'] . '/src/classes/' . str_replace('\\', '/', $class) . '.php';
     if (file_exists($file)) {
         include $file;
     } elseif (preg_match('/\A\w+\Z/', $class)) {

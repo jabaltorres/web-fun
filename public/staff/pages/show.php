@@ -1,4 +1,4 @@
-<?php require_once('../../../private/initialize.php'); ?>
+<?php require_once('../../../src/initialize.php'); ?>
 
 <?php
 // $id = isset($_GET['id']) ? $_GET['id'] : '1';

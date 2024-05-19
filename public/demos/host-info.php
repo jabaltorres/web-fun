@@ -11,7 +11,7 @@
     //custom CSS for this page only
     $custom_class = "host-page";
 
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
     // If not logged in, redirect to login page
     if (!is_logged_in()) {

@@ -3,7 +3,7 @@
     $page_title = "This is the demo index file"; //this is for breadcrumbs if I want a custom title other than the default
     $custom_class = "big-flipper"; //custom CSS for this page only
 
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
     include_once(SHARED_PATH . '/site_header.php');
 ?>
 
