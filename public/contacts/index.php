@@ -14,8 +14,8 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
 // Fetch contacts with the specified sorting
 $contact_set = find_all_contacts($sort);
 
-include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
+
 ?>
 
 <div class="<?php echo $custom_class; ?> container">
@@ -125,4 +125,4 @@ include_once(SHARED_PATH . '/navigation.php');
   });
 </script>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

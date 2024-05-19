@@ -21,8 +21,7 @@ $result = $user->getAllUsers();
 // Check if user is logged in
 $loggedIn = isset($_SESSION['user_id']);
 
-include(SHARED_PATH . '/users_header.php');
-include(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 ?>
 
   <div class="container">
@@ -86,4 +85,4 @@ include(SHARED_PATH . '/navigation.php');
   </div>
 
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

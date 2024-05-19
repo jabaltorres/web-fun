@@ -33,7 +33,7 @@ if(is_post_request()) {
 ?>
 
 <?php $page_title = 'Create Subject'; ?>
-<?php include(SHARED_PATH . '/staff_header.php'); ?>
+<?php include('../../../templates/layout/header.php');?>
 
 <div id="content">
 
@@ -81,4 +81,4 @@ if(is_post_request()) {
 
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../../templates/layout/footer.php'); ?>

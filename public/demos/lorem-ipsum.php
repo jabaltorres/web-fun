@@ -12,10 +12,9 @@
     //custom CSS for this page only
     $custom_class = "page-lorem-ipsum";
 
-    include_once(SHARED_PATH . '/site_header.php');
+include('../../templates/layout/header.php');
 ?>
 
-<?php include_once(SHARED_PATH . '/navigation.php');?>
 
 <div class="container <?php echo $custom_class; ?>">
     <section>
@@ -88,4 +87,4 @@
     </section>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php');?>
+<?php include('../../templates/layout/footer.php'); ?>

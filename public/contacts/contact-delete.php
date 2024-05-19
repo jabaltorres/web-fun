@@ -31,8 +31,7 @@ require_login();
     $custom_class = "db-test-page";
     //custom CSS for this page only
 
-include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -90,4 +89,4 @@ include_once(SHARED_PATH . '/navigation.php');
     </div><!-- end .row -->
 
 </div><!-- end .container -->
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

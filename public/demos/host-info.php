@@ -18,8 +18,8 @@
         redirect_to('/public/contacts/login.php');
     }
 
-    include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+    include('../../templates/layout/header.php');
+
 ?>
 
     <div class="container">
@@ -91,4 +91,4 @@ include_once(SHARED_PATH . '/navigation.php');
         </section>
     </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

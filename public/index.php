@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
 
 ?>
 
-<?php include(SHARED_PATH . '/public_header.php'); ?>
+<?php include('../templates/layout/header.php'); ?>
 
 <div id="main" class="homepage py-4">
   <div class="container">
@@ -77,4 +77,4 @@ if (isset($_GET['id'])) {
   </div>
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../templates/layout/footer.php'); ?>

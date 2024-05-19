@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 $page_title = 'Staff Menu';
-include(SHARED_PATH . '/staff_header.php');
+include('../../templates/layout/header.php');
 ?>
 
 <div class="container">
@@ -17,4 +17,4 @@ include(SHARED_PATH . '/staff_header.php');
     </div>
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>
