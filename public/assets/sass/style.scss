@@ -41,7 +41,7 @@ $dark: $gray-800 !default;
 $primary: $dark;
 $secondary: $yellow;
 
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
 
 @import "base";
 @import "navigation";

@@ -16,31 +16,31 @@ const { series, parallel } = require('gulp');
 
 let paths = {
     styles: {
-        src: "sass/**/*.scss",
-        dest: "public/dist/css"
+        src: "public/assets/sass/**/*.scss",
+        dest: "public/assets/css"
     },
     scripts: {
         src: [
-            "js/vendor/jquery-3.2.1.min.js",
-            "js/vendor/modernizr-3.5.0.min.js",
-            "js/vendor/mustache-2.3.0.min.js",
-            "js/vendor/bootstrap.js",
-            "js/vendor/slick.min.js",
-            "js/vendor/spin.min.js",
-            "js/plugins.js",
-            "js/bigFlipper.js",
-            "js/hostInfo.js",
-            "js/toolTips.js",
-            "js/app.js",
+            "public/assets/js/vendor/jquery-3.2.1.min.js",
+            "public/assets/js/vendor/modernizr-3.5.0.min.js",
+            "public/assets/js/vendor/mustache-2.3.0.min.js",
+            "public/assets/js/vendor/bootstrap.js",
+            "public/assets/js/vendor/slick.min.js",
+            "public/assets/js/vendor/spin.min.js",
+            "public/assets/js/plugins.js",
+            "public/assets/js/bigFlipper.js",
+            "public/assets/js/hostInfo.js",
+            "public/assets/js/toolTips.js",
+            "public/assets/js/app.js",
         ],
-        dest: "public/dist/scripts"
+        dest: "public/assets/js"
     },
     maps: {
-        dest: "public/dist/maps"
+        dest: "public/assets/maps"
     },
     images: {
-        src: "public/images/*",
-        dest: "public/images"
+        src: "public/assets/images/*",
+        dest: "public/assets/images"
     }
 };
 
@@ -81,7 +81,7 @@ function imageminify() {
 function lint() {
     return gulp
         .src(paths.scripts.src)
-        .pipe(jshint("js/.jshintrc"))
+        .pipe(jshint("public/assets/js/.jshintrc"))
         .pipe(jshint.reporter("jshint-stylish"));
 }
 
@@ -89,9 +89,9 @@ function scripts() {
     return gulp
         .src(paths.scripts.src)
         .pipe(sourcemaps.init())
-        .pipe(concat('app.js'))
+        .pipe(concat('main.js'))
         .pipe(gulp.dest(paths.scripts.dest))
-        .pipe(rename('scripts.min.js'))
+        .pipe(rename('main.min.js'))
         .pipe(terser().on('error', function(e){
             console.log(e);
         }))

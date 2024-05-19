@@ -45,9 +45,9 @@ $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP
 // dirname() returns the path to the current directory
 const PRIVATE_PATH = __DIR__;
 define("PROJECT_PATH", dirname(PRIVATE_PATH));
-define("STYLES_PATH", $url . '/dist/css');
-define("SCRIPTS_PATH", $url . '/dist/scripts');
-define("IMAGES_PATH", $url . '/images');
+define("STYLES_PATH", $url . '/assets/css');
+define("SCRIPTS_PATH", $url . '/assets/js');
+define("IMAGES_PATH", $url . '/assets/images');
 
 // * Can dynamically find everything in the URL up to "public"
 $public_end = strpos($_SERVER['SCRIPT_NAME'], '/public');
