@@ -9,32 +9,34 @@ $subject = find_subject_by_id($id);
 ?>
 
 <?php $page_title = 'Show Subject'; ?>
-<?php include('../../../templates/layout/header.php');?>
+<?php include('../../../templates/layout/header.php'); ?>
 
-<div id="content">
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-12">
+            <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php'); ?>">&laquo; Back to List</a>
 
-  <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php'); ?>">&laquo; Back to List</a>
+            <div class="subject show">
 
-  <div class="subject show">
+                <h1>Subject: <?php echo h($subject['menu_name']); ?></h1>
 
-    <h1>Subject: <?php echo h($subject['menu_name']); ?></h1>
+                <div class="attributes">
+                    <dl>
+                        <dt>Menu Name</dt>
+                        <dd><?php echo h($subject['menu_name']); ?></dd>
+                    </dl>
+                    <dl>
+                        <dt>Position</dt>
+                        <dd><?php echo h($subject['position']); ?></dd>
+                    </dl>
+                    <dl>
+                        <dt>Visible</dt>
+                        <dd><?php echo $subject['visible'] == '1' ? 'true' : 'false'; ?></dd>
+                    </dl>
+                </div>
 
-    <div class="attributes">
-      <dl>
-        <dt>Menu Name</dt>
-        <dd><?php echo h($subject['menu_name']); ?></dd>
-      </dl>
-      <dl>
-        <dt>Position</dt>
-        <dd><?php echo h($subject['position']); ?></dd>
-      </dl>
-      <dl>
-        <dt>Visible</dt>
-        <dd><?php echo $subject['visible'] == '1' ? 'true' : 'false'; ?></dd>
-      </dl>
+            </div>
+        </div>
     </div>
-
-  </div>
-
 </div>
 <?php include('../../../templates/layout/footer.php'); ?>
