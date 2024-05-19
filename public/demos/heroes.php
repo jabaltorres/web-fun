@@ -101,21 +101,4 @@ include('../../templates/layout/header.php');
     </div>
 </div>
 
-<div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
-    <div class="hero-background-image bg-5">
-        <div class="container">
-            <div class="row content-wrapper">
-                <div class="col-12 col-lg-6">
-                    <h1 class="hero-headline">Easy, Powerful, and Fast Business Planning Software</h1>
-                    <div class="hero-body">
-                        <p class="lead">Save time, build trust, and improve your team's performance with planning software built for agile&nbsp;businesses.</p>
-                        <a href="#" class="btn btn-secondary text-uppercase font-weight-bold">see what's possible</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <?php include('../../templates/layout/footer.php'); ?>
