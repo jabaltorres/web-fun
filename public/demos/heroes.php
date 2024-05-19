@@ -34,7 +34,7 @@ include('../../templates/layout/header.php');
 
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
+    <img src="../images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
     <div class="hero-background-image bg-1 py-5">
         <div class="container">
             <div class="row content-wrapper">
@@ -51,7 +51,7 @@ include('../../templates/layout/header.php');
 </div>
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
+    <img src="../images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
     <div class="hero-background-image bg-2">
         <div class="container">
             <div class="row content-wrapper">
@@ -68,7 +68,7 @@ include('../../templates/layout/header.php');
 </div>
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
+    <img src="../images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
     <div class="hero-background-image bg-3">
         <div class="container">
             <div class="row content-wrapper">
@@ -85,7 +85,7 @@ include('../../templates/layout/header.php');
 </div>
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
+    <img src="../images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
     <div class="hero-background-image bg-4">
         <div class="container">
             <div class="row content-wrapper">
@@ -102,7 +102,7 @@ include('../../templates/layout/header.php');
 </div>
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
+    <img src="../images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
     <div class="hero-background-image bg-5">
         <div class="container">
             <div class="row content-wrapper">
