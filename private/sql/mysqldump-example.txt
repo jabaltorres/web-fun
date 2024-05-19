@@ -1,1 +1,0 @@
-mysqldump email_db -uroot -proot --host localhost > email_db.sql
