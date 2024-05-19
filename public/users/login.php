@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/classes/KrateUserManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 if ($conn->connect_error) {

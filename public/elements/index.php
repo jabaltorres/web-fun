@@ -1,5 +1,5 @@
 <?php
-    require_once '../../private/initialize.php';
+    require_once '../../src/initialize.php';
     $title = "Elements Page"; // this is for <title>
     $page_title = "This is the elements page"; //this is for breadcrumbs if I want a custom title other than the default
     $addCSS = ""; //custom CSS for this page only

@@ -1,6 +1,6 @@
 <?php
 
-require_once('../../../private/initialize.php');
+require_once('../../../src/initialize.php');
 
 if(!isset($_GET['id'])) {
   redirect_to(url_for('/staff/subjects/index.php'));

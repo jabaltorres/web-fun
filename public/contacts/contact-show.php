@@ -1,5 +1,5 @@
 <?php
-require_once('../../private/initialize.php');
+require_once('../../src/initialize.php');
 require_login();
 $id = $_GET['id'] ?? '1';
 $contact = find_contact_by_id($id);

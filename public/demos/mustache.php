@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
     $title = "Mustache Page";
     // this is for <title>

@@ -1,5 +1,5 @@
 <?php
-    require_once('../../../private/initialize.php');
+    require_once('../../../src/initialize.php');
     include(SHARED_PATH . '/blog_header.php');
 ?>
 
