@@ -5,7 +5,6 @@
     $addCSS = ""; //custom CSS for this page only
 ?>
 <?php include('../../templates/layout/header.php'); ?>
-<?php include_once(SHARED_PATH . '/navigation.php'); ?>
 
 <div class="container">
     <div class="site-inner">

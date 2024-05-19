@@ -18,7 +18,7 @@ include('../../templates/layout/header.php');
 
 <div class="container <?php echo $custom_class; ?>">
     <?php
-        include_once(SHARED_PATH . '/headline_page.php');
+        include('../../templates/components/headline.php');
     ?>
 
     <section class="mt-4">

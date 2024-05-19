@@ -16,7 +16,7 @@ include('../../../templates/layout/header.php');
   <section class="js-fun">
     <p class="lead">This page includes pop up functionality</p>
 
-      <?php include_once(SHARED_PATH . '/headline_page.php'); ?>
+      <?php include('../../../templates/components/headline.php'); ?>
   </section>
 
   <section class="js-playground">

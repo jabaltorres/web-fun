@@ -22,8 +22,8 @@ include('../../templates/layout/header.php');
 
   <section>
       <?php
-      include_once(SHARED_PATH . '/headline_page.php');
-      include_once(SHARED_PATH . '/nav_contacts.php');
+      include('../../templates/components/headline.php');
+      include('../../templates/components/nav_contacts.php');
       ?>
   </section>
 

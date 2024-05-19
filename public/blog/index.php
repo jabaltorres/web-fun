@@ -10,10 +10,6 @@ $addCSS = ""; // Placeholder for page-specific CSS if needed
 
 <?php include('../../templates/layout/header.php'); ?>
 
-<?php
-    include_once(SHARED_PATH . '/navigation.php'); // Include the navigation bar
-?>
-
 <div class="container">
     <div class="site-inner">
         <div class="row">

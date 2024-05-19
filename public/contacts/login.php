@@ -62,7 +62,7 @@ include('../../templates/layout/header.php');
 
 <div class="container <?php echo $custom_class; ?>">
     <section>
-        <?php include_once(SHARED_PATH . '/headline_page.php'); ?>
+        <?php include('../../templates/components/headline.php'); ?>
     </section>
 
     <section id="content">

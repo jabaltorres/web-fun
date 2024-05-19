@@ -26,7 +26,7 @@
 
         <section class="<?php echo $custom_class; ?>">
 
-            <?php include_once(SHARED_PATH . '/headline_page.php'); ?>
+            <?php include('../../templates/components/headline.php'); ?>
 
             <article>
                 <h3>Note:</h3>
@@ -37,7 +37,6 @@
                     echo "<p class='font-weight-bold mb-2'>Paths: </p>";
                     echo '<div class="">PRIVATE_PATH <pre>' . PRIVATE_PATH . '</pre></div>';
                     echo '<div class="">PROJECT_PATH <pre>' . PROJECT_PATH . '</pre></div>';
-                    echo '<div class="">SHARED_PATH <pre>' . SHARED_PATH . '</pre></div>';
                     echo '<div class="">INCLUDES_PATH <pre>' . IMAGES_PATH . '</pre></div>';
                     echo '<div class="">$enviro_prod <pre>' . $enviro_prod . '</pre></div>';
                     ?>
