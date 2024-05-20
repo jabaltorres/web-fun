@@ -1,8 +1,11 @@
 <?php
+
 /*
  * This class is used to create a new Audio element
  */
-class AudioElement {
+
+class AudioElement
+{
 
     private string $title;
     private string $src;
@@ -12,7 +15,8 @@ class AudioElement {
     private bool $loop;
 
 
-    public function __construct($title, $src, $type, $controls = true, $autoplay = false, $loop = false) {
+    public function __construct($title, $src, $type, $controls = true, $autoplay = false, $loop = false)
+    {
         $this->title = $title;
         $this->src = $src;
         $this->type = $type;
@@ -31,13 +35,14 @@ class AudioElement {
         $this->autoplay = $autoplay;
 
         if ($this->autoplay == true) {
-            return  "autoplay='{$this->autoplay}'";
+            return "autoplay='{$this->autoplay}'";
         } else {
             return "";
         }
     }
 
-    public function setLoop($loop) {
+    public function setLoop($loop)
+    {
         $this->loop = $loop;
     }
 

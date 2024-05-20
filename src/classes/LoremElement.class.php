@@ -1,7 +1,9 @@
 <?php
+
 /*
  * This class is used to create a new HTML element
  */
+
 class LoremElement
 {
 
