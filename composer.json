@@ -1,13 +1,13 @@
 {
-    "name": "fivetwofive/krate",
-    "description": "a simple cms app",
+    "name": "fivetwofive/krate-cms",
+    "description": "A content management system for web ideas.",
     "type": "project",
-    "require-dev": {
-        "monolog/monolog": "^2.9"
+    "require": {
+        "ext-mysqli": "*"
     },
     "autoload": {
         "psr-4": {
-            "Fivetwofive\\Krate\\": "src/"
+            "Fivetwofive\\KrateCMS\\": "src/classes/"
         }
     },
     "authors": [
@@ -16,5 +16,8 @@
             "email": "jabal@fivetwofive.com"
         }
     ],
-    "require": {}
+    "minimum-stability": "stable",
+    "require-dev": {
+        "monolog/monolog": "^2.9"
+    }
 }

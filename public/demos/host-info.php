@@ -58,7 +58,6 @@
 
                 <div class="host-page-section">
                     <?php
-                    echo "Actual Link: <pre>" . $actual_link . "</pre>";
                     echo "HTTP_HOST : <pre>" . $http_host . "</pre>";
                     echo "HTTP USER AGENT: <pre>" . $user_agent . "</pre>";
                     echo "PHP_SELF: <pre>" . $_SERVER['PHP_SELF'] . "</pre>";

@@ -5,14 +5,16 @@ use JetBrains\PhpStorm\Pure;
 /**
  * This creates a new HTML card element
  */
-class LoremCard {
+class LoremCard
+{
 
     private string $id;
     private string $classes;
     private string $content;
     private bool $dark_mode;
 
-    public function __construct($args=[]) {
+    public function __construct($args = [])
+    {
         $this->id = $args['id'] ?? '';
         $this->classes = $args['classes'] ?? '';
         $this->content = $args['content'] ?? '';

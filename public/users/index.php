@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-use FiveTwoFive\KrateCMS\UserManagement\KrateUserManager;
+use Fivetwofive\KrateCMS\KrateUserManager;
 
 // Now you can instantiate the User class
 $user = new KrateUserManager($conn);
