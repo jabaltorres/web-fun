@@ -13,38 +13,38 @@ include('../../../templates/layout/header.php');
 
     <?php include('incl/pop-up.php'); ?>
 
-  <section class="js-fun">
-    <p class="lead">This page includes pop up functionality</p>
+    <section class="js-fun">
+        <p class="lead">This page includes pop up functionality</p>
 
-      <?php include('../../../templates/components/headline.php'); ?>
-  </section>
+        <?php include('../../../templates/components/headline.php'); ?>
+    </section>
 
-  <section class="js-playground">
+    <section class="js-playground">
 
-      <?php timeOfDayGreeting(); ?>
+        <?php timeOfDayGreeting(); ?>
 
-    <div class="entry-content">
-      This is rendered content.
-        <?php
-        /**
-         * This is just a comment to remind me that content gets rendered here
-         */
-        ?>
-      <ul></ul>
-    </div>
-  </section>
+        <div class="entry-content">
+            This is rendered content.
+            <?php
+            /**
+             * This is just a comment to remind me that content gets rendered here
+             */
+            ?>
+            <ul></ul>
+        </div>
+    </section>
 
-  <section class="js-append-something">
-    <h3>This is from the getJSON function in apps.js</h3>
-  </section>
+    <section class="js-append-something">
+        <h3>This is from the getJSON function in apps.js</h3>
+    </section>
 
-  <section>
-    <article>
-      <h3>Test embedding a GitHub gist</h3>
-      <p>Check out my bash profile gist</p>
-      <script src="https://gist.github.com/capitalJT/04c8300224c319dc1ccb.js"></script>
-    </article>
-  </section>
+    <section>
+        <article>
+            <h3>Test embedding a GitHub gist</h3>
+            <p>Check out my bash profile gist</p>
+            <script src="https://gist.github.com/capitalJT/04c8300224c319dc1ccb.js"></script>
+        </article>
+    </section>
 
 </div>
 
