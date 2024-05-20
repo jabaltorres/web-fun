@@ -2,7 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
-use FiveTwoFive\KrateCMS\UserManagement\KrateUserManager;
+use Fivetwofive\KrateCMS\KrateUserManager;
 
 // Create a database connection, necessary to instantiate KrateUserManager
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);

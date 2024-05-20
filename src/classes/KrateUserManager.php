@@ -1,6 +1,6 @@
 <?php
 
-namespace FiveTwoFive\KrateCMS\UserManagement;
+namespace Fivetwofive\KrateCMS;
 
 use mysqli;
 use mysqli_result;

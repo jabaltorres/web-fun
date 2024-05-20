@@ -2,7 +2,6 @@
 ob_start(); // output buffering is turned on
 session_start(); // turn on sessions
 
-
 $site_owner = "Jabal Torres";
 $site_name = "LOREM";
 $site_tagline = "A place for all of your web ideas";
