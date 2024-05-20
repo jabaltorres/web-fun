@@ -24,21 +24,8 @@ $port = $_SERVER['SERVER_PORT'];
 $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $port == 443) ? '' : ":$port";
 
 // put em all together to get the complete base URL
-// $url = "${protocol}://${domain}${disp_port}${base_url}";
+$url = "${protocol}://${server_name}";
 $enviro_prod = "web-fun.fivetwofive.com";
-$enviro_dev = "localhost";
-$path = "web-fun";
-if ($server_name == $enviro_prod) {
-    // Production Environment
-    $url = "${protocol}://${server_name}";
-} else {
-    // Local Environment
-    // $url = "${protocol}://${domain}${disp_port}/${path}";
-    $url = "${protocol}://${server_name}";
-}
-
-$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
 
 // Assign file path to PHP constants
 // __FILE__ returns the current path to this file
