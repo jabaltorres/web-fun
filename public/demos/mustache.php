@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
     $title = "Mustache Page";
     // this is for <title>
@@ -13,14 +13,9 @@
     $custom_class = "mustache-page";
     //custom CSS for this page only
 
-    include_once(SHARED_PATH . '/site_header.php');
+    include('../../templates/layout/header.php');
 ?>
 <div class="container <?php echo $custom_class; ?>">
-  
-  <?php
-    include_once(SHARED_PATH . '/navigation.php');
-  ?>
-
 
   <section class="mustache">
     <hgroup>
@@ -53,4 +48,4 @@
   </section>
 
 </div>
-<?php include_once(SHARED_PATH . '/site_footer.php');?>
+<?php include('../../templates/layout/footer.php'); ?>

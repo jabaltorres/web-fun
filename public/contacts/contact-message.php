@@ -1,5 +1,5 @@
 <?php
-require_once('../../private/initialize.php');
+require_once('../../src/initialize.php');
 
 require_login();
 
@@ -52,14 +52,13 @@ require_login();
     $custom_class = "contact-message-page";
     //custom CSS for this page only
 
-    include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+    include('../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
 
     <section>
-        <?php include_once(SHARED_PATH . '/headline_page.php');?>
+        <?php include('../../templates/components/headline.php'); ?>
     </section>
 
     <div class="row">
@@ -118,5 +117,5 @@ include_once(SHARED_PATH . '/navigation.php');
     </div><!-- end .row -->
 
 </div><!-- end .container -->
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>
 

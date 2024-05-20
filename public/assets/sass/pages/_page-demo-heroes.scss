@@ -1,0 +1,144 @@
+.hero-background-image{
+  color: $white;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  @include media-breakpoint-up(lg){
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  @include media-breakpoint-up(xl){
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  &.bg-1{
+    background-image: url("/assets/images/svg/circle-group-dark.svg"),
+      //linear-gradient(to bottom right, rgba(0, 161, 156, 1), rgba(0, 96, 152, 0.7)),
+    linear-gradient(135deg, rgba(0, 161, 156, 1), rgba(255, 255, 255, 0) 100%),
+    url("/assets/images/PF_Changs-0066-F_preview.jpeg");
+    background-size: cover, cover, cover;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: top, 50% 50%, top 40% center;
+  }
+  &.bg-2{
+    background-image: url("/assets/images/svg/circle-group-gradient.svg"),
+    linear-gradient(90deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2) 80%),
+    url("/assets/images/PF_Changs-0066-F_preview.jpeg");
+    background-size: cover, cover, cover;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-position: center center, center center, top 40% right;
+  }
+  &.bg-3{
+    //color: black !important;
+    background-image: url("/assets/images/svg/circle-group-dark.svg"),
+    linear-gradient(90deg, $teal, $blue 80%);
+    background-size: cover, cover;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center, center center;
+    @include media-breakpoint-up(lg){
+      background-image: url("/assets/images/svg/circle-group-dark.svg"),
+      linear-gradient(90deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5) 90%),
+        //linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255,255, 255, 0) 50%),
+      url("/assets/images/PF_Changs-0066-F_preview.jpeg");
+      background-size: cover, cover, cover;
+      background-position: top, center center, top 40%;
+    }
+    @include media-breakpoint-up(xl){
+      background-size: cover, cover, auto;
+    }
+  }
+  &.bg-4{
+    color: black !important;
+    background-color: white;
+    background-image: url("/assets/images/svg/circle-group-light.svg"),
+    linear-gradient(90deg, $teal, $blue 80%);
+    background-size: cover, cover;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center, center center;
+    border-top: solid thin #eee;
+    border-bottom: solid thin #eee;
+    @include media-breakpoint-up(lg){
+      background-image: url("/assets/images/svg/circle-group-light.svg"),
+      linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 75%),
+        //linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255,255, 255, 0) 50%),
+      url("/assets/images/PF_Changs-0066-F_preview-cropped-transparency.png");
+      background-size: cover, cover, cover;
+      background-position: top, center center, 100% 50%;
+    }
+    @include media-breakpoint-up(xl){
+      background-size: cover, cover, 770px auto;
+    }
+  }
+}
+
+
+
+
+
+.aiForPlanning{
+  @include media-breakpoint-up(md){
+    border-right: solid thin $white;
+  }
+}
+
+.btn-link:hover{
+  text-decoration: none;
+}
+
+.paragraph--type--hero.homepage-hero{
+  .hero-background-image{
+    padding:0;
+    color: black;
+    background-color: $white;
+  }
+  .container{
+    padding-top:40px;
+    padding-bottom:40px;
+  }
+  @include media-breakpoint-down(md){
+    .hero-background-image{
+      background-image: url("/assets/images/svg/svg-pattern-mobile.svg");
+      background-size: auto 370px;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+  @include media-breakpoint-up(lg){
+    .container{
+      position: relative;
+      padding-top:60px;
+      padding-bottom:60px;
+      background-image: url("/assets/images/svg/svg-pattern.svg"),
+      linear-gradient(90deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0) 70%),
+      url("/assets/images/pf-changs-1.png");
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-size: auto 410px, cover, 770px auto;
+      background-position: center center, center center, 110% 50%;
+    }
+    .img-caption{
+      position: absolute;
+      bottom: 10px;
+      right: 140px;
+    }
+  }
+  @include media-breakpoint-up(xl){
+    .container{
+      padding-top:80px;
+      padding-bottom:80px;
+      background-size: auto 480px, cover, 840px auto;
+    }
+    .img-caption{
+      right: 160px;
+    }
+  }
+}
+
+
+.paragraph--type--quote.bg-light{
+  color: white;
+  background: #5C0F8C;
+  background-image: url(/assets/images/svg/svg-pattern-alt.svg), linear-gradient(135deg, #5C0F8C 25%, #004EA6);
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto 490px, cover;
+  background-position: 65% 27%, center center;
+}

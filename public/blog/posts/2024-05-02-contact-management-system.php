@@ -1,6 +1,5 @@
 <?php
-    require_once('../../../private/initialize.php');
-    include(SHARED_PATH . '/blog_header.php');
+    require_once('../../../src/initialize.php');
 ?>
 
 <div class="content">
@@ -55,5 +54,3 @@
 
 </div>
 
-
-<?php include(SHARED_PATH . '/footer-footer.php'); ?>

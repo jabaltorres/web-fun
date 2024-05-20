@@ -1,17 +1,14 @@
 <?php
 // Include the necessary configuration and functions
-require_once '../../private/initialize.php';
+require_once '../../src/initialize.php';
 
 // Page metadata
 $title = "Components Page"; // Title for browser title bar
 $page_title = "This is the components page"; // Title for the page, can be used in breadcrumbs or headers
 $addCSS = ""; // Placeholder for page-specific CSS if needed
-include_once(SHARED_PATH . '/site_header.php'); // Include the site header
 ?>
 
-<?php
-    include_once(SHARED_PATH . '/navigation.php'); // Include the navigation bar
-?>
+<?php include('../../templates/layout/header.php'); ?>
 
 <div class="container">
     <div class="site-inner">
@@ -56,4 +53,4 @@ include_once(SHARED_PATH . '/site_header.php'); // Include the site header
     </div>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); // Include the site footer ?>
+<?php include('../../templates/layout/footer.php'); ?>

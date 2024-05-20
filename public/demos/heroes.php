@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
     // this is for <title>
     $title = "Heroes";
 
@@ -12,11 +12,10 @@
     //custom CSS for this page only
     $custom_class = "page-lorem-ipsum";
 
-    include_once(SHARED_PATH . '/site_header.php');
+include('../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-  <?php include_once(SHARED_PATH . '/navigation.php');?>
 
   <section>
 
@@ -35,7 +34,7 @@
 
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
+    <img src="../assets/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
     <div class="hero-background-image bg-1 py-5">
         <div class="container">
             <div class="row content-wrapper">
@@ -52,7 +51,7 @@
 </div>
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
+    <img src="../assets/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
     <div class="hero-background-image bg-2">
         <div class="container">
             <div class="row content-wrapper">
@@ -69,7 +68,7 @@
 </div>
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
+    <img src="../assets/images/PF_Changs-0066-F_preview.jpeg" style="display: none;">
     <div class="hero-background-image bg-3">
         <div class="container">
             <div class="row content-wrapper">
@@ -86,7 +85,7 @@
 </div>
 
 <div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
+    <img src="../assets/images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
     <div class="hero-background-image bg-4">
         <div class="container">
             <div class="row content-wrapper">
@@ -102,21 +101,4 @@
     </div>
 </div>
 
-<div class="paragraph--type--hero mb-4 has-bg-image">
-    <img src="../public/images/PF_Changs-0066-F_preview-cropped-transparency.png" style="display: none;">
-    <div class="hero-background-image bg-5">
-        <div class="container">
-            <div class="row content-wrapper">
-                <div class="col-12 col-lg-6">
-                    <h1 class="hero-headline">Easy, Powerful, and Fast Business Planning Software</h1>
-                    <div class="hero-body">
-                        <p class="lead">Save time, build trust, and improve your team's performance with planning software built for agile&nbsp;businesses.</p>
-                        <a href="#" class="btn btn-secondary text-uppercase font-weight-bold">see what's possible</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php include_once(SHARED_PATH . '/site_footer.php');?>
+<?php include('../../templates/layout/footer.php'); ?>

@@ -13,4 +13,5 @@ node_modules/*
 .DS_Store
 
 # Ignore db credentials
-private/db_credentials.php
+src/db_credentials.php
+/vendor/

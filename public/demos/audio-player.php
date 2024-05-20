@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 $title = "Demo Index";
 // this is for <title>
@@ -10,7 +10,7 @@ $page_subheading = "List of WIP demos";
 $custom_class = "demo-page";
 //custom CSS for this page only
 
-include_once(SHARED_PATH . '/site_header.php');
+include('../../templates/layout/header.php');
 ?>
 
 <?php
@@ -31,11 +31,6 @@ $page_audio_subheader->setContent("Testing out building and using an audio playe
 
     <div class="container <?php echo $custom_class; ?>">
 
-        <?php
-        include_once(SHARED_PATH . '/navigation.php');
-        ?>
-
-
         <section class="lorem-header">
             <?php
             echo $page_audio_header->render();
@@ -55,4 +50,4 @@ $page_audio_subheader->setContent("Testing out building and using an audio playe
 
     </div><!-- end .container -->
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

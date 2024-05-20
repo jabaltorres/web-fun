@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 require_login();
 
 // Check if the form has been submitted
@@ -43,8 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-include(SHARED_PATH . '/site_header.php');
-include(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 
 ?>
 
@@ -86,4 +85,4 @@ include(SHARED_PATH . '/navigation.php');
     </section>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

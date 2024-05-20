@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 $errors = [];
 $username = '';
@@ -18,21 +18,24 @@ if (is_post_request()) {
 ?>
 
 <?php $page_title = 'Log in'; ?>
-<?php include(SHARED_PATH . '/staff_header.php'); ?>
+<?php include('../../templates/layout/header.php'); ?>
 
-<div id="content">
-    <h1>Log in</h1>
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Log in</h1>
 
-    <?php echo display_errors($errors); ?>
+            <?php echo display_errors($errors); ?>
 
-    <form action="login.php" method="post">
-        Username:<br/>
-        <input type="text" name="username" value="<?php echo h($username); ?>"/><br/>
-        Password:<br/>
-        <input type="password" name="password" value=""/><br/>
-        <input type="submit" name="submit" value="Submit"/>
-    </form>
-
+            <form action="login.php" method="post">
+                Username:<br/>
+                <input type="text" name="username" value="<?php echo h($username); ?>"/><br/>
+                Password:<br/>
+                <input type="password" name="password" value=""/><br/>
+                <input type="submit" name="submit" value="Submit"/>
+            </form>
+        </div>
+    </div>
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

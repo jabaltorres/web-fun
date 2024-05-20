@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../private/classes/KrateUserManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 if ($conn->connect_error) {
@@ -45,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 
-include(SHARED_PATH . '/users_header.php');
-include(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 
 ?>
 
@@ -70,4 +69,4 @@ include(SHARED_PATH . '/navigation.php');
     <?php if (!empty($error)) echo "<p>$error</p>"; ?>
 </div>
 
-<?php include(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

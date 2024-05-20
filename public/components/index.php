@@ -1,12 +1,10 @@
 <?php
-    require_once '../../private/initialize.php';
+    require_once '../../src/initialize.php';
     $title = "Components Page"; // this is for <title>
     $page_title = "This is the components page"; //this is for breadcrumbs if I want a custom title other than the default
     $addCSS = ""; //custom CSS for this page only
-    include_once(SHARED_PATH . '/site_header.php');
 ?>
-
-<?php include_once(SHARED_PATH . '/navigation.php'); ?>
+<?php include('../../templates/layout/header.php'); ?>
 
 <div class="container">
     <div class="site-inner">
@@ -25,9 +23,6 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php');
+<?php include('../../templates/layout/footer.php'); ?>

@@ -1,5 +1,5 @@
 <?php
-require_once('../../private/initialize.php');
+require_once('../../src/initialize.php');
 require_login();
 $id = $_GET['id'] ?? '1';
 $contact = find_contact_by_id($id);
@@ -7,15 +7,14 @@ $title = "DB Test Page";
 $page_heading = "This is the DB Test page";
 $page_subheading = "Welcome to the DB test page";
 $custom_class = "db-test-page";
-include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
 
     <section>
-        <?php include_once(SHARED_PATH . '/headline_page.php');?>
-        <?php include_once(SHARED_PATH . '/nav_contacts.php');?>
+        <?php include('../../templates/components/headline.php');?>
+        <?php include('../../templates/components/nav_contacts.php');?>
     </section>
 
     <div class="row">
@@ -65,4 +64,4 @@ include_once(SHARED_PATH . '/navigation.php');
     </div>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>

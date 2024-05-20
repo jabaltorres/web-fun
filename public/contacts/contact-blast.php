@@ -1,5 +1,5 @@
 <?php
-require_once('../../private/initialize.php');
+require_once('../../src/initialize.php');
 
 require_login();
 
@@ -14,8 +14,7 @@ $page_subheading = "Welcome to the DB test page";
 
 $custom_class = "db-test-page";
 //custom CSS for this page only
-include_once(SHARED_PATH . '/site_header.php');
-include_once(SHARED_PATH . '/navigation.php');
+include('../../templates/layout/header.php');
 ?>
     <div class="container <?php echo $custom_class; ?>">
 
@@ -89,4 +88,4 @@ include_once(SHARED_PATH . '/navigation.php');
   </section>
 </div>
 
-<?php include_once(SHARED_PATH . '/site_footer.php'); ?>
+<?php include('../../templates/layout/footer.php'); ?>
