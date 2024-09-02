@@ -31,34 +31,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $last_name = $_POST['last_name'] ?? '';
     $email = $_POST['email'] ?? '';
 
-    if (!empty($first_name) && !empty($last_name) && !empty($email)) {
-        // Update user details in the database
-        $stmt = $conn->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
-        $stmt->bind_param("sssi", $first_name, $last_name, $email, $user_id);
-        if ($stmt->execute()) {
-            $success = "Profile updated successfully!";
-            // Refresh user details after update
-            $userDetails = $userManager->getUserDetails($user_id);
-        } else {
-            $error = "An error occurred while updating your profile. Please try again.";
-        }
-    } else {
-        $error = "All fields are required.";
-    }
-
     // Handle password change
     $current_password = $_POST['current_password'] ?? '';
     $new_password = $_POST['new_password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    if (!empty($current_password) && !empty($new_password) && $new_password === $confirm_password) {
-        if ($userManager->changePassword($user_id, $current_password, $new_password)) {
-            $success = "Password updated successfully!";
+    if (!empty($new_password)) {
+        if ($new_password !== $confirm_password) {
+            $error = "New passwords do not match.";
         } else {
-            $error = "Current password is incorrect. Please try again.";
+            if (!$userManager->changePassword($user_id, $current_password, $new_password)) {
+                $error = "Current password is incorrect. Please try again.";
+            } else {
+                $success = "Password updated successfully!";
+            }
         }
-    } elseif (!empty($new_password)) {
-        $error = "New passwords do not match.";
+    }
+
+    // Proceed with profile update only if no errors
+    if (empty($error)) {
+        if (!empty($first_name) && !empty($last_name) && !empty($email)) {
+            $stmt = $conn->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
+            $stmt->bind_param("sssi", $first_name, $last_name, $email, $user_id);
+            if ($stmt->execute()) {
+                $success = "Profile updated successfully!";
+                // Refresh user details after update
+                $userDetails = $userManager->getUserDetails($user_id);
+            } else {
+                $error = "An error occurred while updating your profile. Please try again.";
+            }
+        } else {
+            $error = "All fields are required.";
+        }
     }
 }
 
