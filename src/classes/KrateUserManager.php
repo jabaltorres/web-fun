@@ -20,6 +20,8 @@ class KrateUserManager
         $this->db = $dbConnection;
     }
 
+    // Session and Authentication Management
+
     /**
      * Authenticates a user with username and password.
      *
@@ -42,6 +44,37 @@ class KrateUserManager
         }
         return null;
     }
+
+    /**
+     * Ends the session for the current user, ensuring all session data is cleared.
+     */
+    public function logout(): void
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000,
+                    $params["path"], $params["domain"],
+                    $params["secure"], $params["httponly"]
+                );
+            }
+            session_unset();
+            session_destroy();
+        }
+    }
+
+    /**
+     * Redirects user to login page if not logged in.
+     */
+    public function checkLoggedIn(): void
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /users/login.php");
+            exit;
+        }
+    }
+
+    // User Management
 
     /**
      * Registers a new user in the database.
@@ -96,6 +129,24 @@ class KrateUserManager
     }
 
     /**
+     * Checks if the given user is an Administrator.
+     *
+     * This method verifies the role of a user by querying the database
+     * for the user's role based on their user ID. It then checks if the
+     * role is 'Administrator'.
+     *
+     * @param int $userId The ID of the user to check.
+     * @return bool Returns true if the user is an Administrator, otherwise false.
+     */
+    public function isAdmin($userId): bool {
+        $stmt = $this->prepareStatement("SELECT role FROM users WHERE user_id = ?", "i", $userId);
+        $stmt->execute();
+        $stmt->bind_result($role);
+        $stmt->fetch();
+        return $role === 'Administrator';
+    }
+
+    /**
      * Fetches all users from the database.
      *
      * @return mysqli_result|null Result set containing all users
@@ -109,34 +160,7 @@ class KrateUserManager
         return null;
     }
 
-    /**
-     * Ends the session for the current user, ensuring all session data is cleared.
-     */
-    public function logout(): void
-    {
-        if (session_status() === PHP_SESSION_ACTIVE) {
-            if (ini_get("session.use_cookies")) {
-                $params = session_get_cookie_params();
-                setcookie(session_name(), '', time() - 42000,
-                    $params["path"], $params["domain"],
-                    $params["secure"], $params["httponly"]
-                );
-            }
-            session_unset();
-            session_destroy();
-        }
-    }
-
-    /**
-     * Redirects user to login page if not logged in.
-     */
-    public function checkLoggedIn(): void
-    {
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /users/login.php");
-            exit;
-        }
-    }
+    // Helper Methods
 
     /**
      * Helper function to prepare SQL statements.
