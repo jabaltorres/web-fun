@@ -65,7 +65,7 @@ if (isset($_GET['id'])) {
             <?php
             if (isset($page)) {
                 // show the page from the database
-                $allowed_tags = '<div><img><h1><h2><p><br><strong><em><ul><li>';
+                $allowed_tags = '<div><img><h1><h2><p><br><strong><em><ul><li><a>';
                 echo strip_tags($page['content'], $allowed_tags);
             } else {
                 include('../templates/pages/static_homepage.php');
