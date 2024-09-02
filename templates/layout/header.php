@@ -19,6 +19,7 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
     <meta charset="utf-8">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/public.css">
+    <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/simple.css">
 </head>
 
 <body>

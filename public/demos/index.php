@@ -34,7 +34,7 @@
         ['id' => 'lorem-ipsum', 'visible' => '1', 'demo_page' => 'Lorem Ipsum', 'page_url' => 'lorem-ipsum.php'],
         ['id' => 'mustache-js', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
         ['id' => 'forms', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/forms.php'],
-        ['id' => 'scratch', 'visible' => '1', 'demo_page' => 'Scratch', 'page_url' => 'scratch.php'],
+        ['id' => 'simple', 'visible' => '1', 'demo_page' => 'Simple', 'page_url' => 'simple.php'],
     ];
 ?>
 

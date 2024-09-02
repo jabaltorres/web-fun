@@ -2,9 +2,9 @@
     <head>
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/public.css">
-        <link rel="stylesheet" href="/assets/css/scratch.css" media="all">
+        <link rel="stylesheet" href="/assets/css/simple.css" media="all">
     </head>
-    <body>
+    <body id="page-scratch" class="">
         <div class="container">
             <h1>Hello world!</h1>
 
