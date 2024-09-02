@@ -20,6 +20,8 @@ class KrateUserManager
         $this->db = $dbConnection;
     }
 
+    // Session and Authentication Management
+
     /**
      * Authenticates a user with username and password.
      *
@@ -42,6 +44,37 @@ class KrateUserManager
         }
         return null;
     }
+
+    /**
+     * Ends the session for the current user, ensuring all session data is cleared.
+     */
+    public function logout(): void
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000,
+                    $params["path"], $params["domain"],
+                    $params["secure"], $params["httponly"]
+                );
+            }
+            session_unset();
+            session_destroy();
+        }
+    }
+
+    /**
+     * Redirects user to login page if not logged in.
+     */
+    public function checkLoggedIn(): void
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /users/login.php");
+            exit;
+        }
+    }
+
+    // User Management
 
     /**
      * Registers a new user in the database.
@@ -96,6 +129,24 @@ class KrateUserManager
     }
 
     /**
+     * Checks if the given user is an Administrator.
+     *
+     * This method verifies the role of a user by querying the database
+     * for the user's role based on their user ID. It then checks if the
+     * role is 'Administrator'.
+     *
+     * @param int $userId The ID of the user to check.
+     * @return bool Returns true if the user is an Administrator, otherwise false.
+     */
+    public function isAdmin($userId): bool {
+        $stmt = $this->prepareStatement("SELECT role FROM users WHERE user_id = ?", "i", $userId);
+        $stmt->execute();
+        $stmt->bind_result($role);
+        $stmt->fetch();
+        return $role === 'Administrator';
+    }
+
+    /**
      * Fetches all users from the database.
      *
      * @return mysqli_result|null Result set containing all users
@@ -110,33 +161,47 @@ class KrateUserManager
     }
 
     /**
-     * Ends the session for the current user, ensuring all session data is cleared.
+     * Changes the user's password after verifying the current password.
+     *
+     * This method first fetches the current password hash for the user
+     * from the database. It then verifies that the provided current password
+     * matches the stored hash. If the verification is successful, the new
+     * password is hashed and updated in the database.
+     *
+     * Note: The result from the first query is freed to ensure that the
+     * MySQL connection is ready for the subsequent update query.
+     *
+     * @param int $userId The ID of the user whose password is being changed.
+     * @param string $currentPassword The current password provided by the user for verification.
+     * @param string $newPassword The new password that the user wants to set.
+     * @return bool Returns true if the password was successfully updated, otherwise false.
      */
-    public function logout(): void
+    public function changePassword(int $userId, string $currentPassword, string $newPassword): bool
     {
-        if (session_status() === PHP_SESSION_ACTIVE) {
-            if (ini_get("session.use_cookies")) {
-                $params = session_get_cookie_params();
-                setcookie(session_name(), '', time() - 42000,
-                    $params["path"], $params["domain"],
-                    $params["secure"], $params["httponly"]
-                );
-            }
-            session_unset();
-            session_destroy();
+        // Fetch the user's current password hash
+        $stmt = $this->prepareStatement("SELECT password_hash FROM users WHERE user_id = ?", "i", $userId);
+        $stmt->execute();
+        $stmt->bind_result($hashed_password);
+        $stmt->fetch();
+
+        // Free the result to allow the next query
+        $stmt->free_result();
+
+        // Verify the current password
+        if (password_verify($currentPassword, $hashed_password)) {
+            // Hash the new password
+            $new_hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            // Update the password in the database
+            $update_stmt = $this->prepareStatement("UPDATE users SET password_hash = ? WHERE user_id = ?", "si", $new_hashed_password, $userId);
+            return $update_stmt->execute();
         }
+
+        return false; // Current password did not match
     }
 
-    /**
-     * Redirects user to login page if not logged in.
-     */
-    public function checkLoggedIn(): void
-    {
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /users/login.php");
-            exit;
-        }
-    }
+
+    // Helper Methods
 
     /**
      * Helper function to prepare SQL statements.
