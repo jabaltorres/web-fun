@@ -160,6 +160,47 @@ class KrateUserManager
         return null;
     }
 
+    /**
+     * Changes the user's password after verifying the current password.
+     *
+     * This method first fetches the current password hash for the user
+     * from the database. It then verifies that the provided current password
+     * matches the stored hash. If the verification is successful, the new
+     * password is hashed and updated in the database.
+     *
+     * Note: The result from the first query is freed to ensure that the
+     * MySQL connection is ready for the subsequent update query.
+     *
+     * @param int $userId The ID of the user whose password is being changed.
+     * @param string $currentPassword The current password provided by the user for verification.
+     * @param string $newPassword The new password that the user wants to set.
+     * @return bool Returns true if the password was successfully updated, otherwise false.
+     */
+    public function changePassword(int $userId, string $currentPassword, string $newPassword): bool
+    {
+        // Fetch the user's current password hash
+        $stmt = $this->prepareStatement("SELECT password_hash FROM users WHERE user_id = ?", "i", $userId);
+        $stmt->execute();
+        $stmt->bind_result($hashed_password);
+        $stmt->fetch();
+
+        // Free the result to allow the next query
+        $stmt->free_result();
+
+        // Verify the current password
+        if (password_verify($currentPassword, $hashed_password)) {
+            // Hash the new password
+            $new_hashed_password = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            // Update the password in the database
+            $update_stmt = $this->prepareStatement("UPDATE users SET password_hash = ? WHERE user_id = ?", "si", $new_hashed_password, $userId);
+            return $update_stmt->execute();
+        }
+
+        return false; // Current password did not match
+    }
+
+
     // Helper Methods
 
     /**
