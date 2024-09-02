@@ -29,13 +29,10 @@ include('../../templates/layout/header.php');
 
     <?php if ($loggedIn): ?>
         <ul class="nav mb-4">
-            <li class="nav-item"><a class="nav-link" href="index.php">Index</a></li>
-            <li class="nav-item"><a class="nav-link" href="change-password.php">Change Password</a></li>
-            <li class="nav-item"><a class="nav-link" href="edit.php">Edit</a></li>
+            <li class="nav-item"><a class="nav-link" href="user-add.php">User Add</a></li>
+            <li class="nav-item"><a class="nav-link" href="edit-profile.php">Edit Profile</a></li>
             <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
             <li class="nav-item"><a class="nav-link" href="logout.php">Logout</a></li>
-            <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="user-add.php">User Add</a></li>
         </ul>
     <?php endif; ?>
 
