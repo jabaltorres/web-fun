@@ -51,10 +51,9 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
             <!-- Update navbar text to reflect user status -->
             <span class="navbar-text">
             <?php if ($is_logged_in): ?>
-                Welcome back, <?= htmlspecialchars($_SESSION['first_name']); ?>! <a href="/users/logout.php">Log Out</a>
+                Welcome back, <a href="/users/my-profile.php"><?= htmlspecialchars($_SESSION['first_name']); ?></a>! <a href="/users/logout.php">Log Out</a>
             <?php else: ?>
-                Welcome Guest! Please <a href="/users/login.php">Log In</a> or <a
-                    href="/public/users/register.php">Register</a>.
+                Welcome Guest! Please <a href="/users/login.php">Log In</a> or <a href="/public/users/register.php">Register</a>.
             <?php endif; ?>
         </span>
         </div>
