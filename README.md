@@ -23,4 +23,8 @@ db_credentials.php has been ignored. It should live in `private/db_credentials` 
     ?>
  
 ## Notes
-- Node version: 10 is required to run gulp.
+- I'm currently using Node version 18 on my iMac to  is to run gulp locally.
+- This codebase is a work in progress. I'm currently working on the `users` section of the site.
+- This project uses Bootstrap 4.6.2 and jQuery 3.7.1.
+- I had to export the database from Cloudways and import it into my local iMac environment.
+- On my PC, I had to use `ddev exec mysqldump -u root -proot kratecms > kratecms.sql` to export the database.
