@@ -86,16 +86,88 @@ class KrateUserManager
      * @param string $last_name Last name
      * @return bool Returns true if registration is successful, false otherwise
      */
-    public function register(string $username, string $password, string $email, string $first_name, string $last_name): bool
+    /**
+     * Registers a new user in the database.
+     *
+     * @param string $username Username
+     * @param string $password Password
+     * @param string $email Email address
+     * @param string $first_name First name
+     * @param string $last_name Last name
+     * @param string $role User role (e.g., 'Administrator', 'Manager', etc.)
+     * @return bool Returns true if registration is successful, false otherwise
+     */
+    public function register(string $username, string $password, string $email, string $first_name, string $last_name, string $role): bool
     {
         if ($this->doesUserExist($username, $email)) {
             return false;
         }
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->prepareStatement("INSERT INTO users (username, password_hash, email, first_name, last_name) VALUES (?, ?, ?, ?, ?)", "sssss", $username, $hashed_password, $email, $first_name, $last_name);
+        $stmt = $this->prepareStatement("INSERT INTO users (username, password_hash, email, first_name, last_name, role) VALUES (?, ?, ?, ?, ?, ?)", "ssssss", $username, $hashed_password, $email, $first_name, $last_name, $role);
         return $stmt->execute();
     }
+
+    /**
+     * Validates user data before registration.
+     *
+     * @param string $username Username
+     * @param string $password Password
+     * @param string $confirm_password Confirmation of the password
+     * @param string $email Email address
+     * @param string $first_name First name
+     * @param string $last_name Last name
+     * @return string|null Returns an error message if validation fails, null if validation passes
+     */
+    public function validateUserData(string $username, string $password, string $confirm_password, string $email, string $first_name, string $last_name): ?string
+    {
+        if ($password !== $confirm_password) {
+            return "Passwords do not match.";
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return "Invalid email address.";
+        }
+
+        if ($this->doesUserExist($username, $email)) {
+            return "Error: Unable to add user. User might already exist.";
+        }
+
+        return null;
+    }
+
+    /**
+     * Registers a new user in the database after validating their data.
+     *
+     * @param array $userData An associative array containing the user's details
+     * @return bool Returns true if registration is successful, false otherwise
+     * @throws \Exception If validation fails, an exception is thrown with the validation error message
+     */
+    public function registerUser(array $userData): bool
+    {
+        $error_message = $this->validateUserData(
+            $userData['username'],
+            $userData['password'],
+            $userData['confirm_password'],
+            $userData['email'],
+            $userData['first_name'],
+            $userData['last_name']
+        );
+
+        if ($error_message) {
+            throw new \Exception($error_message);
+        }
+
+        return $this->register(
+            $userData['username'],
+            $userData['password'],
+            $userData['email'],
+            $userData['first_name'],
+            $userData['last_name'],
+            $userData['role'] // Ensure the role is passed and saved correctly
+        );
+    }
+
 
     /**
      * Checks if a user exists by username or email.
@@ -199,7 +271,6 @@ class KrateUserManager
 
         return false; // Current password did not match
     }
-
 
     // Helper Methods
 
