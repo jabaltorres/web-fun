@@ -54,7 +54,7 @@ if (isset($_GET['id'])) {
         <?php include('../templates/components/nav_public.php'); ?>
       </div>
       <div class="col-md-9 ">
-        <div class="page">
+        <div class="page-content">
             <?php
               if (isset($page)) {
                 // show the page from the database
@@ -64,13 +64,12 @@ if (isset($_GET['id'])) {
                 include('../templates/pages/static_homepage.php');
               }
             ?>
-
-            <?php
-              if ($loggedIn) {
-                echo '<a class="action btn btn-info mt-5" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id)) ) . '">Edit Page</a>';
-              }
-            ?>
         </div>
+          <?php
+          if ($loggedIn) {
+              echo '<a class="action btn btn-info" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id)) ) . '">Edit Page</a>';
+          }
+          ?>
       </div>
     </div>
   </div>
