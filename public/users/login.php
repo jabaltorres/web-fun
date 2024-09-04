@@ -51,22 +51,33 @@ include('../../templates/layout/header.php');
 
 <div class="container">
     <h1>User Login</h1>
-    <p><?= $loggedInMessage ?></p>
+
+    <div class="alert alert-info" role="alert">
+        <?= $loggedInMessage ?>
+    </div>
 
     <?php if (isset($_SESSION['user_id'])): ?>
         <form method="post">
-            <input type="submit" name="logout" value="Log Out" class="btn btn-primary">
+            <button type="submit" name="logout" value="Log Out" class="btn btn-primary">Log Out</button>
         </form>
-        <a href="index.php">Go to main page</a>
+        <a href="index.php" class="btn btn-secondary">Go to main page</a>
     <?php else: ?>
         <form method="post">
-            Username: <input type="text" name="username"><br>
-            Password: <input type="password" name="password"><br>
-            <input type="submit" value="Login" class="btn btn-primary">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password">
+          </div>
+          <button type="submit" value="Login" class="btn btn-primary">Submit</button>
         </form>
     <?php endif; ?>
 
-    <?php if (!empty($error)) echo "<p>$error</p>"; ?>
+    <?php if (!empty($error)) {
+        echo "<p>$error</p>";
+    } ?>
 </div>
 
 <?php include('../../templates/layout/footer.php'); ?>
