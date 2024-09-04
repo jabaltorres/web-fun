@@ -43,13 +43,11 @@ mysqli_free_result($page_set);
 <script>
   tinymce.init({
     selector: 'textarea.wysiwyg',  // Targets all textareas with the class 'wysiwyg'
-    // plugins: 'lists link image code',  // Optional plugins (add more as needed)
     plugins: [
       // Core editing features
-      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount', 'code',
     ],
-    toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',  // Toolbar options
-    // toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code codesample',  // Toolbar options
     menubar: false,  // Hides the default menubar
     height: 600  // Sets the height of the editor
   });
