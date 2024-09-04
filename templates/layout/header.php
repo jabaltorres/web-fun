@@ -9,6 +9,7 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
 
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <title>KrateCMS
         <?php if (isset($page_title)) {
             echo '- ' . h($page_title);
@@ -16,7 +17,7 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
             echo ' [PREVIEW]';
         } ?>
     </title>
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/public.css">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/simple.css">
