@@ -57,12 +57,12 @@ $page_subheading = "User authentication required";
 
 $custom_class = "db-test-login";
 
-include('../../templates/layout/header.php');
+include('../../../templates/layout/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
     <section>
-        <?php include('../../templates/components/headline.php'); ?>
+        <?php include('../../../templates/components/headline.php'); ?>
     </section>
 
     <section id="content">
@@ -70,15 +70,17 @@ include('../../templates/layout/header.php');
         <?php echo display_errors($errors); ?>
 
         <form action="login.php" method="post">
+          <div class="form-group">
             <label for="userName">Username:</label>
             <input id="userName" class="form-control" type="text" name="username" value="<?php echo h($username); ?>"/>
-
+          </div>
+          <div class="form-group">
             <label for="passWord">Password:</label>
             <input id="passWord" class="form-control" type="password" name="password" value=""/>
-
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary"/>
+          </div>
+          <button type="submit" name="submit" value="Submit" class="btn btn-primary"/>Submit</button>
         </form>
 
     </section><!-- end #content -->
 </div><!-- end .container -->
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layout/footer.php'); ?>
