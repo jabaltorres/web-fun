@@ -19,6 +19,7 @@ $admin_set = find_all_admins();
 
                 <div class="actions">
                     <a class="action" href="<?php echo url_for('/staff/admins/new.php'); ?>">Create New Admin</a>
+                    <a class="action" href="<?php echo url_for('/staff/admins/logout.php'); ?>">Log Out</a>
                 </div>
 
                 <table class="table table-striped">
