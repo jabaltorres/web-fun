@@ -9,21 +9,26 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
 
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>KrateCMS
-        <?php if (isset($page_title)) {
-            echo '- ' . h($page_title);
-        } ?><?php if (isset($preview) && $preview) {
-            echo ' [PREVIEW]';
-        } ?>
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
-    <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/public.css">
-    <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/simple.css">
+  <meta charset="utf-8">
+  <title>KrateCMS
+      <?php if (isset($page_title)) {
+          echo '- ' . h($page_title);
+      } ?><?php if (isset($preview) && $preview) {
+          echo ' [PREVIEW]';
+      } ?>
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
+  <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/public.css">
+  <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/simple.css">
+
+  <!-- TinyMCE -->
+  <script src="https://cdn.tiny.cloud/1/9b6vdo6p51qb89toe164crjl7qyvmjbnp3qyv43i0d4wp3mw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
 </head>
 
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="/">KrateCMS</a>
