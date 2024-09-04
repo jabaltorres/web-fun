@@ -14,9 +14,7 @@ $page_set = find_all_pages();
             <div class="pages listing">
                 <h1>Pages</h1>
 
-
-                    <a class="btn btn-outline-info my-4 font-weight-bold" href="<?php echo url_for('/staff/pages/new.php'); ?>">Create New Page</a>
-
+                <a class="btn btn-outline-info my-4 font-weight-bold" href="<?php echo url_for('/staff/pages/new.php'); ?>">Create New Page</a>
 
                 <table class="table table-striped">
                     <tr>

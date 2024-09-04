@@ -67,7 +67,7 @@ if (isset($_GET['id'])) {
         </div>
           <?php
           if ($loggedIn) {
-              echo '<a class="action btn btn-info" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id)) ) . '">Edit Page</a>';
+              echo '<a class="action btn btn-info mt-4" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id)) ) . '">Edit Page</a>';
           }
           ?>
       </div>
