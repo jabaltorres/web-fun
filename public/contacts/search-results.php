@@ -1,6 +1,14 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_login();
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+
+use Fivetwofive\KrateCMS\KrateUserManager;
+
+// Initialize the KrateUserManager with the existing $db connection
+$userManager = new KrateUserManager($db);
+
+// Ensure the user is logged in
+$userManager->checkLoggedIn();
 
 $search = $_GET['search'] ?? '';
 $title = "Search Results";

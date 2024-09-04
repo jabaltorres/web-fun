@@ -1,7 +1,14 @@
 <?php
-require_once('../../src/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
-require_login();
+use Fivetwofive\KrateCMS\KrateUserManager;
+
+// Initialize the KrateUserManager with the existing $db connection
+$userManager = new KrateUserManager($db);
+
+// Ensure the user is logged in
+$userManager->checkLoggedIn();
 
 $title = "DB Test Page";
 // this is for <title>

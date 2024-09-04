@@ -33,7 +33,7 @@
   }
 
   // Call require_login() at the top of any page which needs to
-  // require a valid login before granting acccess to the page.
+  // require a valid login before granting access to the page.
   function require_login() {
     if(!is_logged_in()) {
       redirect_to(url_for('/contacts/login.php'));
