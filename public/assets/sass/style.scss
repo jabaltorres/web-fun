@@ -84,9 +84,6 @@ form {
 }
 
 section {
-  @extend %margin-bottom;
-  padding: $global-padding;
-
   hgroup, .hgroup {
     @extend %margin-bottom;
   }

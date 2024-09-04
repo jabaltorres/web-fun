@@ -40,10 +40,25 @@ mysqli_free_result($page_set);
 <?php $page_title = 'Edit Page'; ?>
 <?php include('../../../templates/layout/header.php'); ?>
 
+<script>
+  tinymce.init({
+    selector: 'textarea.wysiwyg',  // Targets all textareas with the class 'wysiwyg'
+    // plugins: 'lists link image code',  // Optional plugins (add more as needed)
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+    ],
+    toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',  // Toolbar options
+    // toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    menubar: false,  // Hides the default menubar
+    height: 600  // Sets the height of the editor
+  });
+</script>
+
 <div id="content" class="container">
     <div class="row">
         <div class="col-12">
-            <a class="back-link" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
+            <a class="btn btn-outline-info my-4 font-weight-bold" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
 
             <div class="page edit">
                 <h1>Edit Page</h1>
@@ -99,10 +114,10 @@ mysqli_free_result($page_set);
                         </dd>
                     </dl>
                     <dl>
-                        <dt>Content</dt>
-                        <dd>
-                            <textarea name="content" cols="60" rows="10"><?php echo h($page['content']); ?></textarea>
-                        </dd>
+                      <label for="content">Content:</label>
+                      <textarea id="content" name="content" class="wysiwyg"><?php echo h($page['content']); ?></textarea>
+<!--                        <textarea name="content" cols="60" rows="10">--><?php //echo h($page['content']); ?><!--</textarea>-->
+
                     </dl>
                     <div id="operations">
                         <input type="submit" value="Edit Page"/>

@@ -10,6 +10,12 @@ $userManager = new KrateUserManager($db);
 // Ensure the user is logged in
 $userManager->checkLoggedIn();
 
+// Use isLoggedIn to check if the user is logged in for conditional content display
+$loggedIn = $userManager->isLoggedIn();
+
+// Check if the user is an administrator
+$isAdmin = $userManager->isAdmin($_SESSION['user_id']);
+
 $title = "Contact Page";
 $page_heading = "This is the Contacts Page";
 $page_subheading = "Welcome to the Contacts page";
@@ -26,7 +32,15 @@ include('../../templates/layout/header.php');
 
   <div class="<?php echo $custom_class; ?> container">
 
-    <section>
+      <?php if ($isAdmin): ?>
+          <?php include('../../templates/components/nav_admins.php'); ?>
+      <?php endif; ?>
+
+      <?php if ($loggedIn): ?>
+        <?php include('../../templates/components/nav_users.php'); ?>
+      <?php endif; ?>
+
+    <section class="py-4 mb-2">
         <?php
         include('../../templates/components/headline.php');
         include('../../templates/components/nav_contacts.php');

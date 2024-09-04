@@ -23,9 +23,9 @@
 
         <div class="col-4">
             <img class="mb-3" src="<?php echo IMAGES_PATH; ?>/homepage_assets/owner_salon_L30714.jpg" width="250" height="166" alt="Small business owner"/>
-            <h3>Admins</h3>
+            <h3>Demos</h3>
             <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
-            <a href="/staff/admins" class="btn btn-primary">Admins</a>
+            <a href="/demos/" class="btn btn-primary">Demos</a>
         </div>
     </div>
 </div>

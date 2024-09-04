@@ -43,7 +43,7 @@ mysqli_free_result($page_set);
 <div id="content" class="container">
     <div class="row">
         <div class="col-12">
-            <a class="back-link" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
+            <a class="btn btn-outline-info my-4 font-weight-bold" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
 
             <div class="page new">
                 <h1>Create Page</h1>

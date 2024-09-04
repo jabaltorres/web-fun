@@ -14,16 +14,18 @@ $page = find_page_by_id($id);
 <div id="content" class="container">
     <div class="row">
         <div class="col-12">
-            <a class="back-link" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
+            <a class="btn btn-outline-info my-4 font-weight-bold" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
 
             <div class="page show">
 
                 <h1>Page: <?php echo h($page['menu_name']); ?></h1>
 
-                <div class="actions">
-                    <a class="action"
+                <div class="actions mb-4">
+                    <a class="action btn btn-primary"
                        href="<?php echo url_for('/index.php?id=' . h(u($page['id'])) . '&preview=true'); ?>"
                        target="_blank">Preview</a>
+                  <a class="action btn btn-secondary"
+                     href="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($page['id'])) . '&preview=true'); ?>">Edit</a>
                 </div>
 
                 <div class="attributes">

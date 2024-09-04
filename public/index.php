@@ -13,6 +13,7 @@ if (isset($_GET['preview'])) {
 }
 $visible = !$preview;
 
+
 if (isset($_GET['id'])) {
     $page_id = $_GET['id'];
     $page = find_page_by_id($page_id, ['visible' => $visible]);
@@ -38,7 +39,8 @@ if (isset($_GET['id'])) {
     }
     $page_id = $page['id'];
 } else {
-    // nothing selected; show the homepage
+  // Todo: Find a better way at setting the homepage page id
+  $page_id = '1';
 }
 
 ?>
@@ -49,28 +51,25 @@ if (isset($_GET['id'])) {
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-          <?php include('../templates/components/nav_public.php'); ?>
+        <?php include('../templates/components/nav_public.php'); ?>
       </div>
       <div class="col-md-9 ">
-        <section class="user-content">
-            <?php if ($loggedIn): ?>
-              <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
-            <?php else: ?>
-              <p class="mb-0">Please <a href="users/login.php">log in</a> to view this section.</p>
-            <?php endif; ?>
-        </section>
-
-        <div class="page">
+        <div class="page-content">
             <?php
-            if (isset($page)) {
+              if (isset($page)) {
                 // show the page from the database
                 $allowed_tags = '<div><img><h1><h2><p><br><strong><em><ul><li><a>';
                 echo strip_tags($page['content'], $allowed_tags);
-            } else {
+              } else {
                 include('../templates/pages/static_homepage.php');
-            }
+              }
             ?>
         </div>
+          <?php
+          if ($loggedIn) {
+              echo '<a class="action btn btn-info mt-4" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id)) ) . '">Edit Page</a>';
+          }
+          ?>
       </div>
     </div>
   </div>
