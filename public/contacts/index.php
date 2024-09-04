@@ -114,7 +114,9 @@ include('../../templates/layout/header.php');
             <td><?php echo h($contact['id']); ?></td>
             <td><?php echo h($contact['first_name']); ?></td>
             <td><?php echo h($contact['last_name']); ?></td>
-            <td><?php echo h($contact['email']); ?></td>
+            <td>
+              <a href="mailto:<?php echo h($contact['email']); ?>"><?php echo h($contact['email']); ?></a>
+            </td>
             <td><?php echo $contact['favorite'] ? 'Yes' : 'No'; ?></td>
             <td>
               <a href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>"

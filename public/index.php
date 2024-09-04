@@ -39,35 +39,35 @@ if (isset($_GET['id'])) {
     }
     $page_id = $page['id'];
 } else {
-  // Todo: Find a better way at setting the homepage page id
-  $page_id = '1';
+    // Todo: Find a better way at setting the homepage page id
+    $page_id = '1';
 }
 
 ?>
 
 <?php include('../templates/layout/header.php'); ?>
 
-<div id="main" class="homepage py-4">
+<div id="main" class="py-4">
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <?php include('../templates/components/nav_public.php'); ?>
+          <?php include('../templates/components/nav_public.php'); ?>
       </div>
       <div class="col-md-9 ">
         <div class="page-content">
-            <?php
-              if (isset($page)) {
-                // show the page from the database
-                $allowed_tags = '<div><img><h1><h2><p><br><strong><em><ul><li><a><pre>';
-                echo strip_tags($page['content'], $allowed_tags);
-              } else {
-                include('../templates/pages/static_homepage.php');
-              }
-            ?>
+          <?php
+          if (isset($page)) {
+              // show the page from the database
+              $allowed_tags = '<div><img><h1><h2><p><br><strong><em><ul><li><a><pre>';
+              echo strip_tags($page['content'], $allowed_tags);
+          } else {
+              include('../templates/pages/static_homepage.php');
+          }
+          ?>
         </div>
           <?php
           if ($loggedIn) {
-              echo '<a class="action btn btn-info mt-4" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id)) ) . '">Edit Page</a>';
+              echo '<a class="action btn btn-info mt-4" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id))) . '">Edit Page</a>';
           }
           ?>
       </div>
