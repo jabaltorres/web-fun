@@ -74,18 +74,21 @@ class KrateUserManager
         }
     }
 
+    /**
+     * Check if the user is currently logged in.
+     *
+     * This method checks if the session contains a `user_id`, indicating that the user has logged in.
+     * It returns a boolean value that can be used to determine the user's login status without enforcing a redirect.
+     *
+     * @return bool Returns true if the user is logged in (i.e., `user_id` exists in session), false otherwise.
+     */
+    public function isLoggedIn(): bool
+    {
+        return isset($_SESSION['user_id']);
+    }
+
     // User Management
 
-    /**
-     * Registers a new user in the database.
-     *
-     * @param string $username Username
-     * @param string $password Password
-     * @param string $email Email address
-     * @param string $first_name First name
-     * @param string $last_name Last name
-     * @return bool Returns true if registration is successful, false otherwise
-     */
     /**
      * Registers a new user in the database.
      *
@@ -192,7 +195,7 @@ class KrateUserManager
      */
     public function getUserDetails(int $user_id): ?array
     {
-        $stmt = $this->prepareStatement("SELECT username, email, first_name, last_name FROM users WHERE user_id = ?", "i", $user_id);
+        $stmt = $this->prepareStatement("SELECT username, email, first_name, last_name, role FROM users WHERE user_id = ?", "i", $user_id);
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             return $result->fetch_assoc() ?: null;

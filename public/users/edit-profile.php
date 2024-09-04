@@ -4,16 +4,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php')
 
 use Fivetwofive\KrateCMS\KrateUserManager;
 
-// Create database connection
-$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Instantiate the KrateUserManager class
-$userManager = new KrateUserManager($conn);
+$userManager = new KrateUserManager($db);
 
 // Ensure the user is logged in
 $userManager->checkLoggedIn();
@@ -51,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Proceed with profile update only if no errors
     if (empty($error)) {
         if (!empty($first_name) && !empty($last_name) && !empty($email)) {
-            $stmt = $conn->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
+            $stmt = $db->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
             $stmt->bind_param("sssi", $first_name, $last_name, $email, $user_id);
             if ($stmt->execute()) {
                 $success = "Profile updated successfully!";

@@ -14,9 +14,9 @@ $page_set = find_all_pages();
             <div class="pages listing">
                 <h1>Pages</h1>
 
-                <div class="actions">
-                    <a class="action" href="<?php echo url_for('/staff/pages/new.php'); ?>">Create New Page</a>
-                </div>
+
+                    <a class="btn btn-outline-info my-4 font-weight-bold" href="<?php echo url_for('/staff/pages/new.php'); ?>">Create New Page</a>
+
 
                 <table class="table table-striped">
                     <tr>
@@ -25,6 +25,7 @@ $page_set = find_all_pages();
                         <th>Position</th>
                         <th>Visible</th>
                         <th>Name</th>
+                        <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
@@ -38,14 +39,17 @@ $page_set = find_all_pages();
                             <td><?php echo h($page['position']); ?></td>
                             <td><?php echo $page['visible'] == 1 ? 'true' : 'false'; ?></td>
                             <td><?php echo h($page['menu_name']); ?></td>
-                            <td><a class="action"
-                                   href="<?php echo url_for('/staff/pages/show.php?id=' . h(u($page['id']))); ?>">View</a>
+                            <td>
+                              <a class="action" href="<?php echo url_for('/index.php?id=' . h(u($page['id']))); ?>">Visit</a>
                             </td>
-                            <td><a class="action"
-                                   href="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($page['id']))); ?>">Edit</a>
+                            <td>
+                              <a class="action" href="<?php echo url_for('/staff/pages/show.php?id=' . h(u($page['id']))); ?>">Show</a>
                             </td>
-                            <td><a class="action"
-                                   href="<?php echo url_for('/staff/pages/delete.php?id=' . h(u($page['id']))); ?>">Delete</a>
+                            <td>
+                              <a class="action" href="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($page['id']))); ?>">Edit</a>
+                            </td>
+                            <td>
+                              <a class="action" href="<?php echo url_for('/staff/pages/delete.php?id=' . h(u($page['id']))); ?>">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>

@@ -43,34 +43,31 @@
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
-    <section>
+    <section class="my-4">
         <?php
         // Description: An example of using the LoremCard class
-        $lorem_card = new LoremCard(['id' => 'box', 'classes' => 'card p-4 mb-4', 'content' => 'This is a test of the LoremCard class.', 'dark_mode' => false]);
+        $lorem_card = new LoremCard(['id' => 'box', 'classes' => 'card p-4', 'content' => 'This is a test of the LoremCard class.', 'dark_mode' => false]);
         echo $lorem_card->render();
         ?>
     </section>
 
-    <section>
+    <section class="mb-4">
         <?php
-            // Page Header
             echo $page_demo_header->render();
-
-            // Page Sub Header
             echo $page_demo_subheader->render();
         ?>
     </section>
 
-    <section>
-        <ul class="menu list-unstyled">
-            <?php
-            foreach ($page_demo_links as $page_demo_link) {
-                if ($page_demo_link['visible'] == '1') {
-                    echo '<li><a id="link-'.  h($page_demo_link['id']) .'" href="'. h($page_demo_link['page_url']) . '">' . h($page_demo_link['demo_page']) . '</a></li>';
-                }
-            }
-            ?>
-        </ul>
+    <section class="mb-5">
+      <div class="row">
+          <?php
+          foreach ($page_demo_links as $page_demo_link) {
+              if ($page_demo_link['visible'] == '1') {
+                  echo '<div class="col-12 col-md-3"><span class="card p-4"><a id="link-'.  h($page_demo_link['id']) .'" href="'. h($page_demo_link['page_url']) . '">' . h($page_demo_link['demo_page']) . '</a></span></div>';
+              }
+          }
+          ?>
+      </div>
     </section>
 
 </div><!-- end .container -->

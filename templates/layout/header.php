@@ -32,23 +32,9 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/contacts/">Contacts</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/staff/">Staff</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/staff/admins/">Admins</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/demos/">Demos</a>
-                </li>
-            </ul>
+
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/../templates/components/nav_main.php'); ?>
+
             <!-- Update navbar text to reflect user status -->
             <span class="navbar-text">
             <?php if ($is_logged_in): ?>
