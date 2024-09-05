@@ -2,6 +2,16 @@
 ob_start(); // output buffering is turned on
 session_start(); // turn on sessions
 
+// Load Composer's autoloader and initialize phpdotenv
+require __DIR__ . '/../vendor/autoload.php'; // Corrected path to the vendor autoload file
+
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/..'); // Adjust the path to your .env location
+$dotenv->load(); // Load environment variables from .env
+
+$postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'];
+
 $site_owner = "Jabal Torres";
 $site_name = "LOREM";
 $site_tagline = "A place for all of your web ideas";
