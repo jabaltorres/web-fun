@@ -5,6 +5,7 @@ namespace Fivetwofive\KrateCMS;
 use mysqli;
 use mysqli_result;
 use mysqli_stmt;
+use Postmark\PostmarkClient;
 
 class KrateUserManager
 {
@@ -31,18 +32,70 @@ class KrateUserManager
      */
     public function login(string $username, string $password): ?array
     {
-        $stmt = $this->prepareStatement("SELECT user_id, password_hash, first_name FROM users WHERE username = ?", "s", $username);
+        $stmt = $this->prepareStatement("SELECT user_id, password_hash, first_name, email FROM users WHERE username = ?", "s", $username);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows === 1) {
-            $stmt->bind_result($user_id, $hashed_password, $first_name);
+            $stmt->bind_result($user_id, $hashed_password, $first_name, $email);
             $stmt->fetch();
             if (password_verify($password, $hashed_password)) {
-                return ['user_id' => $user_id, 'username' => $username, 'first_name' => $first_name];
+                // Send a login notification email to admins
+                $this->sendLoginNotificationToAdmins($first_name, $email);
+
+                return ['user_id' => $user_id, 'username' => $username, 'first_name' => $first_name, 'email' => $email];
             }
         }
         return null;
+    }
+
+    /**
+     * Sends an email notification to admins when a user logs in.
+     *
+     * @param string $first_name User's first name
+     * @param string $email User's email
+     */
+    private function sendLoginNotificationToAdmins(string $first_name, string $email): void
+    {
+        global $postmarkApiToken;
+
+        // Ensure the Postmark API token is available
+        if (!isset($postmarkApiToken) || empty($postmarkApiToken)) {
+            error_log("Postmark API Token is missing or not set.");
+            return;
+        }
+
+        // Create a new instance of the Postmark client
+        $client = new PostmarkClient($postmarkApiToken);
+
+        // Define admin email addresses
+        $adminEmails = ["jabal@fivetwofive.com", "jabaltorres@gmail.com"];
+
+        // Subject of the email
+        $subject = "User Login Notification";
+
+        // HTML body of the email
+        $htmlBody = "<strong>User:</strong> {$first_name} ({$email}) just logged in.";
+
+        // Text body of the email (for clients that don't support HTML)
+        $textBody = "User: {$first_name} ({$email}) just logged in.";
+
+        foreach ($adminEmails as $toEmail) {
+            try {
+                // Send the email
+                $client->sendEmail(
+                    "jabal@fivetwofive.com",// Sender's email
+                    $toEmail,                    // Admin's email
+                    $subject,                    // Subject
+                    $htmlBody,                   // HTML Body
+                    $textBody                    // Text Body
+                );
+                error_log("Login notification sent to: " . $toEmail);
+            } catch (\Exception $e) {
+                // Handle the error if email fails to send
+                error_log("Failed to send login notification: " . $e->getMessage());
+            }
+        }
     }
 
     /**
@@ -76,9 +129,6 @@ class KrateUserManager
 
     /**
      * Check if the user is currently logged in.
-     *
-     * This method checks if the session contains a `user_id`, indicating that the user has logged in.
-     * It returns a boolean value that can be used to determine the user's login status without enforcing a redirect.
      *
      * @return bool Returns true if the user is logged in (i.e., `user_id` exists in session), false otherwise.
      */
@@ -171,7 +221,6 @@ class KrateUserManager
         );
     }
 
-
     /**
      * Checks if a user exists by username or email.
      *
@@ -206,10 +255,6 @@ class KrateUserManager
     /**
      * Checks if the given user is an Administrator.
      *
-     * This method verifies the role of a user by querying the database
-     * for the user's role based on their user ID. It then checks if the
-     * role is 'Administrator'.
-     *
      * @param int $userId The ID of the user to check.
      * @return bool Returns true if the user is an Administrator, otherwise false.
      */
@@ -237,14 +282,6 @@ class KrateUserManager
 
     /**
      * Changes the user's password after verifying the current password.
-     *
-     * This method first fetches the current password hash for the user
-     * from the database. It then verifies that the provided current password
-     * matches the stored hash. If the verification is successful, the new
-     * password is hashed and updated in the database.
-     *
-     * Note: The result from the first query is freed to ensure that the
-     * MySQL connection is ready for the subsequent update query.
      *
      * @param int $userId The ID of the user whose password is being changed.
      * @param string $currentPassword The current password provided by the user for verification.
