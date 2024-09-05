@@ -15,3 +15,5 @@ node_modules/*
 # Ignore db credentials
 src/db_credentials.php
 /vendor/
+
+.env
