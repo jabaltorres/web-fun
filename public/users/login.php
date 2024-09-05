@@ -10,7 +10,7 @@ $userManager = new KrateUserManager($db);
 // Check if user is already logged in
 $userIsLoggedIn = $userManager->isLoggedIn();
 
-if ( $userIsLoggedIn ) {
+if ($userIsLoggedIn) {
     $loggedInMessage = "You are already logged in.";
 } else {
     $loggedInMessage = "Please log in.";
@@ -34,14 +34,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Try to log in the user
     $loginResult = $userManager->login($username, $password);
     if ($loginResult) {
+        // Log that login was successful for debugging purposes
+        error_log("User logged in successfully: " . $loginResult['username']);
+
         // Store session data on successful login
         $_SESSION['user_id'] = $loginResult['user_id'];
         $_SESSION['username'] = $loginResult['username'];
         $_SESSION['first_name'] = $loginResult['first_name'];  // Store first name in session
+
+        // Redirect to contacts page after successful login
         header("Location: /contacts/index.php");
         exit();
     } else {
-        // Login failed
+        // Log that login failed for debugging purposes
+        error_log("Login failed for username: " . $username);
+
+        // Login failed, set the error message
         $error = "Invalid username or password!";
     }
 }
@@ -56,7 +64,7 @@ include('../../templates/layout/header.php');
         <?= $loggedInMessage ?>
     </div>
 
-      <?php if ( $userIsLoggedIn ): ?>
+      <?php if ($userIsLoggedIn): ?>
         <form method="post">
           <button type="submit" name="logout" value="Log Out" class="btn btn-primary">Log Out</button>
         </form>
