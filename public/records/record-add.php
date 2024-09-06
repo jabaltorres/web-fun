@@ -15,6 +15,9 @@ function addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog
     return mysqli_stmt_execute($stmt);
 }
 
+// Initialize error array
+$errors = [];
+
 // Example usage: Adding a new vinyl record
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
@@ -29,6 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $purchase_date = $_POST['purchase_date'];
     $purchase_price = $_POST['purchase_price'];
     $notes = $_POST['notes'];
+
+    // Server-side validation for purchase_price
+    if (!preg_match('/^\d+(\.\d{1,2})?$/', $purchase_price)) {
+        $errors[] = "Please enter a valid purchase price (e.g., 24.95).";
+    } else {
+        // Convert the input to a float for the database
+        $purchase_price = floatval($purchase_price);
+    }
 
     // Define the upload directory within the 'records' directory
     $upload_dir = '../../public/records/uploads/';
@@ -55,11 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES['back_image']['tmp_name'], $back_image_path);
     }
 
-    // Call the function to add the record with image paths
-    if (addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path)) {
-        echo "Record added successfully!";
-    } else {
-        echo "Error adding record.";
+    // Proceed only if there are no validation errors
+    if (empty($errors)) {
+        // Call the function to add the record with image paths
+        if (addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path)) {
+            $success_message = "Record added successfully!";
+        } else {
+            $errors[] = "Error adding record.";
+        }
     }
 }
 
@@ -69,6 +83,23 @@ include('../../templates/layout/header.php');
     <div class="container py-4">
         <div class="row">
             <div class="col-12">
+
+                <?php if (!empty($errors)): ?>
+                    <div class="alert alert-danger">
+                        <ul>
+                            <?php foreach ($errors as $error): ?>
+                                <li><?php echo htmlspecialchars($error); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (!empty($success_message)): ?>
+                    <div class="alert alert-success" role="alert">
+                        <?php echo $success_message; ?>
+                    </div>
+                <?php endif; ?>
+
                 <h1 class="mb-4">My Vinyl Records Collection</h1>
                 <section class="border p-4 mb-4">
                     <form method="POST" action="record-add.php" enctype="multipart/form-data">
@@ -139,7 +170,7 @@ include('../../templates/layout/header.php');
 
                         <div class="form-group">
                             <label for="purchase_price">Purchase Price</label>
-                            <input type="text" class="form-control" id="purchase_price" name="purchase_price" placeholder="Purchase Price">
+                            <input type="text" class="form-control" id="purchase_price" name="purchase_price" placeholder="Purchase Price" pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid price (e.g., 24.95)" required>
                         </div>
 
                         <div class="form-group">

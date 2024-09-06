@@ -47,16 +47,16 @@ include('../../templates/layout/header.php');
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4"><?php echo $record['title']; ?> by <?php echo $record['artist']; ?></h1>
-            <p><strong>Genre:</strong> <?php echo $record['genre']; ?></p>
-            <p><strong>Release Year:</strong> <?php echo $record['release_year']; ?></p>
-            <p><strong>Label:</strong> <?php echo $record['label']; ?></p>
-            <p><strong>Catalog Number:</strong> <?php echo $record['catalog_number']; ?></p>
-            <p><strong>Format:</strong> <?php echo $record['format']; ?></p>
-            <p><strong>Speed:</strong> <?php echo $record['speed']; ?></p>
-            <p><strong>Condition:</strong> <?php echo $record['condition']; ?></p>
-            <p><strong>Purchase Date:</strong> <?php echo $record['purchase_date']; ?></p>
-            <p><strong>Purchase Price:</strong> $<?php echo number_format($record['purchase_price'], 2); ?></p>
-            <p><strong>Notes:</strong> <?php echo $record['notes']; ?></p>
+            <div><strong>Genre:</strong> <?php echo $record['genre']; ?></div>
+            <div><strong>Release Year:</strong> <?php echo $record['release_year']; ?></div>
+            <div><strong>Label:</strong> <?php echo $record['label']; ?></div>
+            <div><strong>Catalog Number:</strong> <?php echo $record['catalog_number']; ?></div>
+            <div><strong>Format:</strong> <?php echo $record['format']; ?></div>
+            <div><strong>Speed:</strong> <?php echo $record['speed']; ?></div>
+            <div><strong>Condition:</strong> <?php echo $record['condition']; ?></div>
+            <div><strong>Purchase Date:</strong> <?php echo $record['purchase_date']; ?></div>
+            <div><strong>Purchase Price:</strong> $<?php echo number_format($record['purchase_price'], 2); ?></div>
+            <div><strong>Notes:</strong> <?php echo $record['notes']; ?></div>
 
             <!-- Display the front image if available -->
             <?php if (!empty($record['front_image'])): ?>
@@ -69,6 +69,11 @@ include('../../templates/layout/header.php');
                 <p><strong>Back Image:</strong></p>
                 <img class="record-img record-img-front" src="<?php echo '/records/uploads/' . basename($record['back_image']); ?>" alt="Back of Record">
             <?php endif; ?>
+        </div>
+
+        <div class="col-12">
+            <a class="btn btn-primary" href="<?php echo url_for('/records/record-edit.php?id=' . $record['record_id']); ?>">Edit Record</a>
+            <a class="btn btn-danger" href="<?php echo url_for('/records/record-delete.php?id=' . $record['record_id']); ?>">Delete Record</a>
         </div>
     </div>
 </div>
