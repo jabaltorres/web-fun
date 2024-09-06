@@ -76,7 +76,7 @@ if (is_post_request()) {
                         </dd>
                     </dl>
                     <div id="operations">
-                        <input type="submit" value="Create Subject"/>
+                        <input type="submit" value="Create Subject" class="btn btn-primary"/>
                     </div>
                 </form>
 
