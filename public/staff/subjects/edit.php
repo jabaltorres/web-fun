@@ -82,7 +82,7 @@ mysqli_free_result($subject_set);
                         </dd>
                     </dl>
                     <div id="operations">
-                        <input type="submit" value="Edit Subject"/>
+                        <input type="submit" value="Edit Subject" class="btn btn-primary"/>
                     </div>
                 </form>
 
