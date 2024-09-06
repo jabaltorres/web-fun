@@ -17,3 +17,6 @@ src/db_credentials.php
 /vendor/
 
 .env
+
+# Ignore Records uploads
+/public/records/uploads/

@@ -21,21 +21,20 @@ if (is_post_request()) {
 
 <?php include('../../../templates/layout/header.php'); ?>
 
-<div id="content" class="container">
+<div id="content" class="container py-4">
     <div class="row">
         <div class="col-12">
 
-            <a class="back-link" href="<?php echo url_for('/staff/admins/index.php'); ?>">&laquo; Back to List</a>
+            <a class="btn btn-info mb-4" href="<?php echo url_for('/staff/admins/index.php'); ?>">&laquo; Back to List</a>
 
             <div class="admin delete">
                 <h1>Delete Admin</h1>
                 <p>Are you sure you want to delete this admin?</p>
-                <p class="item"><?php echo h($admin['username']); ?></p>
+                <p class="font-weight-bold"><?php echo h($admin['username']); ?></p>
 
-                <form action="<?php echo url_for('/staff/admins/delete.php?id=' . h(u($admin['id']))); ?>"
-                      method="post">
+                <form action="<?php echo url_for('/staff/admins/delete.php?id=' . h(u($admin['id']))); ?>" method="post">
                     <div id="operations">
-                        <input type="submit" name="commit" value="Delete Admin"/>
+                        <input type="submit" class="btn btn-danger" name="commit" value="Delete Admin"/>
                     </div>
                 </form>
             </div>
