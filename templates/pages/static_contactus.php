@@ -51,21 +51,21 @@
 
   <div class="row">
     <div class="col-12 col-md-4">
-      <div class="card p-4">
+      <div class="card p-3">
         <h3>Discord</h3>
         <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
         <a href="https://discord.com/" class="btn btn-primary">Discord</a>
       </div>
     </div>
     <div class="col-12 col-md-4">
-      <div class="card p-4">
+      <div class="card p-3">
         <h3>Facebook</h3>
         <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
         <a href="https://www.facebook.com/" class="btn btn-primary">Facebook</a>
       </div>
     </div>
     <div class="col-12 col-md-4">
-      <div class="card p-4">
+      <div class="card p-3">
         <h3>Instagram</h3>
         <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
         <a href="https://www.instagram.com/" class="btn btn-primary">Instagram</a>
