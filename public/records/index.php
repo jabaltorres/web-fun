@@ -25,26 +25,58 @@ function getAllVinylRecords(): ?array {
 // Display all vinyl records
 $records = getAllVinylRecords();
 
+// Check if there's a message in the query string
+$message = $_GET['message'] ?? null;
+
 include('../../templates/layout/header.php');
 ?>
 
 <div class="container py-4">
     <div class="row">
         <div class="col-12">
+
+            <!-- Display the success message if it exists -->
+            <?php if ($message): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo htmlspecialchars($message); ?>
+                </div>
+            <?php endif; ?>
+
             <h1 class="mb-4">My Vinyl Records Collection</h1>
 
             <a class="btn btn-primary mb-4" href="<?php echo url_for('/records/record-add.php'); ?>">Add New Record</a>
 
             <section class="border p-4">
                 <h2>All Vinyl Records</h2>
-                <ul>
-                    <?php foreach ($records as $record): ?>
-                        <li>
-                            <?php echo $record['title'] . ' by ' . $record['artist'] . ' (' . $record['release_year'] . ')'; ?>
-                            <a href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">View Details</a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+
+                <?php if (!empty($records)): ?>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            <th>Release Year</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($records as $record): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($record['title']); ?></td>
+                                <td><?php echo htmlspecialchars($record['artist']); ?></td>
+                                <td><?php echo htmlspecialchars($record['release_year']); ?></td>
+                                <td class="text-right">
+                                    <a href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>" class="btn btn-info btn-sm">View Details</a>
+                                    <a href="<?php echo url_for('/records/record-edit.php?id=' . $record['record_id']); ?>" class="btn btn-secondary btn-sm">Edit Details</a>
+                                    <a href="<?php echo url_for('/records/record-delete.php?id=' . $record['record_id']); ?>" class="btn btn-danger btn-sm">Delete Record</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <p>No records found.</p>
+                <?php endif; ?>
             </section>
         </div>
     </div>
