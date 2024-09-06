@@ -1,6 +1,15 @@
 <?php
 // Require initialization file
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+
+use Fivetwofive\KrateCMS\KrateUserManager;
+
+// Initialize the KrateUserManager with the existing $db connection
+$userManager = new KrateUserManager($db);
+
+// Use isLoggedIn to check if the user is logged in for conditional content display
+$loggedIn = $userManager->isLoggedIn();
 
 ?>
 
