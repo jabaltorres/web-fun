@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
     }
     $page_id = $page['id'];
 } else {
-    // Todo: Find a better way at setting the homepage page id
+    // Todo: Find a better way at setting the homepage page id. THis doesn't work as expected.
     $page_id = '1';
 }
 
