@@ -1,3 +1,4 @@
+
 <div id="hero" class="jumbotron jumbotron-fluid px-4">
   <div class="container">
     <h1 class="display-4">Contact Us</h1>
@@ -13,7 +14,12 @@
       <?php } elseif (isset($errorMessage)) { ?>
         <div class="alert alert-danger mt-2"><?= $errorMessage ?></div>
       <?php } ?>
-      
+
+      <?php
+        global $loggedIn;
+        if ($loggedIn) :
+      ?>
+
       <form action="contact.php" method="POST" class="border">
         <div class="form-group">
           <label for="name">Your Name</label>
@@ -37,6 +43,9 @@
 
         <button type="submit" class="btn btn-primary">Send Message</button>
       </form>
+
+      <?php endif; ?>
+
     </div>
   </div>
 
