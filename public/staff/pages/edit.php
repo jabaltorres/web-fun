@@ -63,7 +63,7 @@ mysqli_free_result($page_set);
 
                 <?php echo display_errors($errors); ?>
 
-                <form action="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($id))); ?>" method="post">
+                <form action="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($id))); ?>" method="post" class="border">
                     <dl>
                         <dt>Subject</dt>
                         <dd>
@@ -118,7 +118,7 @@ mysqli_free_result($page_set);
 
                     </dl>
                     <div id="operations">
-                        <input type="submit" value="Edit Page"/>
+                        <input type="submit" class="btn btn-secondary" value="Edit Page"/>
                     </div>
                 </form>
 
