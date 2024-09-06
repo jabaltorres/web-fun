@@ -5,14 +5,13 @@ require_once('../../src/initialize.php');
 $success_message = '';
 
 // Function to update a vinyl record
-function updateVinylRecord($id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path) {
+function updateVinylRecord($id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link) {
     global $db;
 
-    // Prepare SQL query
-    $sql = "UPDATE vinyl_records SET title = ?, artist = ?, genre = ?, release_year = ?, label = ?, catalog_number = ?, format = ?, speed = ?, `condition` = ?, purchase_date = ?, purchase_price = ?, notes = ?, front_image = ?, back_image = ? WHERE record_id = ?";
+    $sql = "UPDATE vinyl_records SET title = ?, artist = ?, genre = ?, release_year = ?, label = ?, catalog_number = ?, format = ?, speed = ?, `condition` = ?, purchase_date = ?, purchase_price = ?, notes = ?, front_image = ?, back_image = ?, purchase_link = ? WHERE record_id = ?";
 
     $stmt = mysqli_prepare($db, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssssssssssdsssi', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $id);
+    mysqli_stmt_bind_param($stmt, 'ssssssssssdssssi', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $id);
     return mysqli_stmt_execute($stmt);
 }
 
@@ -38,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $purchase_date = $_POST['purchase_date'];
     $purchase_price = $_POST['purchase_price'];
     $notes = $_POST['notes'];
+    $purchase_link = $_POST['purchase_link'] ?? null;
 
     // Get existing image paths from hidden fields
     $front_image_path = $_POST['existing_front_image'] ?? null;
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Update the record in the database
-    if (updateVinylRecord($record_id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path)) {
+    if (updateVinylRecord($record_id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link)) {
         $success_message = "Record updated successfully!";
     } else {
         echo "Error updating record.";
@@ -183,6 +183,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                     <div class="form-group">
                         <label for="purchase_price">Purchase Price</label>
                         <input type="text" class="form-control" id="purchase_price" name="purchase_price" value="<?php echo $record['purchase_price']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purchase_link">Purchase Link / Audio File URL</label>
+                        <input type="url" class="form-control" id="purchase_link" name="purchase_link" value="<?php echo htmlspecialchars($record['purchase_link']); ?>" placeholder="Enter URL (optional)">
                     </div>
 
                     <div class="form-group">

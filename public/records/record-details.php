@@ -57,6 +57,9 @@ include('../../templates/layout/header.php');
             <div><strong>Purchase Date:</strong> <?php echo $record['purchase_date']; ?></div>
             <div><strong>Purchase Price:</strong> $<?php echo number_format($record['purchase_price'], 2); ?></div>
             <div><strong>Notes:</strong> <?php echo $record['notes']; ?></div>
+            <?php if (!empty($record['purchase_link'])): ?>
+                <p><strong>Purchase / Audio Link:</strong> <a href="<?php echo htmlspecialchars($record['purchase_link']); ?>" target="_blank">Buy or Listen</a></p>
+            <?php endif; ?>
 
             <!-- Display the front image if available -->
             <?php if (!empty($record['front_image'])): ?>
