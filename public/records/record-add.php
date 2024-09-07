@@ -2,6 +2,15 @@
 
 require_once('../../src/initialize.php');
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+
+use Fivetwofive\KrateCMS\KrateUserManager;
+
+// Initialize the KrateUserManager with the existing $db connection
+$userManager = new KrateUserManager($db);
+
+$userManager->checkLoggedIn();
+
 // Function to add a vinyl record with the purchase link
 function addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link) {
     global $db;

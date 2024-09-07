@@ -2,6 +2,16 @@
 
 require_once('../../src/initialize.php');
 
+
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+
+use Fivetwofive\KrateCMS\KrateUserManager;
+
+// Initialize the KrateUserManager with the existing $db connection
+$userManager = new KrateUserManager($db);
+
+$userManager->checkLoggedIn();
+
 // Function to delete the vinyl record
 function deleteVinylRecord($id) {
     global $db;

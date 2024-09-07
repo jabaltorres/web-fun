@@ -2,6 +2,16 @@
 
 require_once('../../src/initialize.php');
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+
+use Fivetwofive\KrateCMS\KrateUserManager;
+
+// Initialize the KrateUserManager with the existing $db connection
+$userManager = new KrateUserManager($db);
+
+// Use isLoggedIn to check if the user is logged in for conditional content display
+$loggedIn = $userManager->isLoggedIn();
+
 /**
  * Get all vinyl records from the database, optionally filtered by a search term.
  *
@@ -88,10 +98,15 @@ include('../../templates/layout/header.php');
                                     <td><?php echo htmlspecialchars($record['title']); ?></td>
                                     <td><?php echo htmlspecialchars($record['artist']); ?></td>
                                     <td><?php echo htmlspecialchars($record['release_year']); ?></td>
-                                    <td class="text-right">
+                                    <td>
                                         <a href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>" class="btn btn-info btn-sm">View Details</a>
-                                        <a href="<?php echo url_for('/records/record-edit.php?id=' . $record['record_id']); ?>" class="btn btn-secondary btn-sm">Edit Details</a>
-                                        <a href="<?php echo url_for('/records/record-delete.php?id=' . $record['record_id']); ?>" class="btn btn-danger btn-sm">Delete Record</a>
+
+                                        <?php
+                                            if ($loggedIn) {
+                                                echo '<a href="' . url_for('/records/record-edit.php?id=' . $record['record_id']) . '" class="btn btn-secondary btn-sm">Edit Details</a>';
+                                                echo '<a href="' . url_for('/records/record-delete.php?id=' . $record['record_id']) . '" class="btn btn-danger btn-sm">Delete Record</a>';
+                                            }
+                                        ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

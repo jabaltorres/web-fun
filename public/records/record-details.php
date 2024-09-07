@@ -2,6 +2,16 @@
 
 require_once('../../src/initialize.php');
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+
+use Fivetwofive\KrateCMS\KrateUserManager;
+
+// Initialize the KrateUserManager with the existing $db connection
+$userManager = new KrateUserManager($db);
+
+// Use isLoggedIn to check if the user is logged in for conditional content display
+$loggedIn = $userManager->isLoggedIn();
+
 // Fetch the record_id from the query string
 $record_id = $_GET['id'] ?? null;
 
@@ -47,6 +57,9 @@ include('../../templates/layout/header.php');
     <div class="row">
         <div class="col-12">
             <h1 class="mb-4"><?php echo $record['title']; ?> by <?php echo $record['artist']; ?></h1>
+
+            <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/records/index.php'); ?>">&laquo; Back to List</a>
+
             <div><strong>Genre:</strong> <?php echo $record['genre']; ?></div>
             <div><strong>Release Year:</strong> <?php echo $record['release_year']; ?></div>
             <div><strong>Label:</strong> <?php echo $record['label']; ?></div>
@@ -74,10 +87,12 @@ include('../../templates/layout/header.php');
             <?php endif; ?>
         </div>
 
-        <div class="col-12">
-            <a class="btn btn-primary" href="<?php echo url_for('/records/record-edit.php?id=' . $record['record_id']); ?>">Edit Record</a>
-            <a class="btn btn-danger" href="<?php echo url_for('/records/record-delete.php?id=' . $record['record_id']); ?>">Delete Record</a>
-        </div>
+        <?php if ($loggedIn) : ?>
+            <div class="col-12">
+                <a class="btn btn-primary" href="<?php echo url_for('/records/record-edit.php?id=' . $record['record_id']); ?>">Edit Record</a>
+                <a class="btn btn-danger" href="<?php echo url_for('/records/record-delete.php?id=' . $record['record_id']); ?>">Delete Record</a>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 
