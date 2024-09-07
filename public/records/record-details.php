@@ -49,12 +49,14 @@ include('../../templates/layout/header.php');
 <style>
     .record-img {
         margin-bottom: 1rem;
-        max-width: 500px;
-        transition: transform 0.5s ease-in-out;
+        max-width: 560px;
+        transition: transform 0.5s ease-in-out, border-radius 0.5s ease-in-out;
+
     }
 
     .rotate {
         animation: spin 4s linear infinite;
+        border-radius: 100%;
     }
 
     @keyframes spin {
