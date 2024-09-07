@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error_message)) {
 include('../../templates/layout/header.php');
 ?>
 
-  <div class="container">
+  <div class="container py-5">
     <h2>Add New User</h2>
 
       <?php if (!empty($success_message)): ?>

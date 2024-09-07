@@ -12,7 +12,7 @@ $admin = find_admin_by_id($id);
 <?php $page_title = 'Show Admin'; ?>
 <?php include('../../../templates/layout/header.php'); ?>
 
-    <div id="content" class="container">
+    <div id="content" class="container py-4">
         <div class="row">
             <div class="col-12">
                 <a class="back-link" href="<?php echo url_for('/staff/admins/index.php'); ?>">&laquo; Back to List</a>

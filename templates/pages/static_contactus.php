@@ -21,21 +21,21 @@
             <div class="card p-3">
                 <h3>LinkedIn</h3>
                 <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
-                <a href="https://www.linkedin.com/in/jabaltorres/" class="btn btn-primary">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/jabaltorres/" target="_blank" class="btn btn-primary">LinkedIn</a>
             </div>
         </div>
         <div class="col-12 col-md-4">
             <div class="card p-3">
                 <h3>Facebook</h3>
                 <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
-                <a href="https://www.facebook.com/jabal.torres" class="btn btn-primary">Facebook</a>
+                <a href="https://www.facebook.com/jabal.torres" target="_blank" class="btn btn-primary">Facebook</a>
             </div>
         </div>
         <div class="col-12 col-md-4">
             <div class="card p-3">
                 <h3>Instagram</h3>
                 <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
-                <a href="https://www.instagram.com/jabaltorres/" class="btn btn-primary">Instagram</a>
+                <a href="https://www.instagram.com/jabaltorres/" target="_blank" class="btn btn-primary">Instagram</a>
             </div>
         </div>
     </div>

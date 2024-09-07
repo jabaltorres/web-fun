@@ -11,7 +11,7 @@ $subject = find_subject_by_id($id);
 <?php $page_title = 'Show Subject'; ?>
 <?php include('../../../templates/layout/header.php'); ?>
 
-<div id="content" class="container">
+<div id="content" class="container py-5">
     <div class="row">
         <div class="col-12">
             <a class="back-link" href="<?php echo url_for('/staff/subjects/index.php'); ?>">&laquo; Back to List</a>

@@ -32,10 +32,6 @@ include('../../templates/layout/header.php');
 
   <div class="<?php echo $custom_class; ?> container">
 
-      <?php if ($isAdmin): ?>
-          <?php include('../../templates/components/nav_admins.php'); ?>
-      <?php endif; ?>
-
       <?php if ($loggedIn): ?>
         <?php include('../../templates/components/nav_users.php'); ?>
       <?php endif; ?>

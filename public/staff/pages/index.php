@@ -8,7 +8,7 @@ $page_set = find_all_pages();
 <?php $page_title = 'Pages'; ?>
 <?php include('../../../templates/layout/header.php'); ?>
 
-<div id="content" class="container">
+<div id="content" class="container py-5">
     <div class="row">
         <div class="col-12">
             <div class="pages listing">

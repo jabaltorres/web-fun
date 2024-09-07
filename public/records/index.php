@@ -56,8 +56,33 @@ $message = $_GET['message'] ?? null;
 
 include('../../templates/layout/header.php');
 ?>
+    <div class="hero">
+        <div class="jumbotron jumbotron-fluid px-4">
+            <div class="container">
+                <h1 class="display-4">Vinyl Record Collection</h1>
+                <p class="lead">KrateCMS is a simple record management system built with PHP and MySQL.</p>
 
-    <div class="container py-4">
+                <!-- Search Form -->
+                <form class="form-inline" action="index.php" method="GET">
+                    <input type="text" name="search" class="form-control mr-2" placeholder="Search by Title or Artist" value="<?php echo htmlspecialchars($search_term); ?>">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <a href="index.php" class="btn btn-outline-secondary ml-2">Clear</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container py-4 border mb-5">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h2>All Vinyl Records</h2>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="action text-right">
+                    <a class="btn btn-primary mb-4" href="<?php echo url_for('/records/record-add.php'); ?>">Add New Record</a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
 
@@ -68,20 +93,7 @@ include('../../templates/layout/header.php');
                     </div>
                 <?php endif; ?>
 
-                <h1 class="mb-4">Records</h1>
-
-                <a class="btn btn-primary mb-4" href="<?php echo url_for('/records/record-add.php'); ?>">Add New Record</a>
-
-                <!-- Search Form -->
-                <form class="form-inline mb-4" action="index.php" method="GET">
-                    <input type="text" name="search" class="form-control mr-2" placeholder="Search by Title or Artist" value="<?php echo htmlspecialchars($search_term); ?>">
-                    <button type="submit" class="btn btn-outline-secondary">Search</button>
-                    <a href="index.php" class="btn btn-outline-secondary ml-2">Clear</a>
-                </form>
-
-                <section class="border p-4">
-                    <h2>All Vinyl Records</h2>
-
+                <section class="">
                     <?php if (!empty($records)): ?>
                         <table class="table table-striped">
                             <thead>
@@ -100,10 +112,9 @@ include('../../templates/layout/header.php');
                                     <td><?php echo htmlspecialchars($record['release_year']); ?></td>
                                     <td>
                                         <a href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>" class="btn btn-info btn-sm">View Details</a>
-
                                         <?php
                                             if ($loggedIn) {
-                                                echo '<a href="' . url_for('/records/record-edit.php?id=' . $record['record_id']) . '" class="btn btn-secondary btn-sm">Edit Details</a>';
+                                                echo '<a href="' . url_for('/records/record-edit.php?id=' . $record['record_id']) . '" class="btn btn-secondary btn-sm ml-1 mr-2">Edit Details</a>';
                                                 echo '<a href="' . url_for('/records/record-delete.php?id=' . $record['record_id']) . '" class="btn btn-danger btn-sm">Delete Record</a>';
                                             }
                                         ?>

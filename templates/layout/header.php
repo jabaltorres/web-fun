@@ -3,7 +3,15 @@ if (!isset($page_title)) {
     $page_title = 'Users Area';
 }
 $url = $url ?? '';
-$is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
+$is_logged_in = isset($_SESSION['user_id']);
+
+$adminLoggedIn = admin_is_logged_in();
+if ($adminLoggedIn) {
+    $adminMessage = "admin is logged in";
+} else {
+    $adminMessage = "admin is not logged in";
+}
+
 ?>
 <!doctype html>
 
@@ -27,6 +35,13 @@ $is_logged_in = isset($_SESSION['user_id']); // Check if user is logged in
 </head>
 
 <body>
+
+<?php
+if ($adminLoggedIn) {
+    include($_SERVER['DOCUMENT_ROOT'] . '/../templates/components/nav_admins.php');
+}
+?>
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
