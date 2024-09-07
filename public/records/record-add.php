@@ -1,26 +1,24 @@
 <?php
 
 require_once('../../src/initialize.php');
-
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
 use Fivetwofive\KrateCMS\KrateUserManager;
 
 // Initialize the KrateUserManager with the existing $db connection
 $userManager = new KrateUserManager($db);
-
 $userManager->checkLoggedIn();
 
-// Function to add a vinyl record with the purchase link
-function addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link) {
+// Function to add a vinyl record with the purchase link and audio file URL
+function addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm) {
     global $db;
 
-    // SQL query to insert the record with image paths and purchase link
-    $sql = "INSERT INTO vinyl_records (title, artist, genre, release_year, label, catalog_number, format, speed, `condition`, purchase_date, purchase_price, notes, front_image, back_image, purchase_link)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // SQL query to insert the record with image paths, purchase link, and audio file URL
+    $sql = "INSERT INTO vinyl_records (title, artist, genre, release_year, label, catalog_number, format, speed, `condition`, purchase_date, purchase_price, notes, front_image, back_image, purchase_link, audio_file_url, bpm)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = mysqli_prepare($db, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssssssssssdssss', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link);
+    mysqli_stmt_bind_param($stmt, 'ssssssssssdsssssi', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm);
     return mysqli_stmt_execute($stmt);
 }
 
@@ -41,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $purchase_date = $_POST['purchase_date'];
     $purchase_price = $_POST['purchase_price'];
     $notes = $_POST['notes'];
-    $purchase_link = $_POST['purchase_link'] ?? null;  // Get the purchase link input
+    $purchase_link = $_POST['purchase_link'] ?? null;
+    $audio_file_url = $_POST['audio_file_url'] ?? null;
+    $bpm = $_POST['bpm'] ?? null;
 
     // Server-side validation for purchase_price
     if (!preg_match('/^\d+(\.\d{1,2})?$/', $purchase_price)) {
@@ -78,8 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Proceed only if there are no validation errors
     if (empty($errors)) {
-        // Call the function to add the record with image paths and purchase link
-        if (addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link)) {
+        // Call the function to add the record with image paths, purchase link, and audio file URL
+        if (addVinylRecord($title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm)) {
             $success_message = "Record added successfully!";
         } else {
             $errors[] = "Error adding record.";
@@ -134,6 +134,11 @@ include('../../templates/layout/header.php');
                         </div>
 
                         <div class="form-group">
+                            <label for="bpm">Beats Per Minute</label>
+                            <input type="number" class="form-control" id="bpm" name="bpm" placeholder="BPM">
+                        </div>
+
+                        <div class="form-group">
                             <label for="label">Label</label>
                             <input type="text" class="form-control" id="label" name="label" placeholder="Label">
                         </div>
@@ -184,8 +189,13 @@ include('../../templates/layout/header.php');
                         </div>
 
                         <div class="form-group">
-                            <label for="purchase_link">Purchase Link / Audio File URL</label>
+                            <label for="purchase_link">Purchase Link</label>
                             <input type="url" class="form-control" id="purchase_link" name="purchase_link" placeholder="Enter URL (optional)">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="purchase_link">Audio File URL</label>
+                            <input type="url" name="audio_file_url" placeholder="Audio File URL">
                         </div>
 
                         <div class="form-group">

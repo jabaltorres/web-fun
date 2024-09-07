@@ -14,13 +14,13 @@ $userManager->checkLoggedIn();
 $success_message = '';
 
 // Function to update a vinyl record
-function updateVinylRecord($id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link) {
+function updateVinylRecord($id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm) {
     global $db;
 
-    $sql = "UPDATE vinyl_records SET title = ?, artist = ?, genre = ?, release_year = ?, label = ?, catalog_number = ?, format = ?, speed = ?, `condition` = ?, purchase_date = ?, purchase_price = ?, notes = ?, front_image = ?, back_image = ?, purchase_link = ? WHERE record_id = ?";
+    $sql = "UPDATE vinyl_records SET title = ?, artist = ?, genre = ?, release_year = ?, label = ?, catalog_number = ?, format = ?, speed = ?, `condition` = ?, purchase_date = ?, purchase_price = ?, notes = ?, front_image = ?, back_image = ?, purchase_link = ?, audio_file_url = ?, bpm = ? WHERE record_id = ?";
 
     $stmt = mysqli_prepare($db, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssssssssssdssssi', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $id);
+    mysqli_stmt_bind_param($stmt, 'ssssssssssdssssssi', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm, $id);
     return mysqli_stmt_execute($stmt);
 }
 
@@ -47,6 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $purchase_price = $_POST['purchase_price'];
     $notes = $_POST['notes'];
     $purchase_link = $_POST['purchase_link'] ?? null;
+    $audio_file_url = $_POST['audio_file_url'] ?? null;
+    $bpm = $_POST['bpm'] ?? null;
 
     // Get existing image paths from hidden fields
     $front_image_path = $_POST['existing_front_image'] ?? null;
@@ -72,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Update the record in the database
-    if (updateVinylRecord($record_id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link)) {
+    if (updateVinylRecord($record_id, $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm)) {
         $success_message = "Record updated successfully!";
     } else {
         echo "Error updating record.";
@@ -124,6 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                 <?php endif; ?>
 
                 <form method="POST" action="record-edit.php?id=<?php echo $record['record_id']; ?>" enctype="multipart/form-data">
+                    <div class="actions mb-4">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a class="btn btn-info" href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">View Record</a>
+                    </div>
+
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" class="form-control" id="title" name="title" value="<?php echo $record['title']; ?>" required>
@@ -195,8 +202,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                     </div>
 
                     <div class="form-group">
-                        <label for="purchase_link">Purchase Link / Audio File URL</label>
+                        <label for="bpm">Beats Per Minute</label>
+                        <input type="number" class="form-control" id="bpm" name="bpm" value="<?php echo $record['bpm']; ?>">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purchase_link">Purchase Link</label>
                         <input type="url" class="form-control" id="purchase_link" name="purchase_link" value="<?php echo htmlspecialchars($record['purchase_link']); ?>" placeholder="Enter URL (optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="purchase_link">Audio File URL</label>
+                        <input type="url" class="form-control" id="audio_file_url" name="audio_file_url" value="<?php echo htmlspecialchars($record['audio_file_url']); ?>" placeholder="Enter URL (optional)">
                     </div>
 
                     <div class="form-group">
@@ -226,9 +243,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                         <?php endif; ?>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-
-                    <a class="btn btn-info" href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">View Record</a>
+                    <div class="actions">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a class="btn btn-info" href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">View Record</a>
+                    </div>
                 </form>
             </div>
         </div>
