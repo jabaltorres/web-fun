@@ -10,7 +10,7 @@ $addCSS = ""; // Placeholder for page-specific CSS if needed
 
 <?php include('../../templates/layout/header.php'); ?>
 
-<div class="container">
+<div class="container py-4">
     <div class="site-inner">
         <div class="row">
             <div class="col-12 col-md-8 mx-auto">

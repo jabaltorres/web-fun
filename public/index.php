@@ -5,8 +5,8 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 // Check if user is logged in
 $loggedIn = isset($_SESSION['user_id']);
 
-
 $preview = false;
+
 if (isset($_GET['preview'])) {
     // previewing should require admin to be logged in
     $preview = $_GET['preview'] == 'true' ? true : false;
@@ -51,8 +51,9 @@ if (isset($_GET['id'])) {
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-          <?php include('../templates/components/nav_public.php'); ?>
+        <?php include('../templates/components/nav_public.php'); ?>
       </div>
+
       <div class="col-md-9 ">
         <div class="page-content">
           <?php
