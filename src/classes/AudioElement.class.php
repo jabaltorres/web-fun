@@ -48,7 +48,7 @@ class AudioElement
 
     public function render(): string
     {
-        $html = "<h3 class=\"h5 font-weight-bold\">{$this->title}</h3>";
+        $html = "<h3 class=\"h5 font-weight-bold mb-4\">{$this->title}</h3>";
         $html .= "<audio class=\"audio-player\" controls=\"{$this->controls}\" {$this->setAutoplay($this->autoplay)}  loop=\"{$this->loop}\">";
         $html .= "<source src=\"{$this->src}\" type=\"{$this->type}\">";
         $html .= "</audio>";

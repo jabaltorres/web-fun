@@ -68,7 +68,7 @@ include('../../templates/layout/header.php');
                     </div>
                 <?php endif; ?>
 
-                <h1 class="mb-4">My Vinyl Records Collection</h1>
+                <h1 class="mb-4">Records</h1>
 
                 <a class="btn btn-primary mb-4" href="<?php echo url_for('/records/record-add.php'); ?>">Add New Record</a>
 

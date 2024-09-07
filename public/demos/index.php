@@ -20,21 +20,17 @@
 
     // Links to demo pages
     $page_demo_links = [
-        ['id' => 'crate-cms', 'visible' => '1', 'demo_page' => 'KrateCMS', 'page_url' =>  '/index.php'],
-        ['id' => 'contacts', 'visible' => '1', 'demo_page' => 'Contacts', 'page_url' =>  '/contacts/index.php'],
-        ['id' => 'users', 'visible' => '1', 'demo_page' => 'Users', 'page_url' =>  '/users/index.php'],
-        ['id' => 'staff', 'visible' => '1', 'demo_page' => 'Staff', 'page_url' =>  '/staff/'],
-        ['id' => 'admin-area', 'visible' => '1', 'demo_page' => 'Staff / Admin', 'page_url' =>  '/staff/admins/'],
-        ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio', 'page_url' => 'audio-player.php'],
+        ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio Player', 'page_url' => 'audio-player.php'],
         ['id' => 'flipper', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
         ['id' => 'javascript', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],
         ['id' => 'heroes', 'visible' => '1', 'demo_page' => 'Heroes', 'page_url' => 'heroes.php'],
         ['id' => 'js-objects', 'visible' => '1', 'demo_page' => 'JS Objects', 'page_url' => 'js-objects.php'],
+        ['id' => 'language', 'visible' => '1', 'demo_page' => 'Language', 'page_url' => 'language.php'],
         ['id' => 'host-info', 'visible' => '1', 'demo_page' => 'Host Info', 'page_url' => 'host-info.php'],
         ['id' => 'lorem-ipsum', 'visible' => '1', 'demo_page' => 'Lorem Ipsum', 'page_url' => 'lorem-ipsum.php'],
         ['id' => 'mustache-js', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
         ['id' => 'forms', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/forms.php'],
-        ['id' => 'simple', 'visible' => '1', 'demo_page' => 'Simple', 'page_url' => 'simple.php'],
+        ['id' => 'simple', 'visible' => '1', 'demo_page' => 'Simple PHP', 'page_url' => 'simple.php'],
     ];
 ?>
 
@@ -63,7 +59,7 @@
           <?php
           foreach ($page_demo_links as $page_demo_link) {
               if ($page_demo_link['visible'] == '1') {
-                  echo '<div class="col-12 col-md-3"><span class="card p-4"><a id="link-'.  h($page_demo_link['id']) .'" href="'. h($page_demo_link['page_url']) . '">' . h($page_demo_link['demo_page']) . '</a></span></div>';
+                  echo '<div class="col-12 col-md-3"><span class="card p-4 mb-4"><a id="link-'.  h($page_demo_link['id']) .'" href="'. h($page_demo_link['page_url']) . '">' . h($page_demo_link['demo_page']) . '</a></span></div>';
               }
           }
           ?>

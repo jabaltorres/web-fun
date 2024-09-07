@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 include('../../templates/layout/header.php');
 ?>
 
-  <div class="container">
+  <div class="container py-5">
     <h1>User Login</h1>
 
     <div class="alert alert-info" role="alert">

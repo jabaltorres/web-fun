@@ -19,9 +19,7 @@ include('../../templates/layout/header.php');
 
 <div id="main">
 
-    <?php include('../../templates/components/nav_public.php'); ?>
-
-  <div id="page">
+  <div id="page" class="container py-5">
 
     <div id="content">
       <h1>Set Language Preference</h1>

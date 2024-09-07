@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="/assets/css/simple.css" media="all">
     </head>
     <body id="page-scratch" class="">
-        <div class="container">
+        <div class="container py-5">
             <h1>Hello world!</h1>
 
             <p>This is where I can test things without messing up anything within the codebase.</p>

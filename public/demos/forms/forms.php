@@ -33,10 +33,8 @@
     include('../../../templates/layout/header.php');
 ?>
 
-<div class="container">
-
+<div class="container py-5">
     <section class="forms">
-
         <header>
             <h1 class="h2"><?php echo $page_title; ?></h1>
             <h2 class="h3"><?php echo $page_subheading; ?></h2>
@@ -44,7 +42,7 @@
 
         <?php echo display_errors($errors); ?>
 
-        <form method="post" action="<?php echo url_for('../forms/forms.php'); ?>">
+        <form method="post" action="<?php echo url_for('../demos/forms/forms.php'); ?>">
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">Full Name:</label>

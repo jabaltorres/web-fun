@@ -29,9 +29,9 @@ $page_audio_subheader->setContent("Testing out building and using an audio playe
 
 ?>
 
-    <div class="container <?php echo $custom_class; ?>">
+    <div class="container py-5 <?php echo $custom_class; ?>">
 
-        <section class="lorem-header">
+        <section class="lorem-header mb-4">
             <?php
             echo $page_audio_header->render();
             echo $page_audio_subheader->render();
@@ -40,7 +40,7 @@ $page_audio_subheader->setContent("Testing out building and using an audio playe
 
         <section class="lorem-audio-player">
             <?php
-            $audio_element = new AudioElement("There's Only One Life", "https://jabaltorres.com/wp-content/uploads/2023/06/THERES-ONLY-ONE-LIFE.mp3", "audio/mp3");
+            $audio_element = new AudioElement("Eh Mambo by Jabal Torres", "https://jabaltorres.com/wp-content/uploads/2024/06/EH-MAMBO.mp3", "audio/mp3");
             $audio_element->setAutoplay(false);
             $audio_element->setLoop(false);
 

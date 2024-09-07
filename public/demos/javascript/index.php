@@ -9,7 +9,7 @@ $custom_class = "javascript-page mb-4";
 include('../../../templates/layout/header.php');
 ?>
 
-<div class="container <?php echo $custom_class; ?>">
+<div class="container py-5 <?php echo $custom_class; ?>">
 
     <?php include('incl/pop-up.php'); ?>
 
