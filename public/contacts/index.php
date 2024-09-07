@@ -97,7 +97,7 @@ include('../../templates/layout/header.php');
       <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
       <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
       <table class="table table-striped border">
-        <thead class="thead-dark">
+        <thead class="thead-light">
         <tr>
           <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
           <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>

@@ -24,9 +24,9 @@ class LoremCard
     public function setDarkMode(): string
     {
         if ($this->dark_mode == true) {
-            return "<div class='bg-primary p-2 dark text-light'>Dark Mode</div>";
+            return "<div class='bg-dark p-2 dark text-light'>Dark Mode</div>";
         } else {
-            return "<div class='bg-secondary p-2 default'>Default Mode</div>";
+            return "<div class='bg-light p-2 default'>Default Mode</div>";
         }
     }
 

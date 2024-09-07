@@ -3,3 +3,17 @@
 audio{
   width: 100%;
 }
+
+ul {
+  padding-left: 20px;
+  @extend %margin-bottom;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}

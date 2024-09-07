@@ -13,7 +13,7 @@
   transform: scaleX($val);
 }
 
-@mixin flexbox{
+@mixin flexbox {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -22,64 +22,72 @@
   -ms-flex-direction: row;
   -ms-flex-align: stetch;
 }
+
 @mixin flexbox-val($val:1) {
   flex: $val;
 }
+
 // a mixin for height and line-height
 @mixin ht-lh($Value) {
-    height: ($Value) + px;
-    line-height: ($Value) + px;
+  height: ($Value) + px;
+  line-height: ($Value) + px;
 }
+
 // a mixin for height, width
 @mixin ht-w($Value) {
-    height: ($Value) + px;
-    width: ($Value) + px;
+  height: ($Value) + px;
+  width: ($Value) + px;
 }
+
 // a mixin for height, width, and line-height
 @mixin ht-w-lh($Value) {
-    height: ($Value) + px;
-    width: ($Value) + px;
-    line-height: ($Value) + px;
+  height: ($Value) + px;
+  width: ($Value) + px;
+  line-height: ($Value) + px;
 }
 
 //this is used within the botttom-cta component
 //I believe this was used in the the Training Center project
-@mixin vertical-center{
+@mixin vertical-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 // a mixin for the social-search sliding effect within the header
-@mixin header-expand{
-  height:0;
+@mixin header-expand {
+  height: 0;
   overflow-y: hidden;
   transition: all 0.4s cubic-bezier(0, 1, 0.5, 1);
 }
+
 // $h = horizontal length
 // $v = vertical length
 // $b = blur radius
 // $s = spread radius
 // $c = shadow color
-@mixin box-shadow($h: 0px, $v:6px, $b: 24px, $s: -01px, $c: rgba(0,0,0,0.2)){
+@mixin box-shadow($h: 0px, $v:6px, $b: 24px, $s: -01px, $c: rgba(0,0,0,0.2)) {
   box-shadow: $h $v $b $s $c;
 }
 
-a{
-  color:$color-accent;
-  &:focus{
-    color:$color-accent;
-  }
-  @extend %transition;
-  // &:link{}
-  // &:visited{}
-  // &:active{}
-  &:hover{
-    color: $color-primary;
-  }
-}
+//a {
+//  color: $color-accent;
+//
+//  &:focus {
+//    color: $color-accent;
+//  }
+//
+//  @extend %transition;
+//  // &:link{}
+//  // &:visited{}
+//  // &:active{}
+//  &:hover {
+//    color: $color-primary;
+//  }
+//}
 
-time{
-  color:$color-dark-shade;
+time {
+  color: $color-dark-shade;
 }
 
 //======================================================================
@@ -87,16 +95,16 @@ time{
 // Placeholders
 // Didnt't include a way to use this yet
 
-$h1-font-size:2.75rem; //44px
+$h1-font-size: 2.75rem; //44px
 
-$h2-font-size:2.3125rem; //37px
+$h2-font-size: 2.3125rem; //37px
 
-$h3-font-size:1.6875rem; //27px
+$h3-font-size: 1.6875rem; //27px
 
-$h4-font-size:1.4375rem; //23px
+$h4-font-size: 1.4375rem; //23px
 
-$h5-font-size:1.125rem; //18px
+$h5-font-size: 1.125rem; //18px
 
-$h6-font-size:1rem; //16px
+$h6-font-size: 1rem; //16px
 
-$small-font-size:80%;
+$small-font-size: 80%;

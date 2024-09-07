@@ -38,8 +38,8 @@ $danger: $red !default;
 $light: $gray-100 !default;
 $dark: $gray-800 !default;
 
-$primary: $dark;
-$secondary: $yellow;
+//$primary: $dark;
+//$secondary: $yellow;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
@@ -65,19 +65,7 @@ body {
   font-family: 'Gudea', sans-serif;
 }
 
-ul {
-  padding-left: 20px;
-  @extend %margin-bottom;
-}
 
-p {
-  margin-bottom: 1.5em;
-}
-
-img {
-  width: 100%;
-  height: auto;
-}
 
 section {
   hgroup, .hgroup {

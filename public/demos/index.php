@@ -29,7 +29,7 @@
         ['id' => 'host-info', 'visible' => '1', 'demo_page' => 'Host Info', 'page_url' => 'host-info.php'],
         ['id' => 'lorem-ipsum', 'visible' => '1', 'demo_page' => 'Lorem Ipsum', 'page_url' => 'lorem-ipsum.php'],
         ['id' => 'mustache-js', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
-        ['id' => 'forms', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/forms.php'],
+        ['id' => 'forms', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/index.php'],
         ['id' => 'simple', 'visible' => '1', 'demo_page' => 'Simple PHP', 'page_url' => 'simple.php'],
     ];
 ?>

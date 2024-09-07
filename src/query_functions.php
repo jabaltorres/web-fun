@@ -672,40 +672,34 @@ function delete_admin($admin)
 }
 
 
-// JT Test - being used on demos/forms/forms.php
-function validate_jt_test_form($jtMessage)
+// This is used on demos/forms/forms.php
+function validate_demo_form($demoMessage)
 {
     $errors = [];
 
-    if (is_blank($jtMessage['name'])) {
+    // Sanitize inputs
+    $demoMessage['name'] = trim(filter_var($demoMessage['name'], FILTER_SANITIZE_STRING));
+    $demoMessage['email'] = trim(filter_var($demoMessage['email'], FILTER_SANITIZE_EMAIL));
+    $demoMessage['message'] = trim(filter_var($demoMessage['message'], FILTER_SANITIZE_STRING));
+
+    if (empty($demoMessage['name'])) {
         $errors[] = "Name cannot be blank.";
-    } elseif (!has_length($jtMessage['name'], ['min' => 2, 'max' => 255])) {
+    } elseif (strlen($demoMessage['name']) < 2 || strlen($demoMessage['name']) > 255) {
         $errors[] = "Name must be between 2 and 255 characters.";
     }
 
-    if (!has_valid_email_format($jtMessage['email'])) {
-        $errors[] = "Invalid email format";
+    if (!filter_var($demoMessage['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
     }
 
-    if (is_blank($jtMessage['message'])) {
+    if (empty($demoMessage['message'])) {
         $errors[] = "Message cannot be blank.";
-    } elseif (!has_length($jtMessage['message'], ['min' => 10, 'max' => 255])) {
+    } elseif (strlen($demoMessage['message']) < 10 || strlen($demoMessage['message']) > 255) {
         $errors[] = "Message must be between 10 and 255 characters.";
     }
 
-
-    if (!empty($errors)) {
-        return $errors;
-    }
-
-    // Testing the return statement.
-    echo '<ul>';
-    foreach ($jtMessage as $jtMessageItem) {
-        echo "<li>" . h($jtMessageItem) . "</li>";
-    }
-    echo '</ul>';
+    return $errors;
 }
-
 function find_all_rankings()
 {
     global $db;
