@@ -40,6 +40,18 @@ mysqli_free_result($page_set);
 <?php $page_title = 'Create Page'; ?>
 <?php include('../../../templates/layout/header.php'); ?>
 
+<script>
+    tinymce.init({
+        selector: 'textarea.wysiwyg',  // Targets all textareas with the class 'wysiwyg'
+        plugins: [
+            // Core editing features
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount', 'code',
+        ],
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code codesample',  // Toolbar options
+        menubar: false,  // Hides the default menubar
+        height: 600  // Sets the height of the editor
+    });
+</script>
 <div id="content" class="container">
     <div class="row">
         <div class="col-12">
@@ -51,11 +63,11 @@ mysqli_free_result($page_set);
                 <?php echo display_errors($errors); ?>
 
                 <form action="<?php echo url_for('/staff/pages/new.php'); ?>" method="post">
-                    <dl>
-                        <dt>Subject</dt>
-                        <dd>
-                            <select name="subject_id">
-                                <?php
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Subject</label>
+                        <select id="exampleFormControlSelect1" name="subject_id" class="form-control" >
+                            <?php
                                 $subject_set = find_all_subjects();
                                 while ($subject = mysqli_fetch_assoc($subject_set)) {
                                     echo "<option value=\"" . h($subject['id']) . "\"";
@@ -65,10 +77,10 @@ mysqli_free_result($page_set);
                                     echo ">" . h($subject['menu_name']) . "</option>";
                                 }
                                 mysqli_free_result($subject_set);
-                                ?>
-                            </select>
-                        </dd>
-                    </dl>
+                            ?>
+                        </select>
+                    </div>
+
                     <dl>
                         <dt>Menu Name</dt>
                         <dd><input type="text" name="menu_name" value="<?php echo h($page['menu_name']); ?>"/></dd>
@@ -101,11 +113,11 @@ mysqli_free_result($page_set);
                     <dl>
                         <dt>Content</dt>
                         <dd>
-                            <textarea name="content" cols="60" rows="10"><?php echo h($page['content']); ?></textarea>
+                            <textarea class="wysiwyg" name="content" cols="60" rows="10"><?php echo h($page['content']); ?></textarea>
                         </dd>
                     </dl>
                     <div id="operations">
-                        <input type="submit" value="Create Page"/>
+                        <input type="submit" value="Create Page" class="btn btn-primary"/>
                     </div>
                 </form>
 
