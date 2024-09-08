@@ -20,7 +20,7 @@ function updateVinylRecord($id, $title, $artist, $genre, $release_year, $label, 
     $sql = "UPDATE vinyl_records SET title = ?, artist = ?, genre = ?, release_year = ?, label = ?, catalog_number = ?, format = ?, speed = ?, `condition` = ?, purchase_date = ?, purchase_price = ?, notes = ?, front_image = ?, back_image = ?, purchase_link = ?, audio_file_url = ?, bpm = ? WHERE record_id = ?";
 
     $stmt = mysqli_prepare($db, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssssssssssdssssssi', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm, $id);
+    mysqli_stmt_bind_param($stmt, 'ssssssssssdsssssii', $title, $artist, $genre, $release_year, $label, $catalog_number, $format, $speed, $condition, $purchase_date, $purchase_price, $notes, $front_image_path, $back_image_path, $purchase_link, $audio_file_url, $bpm, $id);
     return mysqli_stmt_execute($stmt);
 }
 
@@ -212,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                     </div>
 
                     <div class="form-group">
-                        <label for="purchase_link">Audio File URL</label>
+                        <label for="audio_file_url">Audio File URL</label>
                         <input type="url" class="form-control" id="audio_file_url" name="audio_file_url" value="<?php echo htmlspecialchars($record['audio_file_url']); ?>" placeholder="Enter URL (optional)">
                     </div>
 
