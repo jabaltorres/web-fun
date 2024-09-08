@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['first_name'] = $loginResult['first_name'];  // Store first name in session
 
         // Redirect to contacts page after successful login
-        header("Location: /contacts/index.php");
+        header("Location: /records/index.php");
         exit();
     } else {
         // Log that login failed for debugging purposes
