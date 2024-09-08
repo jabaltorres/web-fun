@@ -96,8 +96,7 @@ include('../../templates/layout/header.php');
 
             <?php if (!empty($record['purchase_link'])): ?>
                 <div class="d-lg-none mb-4 mb-lg-0">
-                    <div><strong>Purchase / Audio Link:</strong></div>
-                    <div><a href="<?php echo htmlspecialchars($record['purchase_link']); ?>" target="_blank" class="btn btn-primary">Buy or Listen</a></div>
+                    <a href="<?php echo htmlspecialchars($record['purchase_link']); ?>" target="_blank" class="btn btn-primary">Purchase</a>
                 </div>
             <?php endif; ?>
 
