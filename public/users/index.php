@@ -22,10 +22,9 @@ $result = $isAdmin ? $userManager->getAllUsers() : null;
 include('../../templates/layout/header.php');
 ?>
 
-  <div class="container">
+  <div class="container py-5">
 
     <?php if ($loggedIn): ?>
-      <?php include('../../templates/components/nav_users.php'); ?>
       <h1>Users Page</h1>
       <section class="user-content mb-4">
         <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>

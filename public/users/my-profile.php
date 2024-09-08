@@ -23,10 +23,7 @@ $userDetails = $userManager->getUserDetails($user_id);
 include('../../templates/layout/header.php');
 ?>
 
-<div class="container">
-    <?php if ($loggedIn): ?>
-      <?php include('../../templates/components/nav_users.php'); ?>
-    <?php endif; ?>
+<div class="container py-5">
   <h1>My Profile</h1>
 
   <?php if ($userDetails): ?>

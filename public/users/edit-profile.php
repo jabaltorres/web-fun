@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 include('../../templates/layout/header.php');
 ?>
 
-<div class="container">
+<div class="container py-5">
     <h1>Edit Profile</h1>
 
     <?php if ($error): ?>
