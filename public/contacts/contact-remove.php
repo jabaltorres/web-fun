@@ -27,7 +27,7 @@ $contact_set = find_all_contacts();
 
 include('../../templates/layout/header.php');
 ?>
-<div class="container <?php echo $custom_class; ?>">
+<div class="container py-5<?php echo $custom_class; ?>">
     <section>
         <?php include('../../templates/components/headline.php'); ?>
         <?php include('../../templates/components/nav_contacts.php');?>

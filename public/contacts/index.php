@@ -32,10 +32,6 @@ include('../../templates/layout/header.php');
 
   <div class="<?php echo $custom_class; ?> container">
 
-      <?php if ($loggedIn): ?>
-        <?php include('../../templates/components/nav_users.php'); ?>
-      <?php endif; ?>
-
     <section class="py-4 mb-2">
         <?php
         include('../../templates/components/headline.php');

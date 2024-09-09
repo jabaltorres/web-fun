@@ -22,7 +22,7 @@ if(is_post_request()) {
 <?php $page_title = 'Delete Page'; ?>
 <?php include('../../../templates/layout/header.php');?>
 
-<div id="content" class="container">
+<div id="content" class="container py-5">
     <div class="row">
         <div class="col-12">
             <a class="btn btn-outline-info my-4 font-weight-bold" href="<?php echo url_for('/staff/pages/index.php'); ?>">&laquo; Back to List</a>
@@ -34,7 +34,7 @@ if(is_post_request()) {
 
                 <form action="<?php echo url_for('/staff/pages/delete.php?id=' . h(u($page['id']))); ?>" method="post">
                     <div id="operations">
-                        <input type="submit" name="commit" value="Delete Page" class="btn btn-primary"/>
+                        <input type="submit" name="commit" value="Delete Page" class="btn btn-danger"/>
                     </div>
                 </form>
             </div>

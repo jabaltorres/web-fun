@@ -23,7 +23,7 @@ $custom_class = "db-test-page";
 //custom CSS for this page only
 include('../../templates/layout/header.php');
 ?>
-    <div class="container <?php echo $custom_class; ?>">
+    <div class="container py-5 <?php echo $custom_class; ?>">
 
   <section>
     <h2 class="h3"><span class="font-weight-bold">Private:</span> For Test use ONLY</h2>

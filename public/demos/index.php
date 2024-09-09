@@ -20,6 +20,7 @@
 
     // Links to demo pages
     $page_demo_links = [
+        ['id' => 'bpm-counter', 'visible' => '1', 'demo_page' => 'BPM Counter', 'page_url' => 'bpm-counter.php'],
         ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio Player', 'page_url' => 'audio-player.php'],
         ['id' => 'flipper', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
         ['id' => 'javascript', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],
@@ -31,7 +32,6 @@
         ['id' => 'mustache-js', 'visible' => '1', 'demo_page' => 'Mustache.js', 'page_url' => 'mustache.php'],
         ['id' => 'forms', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/index.php'],
         ['id' => 'simple', 'visible' => '1', 'demo_page' => 'Simple PHP', 'page_url' => 'simple.php'],
-        ['id' => 'bpm-counter', 'visible' => '1', 'demo_page' => 'BPM Counter', 'page_url' => 'bpm-counter.php'],
     ];
 ?>
 

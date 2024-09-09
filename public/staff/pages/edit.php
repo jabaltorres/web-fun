@@ -35,9 +35,10 @@ $page_set = find_all_pages();
 $page_count = mysqli_num_rows($page_set);
 mysqli_free_result($page_set);
 
+$page_title = 'Edit Page';
+
 ?>
 
-<?php $page_title = 'Edit Page'; ?>
 <?php include('../../../templates/layout/header.php'); ?>
 
 <script>
@@ -63,7 +64,7 @@ mysqli_free_result($page_set);
 
                 <?php echo display_errors($errors); ?>
 
-                <form action="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($id))); ?>" method="post" class="border">
+                <form action="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($id))); ?>" method="post" class="border p-4">
                     <dl>
                         <dt>Subject</dt>
                         <dd>
@@ -119,6 +120,7 @@ mysqli_free_result($page_set);
                     </dl>
                     <div id="operations">
                         <input type="submit" class="btn btn-secondary" value="Edit Page"/>
+                        <button type="button" class="btn btn-danger" onclick="window.location.href='<?php echo url_for('/staff/pages/delete.php?id=' . h(u($id))); ?>'">Delete Page</button>
                     </div>
                 </form>
 

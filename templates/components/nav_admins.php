@@ -8,6 +8,8 @@
                     <li class="nav-item"><a class="nav-link text-white" href="/users/">Users</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="/users/user-add.php">User Add</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="/staff/index.php">Staff</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/staff/pages/index.php">Pages</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/staff/subjects/index.php">Subjects</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="/contacts/index.php">Contacts</a></li>
                 </ul>
             </div>
