@@ -75,11 +75,14 @@ include('../../templates/layout/header.php');
             <h1 class="mb-4"><?php echo $record['title']; ?></h1>
         </div>
 
-        <div class="col-12 col-lg-6">
+        <div id="record-img-audio" class="col-12 col-lg-6">
             <!-- Display the front image if available -->
             <?php if (!empty($record['front_image'])): ?>
                 <p><strong>Front Image:</strong></p>
                 <img class="record-img record-img-front" src="<?php echo '/records/uploads/' . basename($record['front_image']); ?>" alt="Front of Record">
+            <?php else: ?>
+                <p><strong>Placeholder Image:</strong></p>
+                <img  class="record-img record-img-front" src="../assets/images/placeholder/placeholder-1x1.png" alt="Placeholder Record Image">
             <?php endif; ?>
 
             <!-- Display the back image if available -->
@@ -108,7 +111,7 @@ include('../../templates/layout/header.php');
                 <?php endif; ?>
             </div>
         </div>
-        <div class="col-12 col-lg-6">
+        <div id="record-details" class="col-12 col-lg-6">
             <?php if (!empty($record['title'])): ?>
                 <p class="h3"><strong>Title:</strong> <?php echo $record['title']; ?></p>
             <?php endif; ?>
@@ -117,49 +120,51 @@ include('../../templates/layout/header.php');
                 <p class="h4"><strong>Artist:</strong> <?php echo $record['artist']; ?></p>
             <?php endif; ?>
 
-            <?php if (!empty($record['genre'])): ?>
-                <div><strong>Genre:</strong> <?php echo $record['genre']; ?></div>
-            <?php endif; ?>
+            <div class="details">
+              <?php if (!empty($record['genre'])): ?>
+                  <div><strong>Genre:</strong> <?php echo $record['genre']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['release_year'])): ?>
-                <div><strong>Release Year:</strong> <?php echo $record['release_year']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['release_year'])): ?>
+                  <div><strong>Release Year:</strong> <?php echo $record['release_year']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['label'])): ?>
-                <div><strong>Label:</strong> <?php echo $record['label']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['label'])): ?>
+                  <div><strong>Label:</strong> <?php echo $record['label']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['catalog_number'])): ?>
-                <div><strong>Catalog Number:</strong> <?php echo $record['catalog_number']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['catalog_number'])): ?>
+                  <div><strong>Catalog Number:</strong> <?php echo $record['catalog_number']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['format'])): ?>
-                <div><strong>Format:</strong> <?php echo $record['format']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['format'])): ?>
+                  <div><strong>Format:</strong> <?php echo $record['format']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['speed'])): ?>
-                <div><strong>Speed:</strong> <?php echo $record['speed']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['speed'])): ?>
+                  <div><strong>Speed:</strong> <?php echo $record['speed']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['bpm'])): ?>
-                <div><strong>Beats Per Minute:</strong> <?php echo $record['bpm']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['bpm'])): ?>
+                  <div><strong>Beats Per Minute:</strong> <?php echo $record['bpm']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['condition'])): ?>
-                <div><strong>Condition:</strong> <?php echo $record['condition']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['condition'])): ?>
+                  <div><strong>Condition:</strong> <?php echo $record['condition']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['purchase_date'])): ?>
-                <div><strong>Purchase Date:</strong> <?php echo $record['purchase_date']; ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['purchase_date'])): ?>
+                  <div><strong>Purchase Date:</strong> <?php echo $record['purchase_date']; ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['purchase_price'])): ?>
-                <div><strong>Purchase Price:</strong> $<?php echo number_format($record['purchase_price'], 2); ?></div>
-            <?php endif; ?>
+              <?php if (!empty($record['purchase_price'])): ?>
+                  <div><strong>Purchase Price:</strong> $<?php echo number_format($record['purchase_price'], 2); ?></div>
+              <?php endif; ?>
 
-            <?php if (!empty($record['notes'])): ?>
-                <p><strong>Notes:</strong> <?php echo $record['notes']; ?></p>
-            <?php endif; ?>
+              <?php if (!empty($record['notes'])): ?>
+                  <p><strong>Notes:</strong> <?php echo $record['notes']; ?></p>
+              <?php endif; ?>
+            </div>
 
             <?php if (!empty($record['purchase_link'])): ?>
                 <div>

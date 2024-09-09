@@ -107,7 +107,11 @@ include('../../templates/layout/header.php');
                             <tbody>
                             <?php foreach ($records as $record): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($record['title']); ?></td>
+                                    <td>
+                                      <a href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">
+                                          <?php echo htmlspecialchars($record['title']); ?>
+                                      </a>
+                                    </td>
                                     <td><?php echo htmlspecialchars($record['artist']); ?></td>
                                     <td><?php echo htmlspecialchars($record['release_year']); ?></td>
                                     <td>
