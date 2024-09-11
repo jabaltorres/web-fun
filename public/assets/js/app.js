@@ -304,7 +304,7 @@
       // using gist as a temporary bandaid
       // This is used on the JS Fun page
       // https://jabaltorres.com/wp-content/themes/jt-altitude-pro/jt-data.json
-      $.getJSON('https://gist.githubusercontent.com/capitalJT/1c7e9304cfb86ffa857c8081b6752366/raw/d2f9a86cc4f550c398c79a4733216cb1938045f9/jt-data.json', function(data) {
+      $.getJSON('https://gist.githubusercontent.com/jabaltorres/1c7e9304cfb86ffa857c8081b6752366/raw/d2f9a86cc4f550c398c79a4733216cb1938045f9/jt-data.json', function(data) {
         var items = [];
         $.each(data, function(idx, obj){
           $.each(obj, function(key, value){

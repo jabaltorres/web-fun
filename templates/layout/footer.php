@@ -2,9 +2,9 @@
     <div class="container">
         <span>&copy; <?php echo date("Y") . "&nbsp;" . $site_owner; ?></span>
         <ul class="d-inline-block">
-            <li><a href="https://github.com/capitalJT/web-fun" target="_blank">Git Repo</a></li>
-            <li><a href="https://github.com/capitalJT/web-fun/issues" target="_blank">Git Issues</a></li>
-            <li><a href="https://github.com/capitalJT/web-fun/wiki" target="_blank">Git Wiki</a></li>
+            <li><a href="https://github.com/jabaltorres/web-fun" target="_blank">Git Repo</a></li>
+            <li><a href="https://github.com/jabaltorres/web-fun/issues" target="_blank">Git Issues</a></li>
+            <li><a href="https://github.com/jabaltorres/web-fun/wiki" target="_blank">Git Wiki</a></li>
             <li><a href="https://getbootstrap.com/docs/4.6/getting-started/introduction/" target="_blank">Bootstrap 4</a></li>
         </ul>
     </div>
