@@ -56,9 +56,9 @@ if ($adminLoggedIn) {
       <!-- Update navbar text to reflect user status -->
       <span class="navbar-text">
         <?php if ($is_logged_in): ?>
-          Welcome back, <a href="/users/my-profile.php"><?= htmlspecialchars($_SESSION['first_name']); ?></a>! <a href="/users/logout.php">Log Out</a>
+            <a class="btn btn-secondary text-white" href="/users/logout.php">Log Out</a>
         <?php else: ?>
-          Welcome Guest! Please <a href="/users/login.php">Log In</a> or <a href="/public/users/register.php">Register</a>.
+            <a class="btn btn-primary text-white" href="/users/login.php">Log In</a>
         <?php endif; ?>
         </span>
     </div>

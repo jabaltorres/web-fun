@@ -11,7 +11,7 @@
     <?php while($nav_subject = mysqli_fetch_assoc($nav_subjects)) { ?>
       <?php // if(!$nav_subject['visible']) { continue; } ?>
       <li class="list-group-item <?php if($nav_subject['id'] == $subject_id) { echo 'selected'; } ?>">
-        <a href="<?php echo url_for('index.php?subject_id=' . h(u($nav_subject['id']))); ?>">
+        <a href="<?php echo url_for('page.php?subject_id=' . h(u($nav_subject['id']))); ?>">
           <?php echo h($nav_subject['menu_name']); ?>
         </a>
 
@@ -21,7 +21,7 @@
             <?php while($nav_page = mysqli_fetch_assoc($nav_pages)) { ?>
               <?php // if(!$nav_page['visible']) { continue; } ?>
               <li class="<?php if($nav_page['id'] == $page_id) { echo 'selected'; } ?>">
-                <a href="<?php echo url_for('index.php?id=' . h(u($nav_page['id']))); ?>">
+                <a href="<?php echo url_for('page.php?id=' . h(u($nav_page['id']))); ?>">
                   <?php echo h($nav_page['menu_name']); ?>
                 </a>
               </li>

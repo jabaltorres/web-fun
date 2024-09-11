@@ -20,3 +20,4 @@ src/db_credentials.php
 
 # Ignore Records uploads
 /public/records/uploads/
+/public/uploads/
