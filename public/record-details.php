@@ -1,8 +1,8 @@
 <?php
 
-require_once('../../src/initialize.php');
+require_once('../src/initialize.php');
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+require_once('../src/classes/KrateUserManager.php');
 
 use Fivetwofive\KrateCMS\KrateUserManager;
 
@@ -43,7 +43,7 @@ if (!$record) {
     exit;
 }
 
-include('../../templates/layout/header.php');
+include('../templates/layout/header.php');
 ?>
 
 <style>
@@ -79,16 +79,16 @@ include('../../templates/layout/header.php');
             <!-- Display the front image if available -->
             <?php if (!empty($record['front_image'])): ?>
                 <p><strong>Front Image:</strong></p>
-                <img class="record-img record-img-front" src="<?php echo '/records/uploads/' . basename($record['front_image']); ?>" alt="Front of Record">
+                <img class="record-img record-img-front" src="<?php echo '/uploads/' . basename($record['front_image']); ?>" alt="Front of Record">
             <?php else: ?>
                 <p><strong>Placeholder Image:</strong></p>
-                <img  class="record-img record-img-front" src="../assets/images/placeholder/placeholder-1x1.png" alt="Placeholder Record Image">
+                <img  class="record-img record-img-front" src="assets/images/placeholder/placeholder-1x1.png" alt="Placeholder Record Image">
             <?php endif; ?>
 
             <!-- Display the back image if available -->
             <?php if (!empty($record['back_image'])): ?>
                 <p><strong>Back Image:</strong></p>
-                <img class="record-img record-img-front" src="<?php echo '/records/uploads/' . basename($record['back_image']); ?>" alt="Back of Record">
+                <img class="record-img record-img-front" src="<?php echo '/uploads/' . basename($record['back_image']); ?>" alt="Back of Record">
             <?php endif; ?>
 
             <?php if (!empty($record['audio_file_url'])): ?>
@@ -104,10 +104,10 @@ include('../../templates/layout/header.php');
             <?php endif; ?>
 
             <div class="col-12 actions mb-5">
-                <a class="btn btn-outline-info font-weight-bold" href="<?php echo url_for('/records/index.php'); ?>">&laquo; Back to List</a>
+                <a class="btn btn-outline-info font-weight-bold" href="<?php echo url_for('/index.php'); ?>">&laquo; Back to List</a>
                 <?php if ($loggedIn) : ?>
-                    <a class="btn btn-warning" href="<?php echo url_for('/records/record-edit.php?id=' . $record['record_id']); ?>">Edit Record</a>
-                    <a class="btn btn-danger" href="<?php echo url_for('/records/record-delete.php?id=' . $record['record_id']); ?>">Delete Record</a>
+                    <a class="btn btn-warning" href="<?php echo url_for('/record-edit.php?id=' . $record['record_id']); ?>">Edit Record</a>
+                    <a class="btn btn-danger" href="<?php echo url_for('/record-delete.php?id=' . $record['record_id']); ?>">Delete Record</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -199,4 +199,4 @@ include('../../templates/layout/header.php');
     });
 </script>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../templates/layout/footer.php'); ?>

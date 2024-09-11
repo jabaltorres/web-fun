@@ -1,9 +1,9 @@
 <?php
 
-require_once('../../src/initialize.php');
+require_once('../src/initialize.php');
 
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+require_once('../src/classes/KrateUserManager.php');
 
 use Fivetwofive\KrateCMS\KrateUserManager;
 
@@ -72,7 +72,7 @@ if (!$record) {
     exit;
 }
 
-include('../../templates/layout/header.php');
+include('../templates/layout/header.php');
 ?>
 
     <div class="container py-4">
@@ -97,10 +97,10 @@ include('../../templates/layout/header.php');
                     <li><strong>Notes:</strong> <?php echo $record['notes']; ?></li>
                     <!-- If you have images -->
                     <?php if (!empty($record['front_image'])): ?>
-                        <li><strong>Front Image:</strong> <img src="<?php echo '/records/uploads/' . basename($record['front_image']); ?>" alt="Front Image" style="max-width: 100px;"></li>
+                        <li><strong>Front Image:</strong> <img src="<?php echo '/uploads/' . basename($record['front_image']); ?>" alt="Front Image" style="max-width: 100px;"></li>
                     <?php endif; ?>
                     <?php if (!empty($record['back_image'])): ?>
-                        <li><strong>Back Image:</strong> <img src="<?php echo '/records/uploads/' . basename($record['back_image']); ?>" alt="Back Image" style="max-width: 100px;"></li>
+                        <li><strong>Back Image:</strong> <img src="<?php echo '/uploads/' . basename($record['back_image']); ?>" alt="Back Image" style="max-width: 100px;"></li>
                     <?php endif; ?>
                 </ul>
 
@@ -112,4 +112,4 @@ include('../../templates/layout/header.php');
         </div>
     </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../templates/layout/footer.php'); ?>

@@ -1,7 +1,7 @@
 <?php
 
-require_once('../../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+require_once('../src/initialize.php');
+require_once('../src/classes/KrateUserManager.php');
 
 use Fivetwofive\KrateCMS\KrateUserManager;
 
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Define the upload directory within the 'records' directory
-    $upload_dir = '../../public/records/uploads/';
+    $upload_dir = '../public/uploads/';
 
     // Ensure the directory exists, create it if not
     if (!is_dir($upload_dir)) {
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include('../../templates/layout/header.php');
+include('../templates/layout/header.php');
 ?>
 
     <div class="container py-4">
@@ -220,4 +220,4 @@ include('../../templates/layout/header.php');
         </div>
     </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../templates/layout/footer.php'); ?>

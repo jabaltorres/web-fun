@@ -79,7 +79,7 @@ include('../templates/layout/header.php');
 
             <div class="col-12 col-md-6">
                 <div class="action text-right">
-                    <a class="btn btn-primary mb-4" href="<?php echo url_for('/records/record-add.php'); ?>">Add New Record</a>
+                    <a class="btn btn-primary mb-4" href="<?php echo url_for('record-add.php'); ?>">Add New Record</a>
                 </div>
             </div>
         </div>
@@ -108,18 +108,18 @@ include('../templates/layout/header.php');
                             <?php foreach ($records as $record): ?>
                                 <tr>
                                     <td>
-                                      <a href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">
+                                      <a href="<?php echo url_for('/record-details.php?id=' . $record['record_id']); ?>">
                                           <?php echo htmlspecialchars($record['title']); ?>
                                       </a>
                                     </td>
                                     <td><?php echo htmlspecialchars($record['artist']); ?></td>
                                     <td><?php echo htmlspecialchars($record['release_year']); ?></td>
                                     <td>
-                                        <a href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>" class="btn btn-info btn-sm">View Details</a>
+                                        <a href="<?php echo url_for('/record-details.php?id=' . $record['record_id']); ?>" class="btn btn-info btn-sm">View Details</a>
                                         <?php
                                             if ($loggedIn) {
-                                                echo '<a href="' . url_for('/records/record-edit.php?id=' . $record['record_id']) . '" class="btn btn-secondary btn-sm ml-1 mr-2">Edit Details</a>';
-                                                echo '<a href="' . url_for('/records/record-delete.php?id=' . $record['record_id']) . '" class="btn btn-danger btn-sm">Delete Record</a>';
+                                                echo '<a href="' . url_for('/record-edit.php?id=' . $record['record_id']) . '" class="btn btn-secondary btn-sm ml-1 mr-2">Edit Details</a>';
+                                                echo '<a href="' . url_for('/record-delete.php?id=' . $record['record_id']) . '" class="btn btn-danger btn-sm">Delete Record</a>';
                                             }
                                         ?>
                                     </td>

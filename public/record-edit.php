@@ -1,8 +1,8 @@
 <?php
 
-require_once('../../src/initialize.php');
+require_once('../src/initialize.php');
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+require_once('../src/classes/KrateUserManager.php');
 
 use Fivetwofive\KrateCMS\KrateUserManager;
 
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
         exit;
     }
 
-    include('../../templates/layout/header.php');
+    include('../templates/layout/header.php');
     ?>
 
     <!-- Display the form -->
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                 <form method="POST" action="record-edit.php?id=<?php echo $record['record_id']; ?>" enctype="multipart/form-data">
                     <div class="actions mb-4">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <a class="btn btn-info" href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">View Record</a>
+                        <a class="btn btn-info" href="<?php echo url_for('/record-details.php?id=' . $record['record_id']); ?>">View Record</a>
                     </div>
 
                     <div class="form-group">
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                         <label for="front_image">Front Image</label>
                         <input type="file" class="form-control" id="front_image" name="front_image" accept="image/*">
                         <?php if (!empty($record['front_image'])): ?>
-                            <p>Current Front Image: <img src="<?php echo '/records/uploads/' . basename($record['front_image']); ?>" alt="Front Image" style="max-width: 100px;"></p>
+                            <p>Current Front Image: <img src="<?php echo '/uploads/' . basename($record['front_image']); ?>" alt="Front Image" style="max-width: 100px;"></p>
                             <!-- Hidden input to retain the existing front image -->
                             <input type="hidden" name="existing_front_image" value="<?php echo $record['front_image']; ?>">
                         <?php endif; ?>
@@ -237,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                         <label for="back_image">Back Image</label>
                         <input type="file" class="form-control" id="back_image" name="back_image" accept="image/*">
                         <?php if (!empty($record['back_image'])): ?>
-                            <p>Current Back Image: <img src="<?php echo '/records/uploads/' . basename($record['back_image']); ?>" alt="Back Image" style="max-width: 100px;"></p>
+                            <p>Current Back Image: <img src="<?php echo '/uploads/' . basename($record['back_image']); ?>" alt="Back Image" style="max-width: 100px;"></p>
                             <!-- Hidden input to retain the existing back image -->
                             <input type="hidden" name="existing_back_image" value="<?php echo $record['back_image']; ?>">
                         <?php endif; ?>
@@ -245,14 +245,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
 
                     <div class="actions">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
-                        <a class="btn btn-info" href="<?php echo url_for('/records/record-details.php?id=' . $record['record_id']); ?>">View Record</a>
+                        <a class="btn btn-info" href="<?php echo url_for('/record-details.php?id=' . $record['record_id']); ?>">View Record</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <?php include('../../templates/layout/footer.php'); ?>
+    <?php include('../templates/layout/footer.php'); ?>
     <?php
 }
 ?>
