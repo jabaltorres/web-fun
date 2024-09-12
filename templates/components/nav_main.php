@@ -1,4 +1,4 @@
-<ul class="navbar-nav mr-auto">
+<ul class="navbar-nav ml-auto mr-md-2">
     <li class="nav-item">
         <a class="nav-link" href="/page.php?subject_id=1">About</a>
     </li>

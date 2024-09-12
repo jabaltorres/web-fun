@@ -132,12 +132,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Title</label>
+                        <label for="title">Title <span class="required">*</span></label>
                         <input type="text" class="form-control" id="title" name="title" value="<?php echo $record['title']; ?>" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="artist">Artist</label>
+                        <label for="artist">Artist <span class="required">*</span></label>
                         <input type="text" class="form-control" id="artist" name="artist" value="<?php echo $record['artist']; ?>" required>
                     </div>
 

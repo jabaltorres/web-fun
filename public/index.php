@@ -58,13 +58,13 @@ include('../templates/layout/header.php');
 ?>
     <div class="hero">
         <div class="jumbotron jumbotron-fluid px-4">
-            <div class="container">
-                <h1 class="display-4">Vinyl Record Collection</h1>
-                <p class="lead">KrateCMS is a simple record management system built with PHP and MySQL.</p>
+            <div class="container text-center">
+                <h1 class="display-4">KrateCMS</h1>
+                <p class="lead">a simple record management system built with PHP and MySQL.</p>
 
                 <!-- Search Form -->
-                <form class="form-inline" action="index.php" method="GET">
-                    <input type="text" name="search" class="form-control mr-2" placeholder="Search by Title or Artist" value="<?php echo htmlspecialchars($search_term); ?>">
+                <form class="form-inline d-block mx-auto" action="index.php" method="GET">
+                    <input type="text" name="search" class="form-control mr-2 mb-2 mb-md-0" placeholder="Search by Title or Artist" value="<?php echo htmlspecialchars($search_term); ?>">
                     <button type="submit" class="btn btn-primary">Search</button>
                     <a href="index.php" class="btn btn-outline-secondary ml-2">Clear</a>
                 </form>

@@ -78,17 +78,17 @@ include('../templates/layout/header.php');
         <div id="record-img-audio" class="col-12 col-lg-6">
             <!-- Display the front image if available -->
             <?php if (!empty($record['front_image'])): ?>
-                <p><strong>Front Image:</strong></p>
                 <img class="record-img record-img-front" src="<?php echo '/uploads/' . basename($record['front_image']); ?>" alt="Front of Record">
+                <p>Front Image</p>
             <?php else: ?>
-                <p><strong>Placeholder Image:</strong></p>
                 <img  class="record-img record-img-front" src="assets/images/placeholder/placeholder-1x1.png" alt="Placeholder Record Image">
+                <p>Placeholder Image</p>
             <?php endif; ?>
 
             <!-- Display the back image if available -->
             <?php if (!empty($record['back_image'])): ?>
-                <p><strong>Back Image:</strong></p>
                 <img class="record-img record-img-front" src="<?php echo '/uploads/' . basename($record['back_image']); ?>" alt="Back of Record">
+                <p>Back Image</p>
             <?php endif; ?>
 
             <?php if (!empty($record['audio_file_url'])): ?>
@@ -120,7 +120,7 @@ include('../templates/layout/header.php');
                 <p class="h4"><strong>Artist:</strong> <?php echo $record['artist']; ?></p>
             <?php endif; ?>
 
-            <div class="details">
+            <div class="details mb-4">
               <?php if (!empty($record['genre'])): ?>
                   <div><strong>Genre:</strong> <?php echo $record['genre']; ?></div>
               <?php endif; ?>

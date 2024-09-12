@@ -114,7 +114,7 @@ include('../templates/layout/header.php');
                 <section class="border p-4 mb-4">
                     <form method="POST" action="record-add.php" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="title">Title</label>
+                            <label for="title">Title<span class="required">*</span></label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
                         </div>
 

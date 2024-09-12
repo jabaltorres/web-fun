@@ -60,9 +60,11 @@ include('../../templates/layout/header.php');
   <div class="container py-5">
     <h1>User Login</h1>
 
-    <div class="alert alert-info" role="alert">
-        <?= $loggedInMessage ?>
-    </div>
+        <?php if ($loggedInMessage): ?>
+            <div class="alert alert-info" role="alert">
+                <?= $loggedInMessage ?>
+            </div>
+        <?php endif; ?>
 
       <?php if ($userIsLoggedIn): ?>
         <form method="post">
@@ -70,6 +72,7 @@ include('../../templates/layout/header.php');
         </form>
         <a href="index.php" class="btn btn-secondary">Go to main page</a>
       <?php else: ?>
+      <div class="login-form border p-4">
         <form method="post">
           <div class="form-group">
             <label for="username">Username</label>
@@ -81,6 +84,7 @@ include('../../templates/layout/header.php');
           </div>
           <button type="submit" value="Login" class="btn btn-primary">Submit</button>
         </form>
+      </div>
       <?php endif; ?>
 
       <?php if (!empty($error)): ?>
