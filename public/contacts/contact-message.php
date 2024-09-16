@@ -12,139 +12,173 @@ $userManager = new KrateUserManager($db);
 // Ensure the user is logged in
 $userManager->checkLoggedIn();
 
-if (!isset($_GET['id'])) {
-    redirect_to(url_for('/index.php'));
+// Initialize variables
+$output_form = false;
+$subject = '';
+$text = '';
+
+// Validate 'id' from GET and ensure it's a positive integer
+if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]])) {
+    $id = intval($_GET['id']);
+    $contact = find_contact_by_id($id);
+    if (!$contact) {
+        // Contact not found, redirect to contacts list
+        redirect_to(url_for('/contacts/index.php'));
+    }
+} else {
+    // Invalid or missing 'id', redirect to contacts list
+    redirect_to(url_for('/contacts/index.php'));
 }
 
-$id = $_GET['id'];
-$contact = find_contact_by_id($id);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Sanitize and validate input data
+    $from = 'info@fivetwofive.com'; // Ensure this is a verified sender in Postmark
+    $subject = trim($_POST['subject'] ?? '');
+    $text = $_POST['message'] ?? ''; // HTML content from TinyMCE
+    $errors = [];
 
-if (is_post_request()) {
-    $from = 'info@fivetwofive.com'; // Update this to the Postmark verified sender email
-    $subject = $_POST['subject'];
-    $text = $_POST['message']; // updated the key to reflect the form input name "message"
-    $output_form = false;
-
-    if (empty($subject) && empty($text)) {
-        // We know both $subject AND $text are blank
-        echo '<div class="alert alert-warning p-4 mb-4">You forgot the email subject and body text.</div>';
-        $output_form = true;
+    // Check for empty fields
+    if (empty($subject)) {
+        $errors[] = 'Please provide an email subject.';
     }
 
-    if (empty($subject) && (!empty($text))) {
-        echo '<div class="alert alert-warning p-4 mb-4">You forgot the email subject.</div>';
-        $output_form = true;
+    if (empty($text)) {
+        $errors[] = 'Please provide the email body text.';
     }
 
-    if (!empty($subject) && empty($text)) {
-        echo '<div class="alert alert-warning p-4 mb-4">You forgot the email body text.</div>';
+    // If there are errors, display them
+    if (!empty($errors)) {
+        foreach ($errors as $error) {
+            echo '<div class="alert alert-warning p-4 mb-4 text-center">' . h($error) . '</div>';
+        }
         $output_form = true;
-    }
+    } else {
+        // Get Postmark API token
+        $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'] ?? '';
+        if (empty($postmarkApiToken)) {
+            echo '<div class="alert alert-danger p-4 text-center">Email sending configuration is missing.</div>';
+            $output_form = true;
+        } else {
+            $client = new PostmarkClient($postmarkApiToken);
 
-    if (!empty($subject) && !empty($text)) {
-        $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'];
-        $client = new PostmarkClient($postmarkApiToken);
+            // Get the contact details from the database
+            $to = $contact['email'];
+            $first_name = $contact['first_name'];
+            $last_name = $contact['last_name'];
 
-        // Get the contact details from the database
-        $to = $contact['email'];
-        $first_name = $contact['first_name'];
-        $last_name = $contact['last_name'];
-        $msg = "Dear $first_name $last_name,\n\n$text";
+            // Prepare the email body
+            $html_body = "<p>Dear " . h($first_name) . " " . h($last_name) . ",</p>" . $text;
+            $text_body = "Dear " . $first_name . " " . $last_name . ",\n\n" . strip_tags($text);
 
-        try {
-            // Send email using Postmark
-            $sendResult = $client->sendEmail(
-                $from, // From email (should be verified in Postmark)
-                $to,   // To email
-                $subject, // Subject
-                $msg    // Body (plain text)
-            );
+            try {
+                // Send email using Postmark
+                $sendResult = $client->sendEmail(
+                    $from,       // From email (verified sender)
+                    $to,         // To email
+                    $subject,    // Subject
+                    $html_body,  // HTML body
+                    $text_body   // Text body
+                );
 
-            if ($sendResult['ErrorCode'] === 0) {
-                echo '<div class="alert alert-success p-4">Message sent successfully to: ' . $to . '</div>';
-            } else {
-                echo '<div class="alert alert-danger p-4">Failed to send message: ' . $sendResult['Message'] . '</div>';
+                // Check the response for success
+                if ($sendResult->ErrorCode === 0) {
+                    echo '<div class="alert alert-success p-4 mb-0 text-center">Message sent successfully to: ' . h($to) . '</div>';
+                } else {
+                    echo '<div class="alert alert-danger p-4 mb-0 text-center">Failed to send message: ' . h($sendResult->Message) . '</div>';
+                }
+            } catch (Exception $e) {
+                echo '<div class="alert alert-danger p-4 mb-0 text-center">An error occurred while sending the message: ' . h($e->getMessage()) . '</div>';
             }
-
-        } catch (Exception $e) {
-            echo '<div class="alert alert-danger p-4">An error occurred while sending the message: ' . $e->getMessage() . '</div>';
         }
     }
 } else {
     $output_form = true;
-    $subject = '';
-    $text = '';
 }
 
 $title = "Contact Message";
-// this is for <title>
-
 $page_heading = "Contact Message";
-// This is for breadcrumbs if I want a custom title other than the default
-
 $page_subheading = "Send a message to your contact";
-// This is the subheading
-
 $custom_class = "contact-message-page";
-// Custom CSS for this page only
 
 include('../../templates/layout/header.php');
 ?>
-<div class="container py-5 <?php echo $custom_class; ?>">
 
-    <section>
-        <?php include('../../templates/components/headline.php'); ?>
-    </section>
+    <script>
+        tinymce.init({
+            selector: 'textarea.wysiwyg',
+            plugins: [
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link',
+                'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount', 'code',
+            ],
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | ' +
+                'bullist numlist outdent indent | link image | code codesample',
+            menubar: false,
+            height: 600
+        });
+    </script>
 
-    <div class="row">
-        <div class="col">
+    <div class="container py-5 <?php echo h($custom_class); ?>">
 
-            <section class="mb-4">
-                <!-- Displaying some values -->
-                <?php echo 'User Id: ' . $_SESSION['user_id'] . '</br>'; ?>
-                <?php echo 'User Username: ' . $_SESSION['username'] . '</br>'; ?>
-                <?php echo 'User First Name: ' . $_SESSION['first_name'] . '</br>'; ?>
-            </section>
+        <section>
+            <?php include('../../templates/components/headline.php'); ?>
+        </section>
 
-            <section class="">
-                <p>Send an email to a contact list member.</p>
+        <div class="row">
+            <div class="col">
 
-                <div class="content w-75 mx-auto">
+                <section class="mb-4 d-none">
+                    <!-- Displaying user information securely -->
+                    <p>User Id: <?php echo h($_SESSION['user_id']); ?></p>
+                    <p>User Username: <?php echo h($_SESSION['username']); ?></p>
+                    <p>User First Name: <?php echo h($_SESSION['first_name']); ?></p>
+                </section>
 
-                    <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
+                <section>
+                    <div class="content w-75 mx-auto">
+                        <?php if ($output_form): ?>
+                            <form method="post" action="<?php echo url_for('/contacts/contact-message.php?id=' . h(u($contact['id']))); ?>" onsubmit="return validateForm();">
 
-                    <?php if ($output_form): ?>
-                        <form method="post" action="<?php echo url_for('/contacts/contact-message.php?id=' . h(u($contact['id']))); ?>">
+                                <div class="h5">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name']); ?></div>
+                                <div class="h5 mb-3">Email Address: <?php echo h($contact['email']); ?></div>
 
-                            <div class="h5">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name']); ?></div>
-                            <div class="h5 mb-3">Address: <?php echo h($contact['email']); ?></div>
+                                <hr>
 
-                            <hr>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <select class="form-control" name="subject" id="subject" required>
+                                        <option value="" disabled <?php echo $subject == '' ? 'selected' : ''; ?>>Select a subject</option>
+                                        <option value="Hello" <?php echo $subject == 'Hello' ? 'selected' : ''; ?>>Hello</option>
+                                        <option value="Compliment" <?php echo $subject == 'Compliment' ? 'selected' : ''; ?>>Compliment</option>
+                                        <option value="Insult" <?php echo $subject == 'Insult' ? 'selected' : ''; ?>>Insult</option>
+                                        <option value="Inquiry" <?php echo $subject == 'Inquiry' ? 'selected' : ''; ?>>Inquiry</option>
+                                        <option value="Sales Pitch" <?php echo $subject == 'Sales Pitch' ? 'selected' : ''; ?>>Sales Pitch</option>
+                                    </select>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <select class="form-control" name="subject" id="subject" required>
-                                    <option value="" disabled selected>Select a subject</option>
-                                    <option value="Hello">Hello</option>
-                                    <option value="Compliment">Compliment</option>
-                                    <option value="Insult">Insult</option>
-                                    <option value="Inquiry">Inquiry</option>
-                                    <option value="Sales Pitch">Sales Pitch</option>
-                                </select>
-                            </div>
+                                <div class="form-group">
+                                    <label for="message">Your Message</label>
+                                    <textarea class="form-control wysiwyg" id="message" name="message" rows="5" ><?php echo h($text); ?></textarea>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="message">Your Message</label>
-                                <textarea class="form-control" id="message" name="message" rows="5" required><?php echo h($text); ?></textarea>
-                            </div>
+                                <input class="btn btn-primary" type="submit" name="submit" value="Send Message" />
+                            </form>
 
-                            <input class="btn btn-primary" type="submit" name="submit" value="Send Message" />
-                        </form>
-                    <?php endif; ?>
-                </div>
-            </section>
-        </div><!-- end .col -->
-    </div><!-- end .row -->
+                            <script>
+                                function validateForm() {
+                                    tinymce.triggerSave();
+                                    var messageContent = document.getElementById('message').value.trim();
+                                    if (messageContent === '') {
+                                        alert('Please enter your message.');
+                                        return false; // Prevent form submission
+                                    }
+                                    return true; // Allow form submission
+                                }
+                            </script>
+                        <?php endif; ?>
+                    </div>
+                </section>
+            </div><!-- end .col -->
+        </div><!-- end .row -->
 
-</div><!-- end .container -->
+    </div><!-- end .container -->
 <?php include('../../templates/layout/footer.php'); ?>
