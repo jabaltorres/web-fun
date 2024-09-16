@@ -1,9 +1,8 @@
 <?php require_once('../../../src/initialize.php'); ?>
 
 <?php
-// $id = isset($_GET['id']) ? $_GET['id'] : '1';
-$id = $_GET['id'] ?? '1'; // PHP > 7.0
 
+$id = $_GET['id'] ?? '1'; // PHP > 7.0
 $page = find_page_by_id($id);
 
 ?>
@@ -22,8 +21,7 @@ $page = find_page_by_id($id);
 
                 <div class="actions mb-4">
                     <a class="action btn btn-primary"
-                       href="<?php echo url_for('/index.php?id=' . h(u($page['id'])) . '&preview=true'); ?>"
-                       target="_blank">Preview</a>
+                       href="<?php echo url_for('/page.php?id=' . h(u($page['id'])) . '&preview=true'); ?>">Preview</a>
                   <a class="action btn btn-secondary"
                      href="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($page['id'])) . '&preview=true'); ?>">Edit</a>
                 </div>
