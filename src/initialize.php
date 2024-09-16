@@ -12,9 +12,10 @@ $dotenv->load(); // Load environment variables from .env
 
 $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'];
 
-$site_owner = "Jabal Torres";
-$site_name = "LOREM";
-$site_tagline = "A place for all of your web ideas";
+$site_owner = $_ENV['SITE_OWNER'];
+$site_name = $_ENV['SITE_NAME'];
+$site_tagline = $_ENV['SITE_TAGLINE'];
+
 $site_description = "Time for some web fun";
 $site_author = "Jabal Torres";
 $site_keywords = "HTML5, CSS3, SASS, jQuery";
