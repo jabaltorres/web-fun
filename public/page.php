@@ -5,15 +5,10 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 // Check if user is logged in
 $loggedIn = isset($_SESSION['user_id']);
 
-$preview = false;
+// Check if previewing
+$visible = !is_preview();
 
-if (isset($_GET['preview'])) {
-    // previewing should require admin to be logged in
-    $preview = $_GET['preview'] == 'true' ? true : false;
-}
-$visible = !$preview;
-
-
+// Get the page id
 if (isset($_GET['id'])) {
     $page_id = $_GET['id'];
     $page = find_page_by_id($page_id, ['visible' => $visible]);
@@ -47,6 +42,13 @@ if (isset($_GET['id'])) {
 
 <?php include('../templates/layout/header.php'); ?>
 
+<?php
+    // If previewing, show an alert
+    if (is_preview()) {
+        show_preview_alert();
+    }
+?>
+
 <div id="main" class="py-4">
   <div class="container">
     <div class="row">
@@ -65,13 +67,13 @@ if (isset($_GET['id'])) {
               include('../templates/pages/static_homepage.php');
           }
           ?>
-        </div>
+        </div><!-- end .page-content -->
           <?php
           if ($loggedIn) {
               echo '<a class="action btn btn-info mt-4" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id))) . '">Edit Page</a>';
           }
           ?>
-      </div>
+      </div><!-- end .col-md-9 -->
     </div>
   </div>
 </div>

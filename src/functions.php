@@ -176,4 +176,23 @@ function lorem_print_header_block($array)
     echo '</header>';
 }
 
+
+// Page functions
+function is_preview(): bool
+{
+    $preview = false;
+    if (isset($_GET['preview'])) {
+        // previewing should require admin to be logged in
+        $preview = $_GET['preview'] == 'true' ? true : false;
+    }
+    return $preview;
+}
+function show_preview_alert()
+{
+    $previewAlertMessage = '<div class="container">';
+    $previewAlertMessage .= '<div class="alert alert-warning" role="alert">You are previewing the page</div>';
+    $previewAlertMessage .= '</div>';
+    echo $previewAlertMessage;
+
+}
 ?>
