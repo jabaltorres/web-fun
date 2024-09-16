@@ -107,7 +107,7 @@ include('../../templates/layout/header.php');
             </section>
 
             <section class="">
-                <p>Write and send an email to contact list members.</p>
+                <p>Send an email to a contact list member.</p>
 
                 <div class="content w-75 mx-auto">
 

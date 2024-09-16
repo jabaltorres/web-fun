@@ -85,7 +85,7 @@ include('../../templates/layout/header.php');
       </div>
     </div>
 
-    <section>
+    <section class="mt-4">
       <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
       <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
       <table class="table table-striped border">
