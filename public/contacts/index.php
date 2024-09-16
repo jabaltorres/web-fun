@@ -107,7 +107,7 @@ include('../../templates/layout/header.php');
             <td><?php echo h($contact['first_name']); ?></td>
             <td><?php echo h($contact['last_name']); ?></td>
             <td>
-              <a href="mailto:<?php echo h($contact['email']); ?>"><?php echo h($contact['email']); ?></a>
+              <a href="/contacts/contact-message.php?id=<?php echo h($contact['id']); ?>"><?php echo h($contact['email']); ?></a>
             </td>
             <td><?php echo $contact['favorite'] ? 'Yes' : 'No'; ?></td>
             <td>

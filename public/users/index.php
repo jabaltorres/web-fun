@@ -25,10 +25,15 @@ include('../../templates/layout/header.php');
   <div class="container py-5">
 
     <?php if ($loggedIn): ?>
-      <h1>Users Page</h1>
-      <section class="user-content mb-4">
-        <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
-      </section>
+        <h1>Users Page</h1>
+        <section class="user-content mb-4">
+            <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
+        </section>
+
+        <section class="mb-4">
+            <?php echo $_SESSION['user_id'] . '</br>'; ?>
+            <?php echo $_SESSION['username'] . '</br>'; ?>
+        </section>
     <?php endif; ?>
 
     <?php if ($isAdmin): ?>

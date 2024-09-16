@@ -1,6 +1,6 @@
 <?php
 if (!isset($page_title)) {
-    $page_title = 'Users Area';
+    $page_title = 'KrateCMS';
 }
 $url = $url ?? '';
 $is_logged_in = isset($_SESSION['user_id']);
