@@ -13,12 +13,17 @@ $dotenv->load(); // Load environment variables from .env
 $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'];
 
 $site_owner = $_ENV['SITE_OWNER'];
+$site_author = $_ENV['SITE_AUTHOR'];
 $site_name = $_ENV['SITE_NAME'];
 $site_tagline = $_ENV['SITE_TAGLINE'];
+$site_description = $_ENV['SITE_DESCRIPTION'];
 
-$site_description = "Time for some web fun";
-$site_author = "Jabal Torres";
-$site_keywords = "HTML5, CSS3, SASS, jQuery";
+
+$db_server = $_ENV['DB_SERVER'];
+$db_user = $_ENV['DB_USER'];
+$db_pass = $_ENV['DB_PASS'];
+$db_name = $_ENV['DB_NAME'];
+
 
 $base_dir = __DIR__;
 
@@ -57,7 +62,7 @@ require_once('query_functions.php');
 require_once('validation_functions.php');
 require_once('auth_functions.php');
 
-$db = db_connect();
+$db = db_connect($db_server, $db_user, $db_pass, $db_name);
 $errors = [];
 
 // Load class definitions manually

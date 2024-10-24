@@ -42,7 +42,6 @@ include('../../templates/layout/header.php');
                         echo 'Site Tagline: ' . $site_tagline . '</br>';
                         echo 'Site Description: ' . $site_description . '</br>';
                         echo 'Site Author: ' . $site_author . '</br>';
-                        echo 'Site Keywords: ' . $site_keywords . '</br>';
                     ?>
                 </section>
             <?php endif; ?>
