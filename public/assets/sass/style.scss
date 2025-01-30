@@ -1,13 +1,3 @@
-// Table of Contents
-//
-// a. Header Styles
-// b. Section Styles
-// c. Aside Styles
-// d. Footer Styles
-// e. Media Queries
-
-//TODO: Clean this shit up
-
 $white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
@@ -41,25 +31,25 @@ $dark: $gray-800 !default;
 //$primary: $dark;
 //$secondary: $yellow;
 
-@import "../../../node_modules/bootstrap/scss/bootstrap";
+@use "../../../node_modules/bootstrap/scss/bootstrap" as bootstrap;
 
-@import "base";
-@import "navigation";
-@import "nav-icon";
-@import "hero";
-@import "forms";
+@use "base";
+@use "navigation";
+@use "nav-icon";
+@use "hero";
+@use "forms";
 
-@import "elements/elements";
+@use "elements/elements";
 
-@import "components/components";
+@use "components/components";
 
-@import "templates/templates";
+@use "templates/templates";
 
-@import "layouts/layouts";
+@use "layouts/layouts";
 
-@import "pages/pages";
+@use "pages/pages";
 
-@import "svg-icon-sprite";
+@use "svg-icon-sprite";
 
 body {
   font-family: 'Gudea', sans-serif;
@@ -280,5 +270,12 @@ article {
     p:last-child{
       margin-bottom: 0;
     }
+  }
+}
+
+body {
+  background-color: pink;
+  p {
+    color: green;
   }
 }
