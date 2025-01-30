@@ -1,4 +1,5 @@
 <?php
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
@@ -31,8 +32,9 @@ include('../../templates/layout/header.php');
         </section>
 
         <section class="mb-4">
-            <?php echo $_SESSION['user_id'] . '</br>'; ?>
-            <?php echo $_SESSION['username'] . '</br>'; ?>
+            User ID: <?php echo $_SESSION['user_id'] . '</br>'; ?>
+            Username: <?php echo $_SESSION['username'] . '</br>'; ?>
+            Role: <?php echo $_SESSION['role'] ?? 'No role'; ?><br>
         </section>
     <?php endif; ?>
 

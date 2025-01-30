@@ -14,7 +14,7 @@ const gulp = require("gulp"),
 
 const { series, parallel } = require('gulp');
 
-let paths = {
+const paths = {
     styles: {
         src: "public/assets/sass/**/*.scss",
         dest: "public/assets/css"
@@ -32,6 +32,13 @@ let paths = {
             "public/assets/js/hostInfo.js",
             "public/assets/js/toolTips.js",
             "public/assets/js/app.js",
+        ],
+        lint: [
+            "public/assets/js/**/*.js",
+            "!public/assets/js/vendor/**",
+            "!public/assets/js/main.js",
+            "!public/assets/js/main.min.js",
+            "!node_modules/**"
         ],
         dest: "public/assets/js"
     },
@@ -54,24 +61,50 @@ function style() {
     return gulp
         .src(paths.styles.src)
         .pipe(sourcemaps.init())
-        .pipe(sass().on("error", sass.logError))
-        .pipe(postcss([autoprefixer(), cssnano()]))
+        .pipe(sass({
+            precision: 8,
+            includePaths: ['./node_modules/'],
+            outputStyle: 'expanded',
+            implementation: require('sass'),
+            fiber: false,
+            quietDeps: true,
+            logger: {
+                warn: function(message) {
+                    if (!message.includes('Deprecation')) {
+                        console.warn(message);
+                    }
+                }
+            }
+        }).on('error', function(err) {
+            console.error(err.message);
+            this.emit('end');
+        }))
+        .on('start', function() {
+            console.log('Starting SASS compilation...');
+        })
+        .on('end', function() {
+            console.log('SASS compilation complete');
+        })
+        .pipe(postcss([
+            autoprefixer(),
+            cssnano({ safe: true })
+        ]))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.styles.dest))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.reload({ stream: true }));
 }
 
 function imageminify() {
     return gulp
         .src(paths.images.src)
         .pipe(imagemin([
-            imagemin.gifsicle({interlaced: true}),
-            imagemin.jpegtran({progressive: true}),
-            imagemin.optipng({optimizationLevel: 5}),
+            imagemin.gifsicle({ interlaced: true }),
+            imagemin.mozjpeg({ progressive: true }),
+            imagemin.optipng({ optimizationLevel: 5 }),
             imagemin.svgo({
                 plugins: [
-                    {removeViewBox: true},
-                    {cleanupIDs: false}
+                    { removeViewBox: false },
+                    { cleanupIDs: false }
                 ]
             })
         ]))
@@ -80,8 +113,8 @@ function imageminify() {
 
 function lint() {
     return gulp
-        .src(paths.scripts.src)
-        .pipe(jshint("public/assets/js/.jshintrc"))
+        .src(paths.scripts.lint)
+        .pipe(jshint())
         .pipe(jshint.reporter("jshint-stylish"));
 }
 
@@ -92,9 +125,7 @@ function scripts() {
         .pipe(concat('main.js'))
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe(rename('main.min.js'))
-        .pipe(terser().on('error', function(e){
-            console.log(e);
-        }))
+        .pipe(terser())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe(browserSync.stream());
@@ -102,14 +133,24 @@ function scripts() {
 
 function watch() {
     browserSync.init({
-        proxy: "https://web-fun.ddev.site/"
+        proxy: "https://web-fun.ddev.site/",
+        notify: false,
+        files: [
+            paths.styles.dest + '/**/*.css',
+            'public/**/*.html',
+            'public/**/*.php'
+        ]
     });
+    
     gulp.watch(paths.styles.src, style);
-    gulp.watch(paths.scripts.src, series(lint, scripts));
+    gulp.watch(paths.scripts.lint, gulp.series(lint, scripts));
 }
 
-exports.default = series(style, series(lint, scripts), watch);
 exports.style = style;
 exports.imageminify = imageminify;
-exports.scripts = series(lint, scripts);
+exports.scripts = gulp.series(lint, scripts);
 exports.watch = watch;
+exports.default = gulp.series(
+    gulp.parallel(style, gulp.series(lint, scripts)),
+    watch
+);

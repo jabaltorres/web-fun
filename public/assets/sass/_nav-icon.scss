@@ -5,12 +5,12 @@
 }
 
 #nav-menu-icon{
-  @include ht-w($Value: 30);
+  // @include ht-w($Value: 30);
   position: absolute;
   top: 35px;
   right: 35px;
   cursor: pointer;
-  @include rotate($val:0deg);
+  // @include rotate($val:0deg);
   @extend %transition;
   @include media-breakpoint-up(md){
     display:none;
