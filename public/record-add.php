@@ -1,12 +1,12 @@
 <?php
 
 require_once('../src/initialize.php');
-require_once('../src/classes/KrateUserManager.php');
+require_once('../src/Fivetwofive/KrateCMS/UserManager.php');
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+// Initialize the UserManager with the existing $db connection
+$userManager = new UserManager($db);
 $userManager->checkLoggedIn();
 
 // Function to add a vinyl record with the purchase link and audio file URL

@@ -2,13 +2,12 @@
 
 require_once('../src/initialize.php');
 
+require_once('../src/Fivetwofive/KrateCMS/UserManager.php');
 
-require_once('../src/classes/KrateUserManager.php');
+use Fivetwofive\KrateCMS\UserManager;
 
-use Fivetwofive\KrateCMS\KrateUserManager;
-
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+// Initialize the UserManager with the existing $db connection
+$userManager = new UserManager($db);
 
 $userManager->checkLoggedIn();
 
