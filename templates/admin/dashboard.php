@@ -4,9 +4,86 @@ if (!defined('PRIVATE_PATH')) {
     exit('Direct access not permitted');
 }
 
-// Verify CSRF token if handling form submissions
+// Handle POST actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Add CSRF verification here
+    // Verify CSRF token
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Invalid CSRF token');
+    }
+
+    switch ($_POST['action']) {
+        case 'edit_setting':
+            if (isset($_POST['setting_id'], $_POST['setting_value'])) {
+                $setting_id = filter_var($_POST['setting_id'], FILTER_SANITIZE_NUMBER_INT);
+                $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
+                $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
+                $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
+                $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+                $is_private = isset($_POST['is_private']) ? 1 : 0;
+
+                $sql = "UPDATE settings 
+                       SET setting_value = ?, setting_type = ?, category = ?, 
+                           description = ?, is_private = ? 
+                       WHERE setting_id = ?";
+                
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param('ssssii', 
+                    $setting_value, 
+                    $setting_type, 
+                    $category, 
+                    $description, 
+                    $is_private, 
+                    $setting_id
+                );
+                $stmt->execute();
+            }
+            break;
+
+        case 'add_setting':
+            if (isset($_POST['setting_key'], $_POST['setting_value'])) {
+                $setting_key = filter_var($_POST['setting_key'], FILTER_SANITIZE_STRING);
+                $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
+                $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
+                $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
+                $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+                $is_private = isset($_POST['is_private']) ? 1 : 0;
+
+                $sql = "INSERT INTO settings 
+                       (setting_key, setting_value, setting_type, category, description, is_private) 
+                       VALUES (?, ?, ?, ?, ?, ?)";
+                
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param('sssssi', 
+                    $setting_key, 
+                    $setting_value, 
+                    $setting_type, 
+                    $category, 
+                    $description, 
+                    $is_private
+                );
+                $stmt->execute();
+            }
+            break;
+
+        case 'delete_setting':
+            if (isset($_POST['setting_id'])) {
+                $setting_id = filter_var($_POST['setting_id'], FILTER_SANITIZE_NUMBER_INT);
+                $sql = "DELETE FROM settings WHERE setting_id = ?";
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param('i', $setting_id);
+                $stmt->execute();
+            }
+            break;
+    }
+
+    // Redirect to prevent form resubmission
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+// Generate CSRF token if not exists
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 ?>
 
@@ -151,6 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form method="POST" action="">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                 <input type="hidden" name="action" value="edit_setting">
                 <input type="hidden" name="setting_id" id="edit_setting_id">
                 
@@ -214,6 +292,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form method="POST" action="">
+                <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                 <input type="hidden" name="action" value="add_setting">
                 
                 <div class="modal-header">
@@ -272,47 +351,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <!-- Add this JavaScript at the bottom of the file -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     // Handle edit button clicks
     document.querySelectorAll('.edit-setting').forEach(button => {
-        button.addEventListener('click', function() {
-            const setting = JSON.parse(this.dataset.setting);
+        button.addEventListener('click', () => {
+            const setting = JSON.parse(button.dataset.setting);
             const modal = document.querySelector('#editSettingModal');
             
-            // Fill the form fields with setting data
+            // Fill the form fields
             modal.querySelector('#edit_setting_id').value = setting.setting_id;
             modal.querySelector('#edit_setting_key').value = setting.setting_key;
-            
-            // Handle the value field based on type
-            const valueInput = modal.querySelector('#edit_setting_value');
-            const typeSelect = modal.querySelector('#edit_setting_type');
-            
-            typeSelect.value = setting.setting_type;
-            updateValueField(setting.setting_type, valueInput, setting.setting_value);
-            
+            modal.querySelector('#edit_setting_value').value = setting.setting_value;
+            modal.querySelector('#edit_setting_type').value = setting.setting_type;
             modal.querySelector('#edit_category').value = setting.category;
             modal.querySelector('#edit_description').value = setting.description;
             modal.querySelector('#edit_is_private').checked = setting.is_private === '1';
-            
-            // Add change event listener for type select
-            typeSelect.addEventListener('change', function() {
-                updateValueField(this.value, valueInput, valueInput.value);
-            });
         });
     });
-    
+
     // Handle delete button clicks
     document.querySelectorAll('.delete-setting').forEach(button => {
         button.addEventListener('click', function() {
             if (confirm(`Are you sure you want to delete the setting "${this.dataset.settingKey}"?`)) {
                 const form = document.createElement('form');
                 form.method = 'POST';
+                form.action = '';
                 form.style.display = 'none';
                 
                 const inputs = {
                     'action': 'delete_setting',
-                    'setting_id': this.dataset.settingId
+                    'setting_id': this.dataset.settingId,
+                    'csrf_token': '<?= $_SESSION['csrf_token'] ?>'
                 };
                 
                 for (const [key, value] of Object.entries(inputs)) {
@@ -329,82 +402,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add event listener for type change in add modal
-    const addTypeSelect = document.querySelector('#add_setting_type');
-    const addValueInput = document.querySelector('#add_setting_value');
-    
-    addTypeSelect.addEventListener('change', function() {
-        updateValueField(this.value, addValueInput);
-    });
-
-    // Add sorting functionality
-    const table = document.getElementById('settingsTable');
-    const headers = table.querySelectorAll('th.sortable');
-    let currentSort = { column: null, direction: 'asc' };
-
-    headers.forEach(header => {
-        header.addEventListener('click', () => {
-            const column = header.dataset.sort;
-            const direction = currentSort.column === column && currentSort.direction === 'asc' ? 'desc' : 'asc';
-            
-            // Update sort indicators
-            headers.forEach(h => h.querySelector('i').className = 'fas fa-sort');
-            header.querySelector('i').className = `fas fa-sort-${direction === 'asc' ? 'up' : 'down'}`;
-            
-            // Sort the table
-            sortTable(column, direction);
-            
-            currentSort = { column, direction };
-        });
-    });
-
-    // Add filtering functionality
+    // Initialize filter functionality
     const filterInput = document.getElementById('settingsFilter');
     const clearFilterBtn = document.getElementById('clearFilter');
     
-    filterInput.addEventListener('input', filterTable);
-    
-    clearFilterBtn.addEventListener('click', () => {
-        filterInput.value = '';
-        filterTable();
-        filterInput.focus();
-    });
-
-    // Show/hide clear button based on filter input
-    filterInput.addEventListener('input', () => {
-        clearFilterBtn.style.display = filterInput.value ? 'block' : 'none';
-    });
-    
-    // Initial state
-    clearFilterBtn.style.display = 'none';
-
-    function sortTable(column, direction) {
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        
-        const sortedRows = rows.sort((a, b) => {
-            const aValue = a.querySelector(`.${column}`).textContent.trim().toLowerCase();
-            const bValue = b.querySelector(`.${column}`).textContent.trim().toLowerCase();
-            
-            if (direction === 'asc') {
-                return aValue.localeCompare(bValue);
-            } else {
-                return bValue.localeCompare(aValue);
-            }
-        });
-        
-        // Clear the table
-        while (tbody.firstChild) {
-            tbody.removeChild(tbody.firstChild);
-        }
-        
-        // Add sorted rows
-        sortedRows.forEach(row => tbody.appendChild(row));
-    }
-
-    function filterTable() {
+    const filterTable = () => {
         const filterValue = filterInput.value.toLowerCase();
-        const rows = table.querySelectorAll('tbody tr');
+        const rows = document.querySelectorAll('#settingsTable tbody tr');
         
         rows.forEach(row => {
             const text = Array.from(row.querySelectorAll('td'))
@@ -413,65 +417,59 @@ document.addEventListener('DOMContentLoaded', function() {
             
             row.style.display = text.includes(filterValue) ? '' : 'none';
         });
-    }
+        
+        clearFilterBtn.style.display = filterValue ? 'block' : 'none';
+    };
+    
+    filterInput?.addEventListener('input', filterTable);
+    clearFilterBtn?.addEventListener('click', () => {
+        filterInput.value = '';
+        filterTable();
+        filterInput.focus();
+    });
 
-    // Initialize tooltips if using Bootstrap's tooltip component
-    $('[data-toggle="tooltip"]').tooltip();
-});
+    // Add table sorting functionality
+    const getCellValue = (tr, idx) => {
+        const cell = tr.children[idx];
+        return cell?.innerText || cell?.textContent;
+    };
 
-function updateValueField(type, input, currentValue = '') {
-    switch(type) {
-        case 'boolean':
-            // Create a select element for boolean values
-            const select = document.createElement('select');
-            select.className = 'form-control';
-            select.name = input.name;
-            select.id = input.id;
-            
-            const options = [
-                { value: '1', text: 'True' },
-                { value: '0', text: 'False' }
-            ];
-            
-            options.forEach(opt => {
-                const option = document.createElement('option');
-                option.value = opt.value;
-                option.textContent = opt.text;
-                option.selected = currentValue === opt.value;
-                select.appendChild(option);
+    const comparer = (idx, asc) => (a, b) => {
+        const v1 = getCellValue(asc ? a : b, idx);
+        const v2 = getCellValue(asc ? b : a, idx);
+        
+        // Handle numeric values
+        if (!isNaN(v1) && !isNaN(v2)) {
+            return v1 - v2;
+        }
+        
+        return v1.toString().localeCompare(v2);
+    };
+
+    document.querySelectorAll('#settingsTable th.sortable').forEach(th => {
+        const thIndex = Array.from(th.parentElement.children).indexOf(th);
+        let asc = true;
+        
+        th.addEventListener('click', () => {
+            // Remove sort indicators from all headers
+            document.querySelectorAll('#settingsTable th.sortable i').forEach(icon => {
+                icon.className = 'fas fa-sort';
             });
             
-            input.parentNode.replaceChild(select, input);
-            break;
+            // Update sort indicator
+            const icon = th.querySelector('i');
+            icon.className = asc ? 'fas fa-sort-up' : 'fas fa-sort-down';
             
-        case 'json':
-        case 'array':
-            const textarea = document.createElement('textarea');
-            textarea.className = 'form-control';
-            textarea.name = input.name;
-            textarea.id = input.id;
-            textarea.value = currentValue;
+            // Sort the table
+            const tbody = th.closest('table').querySelector('tbody');
+            Array.from(tbody.querySelectorAll('tr'))
+                .sort(comparer(thIndex, asc))
+                .forEach(tr => tbody.appendChild(tr));
             
-            input.parentNode.replaceChild(textarea, input);
-            break;
-            
-        case 'integer':
-            input.type = 'number';
-            input.step = '1';
-            input.value = currentValue;
-            break;
-            
-        case 'float':
-            input.type = 'number';
-            input.step = '0.01';
-            input.value = currentValue;
-            break;
-            
-        default:
-            input.type = 'text';
-            input.value = currentValue;
-    }
-}
+            asc = !asc;
+        });
+    });
+});
 </script>
 
 <style>
@@ -490,5 +488,10 @@ function updateValueField(type, input, currentValue = '') {
 
     .card-header .d-flex.gap-2 {
         gap: 0.5rem !important;
+    }
+
+    .fa-sort-up,
+    .fa-sort-down {
+        color: #007bff;
     }
 </style> 

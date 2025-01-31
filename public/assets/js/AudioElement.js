@@ -1,5 +1,16 @@
 class AudioElement {
+    static instance = null; // Singleton instance
+
+    // Constants for local storage keys
+    static AUDIO_CURRENT_TIME_KEY = 'audioCurrentTime';
+    static AUDIO_IS_PLAYING_KEY = 'audioIsPlaying';
+
     constructor(containerSelector, options) {
+        // Initializes the AudioElement instance, setting up the audio player and event listeners
+        if (AudioElement.instance) {
+            return AudioElement.instance; // Return existing instance
+        }
+
         this.container = document.querySelector(containerSelector);
         this.audio = this.container.querySelector('audio');
         this.playPauseBtn = this.container.querySelector(options.playPauseSelector);
@@ -9,12 +20,14 @@ class AudioElement {
         
         this.initializeState();
         this.attachEventListeners();
+
+        AudioElement.instance = this; // Set the singleton instance
     }
 
+    // Initializes the audio player state by restoring the previous playback position and state
     initializeState() {
-        // Restore previous state
-        const savedTime = localStorage.getItem('audioCurrentTime');
-        const wasPlaying = localStorage.getItem('audioIsPlaying') === 'true';
+        const savedTime = localStorage.getItem(AudioElement.AUDIO_CURRENT_TIME_KEY);
+        const wasPlaying = localStorage.getItem(AudioElement.AUDIO_IS_PLAYING_KEY) === 'true';
         
         if (savedTime) {
             this.audio.currentTime = parseFloat(savedTime);
@@ -25,6 +38,7 @@ class AudioElement {
         }
     }
 
+    // Attaches event listeners for play/pause, stop, time update, and page unload
     attachEventListeners() {
         this.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
         this.stopBtn.addEventListener('click', () => this.stop());
@@ -36,44 +50,49 @@ class AudioElement {
         
         this.audio.addEventListener('ended', () => {
             this.stop();
-            localStorage.removeItem('audioIsPlaying');
+            localStorage.removeItem(AudioElement.AUDIO_IS_PLAYING_KEY);
         });
         
-        // Save state before page unload
-        window.addEventListener('beforeunload', () => {
-            this.saveState();
-        });
+        window.addEventListener('beforeunload', () => this.saveState());
     }
 
+    // Toggles between play and pause states
     togglePlayPause() {
-        if (this.audio.paused) {
-            this.play();
-        } else {
-            this.pause();
-        }
+        this.audio.paused ? this.play() : this.pause();
     }
 
+    // Plays the audio and updates the play/pause button
     play() {
-        this.audio.play();
-        this.playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-        localStorage.setItem('audioIsPlaying', 'true');
+        this.audio.play().catch(error => console.error('Playback failed:', error));
+        this.updatePlayPauseButton('pause');
+        localStorage.setItem(AudioElement.AUDIO_IS_PLAYING_KEY, 'true');
     }
 
+    // Pauses the audio and updates the play/pause button
     pause() {
         this.audio.pause();
-        this.playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        localStorage.setItem('audioIsPlaying', 'false');
+        this.updatePlayPauseButton('play');
+        localStorage.setItem(AudioElement.AUDIO_IS_PLAYING_KEY, 'false');
     }
 
+    // Stops the audio, resets the current time, and updates the play/pause button
     stop() {
         this.audio.pause();
         this.audio.currentTime = 0;
-        this.playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+        this.updatePlayPauseButton('play');
         this.updateProgress();
-        localStorage.setItem('audioIsPlaying', 'false');
-        localStorage.removeItem('audioCurrentTime');
+        localStorage.setItem(AudioElement.AUDIO_IS_PLAYING_KEY, 'false');
+        localStorage.removeItem(AudioElement.AUDIO_CURRENT_TIME_KEY);
     }
 
+    // Updates the play/pause button based on the current action
+    updatePlayPauseButton(action) {
+        this.playPauseBtn.innerHTML = action === 'pause' 
+            ? '<i class="fa-solid fa-pause"></i>' 
+            : '<i class="fa-solid fa-play"></i>';
+    }
+
+    // Updates the progress bar and time display based on the current playback position
     updateProgress() {
         const percent = (this.audio.currentTime / this.audio.duration) * 100;
         this.progressBar.style.width = `${percent}%`;
@@ -83,7 +102,8 @@ class AudioElement {
         this.timeDisplay.textContent = `${minutes}:${seconds}`;
     }
 
+    // Saves the current playback time to local storage
     saveState() {
-        localStorage.setItem('audioCurrentTime', this.audio.currentTime.toString());
+        localStorage.setItem(AudioElement.AUDIO_CURRENT_TIME_KEY, this.audio.currentTime.toString());
     }
 } 

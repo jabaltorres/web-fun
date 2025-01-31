@@ -1,0 +1,190 @@
+// ============================================================
+// Dark mode styles
+// ============================================================
+
+// Dark mode variables
+$dark-mode: (
+  background: #1a1a1a,
+  surface: #2d2d2d,
+  border: #404040,
+  input-bg: #404040,
+  input-border: #505050,
+  text: #e0e0e0
+);
+
+body.dark-mode {
+  background-color: map-get($dark-mode, background);
+  color: map-get($dark-mode, text);
+
+  .navbar {
+    background-color: map-get($dark-mode, surface) !important;
+
+    &-light {
+      .navbar-brand,
+      .nav-link {
+        color: map-get($dark-mode, text);
+      }
+    }
+  }
+
+  .card {
+    background-color: map-get($dark-mode, surface);
+    border-color: map-get($dark-mode, border);
+  }
+
+  .table {
+    color: map-get($dark-mode, text);
+
+    td,
+    th {
+      border-color: map-get($dark-mode, border);
+    }
+  }
+
+  .form-control {
+    background-color: map-get($dark-mode, input-bg);
+    border-color: map-get($dark-mode, input-border);
+    color: map-get($dark-mode, text);
+  }
+
+  .modal {
+    &-content {
+      background-color: map-get($dark-mode, surface);
+      color: map-get($dark-mode, text);
+    }
+
+    &-header,
+    &-footer {
+      border-color: map-get($dark-mode, border);
+    }
+  }
+
+  .close {
+    color: map-get($dark-mode, text);
+  }
+
+  .btn-secondary {
+    background-color: map-get($dark-mode, input-bg);
+    border-color: map-get($dark-mode, input-border);
+  }
+}
+
+// ============================================================
+// Settings Table
+// ============================================================
+#settingsTable {
+    .fas {
+      font-size: 0.8rem;
+    }
+    th.sortable {
+      min-width: 140px;
+    }
+  }
+  
+  .settings-header-controls {
+    .input-group {
+      position: relative;
+      max-width: 300px;
+      
+      #settingsFilter {
+        height: 38px;
+        padding-right: 35px;
+        border-radius: 6px;
+        border: 1px solid #dee2e6;
+        transition: all 0.2s ease;
+        
+        &:focus {
+          box-shadow: 0 0 0 0.2rem rgba(0,123,255,.15);
+          border-color: #80bdff;
+        }
+        
+        &::placeholder {
+          color: #adb5bd;
+          font-size: 0.9rem;
+        }
+      }
+      
+      #clearFilter {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 38px;
+        border: none;
+        background: transparent;
+        color: #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 4;
+        
+        .fas {
+          font-size: 0.75rem;
+          transition: transform 0.15s ease;
+        }
+        
+        &:hover {
+          color: #495057;
+          
+          .fas {
+            transform: scale(1.2);
+          }
+        }
+        
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    
+    .btn-add-setting {
+      height: 38px;
+      // padding: 0 1.25rem;
+      font-weight: 500;
+      // display: flex;
+      align-items: center;
+      // gap: 0.5rem;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      width: 100%;
+      .fas {
+        font-size: 0.875rem;
+      }
+      
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+  
+  // Dark mode support
+  body.dark-mode {
+    .settings-header-controls {
+      .input-group {
+        #settingsFilter {
+          background-color: map-get($dark-mode, input-bg);
+          border-color: map-get($dark-mode, input-border);
+          color: map-get($dark-mode, text);
+          
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+          }
+          
+          &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255,255,255,.15);
+            border-color: rgba(255,255,255,.3);
+          }
+        }
+        
+        #clearFilter {
+          color: rgba(255, 255, 255, 0.5);
+          
+          &:hover {
+            color: rgba(255, 255, 255, 0.8);
+          }
+        }
+      }
+    }
+  }
+  

@@ -23,6 +23,7 @@
   - Use constants for magic values
   - Follow dependency injection principles
   - Use proper PHPDoc annotations for collections and complex types
+  - Protect the application from CSRF attacks
 
   Dependencies
   - Composer for dependency management
