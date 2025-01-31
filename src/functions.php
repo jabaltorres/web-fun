@@ -11,56 +11,94 @@ ini_set('display_errors','1');
  */
 function url_for($script_path): string
 {
-    // add the leading '/' if not present
+    // Add the leading '/' if not present
     if ($script_path[0] != '/') {
         $script_path = "/" . $script_path;
     }
     return WWW_ROOT . $script_path;
 }
 
+/**
+ * URL-encodes a string
+ * @param string $string
+ * @return string
+ */
 function u($string = "")
 {
     return urlencode($string);
 }
 
+/**
+ * URL-encodes a string using raw encoding
+ * @param string $string
+ * @return string
+ */
 function raw_u($string = "")
 {
     return rawurlencode($string);
 }
 
+/**
+ * Escapes HTML special characters in a string
+ * @param string $string
+ * @return string
+ */
 function h($string = "")
 {
     return htmlspecialchars($string);
 }
 
+/**
+ * Sends a 404 Not Found header and exits
+ */
 function error_404()
 {
     header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
     exit();
 }
 
+/**
+ * Sends a 500 Internal Server Error header and exits
+ */
 function error_500()
 {
     header($_SERVER["SERVER_PROTOCOL"] . " 500 Internal Server Error");
     exit();
 }
 
+/**
+ * Redirects to a specified location
+ * @param string $location
+ */
 function redirect_to($location)
 {
     header("Location: " . $location);
     exit;
 }
 
+/**
+ * Checks if the request method is POST
+ * @return bool
+ */
 function is_post_request()
 {
-    return $_SERVER['REQUEST_METHOD'] == 'POST';
+    return $_SERVER['REQUEST_METHOD'] === 'POST';
 }
 
+/**
+ * Checks if the request method is GET
+ * @return bool
+ */
 function is_get_request()
 {
-    return $_SERVER['REQUEST_METHOD'] == 'GET';
+    return $_SERVER['REQUEST_METHOD'] === 'GET';
 }
 
+/**
+ * Displays errors in a formatted HTML block
+ * @param array $errors
+ * @return string
+ */
 function display_errors($errors = array())
 {
     $output = '';
@@ -77,15 +115,23 @@ function display_errors($errors = array())
     return $output;
 }
 
+/**
+ * Retrieves and clears the session message
+ * @return string|null
+ */
 function get_and_clear_session_message()
 {
-    if (isset($_SESSION['message']) && $_SESSION['message'] != '') {
+    if (isset($_SESSION['message']) && $_SESSION['message'] !== '') {
         $msg = $_SESSION['message'];
         unset($_SESSION['message']);
         return $msg;
     }
 }
 
+/**
+ * Displays the session message if it exists
+ * @return string|null
+ */
 function display_session_message()
 {
     $msg = get_and_clear_session_message();
@@ -94,8 +140,8 @@ function display_session_message()
     }
 }
 
-/*
- * This function is used to check the time of day and echo a greeting
+/**
+ * Checks the time of day and echoes a greeting
  */
 function timeOfDayGreeting()
 {
@@ -116,7 +162,10 @@ function timeOfDayGreeting()
     echo '</div>';
 }
 
-// Helper function: Check for errors
+/**
+ * Checks for an error and displays a message if one exists
+ * @param mixed $error
+ */
 function check_for_error($error)
 {
     $errorMessage = "An error has occurred.";
@@ -125,26 +174,37 @@ function check_for_error($error)
     }
 }
 
-// Helper function: remove the file extension from the file name
+/**
+ * Removes the file extension from a filename
+ * @param string $file
+ * @return string
+ */
 function remove_file_extension($file)
 {
-    // file extension type
+    // File extension type
     $fileExtension = ".php";
     return str_replace($fileExtension, "", $file);
 }
 
-// Helper function: reverse an array
+/**
+ * Reverses an array and echoes its values
+ * @param array $array
+ */
 function reverse_array($array)
 {
     $newTempArray = array_reverse($array);
 
     foreach ($newTempArray as $value) {
-        echo "This is the new template arry value: {$value}<br>";
+        echo "This is the new template array value: {$value}<br>";
     }
 
     // return $newTempArray;
 }
 
+/**
+ * Prints values of an array
+ * @param array $array
+ */
 function printArrayValues($array)
 {
     $tempArray = array();
@@ -155,10 +215,12 @@ function printArrayValues($array)
     }
 
     // reverse_array($tempArray);
-
 }
 
-// Helper function: print the header block
+/**
+ * Prints a header block with content from an array
+ * @param array $array
+ */
 function lorem_print_header_block($array)
 {
     // Helper function: check for an id
@@ -176,23 +238,28 @@ function lorem_print_header_block($array)
     echo '</header>';
 }
 
-
-// Page functions
+/**
+ * Checks if the page is in preview mode
+ * @return bool
+ */
 function is_preview(): bool
 {
     $preview = false;
     if (isset($_GET['preview'])) {
-        // previewing should require admin to be logged in
-        $preview = $_GET['preview'] == 'true' ? true : false;
+        // Previewing should require admin to be logged in
+        $preview = $_GET['preview'] === 'true';
     }
     return $preview;
 }
+
+/**
+ * Displays a preview alert message
+ */
 function show_preview_alert()
 {
     $previewAlertMessage = '<div class="container">';
     $previewAlertMessage .= '<div class="alert alert-warning" role="alert">You are previewing the page</div>';
     $previewAlertMessage .= '</div>';
     echo $previewAlertMessage;
-
 }
 ?>
