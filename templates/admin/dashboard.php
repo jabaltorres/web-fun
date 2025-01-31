@@ -1,90 +1,94 @@
 <?php
-// Ensure this file isn't accessed directly
-if (!defined('PRIVATE_PATH')) {
-    exit('Direct access not permitted');
-}
-
-// Handle POST actions
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verify CSRF token
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die('Invalid CSRF token');
+    
+    // Ensure this file isn't accessed directly
+    if (!defined('PRIVATE_PATH')) {
+        exit('Direct access not permitted');
     }
 
-    switch ($_POST['action']) {
-        case 'edit_setting':
-            if (isset($_POST['setting_id'], $_POST['setting_value'])) {
-                $setting_id = filter_var($_POST['setting_id'], FILTER_SANITIZE_NUMBER_INT);
-                $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
-                $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
-                $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
-                $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
-                $is_private = isset($_POST['is_private']) ? 1 : 0;
+    // Handle POST actions
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Verify CSRF token
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            die('Invalid CSRF token');
+        }
 
-                $sql = "UPDATE settings 
-                       SET setting_value = ?, setting_type = ?, category = ?, 
-                           description = ?, is_private = ? 
-                       WHERE setting_id = ?";
-                
-                $stmt = $db->prepare($sql);
-                $stmt->bind_param('ssssii', 
-                    $setting_value, 
-                    $setting_type, 
-                    $category, 
-                    $description, 
-                    $is_private, 
-                    $setting_id
-                );
-                $stmt->execute();
-            }
-            break;
+        switch ($_POST['action']) {
+            case 'edit_setting':
+                if (isset($_POST['setting_id'], $_POST['setting_value'])) {
+                    $setting_id = filter_var($_POST['setting_id'], FILTER_SANITIZE_NUMBER_INT);
+                    $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
+                    $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
+                    $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
+                    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+                    $is_private = isset($_POST['is_private']) ? 1 : 0;
 
-        case 'add_setting':
-            if (isset($_POST['setting_key'], $_POST['setting_value'])) {
-                $setting_key = filter_var($_POST['setting_key'], FILTER_SANITIZE_STRING);
-                $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
-                $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
-                $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
-                $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
-                $is_private = isset($_POST['is_private']) ? 1 : 0;
+                    $sql = "UPDATE settings 
+                        SET setting_value = ?, setting_type = ?, category = ?, 
+                            description = ?, is_private = ? 
+                        WHERE setting_id = ?";
+                    
+                    $stmt = $db->prepare($sql);
+                    $stmt->bind_param('ssssii', 
+                        $setting_value, 
+                        $setting_type, 
+                        $category, 
+                        $description, 
+                        $is_private, 
+                        $setting_id
+                    );
+                    $stmt->execute();
+                }
+                break;
 
-                $sql = "INSERT INTO settings 
-                       (setting_key, setting_value, setting_type, category, description, is_private) 
-                       VALUES (?, ?, ?, ?, ?, ?)";
-                
-                $stmt = $db->prepare($sql);
-                $stmt->bind_param('sssssi', 
-                    $setting_key, 
-                    $setting_value, 
-                    $setting_type, 
-                    $category, 
-                    $description, 
-                    $is_private
-                );
-                $stmt->execute();
-            }
-            break;
+            case 'add_setting':
+                if (isset($_POST['setting_key'], $_POST['setting_value'])) {
+                    $setting_key = filter_var($_POST['setting_key'], FILTER_SANITIZE_STRING);
+                    $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
+                    $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
+                    $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
+                    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+                    $is_private = isset($_POST['is_private']) ? 1 : 0;
 
-        case 'delete_setting':
-            if (isset($_POST['setting_id'])) {
-                $setting_id = filter_var($_POST['setting_id'], FILTER_SANITIZE_NUMBER_INT);
-                $sql = "DELETE FROM settings WHERE setting_id = ?";
-                $stmt = $db->prepare($sql);
-                $stmt->bind_param('i', $setting_id);
-                $stmt->execute();
-            }
-            break;
+                    $sql = "INSERT INTO settings 
+                        (setting_key, setting_value, setting_type, category, description, is_private) 
+                        VALUES (?, ?, ?, ?, ?, ?)";
+                    
+                    $stmt = $db->prepare($sql);
+                    $stmt->bind_param('sssssi', 
+                        $setting_key, 
+                        $setting_value, 
+                        $setting_type, 
+                        $category, 
+                        $description, 
+                        $is_private
+                    );
+                    $stmt->execute();
+                }
+                break;
+
+            case 'delete_setting':
+                if (isset($_POST['setting_id'])) {
+                    $setting_id = filter_var($_POST['setting_id'], FILTER_SANITIZE_NUMBER_INT);
+                    $sql = "DELETE FROM settings WHERE setting_id = ?";
+                    $stmt = $db->prepare($sql);
+                    $stmt->bind_param('i', $setting_id);
+                    $stmt->execute();
+                }
+                break;
+        }
+
+        // Redirect to prevent form resubmission
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
     }
 
-    // Redirect to prevent form resubmission
-    header('Location: ' . $_SERVER['PHP_SELF']);
-    exit;
-}
+    // Generate CSRF token if not exists
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
 
-// Generate CSRF token if not exists
-if (!isset($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+    // Get the first name of the user
+    $first_name = isset($_SESSION['first_name']) ? $_SESSION['first_name'] : '';
 ?>
 
 <div class="container py-5">
@@ -95,28 +99,14 @@ if (!isset($_SESSION['csrf_token'])) {
             <?php if ($loggedIn): ?>
                 <section class="card mb-4">
                     <div class="card-body">
-                        <h2 class="card-title h4">Welcome</h2>
-                        <p class="card-text">
-                            Hello, <?= htmlspecialchars($_SESSION['first_name'] ?? 'Administrator') ?>!
+                        <p class="card-text h2">
+                            Hello, <?= htmlspecialchars($first_name ?? 'there') ?>!
                         </p>
                     </div>
                 </section>
             <?php endif; ?>
 
             <?php if ($isAdmin && $users && $users->num_rows > 0): ?>
-                <section class="card mb-4">
-                    <ul class="nav justify-content-center">
-                        <li class="nav-item"><a class="nav-link" href="/staff/admins/">Admins</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/staff/admins/new.php">Create New Admin</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/users/">Users</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/users/user-add.php">User Add</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/staff/index.php">Staff</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/staff/pages/index.php">Pages</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/staff/subjects/index.php">Subjects</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/contacts/index.php">Contacts</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/demos/index.php">Demos</a></li>
-                    </ul>
-                </section>
                 
                 <section class="card mb-4">
                     <div class="card-body">
@@ -158,7 +148,7 @@ if (!isset($_SESSION['csrf_token'])) {
                                 </button>
                             </div>
                             <button type="button" 
-                                    class="btn btn-primary btn-add-setting" 
+                                    class="btn btn-primary btn-add-setting ml-2" 
                                     data-toggle="modal" 
                                     data-target="#addSettingModal">
                                 Add Setting
