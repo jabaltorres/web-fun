@@ -1,6 +1,10 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
+    use Fivetwofive\KrateCMS\LoremElement;
+    use Fivetwofive\KrateCMS\LoremCard;
+    use Fivetwofive\KrateCMS\UserManager;
+
     $title = "Demo Index";
     $page_heading = 'Demo Page Heading';
     $page_subheading = "List of WIP demos";
@@ -33,6 +37,12 @@
         ['id' => 'forms', 'visible' => '1', 'demo_page' => 'Forms', 'page_url' => 'forms/index.php'],
         ['id' => 'simple', 'visible' => '1', 'demo_page' => 'Simple PHP', 'page_url' => 'simple.php'],
     ];
+
+    try {
+        $userManager = new UserManager($db);
+    } catch (Exception $e) {
+        // Handle exception
+    }
 ?>
 
 <?php

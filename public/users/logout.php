@@ -1,16 +1,15 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 
-// Instantiate the user manager
-$userManager = new KrateUserManager($db);
+try {
+    $userManager = new UserManager($db);
+    $userManager->logout();
+} catch (Exception $e) {
+    error_log("Logout error: " . $e->getMessage());
+}
 
-// Use the logout function
-$userManager->logout();
-
-// Redirect to the login page or another appropriate page
 header("Location: login.php");
 exit();
 ?>

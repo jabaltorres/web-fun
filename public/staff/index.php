@@ -1,17 +1,22 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+try {
+    // Initialize the UserManager with the existing $db connection
+    $userManager = new UserManager($db);
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+    // Ensure the user is logged in
+    $userManager->checkLoggedIn();
 
-$page_title = 'Staff Menu';
-include('../../templates/layout/header.php');
+    $page_title = 'Staff Menu';
+    include('../../templates/layout/header.php');
+} catch (Exception $e) {
+    error_log("Staff page error: " . $e->getMessage());
+    header("Location: /users/login.php");
+    exit;
+}
 ?>
 
 <div id="content" class="container py-5">

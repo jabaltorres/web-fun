@@ -1,19 +1,17 @@
 <?php
 
-use JetBrains\PhpStorm\Pure;
+declare(strict_types=1);
 
-/**
- * This creates a new HTML card element
- */
+namespace Fivetwofive\KrateCMS;
+
 class LoremCard
 {
-
     private string $id;
     private string $classes;
     private string $content;
     private bool $dark_mode;
 
-    public function __construct($args = [])
+    public function __construct(array $args = [])
     {
         $this->id = $args['id'] ?? '';
         $this->classes = $args['classes'] ?? '';
@@ -23,21 +21,20 @@ class LoremCard
 
     public function setDarkMode(): string
     {
-        if ($this->dark_mode == true) {
+        if ($this->dark_mode === true) {
             return "<div class='bg-dark p-2 dark text-light'>Dark Mode</div>";
-        } else {
-            return "<div class='bg-light p-2 default'>Default Mode</div>";
         }
+        return "<div class='bg-light p-2 default'>Default Mode</div>";
     }
 
     public function render(): string
     {
-        $html = "<div id=\"{$this->id}\" class=\"{$this->classes}\">";
+        $html = "<div id=\"" . htmlspecialchars($this->id) . "\" class=\"" . htmlspecialchars($this->classes) . "\">";
         $html .= "Excuse me, Let me clear my throat. <br>";
-        $html .= "{$this->content} <br>";
-        $html .= self::setDarkMode();
+        $html .= htmlspecialchars($this->content) . "<br>";
+        $html .= $this->setDarkMode();
         $html .= "</div>";
 
         return $html;
     }
-}
+} 

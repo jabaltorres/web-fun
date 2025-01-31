@@ -1,51 +1,52 @@
 <?php
+declare(strict_types=1);
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+try {
+    // Initialize the UserManager with the existing $db connection
+    $userManager = new UserManager($db);
 
-// Enforce the user is logged in (will redirect if not)
-$userManager->checkLoggedIn();
+    // Enforce login and admin access
+    $userManager->checkLoggedIn();
+    
+    // Get user status
+    $loggedIn = $userManager->isLoggedIn();
+    $isAdmin = isset($_SESSION['user_id']) ? $userManager->isAdmin($_SESSION['user_id']) : false;
+    
+    // If not admin, redirect to regular dashboard
+    if (!$isAdmin) {
+        header('Location: /dashboard');
+        exit;
+    }
 
-// Use isLoggedIn to check if the user is logged in for conditional content display
-$loggedIn = $userManager->isLoggedIn();
+    // Fetch users only if admin (with error handling)
+    $users = null;
+    if ($isAdmin) {
+        $result = $userManager->getAllUsers();
+        $users = $result ? $result : null;
+    }
 
-// Check if the user is an administrator
-$isAdmin = $userManager->isAdmin($_SESSION['user_id']);
+    // Page metadata
+    $pageTitle = 'Admin Dashboard | ' . $config['site']['name'];
+    $pageDescription = 'Administrative dashboard for ' . $config['site']['name'];
 
-// Fetch all users from the database if the user is an admin
-$result = $isAdmin ? $userManager->getAllUsers() : null;
+    // Include header with page metadata
+    include_once('../../templates/layout/header.php');
+    
+    // Include admin dashboard template
+    include_once('../../templates/admin/dashboard.php');
+    
+    // Include footer
+    include_once('../../templates/layout/footer.php');
 
-include('../../templates/layout/header.php');
-?>
-
-    <div class="container py-5">
-
-        <?php if ($loggedIn): ?>
-            <h1>Krate Logged In</h1>
-            <section class="user-content mb-4">
-                <p class="mb-0">Welcome, <?= htmlspecialchars($_SESSION['first_name']); ?>! Here is the exclusive content for logged-in users.</p>
-            </section>
-        <?php endif; ?>
-
-
-        <?php if ($isAdmin): ?>
-            <?php if ($result && $result->num_rows > 0): ?>
-                <section class="user-content">
-                    <h3>Site Settings:</h3>
-                    <?php
-                        echo 'Site Owner: ' . $site_owner . '</br>';
-                        echo 'Site Name: ' . $site_name . '</br>';
-                        echo 'Site Tagline: ' . $site_tagline . '</br>';
-                        echo 'Site Description: ' . $site_description . '</br>';
-                        echo 'Site Author: ' . $site_author . '</br>';
-                    ?>
-                </section>
-            <?php endif; ?>
-        <?php endif; ?>
-    </div>
-
-<?php include('../../templates/layout/footer.php'); ?>
+} catch (Exception $e) {
+    // Log the error
+    error_log($e->getMessage());
+    
+    // Show error page
+    http_response_code(500);
+    include_once('../../templates/errors/500.php');
+}

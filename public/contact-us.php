@@ -1,19 +1,23 @@
 <?php
 // Require initialization file
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+try {
+    // Initialize the UserManager with the existing $db connection
+    $userManager = new UserManager($db);
 
-// Use isLoggedIn to check if the user is logged in for conditional content display
-$loggedIn = $userManager->isLoggedIn();
+    // Use isLoggedIn to check if the user is logged in for conditional content display
+    $loggedIn = $userManager->isLoggedIn();
 
+} catch (Exception $e) {
+    error_log("Contact page error: " . $e->getMessage());
+    $error = "An error occurred while loading the page.";
+}
+
+include('../templates/layout/header.php');
 ?>
-
-<?php include('../templates/layout/header.php'); ?>
 
     <div id="main" class="py-4">
         <div class="container">

@@ -1,24 +1,26 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php'); // Ensure this path is correct
 
 use Fivetwofive\KrateCMS\KrateUserManager;
 
-// Instantiate the KrateUserManager class
-$userManager = new KrateUserManager($db);
+try {
+    // Initialize the KrateUserManager
+    $userManager = new KrateUserManager($db);
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+    // Ensure the user is logged in
+    $userManager->checkLoggedIn();
 
-// Use isLoggedIn to check if the user is logged in for conditional content display
-$loggedIn = $userManager->isLoggedIn();
+    // Fetch user details
+    $userDetails = $userManager->getUserDetails($_SESSION['user_id']);
+    
+    if (!$userDetails) {
+        throw new Exception("Unable to retrieve user details");
+    }
 
-// Check if the user is an administrator
-$isAdmin = $userManager->isAdmin($_SESSION['user_id']);
-
-// Fetch the logged-in user's details
-$user_id = $_SESSION['user_id'];
-$userDetails = $userManager->getUserDetails($user_id);
+} catch (Exception $e) {
+    error_log("Profile error: " . $e->getMessage());
+    $error = "An error occurred while loading your profile.";
+}
 
 include('../../templates/layout/header.php');
 ?>
@@ -37,7 +39,7 @@ include('../../templates/layout/header.php');
       <a href="edit-profile.php" class="btn btn-primary">Edit Profile</a>
     </section>
   <?php else: ?>
-    <div class="alert alert-danger">User details could not be retrieved. Please try again later.</div>
+    <div class="alert alert-danger"><?= $error ?></div>
   <?php endif; ?>
 </div>
 

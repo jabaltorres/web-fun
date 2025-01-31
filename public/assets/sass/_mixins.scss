@@ -1,0 +1,17 @@
+@mixin medium-screen {
+    @media screen and (min-width: $medium-screen) {
+        @content;
+    }
+}
+
+@mixin small-screen-landscape {
+    @media screen and (max-width: $small-screen) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@mixin scaleX($val) {
+    -webkit-transform: scaleX($val);
+    -ms-transform: scaleX($val);
+    transform: scaleX($val);
+} 

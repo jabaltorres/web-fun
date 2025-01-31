@@ -1,6 +1,9 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
+use Fivetwofive\KrateCMS\AudioElement;
+use Fivetwofive\KrateCMS\LoremElement;
+
 $title = "Demo Index";
 // this is for <title>
 
@@ -40,11 +43,19 @@ $page_audio_subheader->setContent("Testing out building and using an audio playe
 
         <section class="lorem-audio-player">
             <?php
-            $audio_element = new AudioElement("Eh Mambo by Jabal Torres", "https://jabaltorres.com/wp-content/uploads/2024/06/EH-MAMBO.mp3", "audio/mp3");
-            $audio_element->setAutoplay(false);
-            $audio_element->setLoop(false);
+            try {
+                $audio_element = new AudioElement(
+                    "Eh Mambo by Jabal Torres", 
+                    "https://jabaltorres.com/wp-content/uploads/2024/06/EH-MAMBO.mp3", 
+                    "audio/mpeg"
+                );
+                $audio_element->setAutoplay(false)
+                             ->setLoop(false);
 
-            echo $audio_element->render();
+                echo $audio_element->render();
+            } catch (\InvalidArgumentException $e) {
+                echo '<div class="alert alert-danger">Error loading audio: ' . htmlspecialchars($e->getMessage()) . '</div>';
+            }
             ?>
         </section>
 

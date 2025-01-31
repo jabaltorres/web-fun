@@ -2,59 +2,67 @@
 
 require_once('../src/initialize.php');
 
-require_once('../src/classes/KrateUserManager.php');
+use Fivetwofive\KrateCMS\UserManager;
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+try {
+    // Initialize the UserManager with the existing $db connection
+    $userManager = new UserManager($db);
 
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+    // Use isLoggedIn to check if the user is logged in for conditional content display
+    $loggedIn = $userManager->isLoggedIn();
 
-// Use isLoggedIn to check if the user is logged in for conditional content display
-$loggedIn = $userManager->isLoggedIn();
+    // Check if the user is an administrator
+    $isAdmin = isset($_SESSION['user_id']) ? $userManager->isAdmin($_SESSION['user_id']) : false;
 
-/**
- * Get all vinyl records from the database, optionally filtered by a search term.
- *
- * @param string|null $search_term The search term to filter records by title or artist.
- * @return array|null Returns an array of records, or null if no records are found or on failure.
- */
-function getAllVinylRecords(?string $search_term = null): ?array {
-    global $db;
+    /**
+     * Get all vinyl records from the database, optionally filtered by a search term.
+     *
+     * @param string|null $search_term The search term to filter records by title or artist.
+     * @return array|null Returns an array of records, or null if no records are found or on failure.
+     */
+    function getAllVinylRecords(?string $search_term = null): ?array {
+        global $db;
 
-    // Base SQL query
-    $sql = "SELECT * FROM vinyl_records";
+        // Base SQL query
+        $sql = "SELECT * FROM vinyl_records";
 
-    // If a search term is provided, filter the results by title or artist
-    if ($search_term) {
-        $sql .= " WHERE title LIKE ? OR artist LIKE ? ORDER BY created_at DESC";
-        $stmt = mysqli_prepare($db, $sql);
-        $search_term = '%' . $search_term . '%'; // Add wildcards for partial matching
-        mysqli_stmt_bind_param($stmt, 'ss', $search_term, $search_term);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-    } else {
-        $sql .= " ORDER BY created_at DESC";
-        $result = mysqli_query($db, $sql);
+        // If a search term is provided, filter the results by title or artist
+        if ($search_term) {
+            $sql .= " WHERE title LIKE ? OR artist LIKE ? ORDER BY created_at DESC";
+            $stmt = mysqli_prepare($db, $sql);
+            $search_term = '%' . $search_term . '%'; // Add wildcards for partial matching
+            mysqli_stmt_bind_param($stmt, 'ss', $search_term, $search_term);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+        } else {
+            $sql .= " ORDER BY created_at DESC";
+            $result = mysqli_query($db, $sql);
+        }
+
+        // Fetch all records and return as an associative array or null if no results
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        }
+        
+        return null;
     }
 
-    // Fetch all records and return as an associative array or null if no results
-    if ($result && mysqli_num_rows($result) > 0) {
-        return mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } else {
-        return null;  // Return null if the query fails or no records are found
-    }
+    // Get the search term from the query string if provided
+    $search_term = $_GET['search'] ?? null;
+
+    // Display all vinyl records, filtered by search term if provided
+    $records = getAllVinylRecords($search_term);
+
+    // Check if there's a message in the query string
+    $message = $_GET['message'] ?? null;
+
+} catch (Exception $e) {
+    error_log("Error in index page: " . $e->getMessage());
+    $error = "An error occurred while loading the page.";
 }
 
-// Get the search term from the query string if provided
-$search_term = $_GET['search'] ?? null;
-
-// Display all vinyl records, filtered by search term if provided
-$records = getAllVinylRecords($search_term);
-
-// Check if there's a message in the query string
-$message = $_GET['message'] ?? null;
-
 include('../templates/layout/header.php');
+
 ?>
     <div class="hero">
         <div class="jumbotron jumbotron-fluid px-4">

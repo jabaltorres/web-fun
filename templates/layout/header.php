@@ -38,7 +38,8 @@
 		} ?>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/style.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/public.css">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/simple.css">
 
@@ -72,6 +73,16 @@
                 <a class="btn btn-primary text-white" href="/users/login.php">Log In</a>
             <?php endif; ?>
             </span>
+
+            <ul class="navbar-nav">
+                <?php if (isset($isAdmin) && $isAdmin): ?>
+                    <li class="nav-item">
+                        <a href="<?php echo url_for('/admin/index.php'); ?>" class="nav-link">
+                            Admin Dashboard
+                        </a>
+                    </li>
+                <?php endif; ?>
+            </ul>
         </div>
     </div>
 </nav>

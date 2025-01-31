@@ -17,6 +17,8 @@ const { series, parallel } = require('gulp');
 const paths = {
     styles: {
         src: "public/assets/sass/**/*.scss",
+        main: ["public/assets/sass/**/*.scss", "!public/assets/sass/**/_*.scss"],
+        watch: "public/assets/sass/**/*.scss",
         dest: "public/assets/css"
     },
     scripts: {
@@ -58,8 +60,9 @@ function defaultTask(cb) {
 }
 
 function style() {
+    console.log('Starting style task...');
     return gulp
-        .src(paths.styles.src)
+        .src(paths.styles.main)
         .pipe(sourcemaps.init())
         .pipe(sass({
             precision: 8,
@@ -67,31 +70,28 @@ function style() {
             outputStyle: 'expanded',
             implementation: require('sass'),
             fiber: false,
-            quietDeps: true,
-            logger: {
-                warn: function(message) {
-                    if (!message.includes('Deprecation')) {
-                        console.warn(message);
-                    }
-                }
-            }
+            quietDeps: true
         }).on('error', function(err) {
-            console.error(err.message);
+            console.log('Sass Error:', err.message);
             this.emit('end');
         }))
-        .on('start', function() {
-            console.log('Starting SASS compilation...');
-        })
-        .on('end', function() {
-            console.log('SASS compilation complete');
-        })
         .pipe(postcss([
             autoprefixer(),
-            cssnano({ safe: true })
+            cssnano({ 
+                safe: true,
+                preset: ['default', {
+                    discardComments: {
+                        removeAll: true
+                    }
+                }]
+            })
         ]))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.styles.dest))
-        .pipe(browserSync.reload({ stream: true }));
+        .pipe(browserSync.stream())
+        .on('end', function() {
+            console.log('Style task completed');
+        });
 }
 
 function imageminify() {
@@ -138,19 +138,38 @@ function watch() {
         files: [
             paths.styles.dest + '/**/*.css',
             'public/**/*.html',
-            'public/**/*.php'
+            'public/**/*.php',
+            'templates/**/*.php'
         ]
     });
     
-    gulp.watch(paths.styles.src, style);
+    gulp.watch(paths.styles.watch, style);
     gulp.watch(paths.scripts.lint, gulp.series(lint, scripts));
+    gulp.watch('public/**/*.php').on('change', browserSync.reload);
+}
+
+function clean(cb) {
+    const fs = require('fs');
+    const cssDir = paths.styles.dest;
+    
+    if (fs.existsSync(cssDir)) {
+        fs.readdirSync(cssDir).forEach(file => {
+            if (file.endsWith('.css') || file.endsWith('.css.map')) {
+                fs.unlinkSync(`${cssDir}/${file}`);
+                console.log(`Deleted: ${cssDir}/${file}`);
+            }
+        });
+    }
+    cb();
 }
 
 exports.style = style;
+exports.clean = clean;
 exports.imageminify = imageminify;
 exports.scripts = gulp.series(lint, scripts);
 exports.watch = watch;
 exports.default = gulp.series(
+    clean,
     gulp.parallel(style, gulp.series(lint, scripts)),
     watch
 );

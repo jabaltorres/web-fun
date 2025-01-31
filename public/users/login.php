@@ -1,57 +1,47 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+try {
+    // Initialize the KrateUserManager
+    $userManager = new UserManager($db);
 
-// Check if user is already logged in
-$userIsLoggedIn = $userManager->isLoggedIn();
+    // Check if user is already logged in
+    $userIsLoggedIn = $userManager->isLoggedIn();
+    $loggedInMessage = $userIsLoggedIn ? "You are already logged in." : "Please log in.";
+    $error = '';
 
-if ($userIsLoggedIn) {
-    $loggedInMessage = "You are already logged in.";
-} else {
-    $loggedInMessage = "Please log in.";
-}
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST['logout'])) {
+            $userManager->logout();
+            header("Location: login.php");
+            exit();
+        }
 
-$error = ''; // Initialize error message
+        // Handle login process
+        $loginResult = $userManager->login(
+            htmlspecialchars($_POST['username']),
+            $_POST['password']
+        );
 
-// Handle POST requests (either login or logout)
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['logout'])) {
-        // Log the user out
-        $userManager->logout();
-        header("Location: login.php");
-        exit();
-    }
+        if ($loginResult) {
+            // Store session data
+            $_SESSION['user_id'] = $loginResult['user_id'];
+            $_SESSION['username'] = $loginResult['username'];
+            $_SESSION['first_name'] = $loginResult['first_name'];
+            $_SESSION['role'] = $loginResult['role'];
 
-    // Handle login process
-    $username = htmlspecialchars($_POST['username']);  // Sanitize inputs
-    $password = $_POST['password'];
-
-    // Try to log in the user
-    $loginResult = $userManager->login($username, $password);
-    if ($loginResult) {
-        // Log that login was successful for debugging purposes
-        error_log("User logged in successfully: " . $loginResult['username']);
-
-        // Store session data on successful login
-        $_SESSION['user_id'] = $loginResult['user_id'];
-        $_SESSION['username'] = $loginResult['username'];
-        $_SESSION['first_name'] = $loginResult['first_name'];  // Store first name in session
-
-        // Redirect to contacts page after successful login
-        header("Location: /index.php");
-        exit();
-    } else {
-        // Log that login failed for debugging purposes
-        error_log("Login failed for username: " . $username);
-
-        // Login failed, set the error message
+            header("Location: /index.php");
+            exit();
+        }
+        
         $error = "Invalid username or password!";
     }
+
+} catch (Exception $e) {
+    error_log("Login error: " . $e->getMessage());
+    $error = "An error occurred during login. Please try again.";
 }
 
 include('../../templates/layout/header.php');

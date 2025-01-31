@@ -1,3 +1,7 @@
+/* Import Bootstrap */
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+/* Variables */
 $white: #fff !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #e9ecef !default;
@@ -22,7 +26,7 @@ $teal: #20c997 !default;
 $cyan: #17a2b8 !default;
 
 $success: $green !default;
-$info: $cyan !default;
+$info: $cyan !default; 
 $warning: $yellow !default;
 $danger: $red !default;
 $light: $gray-100 !default;
@@ -31,28 +35,25 @@ $dark: $gray-800 !default;
 //$primary: $dark;
 //$secondary: $yellow;
 
-@use "../../../node_modules/bootstrap/scss/bootstrap" as bootstrap;
+/* Import base and other partials */
+@import "base";
+@import "navigation";
+@import "nav-icon";
+@import "hero";
+@import "forms";
+@import "elements/elements";
+@import "components/components";
+@import "templates/templates";
+@import "layouts/layouts";
+@import "pages/pages";
+@import "svg-icon-sprite";
 
-@use "base";
-@use "navigation";
-@use "nav-icon";
-@use "hero";
-@use "forms";
-
-@use "elements/elements";
-
-@use "components/components";
-
-@use "templates/templates";
-
-@use "layouts/layouts";
-
-@use "pages/pages";
-
-@use "svg-icon-sprite";
-
+/* Your styles */
 body {
   font-family: 'Gudea', sans-serif;
+  // p {
+  //   color: green;
+  // }
 }
 
 section {
@@ -270,12 +271,5 @@ article {
     p:last-child{
       margin-bottom: 0;
     }
-  }
-}
-
-body {
-  background-color: pink;
-  p {
-    color: green;
   }
 }

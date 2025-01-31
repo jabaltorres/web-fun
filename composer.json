@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Fivetwofive\\KrateCMS\\": "src/classes/"
+            "Fivetwofive\\KrateCMS\\": "src/Fivetwofive/KrateCMS"
         }
     },
     "authors": [

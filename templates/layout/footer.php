@@ -1,6 +1,6 @@
 <footer class="site-footer">
     <div class="container text-center">
-        <span>&copy; <?php echo date("Y") . "&nbsp;" . $site_owner; ?></span>
+        <span>&copy; <?php echo date("Y") . "&nbsp;" . $config['site']['owner']; ?></span>
         <ul class="d-inline-block">
             <li><a href="https://github.com/jabaltorres/web-fun" target="_blank">Github Repo</a></li>
             <li><a href="https://github.com/jabaltorres/web-fun/issues" target="_blank">Github Issues</a></li>

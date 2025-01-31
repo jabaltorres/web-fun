@@ -1,61 +1,54 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php'); // Ensure this path is correct
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 
-// Instantiate the KrateUserManager class
-$userManager = new KrateUserManager($db);
+try {
+    // Initialize the UserManager
+    $userManager = new UserManager($db);
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+    // Ensure the user is logged in
+    $userManager->checkLoggedIn();
 
-// Fetch the logged-in user's details
-$user_id = $_SESSION['user_id'];
-$userDetails = $userManager->getUserDetails($user_id);
+    // Fetch the logged-in user's details
+    $user_id = $_SESSION['user_id'];
+    $userDetails = $userManager->getUserDetails($user_id);
 
-$error = '';
-$success = '';
+    $error = '';
+    $success = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Handle profile information update
-    $first_name = $_POST['first_name'] ?? '';
-    $last_name = $_POST['last_name'] ?? '';
-    $email = $_POST['email'] ?? '';
-
-    // Handle password change
-    $current_password = $_POST['current_password'] ?? '';
-    $new_password = $_POST['new_password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
-
-    if (!empty($new_password)) {
-        if ($new_password !== $confirm_password) {
-            $error = "New passwords do not match.";
-        } else {
-            if (!$userManager->changePassword($user_id, $current_password, $new_password)) {
-                $error = "Current password is incorrect. Please try again.";
-            } else {
-                $success = "Password updated successfully!";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Handle password change
+        if (!empty($_POST['new_password'])) {
+            if ($_POST['new_password'] !== $_POST['confirm_password']) {
+                throw new InvalidArgumentException("New passwords do not match.");
             }
+            
+            if (!$userManager->changePassword($user_id, $_POST['current_password'], $_POST['new_password'])) {
+                throw new InvalidArgumentException("Current password is incorrect.");
+            }
+            
+            $success = "Password updated successfully!";
         }
-    }
 
-    // Proceed with profile update only if no errors
-    if (empty($error)) {
-        if (!empty($first_name) && !empty($last_name) && !empty($email)) {
-            $stmt = $db->prepare("UPDATE users SET first_name = ?, last_name = ?, email = ? WHERE user_id = ?");
-            $stmt->bind_param("sssi", $first_name, $last_name, $email, $user_id);
-            if ($stmt->execute()) {
-                $success = "Profile updated successfully!";
-                // Refresh user details after update
+        // Handle profile update
+        if (!empty($_POST['first_name']) && !empty($_POST['last_name']) && !empty($_POST['email'])) {
+            if ($userManager->updateUserProfile($user_id, [
+                'first_name' => $_POST['first_name'],
+                'last_name' => $_POST['last_name'],
+                'email' => $_POST['email']
+            ])) {
+                $success = empty($success) ? "Profile updated successfully!" : "Profile and password updated successfully!";
                 $userDetails = $userManager->getUserDetails($user_id);
-            } else {
-                $error = "An error occurred while updating your profile. Please try again.";
             }
         } else {
-            $error = "All fields are required.";
+            throw new InvalidArgumentException("All profile fields are required.");
         }
     }
+
+} catch (Exception $e) {
+    error_log("Error in profile management: " . $e->getMessage());
+    $error = $e->getMessage();
 }
 
 include('../../templates/layout/header.php');

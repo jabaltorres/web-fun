@@ -3,58 +3,61 @@ ob_start(); // output buffering is turned on
 session_start(); // turn on sessions
 
 // Load Composer's autoloader and initialize phpdotenv
-require __DIR__ . '/../vendor/autoload.php'; // Corrected path to the vendor autoload file
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..'); // Adjust the path to your .env location
 $dotenv->load(); // Load environment variables from .env
 
-$postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'];
+// Site configuration
+$config = [
+    'site' => [
+        'owner' => $_ENV['SITE_OWNER'],
+        'author' => $_ENV['SITE_AUTHOR'],
+        'name' => $_ENV['SITE_NAME'],
+        'tagline' => $_ENV['SITE_TAGLINE'],
+        'description' => $_ENV['SITE_DESCRIPTION']
+    ],
+    'db' => [
+        'server' => $_ENV['DB_SERVER'],
+        'user' => $_ENV['DB_USER'],
+        'pass' => $_ENV['DB_PASS'],
+        'name' => $_ENV['DB_NAME']
+    ],
+    'api' => [
+        'postmark' => $_ENV['POSTMARK_API_TOKEN']
+    ]
+];
 
-$site_owner = $_ENV['SITE_OWNER'];
-$site_author = $_ENV['SITE_AUTHOR'];
-$site_name = $_ENV['SITE_NAME'];
-$site_tagline = $_ENV['SITE_TAGLINE'];
-$site_description = $_ENV['SITE_DESCRIPTION'];
+// Server configuration
+$serverConfig = [
+    'protocol' => empty($_SERVER['HTTPS']) ? 'http' : 'https',
+    'name' => $_SERVER['SERVER_NAME'],
+    'script' => $_SERVER['SCRIPT_NAME'],
+    'host' => $_SERVER['HTTP_HOST'],
+    'docRoot' => $_SERVER['DOCUMENT_ROOT'],
+    'userAgent' => $_SERVER['HTTP_USER_AGENT'],
+    'port' => $_SERVER['SERVER_PORT']
+];
 
+// Calculate base URL
+$displayPort = ($serverConfig['protocol'] === 'http' && $serverConfig['port'] == 80 || 
+                $serverConfig['protocol'] === 'https' && $serverConfig['port'] == 443) 
+                ? '' : ":{$serverConfig['port']}";
+$baseUrl = "{$serverConfig['protocol']}://{$serverConfig['name']}";
 
-$db_server = $_ENV['DB_SERVER'];
-$db_user = $_ENV['DB_USER'];
-$db_pass = $_ENV['DB_PASS'];
-$db_name = $_ENV['DB_NAME'];
+// Define constants
+define('PRIVATE_PATH', __DIR__);
+define('PROJECT_PATH', dirname(PRIVATE_PATH));
+define('STYLES_PATH', $baseUrl . '/assets/css');
+define('SCRIPTS_PATH', $baseUrl . '/assets/js');
+define('IMAGES_PATH', $baseUrl . '/assets/images');
 
-
-$base_dir = __DIR__;
-
-// server protocol
-$protocol = empty($_SERVER['HTTPS']) ? 'http' : 'https';
-$server_name = $_SERVER['SERVER_NAME'];
-$script_name = $_SERVER['SCRIPT_NAME'];
-$http_host = $_SERVER['HTTP_HOST'];
-$doc_root = $_SERVER['DOCUMENT_ROOT'];
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
-$base_url = preg_replace("!^${doc_root}!", '', $base_dir);
-$port = $_SERVER['SERVER_PORT'];
-$disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $port == 443) ? '' : ":$port";
-
-// put em all together to get the complete base URL
-$url = "${protocol}://${server_name}";
-$enviro_prod = "web-fun.fivetwofive.com";
-
-// Assign file path to PHP constants
-// __FILE__ returns the current path to this file
-// dirname() returns the path to the current directory
-const PRIVATE_PATH = __DIR__;
-define("PROJECT_PATH", dirname(PRIVATE_PATH));
-define("STYLES_PATH", $url . '/assets/css');
-define("SCRIPTS_PATH", $url . '/assets/js');
-define("IMAGES_PATH", $url . '/assets/images');
-
-// * Can dynamically find everything in the URL up to "public"
-$public_end = strpos($_SERVER['SCRIPT_NAME'], '/public');
-$doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
-define("WWW_ROOT", $doc_root);
+// Define WWW_ROOT
+$publicEnd = strpos($_SERVER['SCRIPT_NAME'], '/public');
+$docRoot = substr($_SERVER['SCRIPT_NAME'], 0, $publicEnd);
+define('WWW_ROOT', $docRoot);
 
 require_once('functions.php');
 require_once('database.php');
@@ -62,38 +65,39 @@ require_once('query_functions.php');
 require_once('validation_functions.php');
 require_once('auth_functions.php');
 
-$db = db_connect($db_server, $db_user, $db_pass, $db_name);
+$db = db_connect(
+    $config['db']['server'], 
+    $config['db']['user'], 
+    $config['db']['pass'], 
+    $config['db']['name']
+);
 $errors = [];
 
-// Load class definitions manually
-// -> All classes in directory
-foreach (glob('classes/*.class.php') as $file) {
-    require_once($file);
-}
-
-// Autoload class definitions
-function lorem_autoload($class)
-{
-    if (preg_match('/\A\w+\Z/', $class)) {
-        include('classes/' . $class . '.class.php');
-    }
-}
-
 /**
- * Autoload function for loading PHP classes dynamically.
- * Tries to load classes based on namespace first,
- * then falls back to a simple naming convention if necessary.
+ * PSR-4 Autoloader
  */
 spl_autoload_register(function($class) {
-    // Check if the class file exists based on namespace
-    $file = $_SERVER['DOCUMENT_ROOT'] . '/src/classes/' . str_replace('\\', '/', $class) . '.php';
+    // Project base namespace prefix
+    $prefix = 'Fivetwofive\\KrateCMS\\';
+    
+    // Base directory for the namespace prefix
+    $baseDir = __DIR__ . '/';
+    
+    // Check if the class uses the namespace prefix
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        // No namespace match, move to the next registered autoloader
+        return;
+    }
+    
+    // Get the relative class name
+    $relativeClass = substr($class, $len);
+    
+    // Replace namespace separators with directory separators
+    $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
+    
+    // If the file exists, require it
     if (file_exists($file)) {
-        include $file;
-    } elseif (preg_match('/\A\w+\Z/', $class)) {
-        // If the class file doesn't exist based on namespace, try simple naming convention
-        $file = __DIR__ . '/classes/' . $class . '.class.php';
-        if (file_exists($file)) {
-            include $file;
-        }
+        require_once $file;
     }
 });
