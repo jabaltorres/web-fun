@@ -1,6 +1,11 @@
 <?php
+declare(strict_types=1); // Enable strict typing
+
 // Require initialization file
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+
+// Constants
+const DEFAULT_PAGE_ID = '1';
 
 // Check if user is logged in
 $loggedIn = isset($_SESSION['user_id']);
@@ -9,34 +14,40 @@ $loggedIn = isset($_SESSION['user_id']);
 $visible = !is_preview();
 
 // Get the page id
+$page_id = $_GET['id'] ?? $_GET['subject_id'] ?? DEFAULT_PAGE_ID;
+
 if (isset($_GET['id'])) {
-    $page_id = $_GET['id'];
+    // Fetch the page by ID
     $page = find_page_by_id($page_id, ['visible' => $visible]);
     if (!$page) {
+        // Redirect if the page is not found
         redirect_to(url_for('/page.php'));
     }
     $subject_id = $page['subject_id'];
+    // Fetch the subject by ID
     $subject = find_subject_by_id($subject_id, ['visible' => $visible]);
     if (!$subject) {
+        // Redirect if the subject is not found
         redirect_to(url_for('/page.php'));
     }
 } elseif (isset($_GET['subject_id'])) {
+    // Fetch the subject by subject ID
     $subject_id = $_GET['subject_id'];
     $subject = find_subject_by_id($subject_id, ['visible' => $visible]);
     if (!$subject) {
+        // Redirect if the subject is not found
         redirect_to(url_for('/page.php'));
     }
+    // Fetch pages associated with the subject
     $page_set = find_pages_by_subject_id($subject_id, ['visible' => $visible]);
     $page = mysqli_fetch_assoc($page_set); // first page
     mysqli_free_result($page_set);
     if (!$page) {
+        // Redirect if no pages are found for the subject
         redirect_to(url_for('/page.php'));
     }
     $page_id = $page['id'];
-} else {
-    // Todo: Find a better way at setting the homepage page id. THis doesn't work as expected.
-    $page_id = '1';
-}
+} 
 
 ?>
 

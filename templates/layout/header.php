@@ -1,23 +1,18 @@
 <?php
-	if (!isset($page_title)) {
-		$page_title = 'KrateCMS';
-	}
+	// Set default page title if not provided
+	$page_title = $page_title ?? 'KrateCMS'; // Use null coalescing operator
+
 	$url = $url ?? '';
 	$is_logged_in = isset($_SESSION['user_id']);
-	
-	$adminLoggedIn = admin_is_logged_in();
-	if ($adminLoggedIn) {
-		$adminMessage = "admin is logged in";
-	} else {
-		$adminMessage = "admin is not logged in";
-	}
+    $isAdmin = isset($_SESSION['role']) && $_SESSION['role'] === 'Administrator';
+	$adminMessage = $isAdmin ? "admin is logged in" : "admin is not logged in"; // Use ternary operator
 
-use Fivetwofive\KrateCMS\KrateSettings;
+    use Fivetwofive\KrateCMS\KrateSettings;
 
-function getSetting($key, $default = null) {
-    global $db;
-    return KrateSettings::getInstance($db)->getSetting($key, $default);
-}
+    function getSetting($key, $default = null) {
+        global $db;
+        return KrateSettings::getInstance($db)->getSetting($key, $default);
+    }
 
 ?>
 <!doctype html>
@@ -37,12 +32,11 @@ function getSetting($key, $default = null) {
         gtag('config', 'G-9KJN3YRHDT');
     </script>
     <meta charset="utf-8">
-    <title>KrateCMS
-		<?php if (isset($page_title)) {
-			echo '- ' . h($page_title);
-		} ?><?php if (isset($preview) && $preview) {
-			echo ' [PREVIEW]';
-		} ?>
+    <title>
+		<?php 
+			// Simplified title setting
+			echo h($page_title) . (isset($preview) && $preview ? ' [PREVIEW]' : ''); 
+		?>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -62,7 +56,7 @@ function getSetting($key, $default = null) {
 <body class="<?php echo getSetting('dark_mode', false) ? 'dark-mode' : ''; ?>">
 
 <?php
-	if ($adminLoggedIn) {
+	if ($isAdmin) {
 		include($_SERVER['DOCUMENT_ROOT'] . '/../templates/components/nav_admins.php');
 	}
 ?>
@@ -81,26 +75,23 @@ function getSetting($key, $default = null) {
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-			<?php include($_SERVER['DOCUMENT_ROOT'] . '/../templates/components/nav_main.php'); ?>
+            <?php include($_SERVER['DOCUMENT_ROOT'] . '/../templates/components/nav_main.php'); ?>
 
             <!-- Update navbar text to reflect user status -->
-            <span class="navbar-text">
-            <?php if ($is_logged_in): ?>
-                <a class="btn btn-secondary text-white" href="/users/logout.php">Log Out</a>
-            <?php else: ?>
-                <a class="btn btn-primary text-white" href="/users/login.php">Log In</a>
-            <?php endif; ?>
-            </span>
-
-            <ul class="navbar-nav">
-                <?php if (isset($isAdmin) && $isAdmin): ?>
-                    <li class="nav-item">
-                        <a href="<?php echo url_for('/admin/index.php'); ?>" class="nav-link">
-                            Admin Dashboard
-                        </a>
-                    </li>
+            
+            <span>
+                <?php if ($isAdmin): ?>
+                    <a href="<?php echo url_for('/admin/index.php'); ?>" class="btn btn-secondary">
+                        Admin Dashboard
+                    </a>
                 <?php endif; ?>
-            </ul>
+
+                <?php if ($is_logged_in): ?>
+                    <a class="btn btn-danger mr-2" href="/users/logout.php">Log Out</a>
+                <?php else: ?>
+                    <a class="btn btn-primary mr-2" href="/users/login.php">Log In</a>
+                <?php endif; ?>
+            </span>
         </div>
     </div>
 </nav>
