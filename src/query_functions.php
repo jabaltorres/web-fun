@@ -678,9 +678,9 @@ function validate_demo_form($demoMessage)
     $errors = [];
 
     // Sanitize inputs
-    $demoMessage['name'] = trim(filter_var($demoMessage['name'], FILTER_SANITIZE_STRING));
+    $demoMessage['name'] = trim($demoMessage['name']);
     $demoMessage['email'] = trim(filter_var($demoMessage['email'], FILTER_SANITIZE_EMAIL));
-    $demoMessage['message'] = trim(filter_var($demoMessage['message'], FILTER_SANITIZE_STRING));
+    $demoMessage['message'] = trim($demoMessage['message']);
 
     if (empty($demoMessage['name'])) {
         $errors[] = "Name cannot be blank.";
