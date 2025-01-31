@@ -1,5 +1,4 @@
 <?php
-
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 require_login();
@@ -40,7 +39,7 @@ $admin_set = find_all_admins();
                             <td><?php echo h($admin['email']); ?></td>
                             <td><?php echo h($admin['username']); ?></td>
                             <td class="text-right">
-                                <a class="action btn btn-sm btn-info" href="<?php echo url_for('/staff/admins/show.php?id=' . h(u($admin['id']))); ?>">View</a>
+                                <a class="action btn btn-sm btn-info" href="<?php echo url_for('/staff/admins/show.php?id=' . h(u($admin['id']))); ?>">Show</a>
                                 <a class="action btn btn-sm btn-primary" href="<?php echo url_for('/staff/admins/edit.php?id=' . h(u($admin['id']))); ?>">Edit</a>
                                 <a class="action btn btn-sm btn-danger" href="<?php echo url_for('/staff/admins/delete.php?id=' . h(u($admin['id']))); ?>">Delete</a>
                             </td>

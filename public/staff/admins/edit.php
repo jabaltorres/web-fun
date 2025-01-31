@@ -1,6 +1,5 @@
 <?php
-
-require_once('../../../src/initialize.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 require_login();
 

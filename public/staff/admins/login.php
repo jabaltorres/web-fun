@@ -1,5 +1,4 @@
 <?php
-// Require initialization file
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 $errors = [];
