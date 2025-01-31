@@ -62,7 +62,6 @@ try {
 }
 
 include('../templates/layout/header.php');
-
 ?>
     <div class="hero">
         <div class="jumbotron jumbotron-fluid px-4">
@@ -101,7 +100,7 @@ include('../templates/layout/header.php');
                     </div>
                 <?php endif; ?>
 
-                <section class="">
+                <section class="record-table">
                     <?php if (!empty($records)): ?>
                         <table class="table table-striped">
                             <thead>
@@ -143,4 +142,4 @@ include('../templates/layout/header.php');
         </div>
     </div>
 
-<?php include('../templates/layout/footer.php'); ?>
+    <?php include('../templates/layout/footer.php'); ?>

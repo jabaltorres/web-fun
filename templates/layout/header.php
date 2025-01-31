@@ -12,6 +12,13 @@
 		$adminMessage = "admin is not logged in";
 	}
 
+use Fivetwofive\KrateCMS\KrateSettings;
+
+function getSetting($key, $default = null) {
+    global $db;
+    return KrateSettings::getInstance($db)->getSetting($key, $default);
+}
+
 ?>
 <!doctype html>
 
@@ -42,12 +49,17 @@
     <link rel="stylesheet" href="/assets/css/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/public.css">
     <link rel="stylesheet" href="<?php echo STYLES_PATH; ?>/simple.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/9b6vdo6p51qb89toe164crjl7qyvmjbnp3qyv43i0d4wp3mw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <!-- Add dark mode styles -->
+    <style>
+ 
+    </style>
 </head>
 
-<body>
+<body class="<?php echo getSetting('dark_mode', false) ? 'dark-mode' : ''; ?>">
 
 <?php
 	if ($adminLoggedIn) {
@@ -58,7 +70,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="/">KrateCMS</a>
+        <a class="navbar-brand" href="/">
+            <?php if (!empty($config['site']['logo_url'])): ?>
+                <img class="logo" src="<?= htmlspecialchars($config['site']['logo_url']) ?>" alt="<?= htmlspecialchars($config['site']['name']) ?>" height="30">
+            <?php else: ?>
+                <?= htmlspecialchars($config['site']['name']) ?>
+            <?php endif; ?>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

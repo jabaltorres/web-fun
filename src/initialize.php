@@ -6,25 +6,50 @@ session_start(); // turn on sessions
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
+use Fivetwofive\KrateCMS\KrateSettings;
+
+// Load all required files first
+require_once('functions.php');
+require_once('database.php');
+require_once('query_functions.php');
+require_once('validation_functions.php');
+require_once('auth_functions.php');
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/..'); // Adjust the path to your .env location
 $dotenv->load(); // Load environment variables from .env
 
-// Site configuration
+// Database connection setup
+$dbConfig = [
+    'server' => $_ENV['DB_SERVER'],
+    'user' => $_ENV['DB_USER'],
+    'pass' => $_ENV['DB_PASS'],
+    'name' => $_ENV['DB_NAME']
+];
+
+// Connect to database
+$db = db_connect(
+    $dbConfig['server'], 
+    $dbConfig['user'], 
+    $dbConfig['pass'], 
+    $dbConfig['name']
+);
+
+// Initialize settings manager
+$settingsManager = KrateSettings::getInstance($db);
+
+// Site configuration with database settings integration
 $config = [
     'site' => [
         'owner' => $_ENV['SITE_OWNER'],
         'author' => $_ENV['SITE_AUTHOR'],
         'name' => $_ENV['SITE_NAME'],
         'tagline' => $_ENV['SITE_TAGLINE'],
-        'description' => $_ENV['SITE_DESCRIPTION']
+        'description' => $_ENV['SITE_DESCRIPTION'],
+        
+        'logo_url' => $settingsManager->getSetting('logo_url', ''), // Add logo_url from settings
+        'audio_source_url' => $settingsManager->getSetting('audio_source', ''), // Add audio source from settings
     ],
-    'db' => [
-        'server' => $_ENV['DB_SERVER'],
-        'user' => $_ENV['DB_USER'],
-        'pass' => $_ENV['DB_PASS'],
-        'name' => $_ENV['DB_NAME']
-    ],
+    'db' => $dbConfig,
     'api' => [
         'postmark' => $_ENV['POSTMARK_API_TOKEN']
     ]
@@ -59,18 +84,6 @@ $publicEnd = strpos($_SERVER['SCRIPT_NAME'], '/public');
 $docRoot = substr($_SERVER['SCRIPT_NAME'], 0, $publicEnd);
 define('WWW_ROOT', $docRoot);
 
-require_once('functions.php');
-require_once('database.php');
-require_once('query_functions.php');
-require_once('validation_functions.php');
-require_once('auth_functions.php');
-
-$db = db_connect(
-    $config['db']['server'], 
-    $config['db']['user'], 
-    $config['db']['pass'], 
-    $config['db']['name']
-);
 $errors = [];
 
 /**

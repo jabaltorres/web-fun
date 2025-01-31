@@ -4,6 +4,7 @@ declare(strict_types=1);
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
 
 use Fivetwofive\KrateCMS\UserManager;
+use Fivetwofive\KrateCMS\KrateSettings;
 
 try {
     // Initialize the UserManager with the existing $db connection
@@ -27,6 +28,79 @@ try {
     if ($isAdmin) {
         $result = $userManager->getAllUsers();
         $users = $result ? $result : null;
+    }
+
+    // Fetch all settings
+    $settings = KrateSettings::getInstance($db)->getAllSettings($isAdmin);
+
+    // Add this after the user check and before fetching settings
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+        $settings = KrateSettings::getInstance($db);
+        
+        switch ($_POST['action']) {
+            case 'edit_setting':
+                try {
+                    $success = $settings->setSetting(
+                        $_POST['setting_key'],
+                        $_POST['setting_value'],
+                        $_POST['setting_type'],
+                        $_POST['category'],
+                        $_POST['description'],
+                        isset($_POST['is_private']),
+                        $_SESSION['user_id']
+                    );
+                    
+                    if (!$success) {
+                        throw new Exception('Failed to update setting');
+                    }
+                    
+                    $_SESSION['message'] = "Setting updated successfully";
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit;
+                    
+                } catch (Exception $e) {
+                    $error = $e->getMessage();
+                }
+                break;
+                
+            case 'delete_setting':
+                try {
+                    if ($settings->deleteSetting($_POST['setting_key'])) {
+                        $_SESSION['message'] = "Setting deleted successfully";
+                        header('Location: ' . $_SERVER['PHP_SELF']);
+                        exit;
+                    }
+                    throw new Exception('Failed to delete setting');
+                } catch (Exception $e) {
+                    $error = $e->getMessage();
+                }
+                break;
+
+            case 'add_setting':
+                try {
+                    $success = $settings->setSetting(
+                        $_POST['setting_key'],
+                        $_POST['setting_value'],
+                        $_POST['setting_type'],
+                        $_POST['category'],
+                        $_POST['description'],
+                        isset($_POST['is_private']),
+                        $_SESSION['user_id']
+                    );
+                    
+                    if (!$success) {
+                        throw new Exception('Failed to add setting');
+                    }
+                    
+                    $_SESSION['message'] = "Setting added successfully";
+                    header('Location: ' . $_SERVER['PHP_SELF']);
+                    exit;
+                    
+                } catch (Exception $e) {
+                    $error = $e->getMessage();
+                }
+                break;
+        }
     }
 
     // Page metadata
