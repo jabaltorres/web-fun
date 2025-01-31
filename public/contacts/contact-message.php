@@ -1,13 +1,13 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/classes/KrateUserManager.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/Fivetwofive/KrateCMS/UserManager.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php'); // Autoload Postmark
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+use Fivetwofive\KrateCMS\UserManager;
 use Postmark\PostmarkClient;
 
-// Initialize the KrateUserManager with the existing $db connection
-$userManager = new KrateUserManager($db);
+// Initialize the UserManager with the existing $db connection
+$userManager = new UserManager($db);
 
 // Ensure the user is logged in
 $userManager->checkLoggedIn();
