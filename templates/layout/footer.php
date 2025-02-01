@@ -7,6 +7,8 @@
             <li><a href="https://github.com/jabaltorres/web-fun/wiki" target="_blank">Github Wiki</a></li>
             <li><a href="https://github.com/users/jabaltorres/projects/2" target="_blank">Github Project</a></li>
         </ul>
+        
+        <?php echo displaySocialLinks($settingsManager); ?>
     </div>
 </footer>
 
