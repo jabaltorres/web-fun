@@ -115,8 +115,10 @@
             <?php if ($isAdmin && $users && $users->num_rows > 0): ?>
                 
                 <section class="card mb-4">
+                    <div class="card-header">
+                        <h2 class="h4 mb-0">Environment Configs</h2>
+                    </div>
                     <div class="card-body">
-                        <h2 class="card-title h4">Site Settings</h2>
                         <p>These core settings are managed through environment variables in the <code>.env</code> file. For security reasons, they can only be modified by updating the environment configuration.</p>
                         <dl class="row">
                             <dt class="col-sm-3">Site Owner</dt>
