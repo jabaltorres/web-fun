@@ -81,7 +81,9 @@ include('../templates/layout/header.php');
                 <img class="record-img record-img-front" src="<?php echo '/uploads/' . basename($record['front_image']); ?>" alt="Front of Record">
                 <p>Front Image</p>
             <?php else: ?>
-                <img  class="record-img record-img-front" src="assets/images/placeholder/placeholder-1x1.png" alt="Placeholder Record Image">
+                <!-- <img  class="record-img record-img-front" src="assets/images/placeholder/placeholder-1x1.png" alt="Placeholder Record Image"> -->
+                <img  class="record-img record-img-front" src="assets/images/vinyl-record.png" alt="Placeholder Record Image">
+
                 <p>Placeholder Image</p>
             <?php endif; ?>
 
