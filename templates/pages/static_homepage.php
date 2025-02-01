@@ -1,7 +1,8 @@
 <div id="hero" class="jumbotron jumbotron-fluid px-4">
   <div class="container">
-    <h1 class="display-4">KrateCMS</h1>
-    <p class="lead">A simple record management system built with PHP and MySQL.</p>
+    <h1 class="display-4"><?= $settingsManager->getSetting('site_name'); ?></h1>
+    <p class="lead"><?= $settingsManager->getSetting('site_tagline'); ?></p>
+    
     <a href="https://github.com/jabaltorres/web-fun/wiki" class="btn btn-secondary" target="_blank">Github Wiki</a>
   </div>
 </div>
