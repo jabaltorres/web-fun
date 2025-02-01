@@ -1,6 +1,6 @@
 <?php
 	// Set default page title if not provided
-	$page_title = $page_title ?? 'KrateCMS'; // Use null coalescing operator
+	$page_title = $settingsManager->getSetting('site_name') ?? 'KrateCMS'; // Use null coalescing operator
 
 	$url = $url ?? '';
 	$is_logged_in = isset($_SESSION['user_id']);
