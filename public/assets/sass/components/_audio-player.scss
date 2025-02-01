@@ -61,3 +61,17 @@
         }
     }
 }
+
+
+.audio-player .progress-bar {
+    height: 4px;
+    cursor: pointer;
+}
+
+.audio-player .btn-link {
+    padding: 0.25rem 0.5rem;
+}
+
+.audio-player .btn-link:hover {
+    color: #007bff;
+}
