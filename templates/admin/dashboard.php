@@ -96,12 +96,18 @@
         <div class="col-12">
             <h1 class="mb-4">Admin Dashboard</h1>
             
+            <!-- Dark Mode Toggle Button -->
+            <button id="darkModeToggle" class="btn btn-secondary mb-4">Toggle Dark Mode</button>
+            
             <?php if ($loggedIn): ?>
                 <section class="card mb-4">
                     <div class="card-body">
-                        <p class="card-text h2">
-                            Hello, <?= htmlspecialchars($first_name ?? 'there') ?>!
-                        </p>
+                        <p class="card-text h2">Hello, <?= htmlspecialchars($first_name ?? 'there') ?>!</p>
+                        
+                        <!-- Display current date and time -->
+                        <div class="current-datetime mb-4">
+                            <p id="currentDateTime">Current Date and Time: <?= date('Y-m-d H:i:s') ?></p>
+                        </div>
                     </div>
                 </section>
             <?php endif; ?>
@@ -459,6 +465,35 @@ document.addEventListener('DOMContentLoaded', () => {
             asc = !asc;
         });
     });
+
+    // Function to update the current date and time
+    const updateDateTime = () => {
+        const now = new Date(); // Get the current date and time in the browser's timezone
+        const formattedDateTime = now.toLocaleString(); // Format to local string
+        document.getElementById('currentDateTime').innerText = `Current Date and Time: ${formattedDateTime}`;
+    };
+
+    // Update the time every second
+    setInterval(updateDateTime, 1000);
+
+    // Dark Mode Toggle Functionality
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Check local storage for dark mode preference
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        // Save preference to local storage
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            localStorage.removeItem('darkMode');
+        }
+    });
 });
 </script>
 
@@ -483,5 +518,20 @@ document.addEventListener('DOMContentLoaded', () => {
     .fa-sort-up,
     .fa-sort-down {
         color: #007bff;
+    }
+
+    .dark-mode {
+        background-color: #121212;
+        color: #ffffff;
+    }
+
+    .dark-mode .card {
+        background-color: #1e1e1e;
+        border-color: #333333;
+    }
+
+    .dark-mode .btn {
+        background-color: #333333;
+        color: #ffffff;
     }
 </style> 
