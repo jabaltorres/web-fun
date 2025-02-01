@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $client = new PostmarkClient($postmarkApiToken);
 
             // Email content
-            $fromEmail = "info@fivetwofive.com"; // Replace with your email
-            $toEmail = "jabal@fivetwofive.com"; // Replace with admin email
+            $fromEmail = $settingsManager->getSetting('postmark_from_email');
+            $toEmail = $settingsManager->getSetting('admin_email');
             $htmlBody = "<p><strong>Name:</strong> {$name}</p><p><strong>Email:</strong> {$email}</p><p><strong>Message:</strong><br/>{$message}</p>";
 
             // Send email using Postmark
