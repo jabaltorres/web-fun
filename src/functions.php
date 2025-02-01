@@ -262,4 +262,36 @@ function show_preview_alert()
     $previewAlertMessage .= '</div>';
     echo $previewAlertMessage;
 }
+
+/**
+ * Generate HTML for social media links based on the provided settings.
+ *
+ * This function checks the settings manager for the URLs of social media platforms
+ * and constructs an unordered list of links. If no URLs are found, an empty string
+ * is returned.
+ *
+ * @param SettingsManager $settingsManager An instance of the SettingsManager
+ *                        to retrieve social media URLs.
+ * @return string HTML markup for the social media links, or an empty string if
+ *                no links are available.
+ */
+function displaySocialLinks($settingsManager): string {
+    $socialSettings = [
+        'Facebook' => 'social_facebook',
+        'Instagram' => 'social_instagram',
+        'LinkedIn' => 'social_linkedin'
+    ];
+
+    $output = '';
+
+    foreach ($socialSettings as $platform => $setting) {
+        $url = $settingsManager->getSetting($setting);
+        if ($url) {
+            $output .= "<li><a href=\"{$url}\" target=\"_blank\">{$platform}</a></li>";
+        }
+    }
+
+    return $output ? "<ul>{$output}</ul>" : '';
+}
+
 ?>
