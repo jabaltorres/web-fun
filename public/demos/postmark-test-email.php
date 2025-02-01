@@ -3,6 +3,14 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php'); // Ensure Po
 
 use Postmark\PostmarkClient;
 
+// Ensure the Postmark API token is set
+if (empty($postmarkApiToken)) {
+    // Set a fallback token for testing (remove this in production)
+    $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN']; // Replace with your actual Postmark API token
+    // Alternatively, throw an exception or handle the error as needed
+    // throw new Exception("Postmark API token is not set.");
+}
+
 /**
  * Sends a test email using Postmark to multiple recipients.
  *
@@ -55,7 +63,7 @@ function sendTestEmail(array $recipients, string $subject, string $htmlBody, str
             echo "Test email sent successfully to " . htmlspecialchars($toEmail) . ".<br>";
         } catch (Exception $e) {
             error_log("Failed to send email to {$toEmail}: " . $e->getMessage());
-            echo "Failed to send email to " . htmlspecialchars($toEmail) . ".<br>";
+            echo "Failed to send email to " . htmlspecialchars($toEmail) . ". Error: " . htmlspecialchars($e->getMessage()) . "<br>";
         }
     }
 }
