@@ -1,14 +1,18 @@
+<?php
+// type of array
+$navItems = [
+        ['href' => '/page.php?subject_id=1', 'label' => 'About'],
+        ['href' => '/page.php?subject_id=3', 'label' => 'Documentation'],
+        ['href' => '/page.php?subject_id=5', 'label' => 'Resources'],
+        ['href' => '/contact-us.php', 'label' => 'Contact Us'],
+        ['href' => '/fuck-you.php', 'label' => 'Fuck You'],
+    ];
+?>
+
 <ul class="navbar-nav ml-auto mr-md-2">
-    <li class="nav-item">
-        <a class="nav-link" href="/page.php?subject_id=1">About</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/page.php?subject_id=3">Documentation</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/page.php?subject_id=5">Resources</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/contact-us.php">Contact Us</a>
-    </li>
+    <?php foreach ($navItems as $item): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= htmlspecialchars($item['href']) ?>"><?= htmlspecialchars($item['label']) ?></a>
+        </li>
+    <?php endforeach; ?>
 </ul>
