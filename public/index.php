@@ -66,8 +66,9 @@ include('../templates/layout/header.php');
     <div class="hero">
         <div class="jumbotron jumbotron-fluid px-4">
             <div class="container text-center">
-                <h1 class="display-4">KrateCMS</h1>
-                <p class="lead">a simple record management system built with PHP and MySQL.</p>
+
+                <h1 class="display-4"><?= $settingsManager->getSetting('site_name'); ?></h1>
+                <p class="lead"><?= $settingsManager->getSetting('site_tagline'); ?></p>
 
                 <!-- Search Form -->
                 <form class="form-inline d-block mx-auto" action="index.php" method="GET">
