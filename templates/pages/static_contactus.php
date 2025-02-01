@@ -1,10 +1,3 @@
-<div id="hero" class="jumbotron jumbotron-fluid px-4">
-    <div class="container">
-        <h1 class="display-4">Contact Us</h1>
-        <p class="lead">A simple record management system built with PHP and MySQL.</p>
-    </div>
-</div>
-
 <div id="content" class="content">
     <div class="row">
         <div class="col-12">
@@ -16,48 +9,25 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12 col-md-4">
-            <div class="card p-3">
-                <h3>LinkedIn</h3>
-                <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
-                <a href="https://www.linkedin.com/in/jabaltorres/" target="_blank" class="btn btn-primary">LinkedIn</a>
-            </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="card p-3">
-                <h3>Facebook</h3>
-                <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
-                <a href="https://www.facebook.com/jabal.torres" target="_blank" class="btn btn-primary">Facebook</a>
-            </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="card p-3">
-                <h3>Instagram</h3>
-                <p>Bacon ipsum dolor amet turducken jowl flank strip steak pork shank.</p>
-                <a href="https://www.instagram.com/jabaltorres/" target="_blank" class="btn btn-primary">Instagram</a>
-            </div>
-        </div>
-    </div>
-
     <?php
     global $loggedIn;
-    if ($loggedIn) :?>
-
+    if ($loggedIn) :
+        // Fetch the current user's details
+        $userDetails = $userManager->getCurrentUserDetails();
+    ?>
         <div class="row mt-4">
             <div class="col-12">
                 <h2>Logged In User Contact Us</h2>
                 <form action="contact.php" method="POST" class="border p-3">
                     <div class="form-group">
                         <label for="name">Your Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($userDetails['first_name'] . ' ' . $userDetails['last_name']) ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Your Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($userDetails['email']) ?>" required>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
 
                     <div class="form-group">

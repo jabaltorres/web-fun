@@ -539,4 +539,19 @@ class UserManager
         
         return null;
     }
+
+    /**
+     * Retrieves the details of the currently logged-in user.
+     *
+     * @return array|null Returns user data array if found, null otherwise
+     * @throws Exception If database query fails
+     */
+    public function getCurrentUserDetails(): ?array
+    {
+        if (!isset($_SESSION['user_id'])) {
+            return null; // User is not logged in
+        }
+
+        return $this->getUserDetails((int)$_SESSION['user_id']);
+    }
 } 
