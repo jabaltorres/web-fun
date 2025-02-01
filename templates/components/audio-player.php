@@ -4,7 +4,7 @@ if (!defined('PRIVATE_PATH')) {
 }
 ?>
 
-<section class="fixed-bottom bg-light border-top py-2">
+<section class="fixed-bottom border-top py-2">
     <div class="container">
         <div class="audio-player" id="mainAudioPlayer">
             <div class="d-flex align-items-center">
@@ -32,26 +32,6 @@ if (!defined('PRIVATE_PATH')) {
     </div>
 </section>
 
-<style>
-.audio-player {
-    padding: 0.5rem;
-}
-
-.audio-player .progress-bar {
-    height: 4px;
-    cursor: pointer;
-}
-
-.audio-player .btn-link {
-    color: #333333;
-    padding: 0.25rem 0.5rem;
-}
-
-.audio-player .btn-link:hover {
-    color: #007bff;
-}
-</style>
-
 <script src="<?php echo url_for('/assets/js/AudioElement.js'); ?>"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -63,6 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-console.log('Audio Source URL:', '<?= htmlspecialchars($config['site']['audio_source_url']) ?>');
+// console.log('Audio Source URL:', '<?= htmlspecialchars($config['site']['audio_source_url']) ?>');
 </script>
 
