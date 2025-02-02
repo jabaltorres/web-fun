@@ -64,17 +64,53 @@
             echo $page_demo_subheader->render();
         ?>
     </section>
+    
+    <section class="grouping mb-5">
+        <h3 class="mb-3">Grouping</h3>
+        <p class="mb-4">This is a grouping of demo pages</p>
+        <div class="row">
+            <?php
+            $technology_links = [
+                ['name' => 'CSS', 'url' => 'css/index.php', 'icon' => 'fa-brands fa-css3-alt'],
+                ['name' => 'JavaScript', 'url' => 'javascript/index.php', 'icon' => 'fa-brands fa-js'],
+                ['name' => 'PHP', 'url' => 'php/index.php', 'icon' => 'fa-brands fa-php'],
+            ];
+
+            foreach ($technology_links as $link): ?>
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card h-100 p-4 hover-shadow">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a href="<?= h($link['url']) ?>" class="text-decoration-none">
+                                <i class="<?= $link['icon'] ?> me-2"></i>
+                                <?= h($link['name']) ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
 
     <section class="mb-5">
-      <div class="row">
-          <?php
-          foreach ($page_demo_links as $page_demo_link) {
-              if ($page_demo_link['visible'] == '1') {
-                  echo '<div class="col-12 col-md-3"><span class="card p-4 mb-4"><a id="link-'.  h($page_demo_link['id']) .'" href="'. h($page_demo_link['page_url']) . '">' . h($page_demo_link['demo_page']) . '</a></span></div>';
-              }
-          }
-          ?>
-      </div>
+        <div class="row">
+            <?php foreach ($page_demo_links as $demo_link): ?>
+                <?php if ($demo_link['visible'] === '1'): ?>
+                    <div class="col-12 col-md-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <a 
+                                    id="link-<?= h($demo_link['id']) ?>"
+                                    href="<?= h($demo_link['page_url']) ?>"
+                                    class="text-decoration-none"
+                                >
+                                    <?= h($demo_link['demo_page']) ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
     </section>
 
 </div><!-- end .container -->

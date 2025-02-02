@@ -54,23 +54,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $front_image_path = $_POST['existing_front_image'] ?? null;
     $back_image_path = $_POST['existing_back_image'] ?? null;
 
-    // Define upload directory
-    $upload_dir = '../../public/records/uploads/';
+    // Define upload directory relative to the public folder
+    $upload_dir = 'uploads/';  // This will be relative to the current script location
 
-    // Ensure directory exists
-    if (!is_dir($upload_dir)) {
-        mkdir($upload_dir, 0755, true);
-    }
-
-    // Handle image uploads or keep existing images
+    // Handle image uploads with proper path handling
     if (!empty($_FILES['front_image']['name'])) {
-        $front_image_path = $upload_dir . basename($_FILES['front_image']['name']);
-        move_uploaded_file($_FILES['front_image']['tmp_name'], $front_image_path);
+        $front_image_name = time() . '_' . preg_replace("/[^a-zA-Z0-9.]/", "_", $_FILES['front_image']['name']);
+        $front_image_path = $upload_dir . $front_image_name;
+        if (!move_uploaded_file($_FILES['front_image']['tmp_name'], $front_image_path)) {
+            error_log("Failed to move uploaded front image to: " . $front_image_path);
+            $front_image_path = $_POST['existing_front_image'] ?? null;
+        }
     }
 
     if (!empty($_FILES['back_image']['name'])) {
-        $back_image_path = $upload_dir . basename($_FILES['back_image']['name']);
-        move_uploaded_file($_FILES['back_image']['tmp_name'], $back_image_path);
+        $back_image_name = time() . '_' . preg_replace("/[^a-zA-Z0-9.]/", "_", $_FILES['back_image']['name']);
+        $back_image_path = $upload_dir . $back_image_name;
+        if (!move_uploaded_file($_FILES['back_image']['tmp_name'], $back_image_path)) {
+            error_log("Failed to move uploaded back image to: " . $back_image_path);
+            $back_image_path = $_POST['existing_back_image'] ?? null;
+        }
     }
 
     // Update the record in the database

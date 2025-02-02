@@ -19,6 +19,24 @@ include('../../../templates/layout/header.php');
         <?php include('../../../templates/components/headline.php'); ?>
     </section>
 
+    <section class="js-navigation">
+        <h3>Navigation Items</h3>
+        <nav class="nav flex-column">
+            <?php
+            $navigationJson = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/data/navigation.json');
+            $navigationData = json_decode($navigationJson, true);
+            
+            foreach ($navigationData['navigation'] as $navItem) {
+                echo sprintf(
+                    '<a class="nav-link inline-block" href="%s">%s</a>',
+                    htmlspecialchars($navItem['url']),
+                    htmlspecialchars($navItem['text'])
+                );
+            }
+            ?>
+        </nav>
+    </section>
+
     <section class="js-playground">
 
         <?php timeOfDayGreeting(); ?>

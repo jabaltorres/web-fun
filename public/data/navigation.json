@@ -1,16 +1,16 @@
 {
   "navigation": [
-    { "text" : "brand",
-      "url"  : "/public/brand.php"
+    { "text" : "About",
+      "url"  : "/page.php?subject_id=1"
     },
-    { "text" : "elements",
-      "url"  : "/public/elements.php"
+    { "text" : "Documentation",
+      "url"  : "/page.php?subject_id=3"
     },
-    { "text" : "components",
-      "url"  : "/public/components.php"
+    { "text" : "Resources",
+      "url"  : "/page.php?subject_id=5"
     },
-    { "text" : "templates",
-      "url"  : "/public/templates.php"
+    { "text" : "Contact Us",
+      "url"  : "/contact-us.php"
     }
   ]
 }
