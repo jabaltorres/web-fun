@@ -13,7 +13,7 @@
     //custom CSS for this page only
     $custom_class = "object-obsession-page";
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 <div class="container py-5 <?php echo $custom_class; ?>">
@@ -172,4 +172,4 @@ include('../../templates/layout/header.php');
     </script>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

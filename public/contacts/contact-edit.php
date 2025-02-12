@@ -67,7 +67,7 @@ $page_heading = "Edit the contact";
 $page_subheading = "Test the database functionality";
 $custom_class = "edit-contact-page";
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 
 ?>
 
@@ -130,4 +130,4 @@ include('../../templates/layout/header.php');
     </section>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

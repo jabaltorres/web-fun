@@ -35,7 +35,7 @@ if (is_post_request()) {
 ?>
 
 <?php $page_title = 'Create Admin'; ?>
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
 <div id="content" class="container py-5">
     <div class="row">
@@ -94,4 +94,4 @@ if (is_post_request()) {
     </div>
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

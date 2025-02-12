@@ -6,7 +6,7 @@ $subject_set = find_all_subjects();
 ?>
 
 <?php $page_title = 'Subjects'; ?>
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
 <div id="content" class="container py-5">
     <div class="row">
@@ -57,4 +57,4 @@ $subject_set = find_all_subjects();
 
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

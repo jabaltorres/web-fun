@@ -11,7 +11,7 @@ try {
     $userManager->checkLoggedIn();
 
     $page_title = 'Staff Menu';
-    include('../../templates/layout/header.php');
+    include('../../templates/layouts/header.php');
 } catch (Exception $e) {
     error_log("Staff page error: " . $e->getMessage());
     header("Location: /users/login.php");
@@ -33,4 +33,4 @@ try {
     </div>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

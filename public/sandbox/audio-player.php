@@ -13,7 +13,7 @@ $page_subheading = "List of WIP demos";
 $custom_class = "demo-page";
 //custom CSS for this page only
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 <?php
@@ -61,4 +61,4 @@ $page_audio_subheader->setContent("Testing out building and using an audio playe
 
     </div><!-- end .container -->
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

@@ -16,7 +16,7 @@ try {
     $error = "An error occurred while loading the page.";
 }
 
-include('../templates/layout/header.php');
+include('../templates/layouts/header.php');
 ?>
 
     <div id="main" class="py-4">
@@ -34,4 +34,4 @@ include('../templates/layout/header.php');
         </div>
     </div>
 
-<?php include('../templates/layout/footer.php'); ?>
+<?php include('../templates/layouts/footer.php'); ?>

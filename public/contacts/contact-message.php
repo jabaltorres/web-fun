@@ -100,7 +100,7 @@ $page_heading = "Contact Message";
 $page_subheading = "Send a message to your contact";
 $custom_class = "contact-message-page";
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
     <script>
@@ -181,4 +181,4 @@ include('../../templates/layout/header.php');
         </div><!-- end .row -->
 
     </div><!-- end .container -->
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

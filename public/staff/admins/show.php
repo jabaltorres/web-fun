@@ -9,7 +9,7 @@ $admin = find_admin_by_id($id);
 ?>
 
 <?php $page_title = 'Show Admin'; ?>
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
     <div id="content" class="container py-4">
         <div class="row">
@@ -50,4 +50,4 @@ $admin = find_admin_by_id($id);
         </div>
     </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

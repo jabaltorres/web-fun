@@ -61,7 +61,7 @@ try {
     $error = "An error occurred while loading the page.";
 }
 
-include('../templates/layout/header.php');
+include('../templates/layouts/header.php');
 ?>
     <div class="hero">
         <div class="jumbotron jumbotron-fluid px-4">
@@ -143,4 +143,4 @@ include('../templates/layout/header.php');
         </div>
     </div>
 
-    <?php include('../templates/layout/footer.php'); ?>
+    <?php include('../templates/layouts/footer.php'); ?>

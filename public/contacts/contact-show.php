@@ -16,7 +16,7 @@ $title = "DB Test Page";
 $page_heading = "This is the DB Test page";
 $page_subheading = "Welcome to the DB test page";
 $custom_class = "db-test-page";
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 <div class="container py-5 <?php echo $custom_class; ?>">
@@ -73,4 +73,4 @@ include('../../templates/layout/header.php');
     </div>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

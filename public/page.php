@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
 
 ?>
 
-<?php include('../templates/layout/header.php'); ?>
+<?php include('../templates/layouts/header.php'); ?>
 
 <?php
     // If previewing, show an alert
@@ -89,4 +89,4 @@ if (isset($_GET['id'])) {
   </div>
 </div>
 
-<?php include('../templates/layout/footer.php'); ?>
+<?php include('../templates/layouts/footer.php'); ?>

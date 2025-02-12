@@ -1,0 +1,31 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}PHP Sandbox{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+        <h1>Hello world!</h1>
+
+        <p>This is where I can test things without messing up anything within the codebase.</p>
+
+        <div class="headline">
+            <h4>{{ headline }}</h4>
+        </div>
+
+        <div class="carousel-blurbs">
+            {% for blurb in carousel_blurbs %}
+                <div class="blurb">
+                    <ul>
+                        <li>{{ blurb }}</li>
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    console.log('Test console log message from twig');
+</script>
+{% endblock %} 

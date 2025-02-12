@@ -15,7 +15,7 @@ $page_heading = "Create a new contact";
 $page_subheading = "Test the database functionality";
 $custom_class = "add-email-page";
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 <div class="container py-5 <?php echo $custom_class; ?>">
@@ -72,4 +72,4 @@ include('../../templates/layout/header.php');
     </section>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

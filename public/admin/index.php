@@ -108,13 +108,13 @@ try {
     $pageDescription = 'Administrative dashboard for ' . $config['site']['name'];
 
     // Include header with page metadata
-    include_once('../../templates/layout/header.php');
+    include_once('../../templates/layouts/header.php');
     
     // Include admin dashboard template
     include_once('../../templates/admin/dashboard.php');
     
     // Include footer
-    include_once('../../templates/layout/footer.php');
+    include_once('../../templates/layouts/footer.php');
 
 } catch (Exception $e) {
     // Log the error

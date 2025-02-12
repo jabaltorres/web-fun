@@ -15,6 +15,9 @@ node_modules/*
 # Ignore db credentials
 src/db_credentials.php
 /vendor/
+/cache/twig/*
+!cache/twig/.gitkeep
+composer.lock
 
 .env
 

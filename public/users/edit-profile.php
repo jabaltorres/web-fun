@@ -51,7 +51,7 @@ try {
     $error = $e->getMessage();
 }
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 <div class="container py-5">
@@ -97,4 +97,4 @@ include('../../templates/layout/header.php');
     </form>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

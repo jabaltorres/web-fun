@@ -12,7 +12,7 @@
     //custom CSS for this page only
     $custom_class = "page-lorem-ipsum";
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 
@@ -87,4 +87,4 @@ include('../../templates/layout/header.php');
     </section>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

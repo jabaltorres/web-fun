@@ -27,7 +27,7 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
 // Fetch contacts with the specified sorting (assuming find_all_contacts() is already implemented)
 $contact_set = find_all_contacts($sort);
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
   <div class="<?php echo $custom_class; ?> container">
@@ -140,4 +140,4 @@ include('../../templates/layout/header.php');
     });
   </script>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

@@ -6,7 +6,7 @@ $page_set = find_all_pages();
 ?>
 
 <?php $page_title = 'Pages'; ?>
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
 <div id="content" class="container py-5">
     <div class="row">
@@ -60,4 +60,4 @@ $page_set = find_all_pages();
     </div>
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

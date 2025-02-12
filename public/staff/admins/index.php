@@ -8,7 +8,7 @@ $admin_set = find_all_admins();
 ?>
 
 <?php $page_title = 'Admins'; ?>
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
 <div id="content" class="container py-4">
     <div class="row">
@@ -55,4 +55,4 @@ $admin_set = find_all_admins();
     </div>
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

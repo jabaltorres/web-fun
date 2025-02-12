@@ -46,7 +46,7 @@
 ?>
 
 <?php
-    include('../../templates/layout/header.php');
+    include('../../templates/layouts/header.php');
 ?>
 
 <div class="container <?php echo $custom_class; ?>">
@@ -115,4 +115,4 @@
 
 </div><!-- end .container -->
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

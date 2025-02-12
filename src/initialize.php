@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 ob_start(); // output buffering is turned on
 session_start(); // turn on sessions
 
@@ -81,7 +83,7 @@ define('IMAGES_PATH', $baseUrl . '/assets/images');
 
 // Define WWW_ROOT
 $publicEnd = strpos($_SERVER['SCRIPT_NAME'], '/public');
-$docRoot = substr($_SERVER['SCRIPT_NAME'], 0, $publicEnd);
+$docRoot = ($publicEnd !== false) ? substr($_SERVER['SCRIPT_NAME'], 0, $publicEnd) : '';
 define('WWW_ROOT', $docRoot);
 
 $errors = [];
@@ -114,3 +116,45 @@ spl_autoload_register(function($class) {
         require_once $file;
     }
 });
+
+// Initialize Twig
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
+$twig = new \Twig\Environment($loader, [
+    'cache' => __DIR__ . '/../cache/twig',
+    'debug' => true, // Set to false in production
+    'auto_reload' => true, // Set to false in production
+]);
+
+// Add any global variables or functions you want available in all templates
+$twig->addGlobal('site_name', $config['site']['name'] ?? 'KrateCMS');
+
+// Add CSRF protection function
+$twig->addFunction(new \Twig\TwigFunction('csrf_token', function() {
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}));
+
+if (!isset($db)) {
+    // If database connection isn't already established, establish it here
+    try {
+        $db = new PDO(
+            "mysql:host={$config['database']['host']};dbname={$config['database']['name']};charset=utf8mb4",
+            $config['database']['user'],
+            $config['database']['pass'],
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ]
+        );
+    } catch (PDOException $e) {
+        error_log('Database connection failed: ' . $e->getMessage());
+        die('Could not connect to the database.');
+    }
+}
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}

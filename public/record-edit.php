@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
         exit;
     }
 
-    include('../templates/layout/header.php');
+    include('../templates/layouts/header.php');
     ?>
 
     <!-- Display the form -->
@@ -255,7 +255,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' || !empty($success_message)) {
         </div>
     </div>
 
-    <?php include('../templates/layout/footer.php'); ?>
+    <?php include('../templates/layouts/footer.php'); ?>
     <?php
 }
 ?>

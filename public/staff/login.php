@@ -18,7 +18,7 @@ if (is_post_request()) {
 ?>
 
 <?php $page_title = 'Log in'; ?>
-<?php include('../../templates/layout/header.php'); ?>
+<?php include('../../templates/layouts/header.php'); ?>
 
 <div id="content" class="container">
     <div class="row">
@@ -38,4 +38,4 @@ if (is_post_request()) {
     </div>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

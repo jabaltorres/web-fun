@@ -6,7 +6,7 @@ $page_heading = "Javascript playground";
 $page_subheading = "Scripting Sandbox";
 $custom_class = "javascript-page mb-4";
 
-include('../../../templates/layout/header.php');
+include('../../../templates/layouts/header.php');
 ?>
 
 <div class="container py-5 <?php echo $custom_class; ?>">
@@ -66,4 +66,4 @@ include('../../../templates/layout/header.php');
 
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

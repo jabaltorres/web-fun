@@ -1,0 +1,28 @@
+{% extends "layouts/base.twig" %}
+
+{% block title %}Error 500 | Internal Server Error{% endblock %}
+
+{% block description %}An unexpected error occurred{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h1 class="card-title text-danger mb-4">500 - Internal Server Error</h1>
+                    <p class="card-text mb-4">An unexpected error has occurred. Our team has been notified.</p>
+                    
+                    {% if app.debug and error %}
+                        <div class="alert alert-danger text-left">
+                            <pre class="mb-0"><code>{{ error }}</code></pre>
+                        </div>
+                    {% endif %}
+                    
+                    <a href="/" class="btn btn-primary">Return to Homepage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

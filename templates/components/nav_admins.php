@@ -14,7 +14,7 @@
                         ['label' => 'Pages', 'url' => '/staff/pages/index.php', 'id' => 'pages'],
                         ['label' => 'Subjects', 'url' => '/staff/subjects/index.php', 'id' => 'subjects'],
                         ['label' => 'Contacts', 'url' => '/contacts/index.php', 'id' => 'contacts'],
-                        ['label' => 'Demos', 'url' => '/demos/index.php', 'id' => 'demos'],
+                        ['label' => 'Sandbox', 'url' => '/sandbox/index.php', 'id' => 'sandbox'],
                     ];
 
                     // Generate navigation items

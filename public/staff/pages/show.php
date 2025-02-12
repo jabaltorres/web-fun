@@ -8,7 +8,7 @@ $page = find_page_by_id($id);
 ?>
 
 <?php $page_title = 'Show Page'; ?>
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
 <div id="content" class="container">
     <div class="row">
@@ -55,4 +55,4 @@ $page = find_page_by_id($id);
     </div>
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

@@ -15,7 +15,7 @@ $page_subheading = "Welcome to the mustache";
 $custom_class = "mustache-page";
 //custom CSS for this page only
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 <div class="container py-5 <?= htmlspecialchars($custom_class); ?>">
 
@@ -50,4 +50,4 @@ include('../../templates/layout/header.php');
   </section>
 
 </div>
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

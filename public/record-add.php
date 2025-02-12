@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-include('../templates/layout/header.php');
+include('../templates/layouts/header.php');
 ?>
 
     <div class="container py-4">
@@ -220,4 +220,4 @@ include('../templates/layout/header.php');
         </div>
     </div>
 
-<?php include('../templates/layout/footer.php'); ?>
+<?php include('../templates/layouts/footer.php'); ?>

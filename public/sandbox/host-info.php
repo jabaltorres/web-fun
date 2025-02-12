@@ -22,7 +22,7 @@
     //custom CSS for this page only
     $custom_class = "host-page";
 
-    include('../../templates/layout/header.php');
+    include('../../templates/layouts/header.php');
 
 ?>
 
@@ -93,4 +93,4 @@
     </section>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

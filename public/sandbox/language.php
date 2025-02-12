@@ -13,7 +13,7 @@
       $language = $_COOKIE['language'] ?? 'None';
     }
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 
 ?>
 
@@ -49,4 +49,4 @@ include('../../templates/layout/header.php');
 
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

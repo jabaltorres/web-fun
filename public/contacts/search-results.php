@@ -30,7 +30,7 @@ function search_contacts($search) {
 
 $contacts = search_contacts($search);
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 
@@ -82,4 +82,4 @@ include('../../templates/layout/header.php');
     <?php mysqli_free_result($contacts); ?>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

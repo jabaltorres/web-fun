@@ -38,7 +38,7 @@ mysqli_free_result($page_set);
 ?>
 
 <?php $page_title = 'Create Page'; ?>
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
 <script>
     tinymce.init({
@@ -126,4 +126,4 @@ mysqli_free_result($page_set);
     </div>
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

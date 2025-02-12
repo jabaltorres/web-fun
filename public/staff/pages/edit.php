@@ -39,7 +39,7 @@ $page_title = 'Edit Page';
 
 ?>
 
-<?php include('../../../templates/layout/header.php'); ?>
+<?php include('../../../templates/layouts/header.php'); ?>
 
 <script>
   tinymce.init({
@@ -129,4 +129,4 @@ $page_title = 'Edit Page';
     </div>
 </div>
 
-<?php include('../../../templates/layout/footer.php'); ?>
+<?php include('../../../templates/layouts/footer.php'); ?>

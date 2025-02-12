@@ -43,7 +43,7 @@ if (!$record) {
     exit;
 }
 
-include('../templates/layout/header.php');
+include('../templates/layouts/header.php');
 ?>
 
 <style>
@@ -201,4 +201,4 @@ include('../templates/layout/header.php');
     });
 </script>
 
-<?php include('../templates/layout/footer.php'); ?>
+<?php include('../templates/layouts/footer.php'); ?>

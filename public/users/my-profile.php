@@ -22,7 +22,7 @@ try {
     $error = "An error occurred while loading your profile.";
 }
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 
 <div class="container py-5">
@@ -43,4 +43,4 @@ include('../../templates/layout/header.php');
   <?php endif; ?>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

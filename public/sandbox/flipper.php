@@ -4,7 +4,7 @@
     $custom_class = "big-flipper"; //custom CSS for this page only
 
     require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-    include('../../templates/layout/header.php');
+    include('../../templates/layouts/header.php');
 ?>
 
     <div class="container py-5 <?php echo $custom_class; ?>">
@@ -36,4 +36,4 @@
         </section>
     </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

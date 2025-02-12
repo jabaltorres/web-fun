@@ -25,7 +25,7 @@ $custom_class = "db-test-page";
 $contact_set = find_all_contacts();
 // From globe_bank tutorial
 
-include('../../templates/layout/header.php');
+include('../../templates/layouts/header.php');
 ?>
 <div class="container py-5<?php echo $custom_class; ?>">
     <section>
@@ -73,4 +73,4 @@ include('../../templates/layout/header.php');
     </section>
 </div>
 
-<?php include('../../templates/layout/footer.php'); ?>
+<?php include('../../templates/layouts/footer.php'); ?>

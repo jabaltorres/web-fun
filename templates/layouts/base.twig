@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block description %}{% endblock %}">
+        <title>{% block title %}{% endblock %}</title>
+        
+        {# Favicon #}
+        <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+        
+        {# CSS #}
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/public.css">
+        
+        {# Additional CSS #}
+        {% block styles %}{% endblock %}
+    </head>
+    <body class="{{ bodyClass|default('') }}">
+        {# Header #}
+        {% include 'components/header.twig' %}
+        
+        {# Main Content #}
+        <main id="main-content">
+            {% block body %}{% endblock %}
+        </main>
+        
+        {# Footer #}
+        {% include 'components/footer.twig' %}
+        
+        {# JavaScript #}
+        <script src="/assets/js/app.js"></script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html> 
