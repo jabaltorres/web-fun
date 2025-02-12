@@ -2,7 +2,6 @@
 @import "base/variables.scss";
 @import "base/util-classes.scss";
 @import "base/mixins.scss";
-@import "base/placeholders.scss";
 @import "base/typography.scss";
 
 @mixin rotate( $val: 90deg ) {
@@ -69,22 +68,6 @@
 @mixin box-shadow($h: 0px, $v:6px, $b: 24px, $s: -01px, $c: rgba(0,0,0,0.2)) {
   box-shadow: $h $v $b $s $c;
 }
-
-//a {
-//  color: $color-accent;
-//
-//  &:focus {
-//    color: $color-accent;
-//  }
-//
-//  @extend %transition;
-//  // &:link{}
-//  // &:visited{}
-//  // &:active{}
-//  &:hover {
-//    color: $color-primary;
-//  }
-//}
 
 time {
   color: $color-dark-shade;

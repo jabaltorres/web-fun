@@ -10,15 +10,12 @@
   top: 35px;
   right: 35px;
   cursor: pointer;
-  // @include rotate($val:0deg);
-  @extend %transition;
   @include media-breakpoint-up(md){
     display:none;
   }
 
   span{
     display: block;
-    @extend %position-absolute;
     height: 5px;
     width: 100%;
     background: $color-primary;
@@ -26,7 +23,6 @@
     opacity: 1;
     left: 0;
     @include rotate($val:0deg);
-    @extend %transition;
   }
  
   & span:nth-child(1) {

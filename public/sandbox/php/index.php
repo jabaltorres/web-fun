@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 $twig = require_once __DIR__ . '/../../../config/bootstrap.php';
 
-function getHeadline(string $headlineText): string 
+const HEADLINE_TEXT = "This Not a test";
+
+function getHeadline(): string 
 {
-    return $headlineText;
+    return HEADLINE_TEXT;
 }
 
 $carouselBlurbs = [
@@ -15,6 +17,6 @@ $carouselBlurbs = [
 ];
 
 echo $twig->render('sandbox/php/index.twig', [
-    'headline' => getHeadline("This is only a test"),
+    'headline' => getHeadline(),
     'carousel_blurbs' => $carouselBlurbs
 ]);

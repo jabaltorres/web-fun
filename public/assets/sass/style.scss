@@ -37,9 +37,7 @@
 
 /* Import base and other partials */
 @import "base";
-@import "navigation";
 @import "nav-icon";
-@import "hero";
 @import "forms";
 @import "elements/elements";
 @import "components/components";
@@ -55,16 +53,6 @@ body {
   font-family: 'Gudea', sans-serif;
 }
 
-section {
-  hgroup, .hgroup {
-    @extend %margin-bottom;
-  }
-
-  h1 {
-    margin-bottom: calc($global-margin / 2);
-  }
-}
-
 .close-btn {
   background-color: #ccc;
   padding: 0.5em 1em;
@@ -76,8 +64,6 @@ section {
 }
 
 .main-header {
-  padding-top: 25px;
-
   a {
     display: inline-block;
     margin-bottom: 10px;
@@ -85,8 +71,6 @@ section {
 }
 
 article {
-  @extend %margin-bottom;
-
   footer {
     border-top: $global-border;
   }
@@ -112,7 +96,6 @@ article {
     background-color: #000;
     visibility: hidden;
     @include scaleX($val: 0);
-    @extend %transition;
   }
 
   &:hover:before {

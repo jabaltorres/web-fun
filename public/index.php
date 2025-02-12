@@ -143,4 +143,4 @@ include('../templates/layouts/header.php');
         </div>
     </div>
 
-    <?php include('../templates/layouts/footer.php'); ?>
+<?php include('../templates/layouts/footer.php'); ?>

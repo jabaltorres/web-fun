@@ -1,6 +1,6 @@
 const bigFlipper = {
 	wrapper: document.getElementById('big-flipper-wrapper'),
-	images: document.getElementsByTagName('img'),
+	images: Array.from(document.querySelectorAll('#big-flipper-wrapper img')),
 	originalOrder: [],  // Array to hold clones of the original images
 
 	// Set the height of the wrapper to the height of the first image
@@ -17,7 +17,7 @@ const bigFlipper = {
 
 	// Captures the original order of images on page load
 	captureOriginalOrder: function() {
-		this.originalOrder = Array.from(this.images).map(img => img.cloneNode());
+		this.originalOrder = this.images.map(img => img.cloneNode());
 	},
 
 	// Restores the images to their original order
@@ -25,7 +25,7 @@ const bigFlipper = {
 		let parent = this.wrapper;
 		parent.innerHTML = ''; // Clear the current images
 		this.originalOrder.forEach(img => parent.appendChild(img));
-		this.images = document.getElementsByTagName('img'); // Reassign the images collection
+		this.images = Array.from(document.querySelectorAll('#big-flipper-wrapper img')); // Reassign the images collection
 		this.makeFirstImageActive();
 	},
 
