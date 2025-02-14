@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Fivetwofive\KrateCMS;
+namespace Fivetwofive\KrateCMS\Models;
 
 /**
  * Class AudioElement

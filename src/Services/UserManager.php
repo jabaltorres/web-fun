@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fivetwofive\KrateCMS;
+namespace Fivetwofive\KrateCMS\Services;
 
-use mysqli;
+use Fivetwofive\KrateCMS\Core\Database\DatabaseConnection;
 use mysqli_result;
 use mysqli_stmt;
 use Postmark\PostmarkClient;
 use InvalidArgumentException;
 use Exception;
+use Fivetwofive\KrateCMS\Models\KrateSettings;
 
 /**
  * Class UserManager
@@ -41,19 +42,19 @@ class UserManager
         'Guest'
     ];
 
-    /** @var mysqli */
-    private $db;
+    /** @var DatabaseConnection */
+    private DatabaseConnection $db;
 
     /** @var PostmarkClient|null */
-    private $postmarkClient;
+    private ?PostmarkClient $postmarkClient = null;
 
     /**
      * Constructor to initialize the UserManager.
      *
-     * @param mysqli $dbConnection Database connection object
+     * @param DatabaseConnection $dbConnection Database connection object
      * @param string|null $postmarkApiToken Optional Postmark API token
      */
-    public function __construct(mysqli $dbConnection, ?string $postmarkApiToken = null)
+    public function __construct(DatabaseConnection $dbConnection, ?string $postmarkApiToken = null)
     {
         $this->db = $dbConnection;
         if ($postmarkApiToken) {
@@ -71,34 +72,30 @@ class UserManager
      */
     public function login(string $username, string $password): ?array
     {
-        $stmt = $this->prepareStatement(
+        $stmt = $this->db->prepare(
             "SELECT user_id, password_hash, first_name, email, role 
              FROM users 
-             WHERE username = ?",
-            "s",
-            $username
+             WHERE username = ?"
         );
-
+        
+        $stmt->bind_param("s", $username);
         $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows === 1) {
-            $stmt->bind_result($user_id, $hashed_password, $first_name, $email, $role);
-            $stmt->fetch();
-
-            if (password_verify($password, $hashed_password)) {
-                $this->sendLoginNotificationToAdmins($first_name, $email);
-
+        $result = $stmt->get_result();
+        
+        if ($row = $result->fetch_assoc()) {
+            if (password_verify($password, $row['password_hash'])) {
+                $this->sendLoginNotificationToAdmins($row['first_name'], $row['email']);
+                
                 return [
-                    'user_id' => $user_id,
+                    'user_id' => $row['user_id'],
                     'username' => $username,
-                    'first_name' => $first_name,
-                    'email' => $email,
-                    'role' => $role
+                    'first_name' => $row['first_name'],
+                    'email' => $row['email'],
+                    'role' => $row['role']
                 ];
             }
         }
-
+        
         return null;
     }
 
@@ -203,28 +200,23 @@ class UserManager
      */
     public function changePassword(int $userId, string $currentPassword, string $newPassword): bool
     {
-        $stmt = $this->prepareStatement(
-            "SELECT password_hash FROM users WHERE user_id = ?",
-            "i",
-            $userId
+        $stmt = $this->db->prepare(
+            "SELECT password_hash FROM users WHERE user_id = ?"
         );
         
+        $stmt->bind_param("i", $userId);
         $stmt->execute();
-        $stmt->bind_result($hashedPassword);
+        $result = $stmt->get_result();
         
-        if (!$stmt->fetch() || !password_verify($currentPassword, $hashedPassword)) {
+        if (!$row = $result->fetch_assoc() || !password_verify($currentPassword, $row['password_hash'])) {
             return false;
         }
         
-        $stmt->free_result();
-
         $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $updateStmt = $this->prepareStatement(
-            "UPDATE users SET password_hash = ? WHERE user_id = ?",
-            "si",
-            $newHashedPassword,
-            $userId
+        $updateStmt = $this->db->prepare(
+            "UPDATE users SET password_hash = ? WHERE user_id = ?"
         );
+        $updateStmt->bind_param("si", $newHashedPassword, $userId);
 
         return $updateStmt->execute();
     }
@@ -261,18 +253,16 @@ class UserManager
      */
     public function isAdmin(int $userId): bool 
     {
-        $stmt = $this->prepareStatement(
-            "SELECT role FROM users WHERE user_id = ?",
-            "i",
-            $userId
+        $stmt = $this->db->prepare(
+            "SELECT role FROM users WHERE user_id = ?"
         );
         
+        $stmt->bind_param("i", $userId);
         $stmt->execute();
-        $stmt->bind_result($role);
-        $stmt->fetch();
-        $stmt->close();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
         
-        return $role === 'Administrator';
+        return $row && $row['role'] === 'Administrator';
     }
 
     /**
@@ -283,7 +273,7 @@ class UserManager
      */
     public function getAllUsers(): ?mysqli_result
     {
-        $stmt = $this->prepareStatement(
+        $stmt = $this->db->prepare(
             "SELECT user_id, first_name, last_name, email, username, role 
              FROM users 
              ORDER BY user_id ASC"
@@ -346,42 +336,13 @@ class UserManager
     ): bool {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
-        $stmt = $this->prepareStatement(
+        $stmt = $this->db->prepare(
             "INSERT INTO users (username, password_hash, email, first_name, last_name, role) 
-             VALUES (?, ?, ?, ?, ?, ?)",
-            "ssssss",
-            $username,
-            $hashed_password,
-            $email,
-            $first_name,
-            $last_name,
-            $role
+             VALUES (?, ?, ?, ?, ?, ?)"
         );
+        $stmt->bind_param("ssssss", $username, $hashed_password, $email, $first_name, $last_name, $role);
 
         return $stmt->execute();
-    }
-
-    /**
-     * Prepares an SQL statement with parameters.
-     *
-     * @param string $query SQL query
-     * @param string $types Parameter types
-     * @param mixed ...$params Query parameters
-     * @return mysqli_stmt
-     * @throws Exception If statement preparation fails
-     */
-    private function prepareStatement(string $query, string $types = "", ...$params): mysqli_stmt
-    {
-        $stmt = $this->db->prepare($query);
-        if ($stmt === false) {
-            throw new Exception("Failed to prepare statement: " . $this->db->error);
-        }
-
-        if ($types && $params) {
-            $stmt->bind_param($types, ...$params);
-        }
-
-        return $stmt;
     }
 
     /**
@@ -401,17 +362,12 @@ class UserManager
             );
         }
 
-        $stmt = $this->prepareStatement(
+        $stmt = $this->db->prepare(
             "UPDATE users 
              SET first_name = ?, last_name = ?, email = ?, role = ? 
-             WHERE user_id = ?",
-            "ssssi",
-            $profileData['first_name'],
-            $profileData['last_name'],
-            $profileData['email'],
-            $profileData['role'] ?? 'Standard User',  // Default to 'Standard User' instead of 'User'
-            $userId
+             WHERE user_id = ?"
         );
+        $stmt->bind_param("ssssi", $profileData['first_name'], $profileData['last_name'], $profileData['email'], $profileData['role'] ?? 'Standard User', $userId);
 
         return $stmt->execute();
     }
@@ -426,12 +382,10 @@ class UserManager
      */
     public function doesUserExist(string $username, string $email): bool
     {
-        $stmt = $this->prepareStatement(
-            "SELECT username FROM users WHERE username = ? OR email = ?",
-            "ss",
-            $username,
-            $email
+        $stmt = $this->db->prepare(
+            "SELECT username FROM users WHERE username = ? OR email = ?"
         );
+        $stmt->bind_param("ss", $username, $email);
         $stmt->execute();
         $stmt->store_result();
         return $stmt->num_rows > 0;
@@ -446,20 +400,16 @@ class UserManager
      */
     public function getUserDetails(int $user_id): ?array
     {
-        $stmt = $this->prepareStatement(
+        $stmt = $this->db->prepare(
             "SELECT username, email, first_name, last_name, role 
              FROM users 
-             WHERE user_id = ?",
-            "i",
-            $user_id
+             WHERE user_id = ?"
         );
         
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
-            return $result->fetch_assoc() ?: null;
-        }
-        
-        return null;
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc() ?: null;
     }
 
     /**
@@ -473,12 +423,10 @@ class UserManager
     public function adminChangeUserPassword(int $userId, string $newPassword): bool
     {
         $newHashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-        $stmt = $this->prepareStatement(
-            "UPDATE users SET password_hash = ? WHERE user_id = ?",
-            "si",
-            $newHashedPassword,
-            $userId
+        $stmt = $this->db->prepare(
+            "UPDATE users SET password_hash = ? WHERE user_id = ?"
         );
+        $stmt->bind_param("si", $newHashedPassword, $userId);
 
         return $stmt->execute();
     }
@@ -531,7 +479,11 @@ class UserManager
         }
         $sql .= " ORDER BY {$sortField} {$sortOrder}";
 
-        $stmt = $this->prepareStatement($sql, $types, ...$params);
+        $stmt = $this->db->prepare($sql);
+        
+        if ($types && $params) {
+            $stmt->bind_param($types, ...$params);
+        }
         
         if ($stmt->execute()) {
             return $stmt->get_result();

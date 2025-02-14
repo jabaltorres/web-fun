@@ -1,19 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace Fivetwofive\KrateCMS;
+namespace Fivetwofive\KrateCMS\Models;
+
+use Fivetwofive\KrateCMS\Core\Database\DatabaseConnection;
 
 class KrateSettings {
-    private $db;
-    private static $instance = null;
-    private $settings = [];
+    private DatabaseConnection $db;
+    private static ?self $instance = null;
+    private array $settings = [];
     
     /**
      * Constructor - establishes database connection
      * 
      * @param \mysqli $db Database connection
      */
-    private function __construct(\mysqli $db) {
+    private function __construct(DatabaseConnection $db) {
         $this->db = $db;
         $this->loadSettings();
     }
@@ -24,7 +26,7 @@ class KrateSettings {
      * @param \mysqli $db Database connection
      * @return self
      */
-    public static function getInstance(\mysqli $db): self {
+    public static function getInstance(DatabaseConnection $db): self {
         if (self::$instance === null) {
             self::$instance = new self($db);
         }
@@ -35,16 +37,13 @@ class KrateSettings {
      * Load all settings from database
      */
     private function loadSettings(): void {
-        $sql = "SELECT * FROM settings";
-        $result = mysqli_query($this->db, $sql);
+        $result = $this->db->query("SELECT * FROM settings");
         
-        if ($result) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $this->settings[$row['setting_key']] = [
-                    'value' => $row['setting_value'],
-                    'type' => $row['setting_type']
-                ];
-            }
+        while ($row = $result->fetch_assoc()) {
+            $this->settings[$row['setting_key']] = [
+                'value' => $row['setting_value'],
+                'type' => $row['setting_type']
+            ];
         }
     }
     
@@ -142,11 +141,10 @@ class KrateSettings {
                     updated_by = VALUES(updated_by),
                     updated_at = CURRENT_TIMESTAMP";
         
-        $stmt = mysqli_prepare($this->db, $sql);
+        $stmt = $this->db->prepare($sql);
         $isPrivateInt = $isPrivate ? 1 : 0;
         
-        mysqli_stmt_bind_param(
-            $stmt, 
+        $stmt->bind_param(
             'sssssiis',
             $key,
             $value,
@@ -158,7 +156,7 @@ class KrateSettings {
             $userId
         );
         
-        $success = mysqli_stmt_execute($stmt);
+        $success = $stmt->execute();
         
         if ($success) {
             // Update local cache
@@ -179,10 +177,10 @@ class KrateSettings {
      */
     public function deleteSetting(string $key): bool {
         $sql = "DELETE FROM settings WHERE setting_key = ?";
-        $stmt = mysqli_prepare($this->db, $sql);
-        mysqli_stmt_bind_param($stmt, 's', $key);
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('s', $key);
         
-        $success = mysqli_stmt_execute($stmt);
+        $success = $stmt->execute();
         
         if ($success) {
             unset($this->settings[$key]);
@@ -204,11 +202,11 @@ class KrateSettings {
         }
         $sql .= " ORDER BY category, setting_key";
         
-        $result = mysqli_query($this->db, $sql);
+        $result = $this->db->query($sql);
         $settings = [];
         
         if ($result) {
-            while ($row = mysqli_fetch_assoc($result)) {
+            while ($row = $result->fetch_assoc()) {
                 $settings[] = $row;
             }
         }
@@ -225,12 +223,12 @@ class KrateSettings {
     public function getSettingDescription(string $key): string
     {
         $sql = "SELECT description FROM settings WHERE setting_key = ?";
-        $stmt = mysqli_prepare($this->db, $sql);
-        mysqli_stmt_bind_param($stmt, 's', $key);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('s', $key);
+        $stmt->execute();
+        $result = $stmt->get_result();
         
-        if ($row = mysqli_fetch_assoc($result)) {
+        if ($row = $result->fetch_assoc()) {
             return $row['description'];
         }
         
