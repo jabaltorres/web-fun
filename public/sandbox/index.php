@@ -35,8 +35,8 @@ try {
 
     // Links to demo pages
     $pageDemoLinks = [
-        ['id' => 'bpm-counter', 'visible' => '1', 'demo_page' => 'BPM Counter', 'page_url' => 'bpm-counter.php'],
-        ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio Player', 'page_url' => 'audio-player.php'],
+        ['id' => 'bpm-counter', 'visible' => '1', 'demo_page' => 'BPM Counter', 'page_url' => 'sandbox/bpm-counter.php'],
+        ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio Player', 'page_url' => 'sandbox/audio-player.php'],
         ['id' => 'flipper', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
         ['id' => 'javascript', 'visible' => '1', 'demo_page' => 'JavaScript', 'page_url' => 'javascript/index.php'],
         ['id' => 'heroes', 'visible' => '1', 'demo_page' => 'Heroes', 'page_url' => 'heroes.php'],
@@ -50,9 +50,9 @@ try {
     ];
 
     $technologyLinks = [
-        ['name' => 'CSS', 'url' => 'css/index.php', 'icon' => 'fa-brands fa-css3-alt'],
-        ['name' => 'JavaScript', 'url' => 'javascript/index.php', 'icon' => 'fa-brands fa-js'],
-        ['name' => 'PHP', 'url' => 'php/index.php', 'icon' => 'fa-brands fa-php'],
+        ['name' => 'CSS', 'url' => 'sandbox/css/index.php', 'icon' => 'fa-brands fa-css3-alt'],
+        ['name' => 'JavaScript', 'url' => 'sandbox/javascript/index.php', 'icon' => 'fa-brands fa-js'],
+        ['name' => 'PHP', 'url' => 'sandbox/php/index.php', 'icon' => 'fa-brands fa-php'],
     ];
 
     // Include the header with access to all services
