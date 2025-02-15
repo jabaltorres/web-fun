@@ -2,7 +2,7 @@
 declare(strict_types=1);
 // src/Http/Controllers/RecordController.php
 
-namespace Fivetwofive\KrateCMS\Http\Controllers;
+namespace Fivetwofive\KrateCMS\Controllers;
 
 use Fivetwofive\KrateCMS\Services\RecordService;
 use Fivetwofive\KrateCMS\Core\Helpers\RequestHelper;

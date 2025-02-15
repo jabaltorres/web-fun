@@ -8,7 +8,7 @@ ini_set('display_errors', '1');
 // Load bootstrap and get application container
 $app = require_once(__DIR__ . '/../config/bootstrap.php');
 
-use Fivetwofive\KrateCMS\Http\Controllers\RecordController;
+use Fivetwofive\KrateCMS\Controllers\RecordController;
 use Fivetwofive\KrateCMS\Services\RecordService;
 
 try {
