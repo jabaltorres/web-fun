@@ -25,16 +25,24 @@
   - Use proper PHPDoc annotations for collections and complex types
   - Protect the application from CSRF attacks
 
-  Dependencies
-  - Composer for dependency management
+PHP Comments:
+- Follow PSR standards and provide clear documentation for developers working with this code
+- Document the overall purpose of the class
+- Describe each method's functionality
+- Document parameters and return types
+- Note potential exceptions that may be thrown
+- Explain the purpose of key operations
 
-  JavaScript
-  - Use vanilla JavaScript ES6+
-  - Write concise comments for code
-  - Improve code for readability and reduced redundancy
+Dependencies
+- Composer for dependency management
 
-  CSS
-  - Use Bootstrap 4 for styling
-  - Use custom CSS for additional styling
-  - Use SASS for complex styling
-  - Do not use shorthand properties
+JavaScript
+- Use vanilla JavaScript ES6+
+- Write concise comments for code
+- Improve code for readability and reduced redundancy
+
+CSS
+- Use Bootstrap 4 for styling
+- Use custom CSS for additional styling
+- Use SASS for complex styling
+- Do not use shorthand properties

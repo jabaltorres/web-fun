@@ -82,24 +82,68 @@ class PageService {
      * Finds all pages belonging to a specific subject
      * @param int $subjectId Subject ID to find pages for
      * @param array $options Additional options (e.g. visibility filter)
-     * @return array Array of pages belonging to the subject
+     * @return \mysqli_result Result set of pages belonging to the subject
      */
-    public function findPagesBySubjectId(int $subjectId, array $options = []): array {
-        $visible = $options['visible'] ?? true;
-        
+    public function findPagesBySubjectId(int $subjectId, array $options = []): \mysqli_result {
+        // Build the SQL query with proper visibility handling
         $sql = "SELECT * FROM pages WHERE subject_id = ?";
-        if ($visible) {
-            $sql .= " AND visible = 1";
-        }
+        
+        // Convert visibility to integer for SQL
+        $visible = isset($options['visible']) ? (int)$options['visible'] : 1;
+        $sql .= " AND visible = ?";
+        
         $sql .= " ORDER BY position ASC";
         
+        // Debug the SQL query
+        error_log("SQL Query for pages: " . $sql . " [subject_id: $subjectId, visible: $visible]");
+        
         $stmt = $this->db->prepare($sql);
-        $stmt->bind_param('i', $subjectId);
+        if ($stmt === false) {
+            throw new \Exception("Failed to prepare statement: " . $this->db->getConnection()->error);
+        }
+        
+        $stmt->bind_param('ii', $subjectId, $visible);
         $stmt->execute();
+        
         $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+        $count = $result->num_rows;
+        error_log("Found $count pages for subject $subjectId");
+        
+        return $result;
     }
 
+    /**
+     * Finds a subject by its ID
+     * @param int $id Subject ID to search for
+     * @param array $options Additional options (e.g. visibility filter)
+     * @return array|null Subject data array or null if not found
+     */
+    public function findSubjectById(int $id, array $options = []): ?array {
+        $sql = "SELECT * FROM subjects WHERE id = ?";
+        
+        // Check if visibility filter should be applied
+        $visible = $options['visible'] ?? null;
+        if ($visible !== null) {
+            $sql .= " AND visible = ?";
+        }
+        
+        $sql .= " LIMIT 1";
+        
+        $stmt = $this->db->prepare($sql);
+        if ($stmt === false) {
+            throw new \Exception("Failed to prepare statement: " . $this->db->getConnection()->error);
+        }
+        
+        // Bind parameters based on whether visibility filter is included
+        if ($visible !== null) {
+            $stmt->bind_param('ii', $id, $visible);
+        } else {
+            $stmt->bind_param('i', $id);
+        }
+        
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
 
     public function validatePage($page)
     {
