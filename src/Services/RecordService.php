@@ -13,6 +13,12 @@ class RecordService
     public function __construct(DatabaseConnection $db)
     {
         $this->db = $db;
+        $this->ensureTableExists();
+    }
+    
+    public function getDb(): DatabaseConnection
+    {
+        return $this->db;
     }
     
     /**
@@ -21,28 +27,41 @@ class RecordService
      */
     public function findAll(?string $searchTerm = null): array
     {
-        if ($searchTerm) {
-            $stmt = $this->db->prepare(
-                "SELECT * FROM vinyl_records 
-                WHERE title LIKE ? OR artist LIKE ? 
-                ORDER BY created_at DESC"
-            );
-            $searchPattern = '%' . $searchTerm . '%';
-            $stmt->bind_param('ss', $searchPattern, $searchPattern);
-            $stmt->execute();
-            $result = $stmt->get_result();
-        } else {
-            $result = $this->db->query(
-                "SELECT * FROM vinyl_records ORDER BY created_at DESC"
-            );
+        try {
+            if ($searchTerm) {
+                $stmt = $this->db->prepare(
+                    "SELECT * FROM vinyl_records 
+                    WHERE title LIKE ? OR artist LIKE ? 
+                    ORDER BY created_at DESC"
+                );
+                if (!$stmt) {
+                    return [];
+                }
+                $searchPattern = '%' . $searchTerm . '%';
+                $stmt->bind_param('ss', $searchPattern, $searchPattern);
+                $stmt->execute();
+                $result = $stmt->get_result();
+            } else {
+                $result = $this->db->query(
+                    "SELECT * FROM vinyl_records ORDER BY created_at DESC"
+                );
+                
+                if ($result === false) {
+                    return [];
+                }
+            }
+            
+            $records = [];
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $records[] = Record::fromArray($row);
+                }
+            }
+            
+            return $records;
+        } catch (\Exception $e) {
+            return [];
         }
-        
-        $records = [];
-        while ($row = $result->fetch_assoc()) {
-            $records[] = Record::fromArray($row);
-        }
-        
-        return $records;
     }
     
     public function findById(int $id): ?Record
@@ -178,7 +197,7 @@ class RecordService
 
         $stmt = $this->db->prepare($sql);
         if (!$stmt) {
-            throw new \Exception("Failed to prepare statement: " . $this->db->error);
+            throw new \Exception("Failed to prepare statement: " . $this->db->getConnection()->error);
         }
 
         // Required fields
@@ -248,5 +267,65 @@ class RecordService
 
         // Return the updated record
         return $this->findById($id);
+    }
+
+    private function ensureTableExists(): void
+    {
+        try {
+            // Check if table exists
+            $result = $this->db->query("SHOW TABLES LIKE 'vinyl_records'");
+            
+            if ($result->num_rows === 0) {
+                error_log("Creating vinyl_records table...");
+                
+                // Create the table
+                $sql = "CREATE TABLE vinyl_records (
+                    record_id INT AUTO_INCREMENT PRIMARY KEY,
+                    title VARCHAR(255) NOT NULL,
+                    artist VARCHAR(255) NOT NULL,
+                    release_year INT,
+                    genre VARCHAR(100),
+                    label VARCHAR(255),
+                    catalog_number VARCHAR(100),
+                    format VARCHAR(50),
+                    speed VARCHAR(20),
+                    `condition` VARCHAR(50),
+                    purchase_date DATE,
+                    purchase_price DECIMAL(10,2),
+                    notes TEXT,
+                    front_image VARCHAR(255),
+                    back_image VARCHAR(255),
+                    purchase_link VARCHAR(255),
+                    audio_file_url VARCHAR(255),
+                    bpm INT,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                )";
+                
+                $this->db->query($sql);
+                error_log("Table created successfully");
+                
+                // Insert test data
+                $this->insertTestData();
+            }
+        } catch (\Exception $e) {
+            error_log("Error ensuring table exists: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    private function insertTestData(): void
+    {
+        try {
+            $sql = "INSERT INTO vinyl_records (title, artist, release_year) VALUES 
+                ('Test Album 1', 'Test Artist 1', 2023),
+                ('Test Album 2', 'Test Artist 2', 2022)";
+            
+            $this->db->query($sql);
+            error_log("Test data inserted successfully");
+        } catch (\Exception $e) {
+            error_log("Error inserting test data: " . $e->getMessage());
+            throw $e;
+        }
     }
 } 

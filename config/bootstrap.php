@@ -31,6 +31,11 @@ use Fivetwofive\KrateCMS\Services\SocialLinksService;
 use Fivetwofive\KrateCMS\Services\RecordService;
 use Fivetwofive\KrateCMS\Services\UserManager;
 use Fivetwofive\KrateCMS\Models\KrateSettings;
+use Fivetwofive\KrateCMS\Http\Controllers\RecordController;
+use Fivetwofive\KrateCMS\Models\Record; 
+
+// Initialize the application container
+$app = [];
 
 // Database configuration
 $dbConfig = [
@@ -40,9 +45,15 @@ $dbConfig = [
     'name' => $_ENV['DB_NAME']
 ];
 
+error_log("Initializing core services in bootstrap.php");
+error_log("Database config: " . print_r($dbConfig, true));
+
 // Initialize database connection
 $dbConnection = new DatabaseConnection($dbConfig);
 $dbService = new DatabaseService($dbConnection);
+
+// Add database connection to the app container
+$app['databaseConnection'] = $dbConnection;
 
 // Initialize settings manager with DatabaseConnection
 $settingsManager = KrateSettings::getInstance($dbConnection);
@@ -68,6 +79,12 @@ $requestHelper = new RequestHelper();
 $validationService = new ValidationService();
 $adminAuthService = new AdminAuthService();
 
+// Add helpers to the app container
+$app['requestHelper'] = $requestHelper;
+$app['sessionHelper'] = $sessionHelper;
+$app['htmlHelper'] = $htmlHelper;
+$app['settingsManager'] = $settingsManager;
+
 // Initialize business services
 $socialLinksService = new SocialLinksService($settingsManager, $htmlHelper);
 $recordService = new RecordService($dbConnection);
@@ -89,6 +106,13 @@ $config = [
         'postmark' => $_ENV['POSTMARK_API_TOKEN']
     ]
 ];
+
+// Add services to app container
+$app['socialLinksService'] = $socialLinksService;
+$app['recordService'] = $recordService;
+$app['userManager'] = $userManager;
+$app['urlHelper'] = $urlHelper;
+$app['config'] = $config;
 
 // Define path constants
 define('PRIVATE_PATH', ROOT_PATH . '/src');
@@ -137,21 +161,5 @@ function redirect_to(string $location): never {
     $urlHelper->redirect($location);
 }
 
-// Return important variables
-return [
-    'twig' => $twig,
-    'db' => $dbConnection,
-    'dbService' => $dbService,
-    'config' => $config,
-    'settingsManager' => $settingsManager,
-    'urlHelper' => $urlHelper,
-    'htmlHelper' => $htmlHelper,
-    'sessionHelper' => $sessionHelper,
-    'requestHelper' => $requestHelper,
-    'validationService' => $validationService,
-    'adminAuthService' => $adminAuthService,
-    'socialLinksService' => $socialLinksService,
-    'recordService' => $recordService,
-    'userManager' => $userManager,
-    'baseUrl' => $baseUrl
-]; 
+// Return the application container
+return $app; 

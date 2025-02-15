@@ -28,10 +28,10 @@ class Record
     private ?string $updatedAt;
 
     public function __construct(
-        int $id,
-        string $title,
-        string $artist,
-        int $releaseYear,
+        int $id = 0,
+        string $title = '',
+        string $artist = '',
+        int $releaseYear = 0,
         ?string $description = null,
         ?string $frontImage = null,
         ?string $backImage = null,
@@ -281,7 +281,7 @@ class Record
      */
     public static function fromArray(array $data): self
     {
-        return new self(
+        $record = new self(
             (int) ($data['record_id'] ?? 0),
             (string) ($data['title'] ?? ''),
             (string) ($data['artist'] ?? ''),
@@ -304,6 +304,8 @@ class Record
             (string) ($data['created_at'] ?? date('Y-m-d H:i:s')),
             $data['updated_at'] ?? null
         );
+        
+        return $record;
     }
 
     /**
@@ -336,5 +338,12 @@ class Record
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt
         ];
+    }
+
+    public function findAll(?string $searchTerm = null): array
+    {
+        // Implementation of findAll method
+        // This method should return an array of records matching the search term
+        return [];
     }
 } 

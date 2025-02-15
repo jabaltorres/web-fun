@@ -4,8 +4,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-
 # [Unreleased]
+
+## [0.1.2] - 2024-01-16
+
+### Changed
+- Refactored application to use MVC architecture
+  - Moved business logic from `public/index.php` to dedicated controllers and services
+  - Implemented `RecordController` to handle record-related requests
+  - Created `RecordService` for database operations and business logic
+  - Introduced proper `Record` model with type-safe properties and methods
+  - Separated views into organized template structure:
+    - `/templates/records/` for record-related views
+    - `/templates/shared/` for common layouts
+- Enhanced dependency management
+  - Implemented proper dependency injection in controllers
+  - Added service container in `bootstrap.php`
+  - Improved helper class organization
+- Added type hints and return types throughout codebase
+- Improved error handling in database operations
+
+### Removed
+- Removed inline PHP from `public/index.php`
+- Removed debug logging statements across all files
+- Removed redundant comments and documentation
+
+### Fixed
+- Fixed missing `urlHelper` dependency in record templates
+- Fixed table display issues by properly passing dependencies to views
+- Fixed database connection handling in service layer
+
+### Architecture
+- Implemented proper MVC separation:
+  - Models: Handle data structure and validation
+  - Views: Handle presentation logic in templates
+  - Controllers: Coordinate between models and views
+- Improved application bootstrapping process
+- Added service layer for business logic
 
 ## [0.1.1] - 2025-02-15
 

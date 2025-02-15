@@ -12,6 +12,13 @@ class DatabaseConnection
     
     public function __construct(array $config)
     {
+        error_log("DatabaseConnection class instantiated: " . __CLASS__);
+        error_log("Attempting database connection with config: " . print_r([
+            'server' => $config['server'],
+            'user' => $config['user'],
+            'name' => $config['name']
+        ], true));
+        
         $this->connect($config);
     }
     
@@ -25,9 +32,11 @@ class DatabaseConnection
         );
         
         if ($this->connection->connect_errno) {
+            error_log("Database connection failed: " . $this->connection->connect_error);
             throw new Exception("Database connection failed: " . $this->connection->connect_error);
         }
         
+        error_log("Database connection successful");
         $this->connection->set_charset('utf8mb4');
     }
     
@@ -38,8 +47,10 @@ class DatabaseConnection
     
     public function query(string $sql): \mysqli_result
     {
+        error_log("Executing query: " . $sql);
         $result = $this->connection->query($sql);
         if ($result === false) {
+            error_log("Query failed: " . $this->connection->error);
             throw new Exception("Query failed: " . $this->connection->error);
         }
         return $result;
