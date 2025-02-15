@@ -4,104 +4,86 @@ declare(strict_types=1);
 // Load bootstrap and get application container
 $app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
-use Fivetwofive\KrateCMS\Services\UserManager;
-use Fivetwofive\KrateCMS\Services\RecordService;
-use Fivetwofive\KrateCMS\Core\Helpers\RequestHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\HtmlHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\UrlHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\SessionHelper;
-
 try {
-    // Get dependencies from app container
-    $db = $app['db'];
+    // Extract all required services
+    $urlHelper = $app['urlHelper'];
+    $htmlHelper = $app['htmlHelper'];
+    $sessionHelper = $app['sessionHelper'];
+    $requestHelper = $app['requestHelper'];
     $settingsManager = $app['settingsManager'];
-    $recordService = $app['recordService'];
     $userManager = $app['userManager'];
+    $recordService = $app['recordService'];
+    $config = $app['config'];
     
     // Check user status
-    if (!SessionHelper::isLoggedIn()) {
-        header('Location: ../index.php?message=' . urlencode('Please login to add records'));
-        exit;
+    if (!$sessionHelper->isLoggedIn()) {
+        $sessionHelper->setMessage('Please login to add records');
+        $urlHelper->redirect('../index.php');
     }
 
     // Initialize error array
     $errors = [];
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $title = RequestHelper::post('title');
-        $artist = RequestHelper::post('artist');
-        $genre = RequestHelper::post('genre');
-        $release_year = RequestHelper::post('release_year');
-        $label = RequestHelper::post('label');
-        $catalog_number = RequestHelper::post('catalog_number');
-        $format = RequestHelper::post('format');
-        $speed = RequestHelper::post('speed');
-        $condition = RequestHelper::post('condition');
-        $purchase_date = RequestHelper::post('purchase_date');
-        $purchase_price = RequestHelper::post('purchase_price');
-        $notes = RequestHelper::post('notes');
-        $purchase_link = RequestHelper::post('purchase_link');
-        $audio_file_url = RequestHelper::post('audio_file_url');
-        $bpm = RequestHelper::post('bpm');
+    if ($requestHelper->isPost()) {
+        // Get form data
+        $formData = [
+            'title' => $requestHelper->post('title'),
+            'artist' => $requestHelper->post('artist'),
+            'genre' => $requestHelper->post('genre'),
+            'release_year' => $requestHelper->post('release_year'),
+            'label' => $requestHelper->post('label'),
+            'catalog_number' => $requestHelper->post('catalog_number'),
+            'format' => $requestHelper->post('format'),
+            'speed' => $requestHelper->post('speed'),
+            'condition' => $requestHelper->post('condition'),
+            'purchase_date' => $requestHelper->post('purchase_date'),
+            'purchase_price' => $requestHelper->post('purchase_price'),
+            'notes' => $requestHelper->post('notes'),
+            'purchase_link' => $requestHelper->post('purchase_link'),
+            'audio_file_url' => $requestHelper->post('audio_file_url'),
+            'bpm' => $requestHelper->post('bpm')
+        ];
 
         // Define the upload directory
-        $upload_dir = __DIR__ . '/../../public/uploads/';
+        $uploadDir = ROOT_PATH . '/public/uploads/';
 
         // Ensure the directory exists
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0755, true);
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
         }
 
         // Handle file uploads
-        $front_image_path = null;
-        $back_image_path = null;
+        $formData['front_image'] = null;
+        $formData['back_image'] = null;
 
         if (!empty($_FILES['front_image']['name'])) {
-            $front_image_filename = time() . '_' . basename($_FILES['front_image']['name']);
-            $front_image_path = 'uploads/' . $front_image_filename;
-            move_uploaded_file($_FILES['front_image']['tmp_name'], $upload_dir . $front_image_filename);
+            $frontImageFilename = time() . '_' . basename($_FILES['front_image']['name']);
+            $formData['front_image'] = 'uploads/' . $frontImageFilename;
+            move_uploaded_file($_FILES['front_image']['tmp_name'], $uploadDir . $frontImageFilename);
         }
 
         if (!empty($_FILES['back_image']['name'])) {
-            $back_image_filename = time() . '_' . basename($_FILES['back_image']['name']);
-            $back_image_path = 'uploads/' . $back_image_filename;
-            move_uploaded_file($_FILES['back_image']['tmp_name'], $upload_dir . $back_image_filename);
+            $backImageFilename = time() . '_' . basename($_FILES['back_image']['name']);
+            $formData['back_image'] = 'uploads/' . $backImageFilename;
+            move_uploaded_file($_FILES['back_image']['tmp_name'], $uploadDir . $backImageFilename);
         }
 
         try {
-            $record = $recordService->create([
-                'title' => $title,
-                'artist' => $artist,
-                'genre' => $genre,
-                'release_year' => $release_year,
-                'label' => $label,
-                'catalog_number' => $catalog_number,
-                'format' => $format,
-                'speed' => $speed,
-                'condition' => $condition,
-                'purchase_date' => $purchase_date,
-                'purchase_price' => $purchase_price,
-                'notes' => $notes,
-                'front_image' => $front_image_path,
-                'back_image' => $back_image_path,
-                'purchase_link' => $purchase_link,
-                'audio_file_url' => $audio_file_url,
-                'bpm' => $bpm
-            ]);
-
-            header('Location: ../index.php?message=' . urlencode('Record added successfully!'));
-            exit;
+            $record = $recordService->create($formData);
+            $sessionHelper->setMessage('Record added successfully!');
+            $urlHelper->redirect('../index.php');
         } catch (Exception $e) {
             $errors[] = "Error adding record: " . $e->getMessage();
         }
     }
 
+    // Include the header with access to all services
+    include(ROOT_PATH . '/templates/layouts/header.php');
 } catch (Exception $e) {
     error_log("Error in add record: " . $e->getMessage());
-    $errors[] = "An error occurred while processing your request.";
+    $sessionHelper->setMessage("Error: " . $e->getMessage());
+    $urlHelper->redirect('../index.php');
 }
-
-include(__DIR__ . '/../../templates/layouts/header.php');
 ?>
 
 <div class="container py-4">
@@ -111,7 +93,7 @@ include(__DIR__ . '/../../templates/layouts/header.php');
                 <div class="alert alert-danger">
                     <ul>
                         <?php foreach ($errors as $error): ?>
-                            <li><?= HtmlHelper::escape($error); ?></li>
+                            <li><?= $htmlHelper->escape($error) ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -222,7 +204,7 @@ include(__DIR__ . '/../../templates/layouts/header.php');
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Add Record</button>
-                        <a href="<?= UrlHelper::generate('/index.php'); ?>" class="btn btn-secondary">Cancel</a>
+                        <a href="<?= $urlHelper->urlFor('/index.php') ?>" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>
             </section>
@@ -230,4 +212,4 @@ include(__DIR__ . '/../../templates/layouts/header.php');
     </div>
 </div>
 
-<?php include(__DIR__ . '/../../templates/layouts/footer.php'); ?> 
+<?php include(ROOT_PATH . '/templates/layouts/footer.php'); ?> 

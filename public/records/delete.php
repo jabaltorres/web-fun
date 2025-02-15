@@ -4,91 +4,95 @@ declare(strict_types=1);
 // Load bootstrap and get application container
 $app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
-use Fivetwofive\KrateCMS\Services\UserManager;
-use Fivetwofive\KrateCMS\Services\RecordService;
-use Fivetwofive\KrateCMS\Core\Helpers\RequestHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\HtmlHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\UrlHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\SessionHelper;
-
 try {
-    // Get dependencies from app container
-    $db = $app['db'];
+    // Extract all required services
+    $urlHelper = $app['urlHelper'];
+    $htmlHelper = $app['htmlHelper'];
+    $sessionHelper = $app['sessionHelper'];
+    $requestHelper = $app['requestHelper'];
     $settingsManager = $app['settingsManager'];
-    $recordService = $app['recordService'];
     $userManager = $app['userManager'];
+    $recordService = $app['recordService'];
+    $config = $app['config'];
     
     // Check user status
-    if (!SessionHelper::isLoggedIn()) {
-        header('Location: ../index.php?message=' . urlencode('Please login to delete records'));
-        exit;
+    if (!$sessionHelper->isLoggedIn()) {
+        $sessionHelper->setMessage('Please login to delete records');
+        $urlHelper->redirect('../index.php');
     }
 
-    $record_id = RequestHelper::get('id');
-    if (!$record_id) {
+    $recordId = $requestHelper->get('id');
+    if (!$recordId) {
         throw new Exception("Record ID not provided");
     }
 
     // Get the record
-    $record = $recordService->findById((int)$record_id);
+    $record = $recordService->findById((int)$recordId);
     if (!$record) {
         throw new Exception("Record not found");
     }
 
     // Handle deletion
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $recordService->delete((int)$record_id);
-        SessionHelper::setMessage('Record deleted successfully');
-        header('Location: ../index.php');
-        exit;
+    if ($requestHelper->isPost()) {
+        $recordService->delete((int)$recordId);
+        $sessionHelper->setMessage('Record deleted successfully');
+        $urlHelper->redirect('../index.php');
     }
 
+    // Include the header with access to all services
+    include(ROOT_PATH . '/templates/layouts/header.php');
 } catch (Exception $e) {
     error_log("Error in delete record: " . $e->getMessage());
-    SessionHelper::setMessage("Error: " . $e->getMessage());
-    header('Location: ../index.php');
-    exit;
+    $sessionHelper->setMessage("Error: " . $e->getMessage());
+    $urlHelper->redirect('../index.php');
 }
-
-include(__DIR__ . '/../../templates/layouts/header.php');
 ?>
 
 <div class="container py-4">
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-4">Delete Vinyl Record: <?= HtmlHelper::escape($record->getTitle()); ?> by <?= HtmlHelper::escape($record->getArtist()); ?></h1>
+            <h1 class="mb-4">Delete Vinyl Record: <?= $htmlHelper->escape($record->getTitle()) ?> by <?= $htmlHelper->escape($record->getArtist()) ?></h1>
 
             <p>Are you sure you want to delete the following record?</p>
 
             <ul>
-                <li><strong>Title:</strong> <?= HtmlHelper::escape($record->getTitle()); ?></li>
-                <li><strong>Artist:</strong> <?= HtmlHelper::escape($record->getArtist()); ?></li>
-                <li><strong>Genre:</strong> <?= HtmlHelper::escape($record->getGenre()); ?></li>
-                <li><strong>Release Year:</strong> <?= $record->getReleaseYear(); ?></li>
-                <li><strong>Label:</strong> <?= HtmlHelper::escape($record->getLabel()); ?></li>
-                <li><strong>Catalog Number:</strong> <?= HtmlHelper::escape($record->getCatalogNumber()); ?></li>
-                <li><strong>Format:</strong> <?= HtmlHelper::escape($record->getFormat()); ?></li>
-                <li><strong>Speed:</strong> <?= HtmlHelper::escape($record->getSpeed()); ?></li>
-                <li><strong>Condition:</strong> <?= HtmlHelper::escape($record->getCondition()); ?></li>
-                <li><strong>Purchase Date:</strong> <?= HtmlHelper::escape($record->getPurchaseDate()); ?></li>
-                <li><strong>Purchase Price:</strong> $<?= number_format($record->getPurchasePrice(), 2); ?></li>
-                <li><strong>Notes:</strong> <?= HtmlHelper::escape($record->getNotes()); ?></li>
+                <li><strong>Title:</strong> <?= $htmlHelper->escape($record->getTitle()) ?></li>
+                <li><strong>Artist:</strong> <?= $htmlHelper->escape($record->getArtist()) ?></li>
+                <li><strong>Genre:</strong> <?= $htmlHelper->escape($record->getGenre()) ?></li>
+                <li><strong>Release Year:</strong> <?= $record->getReleaseYear() ?></li>
+                <li><strong>Label:</strong> <?= $htmlHelper->escape($record->getLabel()) ?></li>
+                <li><strong>Catalog Number:</strong> <?= $htmlHelper->escape($record->getCatalogNumber()) ?></li>
+                <li><strong>Format:</strong> <?= $htmlHelper->escape($record->getFormat()) ?></li>
+                <li><strong>Speed:</strong> <?= $htmlHelper->escape($record->getSpeed()) ?></li>
+                <li><strong>Condition:</strong> <?= $htmlHelper->escape($record->getCondition()) ?></li>
+                <li><strong>Purchase Date:</strong> <?= $htmlHelper->escape($record->getPurchaseDate()) ?></li>
+                <li><strong>Purchase Price:</strong> $<?= number_format($record->getPurchasePrice(), 2) ?></li>
+                <li><strong>Notes:</strong> <?= $htmlHelper->escape($record->getNotes()) ?></li>
                 
                 <?php if ($record->getFrontImage()): ?>
-                    <li><strong>Front Image:</strong> <img src="<?= UrlHelper::generate('/uploads/' . basename($record->getFrontImage())); ?>" alt="Front Image" style="max-width: 100px;"></li>
+                    <li><strong>Front Image:</strong> 
+                        <img src="<?= $urlHelper->urlFor('/uploads/' . basename($record->getFrontImage())) ?>" 
+                             alt="Front Image" 
+                             style="max-width: 100px;">
+                    </li>
                 <?php endif; ?>
                 
                 <?php if ($record->getBackImage()): ?>
-                    <li><strong>Back Image:</strong> <img src="<?= UrlHelper::generate('/uploads/' . basename($record->getBackImage())); ?>" alt="Back Image" style="max-width: 100px;"></li>
+                    <li><strong>Back Image:</strong> 
+                        <img src="<?= $urlHelper->urlFor('/uploads/' . basename($record->getBackImage())) ?>" 
+                             alt="Back Image" 
+                             style="max-width: 100px;">
+                    </li>
                 <?php endif; ?>
             </ul>
 
-            <form method="POST" action="delete.php?id=<?= $record->getId(); ?>">
+            <form method="POST" action="delete.php?id=<?= $record->getId() ?>">
                 <button type="submit" class="btn btn-danger">Delete Record</button>
-                <a href="<?= UrlHelper::generate('/records/edit.php?id=' . $record->getId()); ?>" class="btn btn-secondary">Cancel</a>
+                <a href="<?= $urlHelper->urlFor('/records/edit.php?id=' . $record->getId()) ?>" 
+                   class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>
 </div>
 
-<?php include(__DIR__ . '/../../templates/layouts/footer.php'); ?> 
+<?php include(ROOT_PATH . '/templates/layouts/footer.php'); ?> 

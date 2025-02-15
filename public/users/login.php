@@ -1,85 +1,108 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+declare(strict_types=1);
 
-use Fivetwofive\KrateCMS\UserManager;
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
 try {
-    // Initialize the KrateUserManager
-    $userManager = new UserManager($db);
-
+    // Extract required services
+    $urlHelper = $app['urlHelper'];
+    $htmlHelper = $app['htmlHelper'];
+    $sessionHelper = $app['sessionHelper'];
+    $requestHelper = $app['requestHelper'];
+    $userManager = $app['userManager'];
+    $config = $app['config'];
+    
     // Check if user is already logged in
-    $userIsLoggedIn = $userManager->isLoggedIn();
+    $userIsLoggedIn = $sessionHelper->isLoggedIn();
     $loggedInMessage = $userIsLoggedIn ? "You are already logged in." : "Please log in.";
     $error = '';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['logout'])) {
+    if ($requestHelper->isPost()) {
+        if ($requestHelper->post('logout')) {
             $userManager->logout();
-            header("Location: login.php");
-            exit();
+            $urlHelper->redirect('login.php');
         }
 
         // Handle login process
-        $loginResult = $userManager->login(
-            htmlspecialchars($_POST['username']),
-            $_POST['password']
-        );
+        $username = $requestHelper->post('username');
+        $password = $requestHelper->post('password');
 
-        if ($loginResult) {
-            // Store session data
-            $_SESSION['user_id'] = $loginResult['user_id'];
-            $_SESSION['username'] = $loginResult['username'];
-            $_SESSION['first_name'] = $loginResult['first_name'];
-            $_SESSION['role'] = $loginResult['role'];
+        if (!$username || !$password) {
+            $error = "Username and password are required.";
+        } else {
+            $loginResult = $userManager->login(
+                $htmlHelper->escape($username),
+                $password
+            );
 
-            header("Location: /index.php");
-            exit();
+            if ($loginResult) {
+                // Store session data
+                $sessionHelper->set('user_id', $loginResult['user_id']);
+                $sessionHelper->set('username', $loginResult['username']);
+                $sessionHelper->set('first_name', $loginResult['first_name']);
+                $sessionHelper->set('role', $loginResult['role']);
+
+                $sessionHelper->setMessage('Successfully logged in!');
+                $urlHelper->redirect('/index.php');
+            }
+            
+            $error = "Invalid username or password!";
         }
-        
-        $error = "Invalid username or password!";
     }
 
+    // Include the header with access to all services
+    include(ROOT_PATH . '/templates/layouts/header.php');
 } catch (Exception $e) {
     error_log("Login error: " . $e->getMessage());
     $error = "An error occurred during login. Please try again.";
 }
-
-include('../../templates/layouts/header.php');
 ?>
 
-  <div class="container py-5">
+<div class="container py-5">
     <h1>User Login</h1>
 
-        <?php if ($loggedInMessage): ?>
-            <div class="alert alert-info" role="alert">
-                <?= $loggedInMessage ?>
-            </div>
-        <?php endif; ?>
+    <?php if ($loggedInMessage): ?>
+        <div class="alert alert-info" role="alert">
+            <?= $htmlHelper->escape($loggedInMessage) ?>
+        </div>
+    <?php endif; ?>
 
-      <?php if ($userIsLoggedIn): ?>
+    <?php if ($userIsLoggedIn): ?>
         <form method="post">
-          <button type="submit" name="logout" value="Log Out" class="btn btn-primary">Log Out</button>
+            <button type="submit" name="logout" value="Log Out" class="btn btn-primary">Log Out</button>
         </form>
-        <a href="index.php" class="btn btn-secondary">Go to main page</a>
-      <?php else: ?>
-      <div class="login-form border p-4">
-        <form method="post">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" required>
-          </div>
-          <button type="submit" value="Login" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-      <?php endif; ?>
+        <a href="<?= $urlHelper->urlFor('/index.php') ?>" class="btn btn-secondary">Go to main page</a>
+    <?php else: ?>
+        <div class="login-form border p-4">
+            <form method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" 
+                           class="form-control" 
+                           id="username" 
+                           name="username" 
+                           value="<?= $htmlHelper->escape($requestHelper->post('username', '')) ?>"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" 
+                           class="form-control" 
+                           id="password" 
+                           name="password" 
+                           required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    <?php endif; ?>
 
-      <?php if (!empty($error)): ?>
-        <div class="alert alert-danger mt-2"><?= $error ?></div>
-      <?php endif; ?>
-  </div>
+    <?php if (!empty($error)): ?>
+        <div class="alert alert-danger mt-2">
+            <?= $htmlHelper->escape($error) ?>
+        </div>
+    <?php endif; ?>
+</div>
 
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php include(ROOT_PATH . '/templates/layouts/footer.php'); ?>

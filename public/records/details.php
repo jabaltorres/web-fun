@@ -12,17 +12,21 @@ use Fivetwofive\KrateCMS\Core\Helpers\UrlHelper;
 use Fivetwofive\KrateCMS\Core\Helpers\SessionHelper;
 
 try {
-    // Get dependencies from app container
-    $db = $app['db'];
+    // Extract all required services
+    $urlHelper = $app['urlHelper'];
+    $htmlHelper = $app['htmlHelper'];
+    $sessionHelper = $app['sessionHelper'];
+    $requestHelper = $app['requestHelper'];
     $settingsManager = $app['settingsManager'];
-    $recordService = $app['recordService'];
     $userManager = $app['userManager'];
+    $recordService = $app['recordService'];
+    $config = $app['config'];
     
     // Check user status
-    $loggedIn = SessionHelper::isLoggedIn();
+    $loggedIn = $sessionHelper->isLoggedIn();
     
     // Get record ID from query string
-    $recordId = RequestHelper::get('id');
+    $recordId = $requestHelper->get('id');
     
     if (!$recordId) {
         throw new Exception("Record ID not provided");
@@ -35,14 +39,13 @@ try {
         throw new Exception("Record not found");
     }
     
+    // Include the header with access to all services
+    include(ROOT_PATH . '/templates/layouts/header.php');
 } catch (Exception $e) {
     error_log("Error in record details: " . $e->getMessage());
-    SessionHelper::setMessage("Error: " . $e->getMessage());
-    header('Location: ../index.php');
-    exit;
+    $sessionHelper->setMessage("Error: " . $e->getMessage());
+    $urlHelper->redirect('../index.php');
 }
-
-include(__DIR__ . '/../../templates/layouts/header.php');
 ?>
 
 <style>
@@ -66,25 +69,25 @@ include(__DIR__ . '/../../templates/layouts/header.php');
 <div class="container py-4">
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-4"><?= HtmlHelper::escape($record->getTitle()); ?></h1>
+            <h1 class="mb-4"><?= $htmlHelper->escape($record->getTitle()) ?></h1>
         </div>
 
         <div id="record-img-audio" class="col-12 col-lg-6">
             <?php if ($record->getFrontImage()): ?>
                 <img class="record-img record-img-front" 
-                     src="<?= UrlHelper::generate('/uploads/' . basename($record->getFrontImage())); ?>" 
+                     src="<?= $urlHelper->urlFor('/uploads/' . basename($record->getFrontImage())) ?>" 
                      alt="Front of Record">
                 <p>Front Image</p>
             <?php else: ?>
                 <img class="record-img record-img-front" 
-                     src="<?= UrlHelper::generate('/assets/images/vinyl-record.png'); ?>" 
+                     src="<?= $urlHelper->urlFor('/assets/images/vinyl-record.png') ?>" 
                      alt="Placeholder Record Image">
                 <p>Placeholder Image</p>
             <?php endif; ?>
 
             <?php if ($record->getBackImage()): ?>
                 <img class="record-img record-img-front" 
-                     src="<?= UrlHelper::generate('/uploads/' . basename($record->getBackImage())); ?>" 
+                     src="<?= $urlHelper->urlFor('/uploads/' . basename($record->getBackImage())) ?>" 
                      alt="Back of Record">
                 <p>Back Image</p>
             <?php endif; ?>
@@ -92,14 +95,14 @@ include(__DIR__ . '/../../templates/layouts/header.php');
             <?php if ($record->getAudioFileUrl()): ?>
                 <div class="mb-4">
                     <audio class="audio-player" controls loop>
-                        <source src="<?= HtmlHelper::escape($record->getAudioFileUrl()); ?>" type="audio/mp3">
+                        <source src="<?= $htmlHelper->escape($record->getAudioFileUrl()) ?>" type="audio/mp3">
                     </audio>
                 </div>
             <?php endif; ?>
 
             <?php if ($record->getPurchaseLink()): ?>
                 <div class="d-lg-none mb-4 mb-lg-0">
-                    <a href="<?= HtmlHelper::escape($record->getPurchaseLink()); ?>" 
+                    <a href="<?= $htmlHelper->escape($record->getPurchaseLink()) ?>" 
                        target="_blank" 
                        class="btn btn-primary">Purchase</a>
                 </div>
@@ -107,68 +110,69 @@ include(__DIR__ . '/../../templates/layouts/header.php');
 
             <div class="col-12 actions mb-5">
                 <a class="btn btn-outline-info font-weight-bold" 
-                   href="<?= UrlHelper::generate('/index.php'); ?>">&laquo; Back to List</a>
+                   href="<?= $urlHelper->urlFor('/index.php') ?>">&laquo; Back to List</a>
                 <?php if ($loggedIn) : ?>
                     <a class="btn btn-warning" 
-                       href="<?= UrlHelper::generate('/records/edit.php?id=' . $record->getId()); ?>">Edit Record</a>
+                       href="<?= $urlHelper->urlFor('/records/edit.php?id=' . $record->getId()) ?>">Edit Record</a>
                     <a class="btn btn-danger" 
-                       href="<?= UrlHelper::generate('/records/delete.php?id=' . $record->getId()); ?>">Delete Record</a>
+                       href="<?= $urlHelper->urlFor('/records/delete.php?id=' . $record->getId()) ?>">Delete Record</a>
                 <?php endif; ?>
             </div>
         </div>
+
         <div id="record-details" class="col-12 col-lg-6">
-            <p class="h3"><strong>Title:</strong> <?= HtmlHelper::escape($record->getTitle()); ?></p>
-            <p class="h4"><strong>Artist:</strong> <?= HtmlHelper::escape($record->getArtist()); ?></p>
+            <p class="h3"><strong>Title:</strong> <?= $htmlHelper->escape($record->getTitle()) ?></p>
+            <p class="h4"><strong>Artist:</strong> <?= $htmlHelper->escape($record->getArtist()) ?></p>
 
             <div class="details mb-4">
                 <?php if ($record->getGenre()): ?>
-                    <div><strong>Genre:</strong> <?= HtmlHelper::escape($record->getGenre()); ?></div>
+                    <div><strong>Genre:</strong> <?= $htmlHelper->escape($record->getGenre()) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getReleaseYear()): ?>
-                    <div><strong>Release Year:</strong> <?= $record->getReleaseYear(); ?></div>
+                    <div><strong>Release Year:</strong> <?= $record->getReleaseYear() ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getLabel()): ?>
-                    <div><strong>Label:</strong> <?= HtmlHelper::escape($record->getLabel()); ?></div>
+                    <div><strong>Label:</strong> <?= $htmlHelper->escape($record->getLabel()) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getCatalogNumber()): ?>
-                    <div><strong>Catalog Number:</strong> <?= HtmlHelper::escape($record->getCatalogNumber()); ?></div>
+                    <div><strong>Catalog Number:</strong> <?= $htmlHelper->escape($record->getCatalogNumber()) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getFormat()): ?>
-                    <div><strong>Format:</strong> <?= HtmlHelper::escape($record->getFormat()); ?></div>
+                    <div><strong>Format:</strong> <?= $htmlHelper->escape($record->getFormat()) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getSpeed()): ?>
-                    <div><strong>Speed:</strong> <?= HtmlHelper::escape($record->getSpeed()); ?></div>
+                    <div><strong>Speed:</strong> <?= $htmlHelper->escape($record->getSpeed()) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getBpm()): ?>
-                    <div><strong>Beats Per Minute:</strong> <?= $record->getBpm(); ?></div>
+                    <div><strong>Beats Per Minute:</strong> <?= $record->getBpm() ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getCondition()): ?>
-                    <div><strong>Condition:</strong> <?= HtmlHelper::escape($record->getCondition()); ?></div>
+                    <div><strong>Condition:</strong> <?= $htmlHelper->escape($record->getCondition()) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getPurchaseDate()): ?>
-                    <div><strong>Purchase Date:</strong> <?= HtmlHelper::escape($record->getPurchaseDate()); ?></div>
+                    <div><strong>Purchase Date:</strong> <?= $htmlHelper->escape($record->getPurchaseDate()) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getPurchasePrice()): ?>
-                    <div><strong>Purchase Price:</strong> $<?= number_format($record->getPurchasePrice(), 2); ?></div>
+                    <div><strong>Purchase Price:</strong> $<?= number_format($record->getPurchasePrice(), 2) ?></div>
                 <?php endif; ?>
 
                 <?php if ($record->getNotes()): ?>
-                    <p><strong>Notes:</strong> <?= HtmlHelper::escape($record->getNotes()); ?></p>
+                    <p><strong>Notes:</strong> <?= $htmlHelper->escape($record->getNotes()) ?></p>
                 <?php endif; ?>
             </div>
 
             <?php if ($record->getPurchaseLink()): ?>
                 <div>
-                    <a href="<?= HtmlHelper::escape($record->getPurchaseLink()); ?>" 
+                    <a href="<?= $htmlHelper->escape($record->getPurchaseLink()) ?>" 
                        target="_blank" 
                        class="btn btn-primary">Purchase</a>
                 </div>
@@ -198,4 +202,4 @@ include(__DIR__ . '/../../templates/layouts/header.php');
     });
 </script>
 
-<?php include(__DIR__ . '/../../templates/layouts/footer.php'); ?> 
+<?php include(ROOT_PATH . '/templates/layouts/footer.php'); ?> 

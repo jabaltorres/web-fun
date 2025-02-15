@@ -1,29 +1,40 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+declare(strict_types=1);
 
-    use Fivetwofive\KrateCMS\LoremElement;
-    use Fivetwofive\KrateCMS\LoremCard;
-    use Fivetwofive\KrateCMS\UserManager;
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
+
+use Fivetwofive\KrateCMS\Models\LoremElement;
+use Fivetwofive\KrateCMS\Models\LoremCard;
+
+try {
+    // Extract required services
+    $urlHelper = $app['urlHelper'];
+    $htmlHelper = $app['htmlHelper'];
+    $sessionHelper = $app['sessionHelper'];
+    $settingsManager = $app['settingsManager'];
+    $userManager = $app['userManager'];
+    $config = $app['config'];
 
     $title = "Demo Index";
-    $page_heading = 'Demo Page Heading';
-    $page_subheading = "List of WIP demos";
-    $custom_class = "demo-page";
+    $pageHeading = 'Demo Page Heading';
+    $pageSubheading = "List of WIP demos";
+    $customClass = "demo-page";
 
     // Page Header
-    $page_demo_header = new LoremElement("h1");
-    $page_demo_header->setAttribute("id", "page-heading");
-    $page_demo_header->setAttribute("class", "h4 mb-2");
-    $page_demo_header->setContent("Demos Page");
+    $pageDemoHeader = new LoremElement("h1");
+    $pageDemoHeader->setAttribute("id", "page-heading");
+    $pageDemoHeader->setAttribute("class", "h4 mb-2");
+    $pageDemoHeader->setContent("Demos Page");
 
     // Page Sub Header
-    $page_demo_subheader = new LoremElement("h3");
-    $page_demo_subheader->setAttribute("id", "page-subheading");
-    $page_demo_subheader->setAttribute("class", "h5 mb-0");
-    $page_demo_subheader->setContent("This is where I will list all of my demos");
+    $pageDemoSubheader = new LoremElement("h3");
+    $pageDemoSubheader->setAttribute("id", "page-subheading");
+    $pageDemoSubheader->setAttribute("class", "h5 mb-0");
+    $pageDemoSubheader->setContent("This is where I will list all of my demos");
 
     // Links to demo pages
-    $page_demo_links = [
+    $pageDemoLinks = [
         ['id' => 'bpm-counter', 'visible' => '1', 'demo_page' => 'BPM Counter', 'page_url' => 'bpm-counter.php'],
         ['id' => 'audio', 'visible' => '1', 'demo_page' => 'Audio Player', 'page_url' => 'audio-player.php'],
         ['id' => 'flipper', 'visible' => '1', 'demo_page' => 'Flipper', 'page_url' => 'flipper.php'],
@@ -38,30 +49,39 @@
         ['id' => 'simple', 'visible' => '1', 'demo_page' => 'Simple PHP', 'page_url' => 'simple.php'],
     ];
 
-    try {
-        $userManager = new UserManager($db);
-    } catch (Exception $e) {
-        // Handle exception
-    }
+    $technologyLinks = [
+        ['name' => 'CSS', 'url' => 'css/index.php', 'icon' => 'fa-brands fa-css3-alt'],
+        ['name' => 'JavaScript', 'url' => 'javascript/index.php', 'icon' => 'fa-brands fa-js'],
+        ['name' => 'PHP', 'url' => 'php/index.php', 'icon' => 'fa-brands fa-php'],
+    ];
+
+    // Include the header with access to all services
+    include(ROOT_PATH . '/templates/layouts/header.php');
+} catch (Exception $e) {
+    error_log("Sandbox Error: " . $e->getMessage());
+    $sessionHelper->setMessage("An error occurred: " . $e->getMessage());
+    $urlHelper->redirect('/index.php');
+}
 ?>
 
-<?php
-    include('../../templates/layouts/header.php');
-?>
-
-<div class="container <?php echo $custom_class; ?>">
+<div class="container <?= $htmlHelper->escape($customClass) ?>">
     <section class="my-4">
         <?php
         // Description: An example of using the LoremCard class
-        $lorem_card = new LoremCard(['id' => 'box', 'classes' => 'card p-4', 'content' => 'This is a test of the LoremCard class.', 'dark_mode' => false]);
-        echo $lorem_card->render();
+        $loremCard = new LoremCard([
+            'id' => 'box', 
+            'classes' => 'card p-4', 
+            'content' => 'This is a test of the LoremCard class.', 
+            'dark_mode' => false
+        ]);
+        echo $loremCard->render();
         ?>
     </section>
 
     <section class="mb-4">
         <?php
-            echo $page_demo_header->render();
-            echo $page_demo_subheader->render();
+            echo $pageDemoHeader->render();
+            echo $pageDemoSubheader->render();
         ?>
     </section>
     
@@ -69,20 +89,13 @@
         <h3 class="mb-3">Grouping</h3>
         <p class="mb-4">This is a grouping of demo pages</p>
         <div class="row">
-            <?php
-            $technology_links = [
-                ['name' => 'CSS', 'url' => 'css/index.php', 'icon' => 'fa-brands fa-css3-alt'],
-                ['name' => 'JavaScript', 'url' => 'javascript/index.php', 'icon' => 'fa-brands fa-js'],
-                ['name' => 'PHP', 'url' => 'php/index.php', 'icon' => 'fa-brands fa-php'],
-            ];
-
-            foreach ($technology_links as $link): ?>
+            <?php foreach ($technologyLinks as $link): ?>
                 <div class="col-12 col-md-4 mb-3">
                     <div class="card h-100 p-4 hover-shadow">
                         <div class="d-flex align-items-center justify-content-center">
-                            <a href="<?= h($link['url']) ?>" class="text-decoration-none">
-                                <i class="<?= $link['icon'] ?> me-2"></i>
-                                <?= h($link['name']) ?>
+                            <a href="<?= $urlHelper->urlFor($link['url']) ?>" class="text-decoration-none">
+                                <i class="<?= $htmlHelper->escape($link['icon']) ?> me-2"></i>
+                                <?= $htmlHelper->escape($link['name']) ?>
                             </a>
                         </div>
                     </div>
@@ -93,17 +106,15 @@
 
     <section class="mb-5">
         <div class="row">
-            <?php foreach ($page_demo_links as $demo_link): ?>
-                <?php if ($demo_link['visible'] === '1'): ?>
+            <?php foreach ($pageDemoLinks as $demoLink): ?>
+                <?php if ($demoLink['visible'] === '1'): ?>
                     <div class="col-12 col-md-3 mb-4">
                         <div class="card h-100">
                             <div class="card-body d-flex align-items-center justify-content-center">
-                                <a 
-                                    id="link-<?= h($demo_link['id']) ?>"
-                                    href="<?= h($demo_link['page_url']) ?>"
-                                    class="text-decoration-none"
-                                >
-                                    <?= h($demo_link['demo_page']) ?>
+                                <a id="link-<?= $htmlHelper->escape($demoLink['id']) ?>"
+                                   href="<?= $urlHelper->urlFor($demoLink['page_url']) ?>"
+                                   class="text-decoration-none">
+                                    <?= $htmlHelper->escape($demoLink['demo_page']) ?>
                                 </a>
                             </div>
                         </div>
@@ -112,7 +123,6 @@
             <?php endforeach; ?>
         </div>
     </section>
+</div>
 
-</div><!-- end .container -->
-
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php include(ROOT_PATH . '/templates/layouts/footer.php'); ?>

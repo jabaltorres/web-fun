@@ -22,6 +22,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added comprehensive error handling in services
 - Implemented proper file upload management
 - Added type declarations and return types
+- New SessionHelper methods:
+  - `set()` for setting session variables
+  - `get()` for retrieving session values
+  - `has()` for checking session variable existence
+  - `remove()` for removing session variables
+  - `clear()` for clearing all session data
+- Proper error handling and logging across all files
+- Consistent service usage through dependency injection
+- Bootstrap integration across all files
 
 ### Changed
 - Migrated from initialize.php to bootstrap.php for better dependency management
@@ -31,16 +40,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved form handling with proper validation
 - Enhanced image file management with cleanup
 - Updated URL generation for new file structure
+- Refactored multiple PHP files to use new service architecture:
+  - public/admin/index.php
+  - public/users/login.php
+  - public/users/logout.php
+  - public/records/add.php
+  - public/records/edit.php
+  - public/records/delete.php
+  - public/records/details.php
+  - public/sandbox/index.php
+
+- Updated service usage:
+  - Replaced static helper calls with service instances
+  - Moved from direct class instantiation to container-based dependency injection
+  - Switched to proper URL generation with urlHelper->urlFor()
+  - Implemented consistent HTML escaping with htmlHelper
+  - Used sessionHelper for session management
+  - Used requestHelper for form handling
+
+- Code Style Improvements:
+  - Converted snake_case to camelCase for variable names
+  - Added proper type hints and return types
+  - Improved code organization and readability
+  - Added consistent error handling patterns
+  - Implemented proper path handling using ROOT_PATH constant
 
 ### Removed
 - Deprecated record-add.php, record-edit.php, record-delete.php, and record-details.php
 - Removed direct database operations from view files
+- Static helper method calls
+- Direct file inclusions in favor of bootstrap
+- Direct class instantiations
+- Legacy initialization files
 
 ### Security
 - Added login state verification for sensitive operations
 - Improved input validation and sanitization
 - Enhanced error handling and logging
 - Added proper parameter binding for database operations
+- Added proper HTML escaping throughout
+- Improved session handling security
+- Added CSRF protection through bootstrap
+- Improved form validation and sanitization
+- Better error handling and logging
 
 ## [0.1.0] - 2024-02-13
 
