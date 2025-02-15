@@ -104,9 +104,9 @@ try {
     $pageDescription = 'Administrative dashboard for ' . $config['site']['name'];
 
     // Include templates
-    include(ROOT_PATH . '/templates/layouts/header.php');
+    include(ROOT_PATH . '/templates/shared/header.php');
     include(ROOT_PATH . '/templates/admin/dashboard.php');
-    include(ROOT_PATH . '/templates/layouts/footer.php');
+    include(ROOT_PATH . '/templates/shared/footer.php');
 
 } catch (Exception $e) {
     // Log the error

@@ -89,7 +89,7 @@ try {
     }
 
     // Include the header with access to all services
-    include(ROOT_PATH . '/templates/layouts/header.php');
+    include(ROOT_PATH . '/templates/shared/header.php');
 } catch (Exception $e) {
     error_log("Error in edit record: " . $e->getMessage());
     $sessionHelper->setMessage("Error: " . $e->getMessage());
@@ -235,4 +235,4 @@ try {
     </div>
 </div>
 
-<?php include(ROOT_PATH . '/templates/layouts/footer.php'); ?> 
+<?php include(ROOT_PATH . '/templates/shared/footer.php'); ?> 
