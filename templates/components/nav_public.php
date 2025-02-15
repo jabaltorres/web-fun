@@ -3,7 +3,7 @@
   $page_id = $page_id ?? '';
   $subject_id = $subject_id ?? '';
   $visible = !$app['pageService']->is_preview();
-  $subjects = $app['pageService']->findAllSubjects();
+  $subjects = $app['subjectService']->findAllSubjects();
 ?>
 
 <div class="sidebar">

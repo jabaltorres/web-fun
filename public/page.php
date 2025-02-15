@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
     }
     $subject_id = $page['subject_id'];
     // Fetch the subject by ID
-    $subject = $app['pageService']->findSubjectById($subject_id, ['visible' => $visible]);
+    $subject = $app['subjectService']->findSubjectById($subject_id, ['visible' => $visible]);
     if (!$subject) {
         // Redirect if the subject is not found
         redirect_to(url_for('/page.php'));
@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
 } elseif (isset($_GET['subject_id'])) {
     // Fetch the subject by subject ID
     $subject_id = $_GET['subject_id'];
-    $subject = $app['pageService']->findSubjectById($subject_id, ['visible' => $visible]);
+    $subject = $app['subjectService']->findSubjectById($subject_id, ['visible' => $visible]);
     if (!$subject) {
         // Redirect if the subject is not found
         redirect_to(url_for('/page.php'));

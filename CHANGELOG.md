@@ -6,7 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
-## [0.1.3] - 2024-01-17
+## [0.1.4] - 2025-02-15
+
+### Changed
+- Integrated a new SubjectService to manage subject-related operations.
+  - Refactored code to utilize the SubjectService for fetching subjects in the edit and show pages.
+  - Updated methods to ensure proper dependency injection for the SubjectService.
+  - Improved error handling and validation when retrieving subjects.
+
+### Fixed
+- Resolved issues with subject retrieval that caused incorrect data to be displayed.
+- Ensured that subject IDs are properly encoded and escaped in URLs.
+
+### Added
+- Added unit tests for the SubjectService to ensure reliability and correctness of subject-related operations.
+
+## [0.1.3] - 2025-02-15
 
 ### Changed
 - Consolidated header and footer templates
@@ -35,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Better component separation
   - Consistent styling classes
 
-## [0.1.2] - 2024-01-16
+## [0.1.2] - 2025-02-14
 
 ### Changed
 - Refactored application to use MVC architecture
@@ -71,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved application bootstrapping process
 - Added service layer for business logic
 
-## [0.1.1] - 2025-02-15
+## [0.1.1] - 2025-02-14
 
 ### Added
 - Implemented MVC architecture:
@@ -148,7 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved form validation and sanitization
 - Better error handling and logging
 
-## [0.1.0] - 2024-02-13
+## [0.1.0] - 2025-02-13
 
 ### Added
 - Integrated Twig templating engine
@@ -173,4 +188,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Added CSRF protection for forms
 - Implemented proper error handling and logging
-- Added secure session management 
+- Added secure session management  

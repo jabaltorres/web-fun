@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Fivetwofive\KrateCMS\Services;
 
 use Fivetwofive\KrateCMS\Core\Database\DatabaseConnection;
-
+use Fivetwofive\KrateCMS\Core\Helpers\ValidationHelper;
 /**
  * Service class for handling page-related database operations and utilities
  */
@@ -44,19 +44,7 @@ class PageService {
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        return $result ? $result->fetch_assoc() : null;
-    }
-
-    /**
-     * Finds a subject by its ID
-     * @param int $id Subject ID to search for
-     * @return array|null Subject data array or null if not found
-     */
-    public function findSubjectById(int $id): ?array {
-        $stmt = $this->db->prepare("SELECT * FROM subjects WHERE id = ? LIMIT 1");
-        $stmt->bind_param('i', $id);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        return $result->fetch_assoc();
     }
 
     /**
@@ -88,11 +76,7 @@ class PageService {
      * Retrieves all subjects ordered by position
      * @return array Array of all subjects
      */
-    public function findAllSubjects(): array {
-        $sql = "SELECT * FROM subjects ORDER BY position ASC";
-        $result = $this->db->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
+    // Removed subject-related methods
 
     /**
      * Finds all pages belonging to a specific subject
@@ -114,5 +98,44 @@ class PageService {
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+
+    public function validatePage($page)
+    {
+        $errors = [];
+
+        // menu_name
+        if (ValidationHelper::is_blank($page['menu_name'])) {
+            $errors[] = "Menu name cannot be blank.";
+        }
+    }
+    
+    public function updatePage(array $page): bool {
+        // Escape the input values, casting to string where necessary
+        $subject_id = $this->db->escape((string)$page['subject_id']);
+        $menu_name = $this->db->escape($page['menu_name']);
+        
+        // Validate position
+        $position = !empty($page['position']) ? (int)$page['position'] : 0; // Set default to 0 if empty
+        $visible = $this->db->escape((string)$page['visible']);
+        $content = str_replace(array("\r\n", "\r"), "\n", $page['content']);
+        $id = $this->db->escape((string)$page['id']);
+
+        $stmt = $this->db->prepare("UPDATE pages SET subject_id = ?, menu_name = ?, position = ?, visible = ?, content = ? WHERE id = ?");
+        
+        if ($stmt === false) {
+            throw new \Exception("Prepare failed: " . $this->db->getConnection()->error);
+        }
+
+        $stmt->bind_param('issisi', $subject_id, $menu_name, $position, $visible, $content, $id);
+        
+        $result = $stmt->execute();
+        
+        if ($result === false) {
+            throw new \Exception("Update failed: " . $this->db->getConnection()->error);
+        }
+
+        return true; // Return true if the update was successful
     }
 } 

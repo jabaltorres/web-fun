@@ -34,7 +34,7 @@ use Fivetwofive\KrateCMS\Models\KrateSettings;
 use Fivetwofive\KrateCMS\Http\Controllers\RecordController;
 use Fivetwofive\KrateCMS\Models\Record;
 use Fivetwofive\KrateCMS\Services\PageService;
-
+use Fivetwofive\KrateCMS\Services\SubjectService;
 // Initialize the application container
 $app = [];
 
@@ -117,6 +117,7 @@ $app['config'] = $config;
 
 // Add to service container
 $app['pageService'] = new PageService($app['databaseConnection']);
+$app['subjectService'] = new SubjectService($app['databaseConnection']);
 
 // Define path constants
 define('PRIVATE_PATH', ROOT_PATH . '/src');

@@ -1,6 +1,7 @@
 <?php
 $app = require_once(__DIR__ . '/../../../config/bootstrap.php');
 $pages = $app['pageService']->findAllPages();
+$subjects = $app['subjectService']->findAllSubjects();
 
 ?>
 
@@ -29,7 +30,7 @@ $pages = $app['pageService']->findAllPages();
                     </tr>
 
                     <?php foreach ($pages as $page) { ?>
-                        <?php $subject = $app['pageService']->findSubjectById((int)$page['subject_id']); ?>
+                        <?php $subject = $app['subjectService']->findSubjectById((int)$page['subject_id']); ?>
                         <tr>
                             <td><?php echo h($page['id']); ?></td>
                             <td><?php echo h($subject['menu_name'] ?? ''); ?></td>

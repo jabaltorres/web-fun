@@ -1,14 +1,41 @@
-<?php require_once('../../../src/initialize.php'); ?>
+<?php declare(strict_types=1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
-<?php
+// require_once('../../../src/initialize.php');
+$app = require_once(__DIR__ . '/../../../config/bootstrap.php');
 
-$id = $_GET['id'] ?? '1'; // PHP > 7.0
-$page = find_page_by_id($id);
+// UrlHelper
+$urlHelper = $app['urlHelper'];
+
+// Get the page id from the URL and cast it to an integer
+$id = (int) ($_GET['id'] ?? 0); // Default to 0 if not set
+
+if ($id === 0) {
+    // Handle the case where the ID is not valid
+    echo '<p>Invalid page ID.</p>';
+    exit; // Stop further execution
+}
+
+// Fetch the page by ID
+$page = $app['pageService']->findPageById($id); // Pass the integer $id
+
+//subject
+$subject = $app['subjectService']->findSubjectById($page['subject_id']);
+
+if (!$page) {
+    echo '<p>Page not found.</p>';
+} else {
+    // Debugging: Check the content
+    // var_dump($page['content']); // Check what is being retrieved
+    // echo '<div>' . htmlspecialchars($page['content']) . '</div>'; // Display the content safely
+}
 
 ?>
 
 <?php $page_title = 'Show Page'; ?>
-<?php include('../../../templates/layouts/header.php'); ?>
+<?php include('../../../templates/shared/header.php'); ?>
 
 <div id="content" class="container">
     <div class="row">
@@ -20,29 +47,28 @@ $page = find_page_by_id($id);
                 <h1>Page: <?php echo h($page['menu_name']); ?></h1>
 
                 <div class="actions mb-4">
-                    <a class="action btn btn-primary"
-                       href="<?php echo url_for('/page.php?id=' . h(u($page['id'])) . '&preview=true'); ?>">Preview</a>
-                  <a class="action btn btn-secondary"
-                     href="<?php echo url_for('/staff/pages/edit.php?id=' . h(u($page['id'])) . '&preview=true'); ?>">Edit</a>
+                    <?php $encodedId = $urlHelper->u((string)$page['id']); // Cast to string before encoding ?>
+                    <a class="action btn btn-primary" href="<?php echo url_for('/page.php?id=' . h($encodedId) . '&preview=true'); ?>">Preview</a>
+                    <a class="action btn btn-secondary" href="<?php echo url_for('/staff/pages/edit.php?id=' . h($encodedId) . '&preview=true'); ?>">Edit</a>
                 </div>
 
                 <div class="attributes">
-                    <?php $subject = find_subject_by_id($page['subject_id']); ?>
+                    <?php $subject = $app['subjectService']->findSubjectById($page['subject_id']); ?>
                     <dl>
                         <dt>Subject</dt>
-                        <dd><?php echo h($subject['menu_name']); ?></dd>
+                        <dd><?php echo h((string)$subject['menu_name']); ?></dd>
                     </dl>
                     <dl>
                         <dt>Menu Name</dt>
-                        <dd><?php echo h($page['menu_name']); ?></dd>
+                        <dd><?php echo h((string)$page['menu_name']); ?></dd>
                     </dl>
                     <dl>
                         <dt>Position</dt>
-                        <dd><?php echo h($page['position']); ?></dd>
+                        <dd><?php echo h((string)$page['position']); ?></dd>
                     </dl>
                     <dl>
                         <dt>Visible</dt>
-                        <dd><?php echo $page['visible'] == '1' ? 'true' : 'false'; ?></dd>
+                        <dd><?php echo h((string)$page['visible']); ?></dd>
                     </dl>
                     <dl>
                         <dt>Content</dt>
@@ -55,4 +81,4 @@ $page = find_page_by_id($id);
     </div>
 </div>
 
-<?php include('../../../templates/layouts/footer.php'); ?>
+<?php include('../../../templates/shared/footer.php'); ?>

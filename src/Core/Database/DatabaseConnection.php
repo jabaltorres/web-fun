@@ -69,4 +69,22 @@ class DatabaseConnection
     {
         return $this->connection->real_escape_string($string);
     }
+    
+    public function get_num_rows($result): int {
+        if ($result instanceof \mysqli_result) {
+            return mysqli_num_rows($result);
+        }
+        return 0; // Return 0 if the result is not valid
+    }
+    
+    public function free_result($result): void {
+        if ($result instanceof \mysqli_result) {
+            mysqli_free_result($result);
+        }
+    }
+
+    public function error()
+    {
+        return $this->connection->error;
+    }
 } 

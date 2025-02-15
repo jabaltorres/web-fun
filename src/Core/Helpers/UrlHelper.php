@@ -65,4 +65,8 @@ class UrlHelper
     {
         return rawurlencode($string);
     }
-} 
+
+    public function u(string $string): string {
+        return urlencode($string);
+    }
+}
