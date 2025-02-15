@@ -32,7 +32,8 @@ use Fivetwofive\KrateCMS\Services\RecordService;
 use Fivetwofive\KrateCMS\Services\UserManager;
 use Fivetwofive\KrateCMS\Models\KrateSettings;
 use Fivetwofive\KrateCMS\Http\Controllers\RecordController;
-use Fivetwofive\KrateCMS\Models\Record; 
+use Fivetwofive\KrateCMS\Models\Record;
+use Fivetwofive\KrateCMS\Services\PageService;
 
 // Initialize the application container
 $app = [];
@@ -114,6 +115,9 @@ $app['userManager'] = $userManager;
 $app['urlHelper'] = $urlHelper;
 $app['config'] = $config;
 
+// Add to service container
+$app['pageService'] = new PageService($app['databaseConnection']);
+
 // Define path constants
 define('PRIVATE_PATH', ROOT_PATH . '/src');
 define('STYLES_PATH', $baseUrl . '/assets/css');
@@ -145,17 +149,22 @@ $twig->addFunction(new \Twig\TwigFunction('h', [$htmlHelper, 'escape']));
 $twig->addFunction(new \Twig\TwigFunction('display_errors', [$htmlHelper, 'displayErrors']));
 $twig->addFunction(new \Twig\TwigFunction('display_social_links', [$socialLinksService, 'displayLinks']));
 
-// Legacy function aliases for backward compatibility
+// HTML helper function to escape output for safe rendering
+// This prevents XSS attacks by converting special characters to HTML entities
 function h(string $string = ""): string {
     global $htmlHelper;
     return $htmlHelper->escape($string);
 }
 
+// URL helper function to generate a URL for a given path
+// This abstracts the URL generation logic, making it easier to manage routes
 function url_for(string $path): string {
     global $urlHelper;
     return $urlHelper->urlFor($path);
 }
 
+// Redirect function to send the user to a specified location
+// This function does not return; it terminates the current script and performs a redirect
 function redirect_to(string $location): never {
     global $urlHelper;
     $urlHelper->redirect($location);

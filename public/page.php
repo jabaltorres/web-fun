@@ -2,30 +2,38 @@
 declare(strict_types=1); // Enable strict typing
 
 // Require initialization file
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+// require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+
+$app = require_once(__DIR__ . '/../config/bootstrap.php');
+$page = isset($_GET['id']) ? $app['pageService']->findPageById((int) $_GET['id']) : null;
 
 // Constants
-const DEFAULT_PAGE_ID = '1';
+const DEFAULT_PAGE_ID = 1; // Ensure this is an integer
 
 // Check if user is logged in
 $loggedIn = isset($_SESSION['user_id']);
 
 // Check if previewing
-$visible = !is_preview();
+$visible = !$app['pageService']->is_preview();
 
-// Get the page id
-$page_id = $_GET['id'] ?? $_GET['subject_id'] ?? DEFAULT_PAGE_ID;
+// Get the page id and cast it to an integer
+$page_id = (int) ($_GET['id'] ?? $_GET['subject_id'] ?? DEFAULT_PAGE_ID);
+
+// Debugging: Check the type and value of $page_id
+if (!is_int($page_id)) {
+    throw new \Exception("Page ID must be an integer. Given: " . gettype($page_id));
+}
 
 if (isset($_GET['id'])) {
     // Fetch the page by ID
-    $page = find_page_by_id($page_id, ['visible' => $visible]);
+    $page = $app['pageService']->findPageById($page_id, ['visible' => $visible]);
     if (!$page) {
         // Redirect if the page is not found
         redirect_to(url_for('/page.php'));
     }
     $subject_id = $page['subject_id'];
     // Fetch the subject by ID
-    $subject = find_subject_by_id($subject_id, ['visible' => $visible]);
+    $subject = $app['pageService']->findSubjectById($subject_id, ['visible' => $visible]);
     if (!$subject) {
         // Redirect if the subject is not found
         redirect_to(url_for('/page.php'));
@@ -33,13 +41,13 @@ if (isset($_GET['id'])) {
 } elseif (isset($_GET['subject_id'])) {
     // Fetch the subject by subject ID
     $subject_id = $_GET['subject_id'];
-    $subject = find_subject_by_id($subject_id, ['visible' => $visible]);
+    $subject = $app['pageService']->findSubjectById($subject_id, ['visible' => $visible]);
     if (!$subject) {
         // Redirect if the subject is not found
         redirect_to(url_for('/page.php'));
     }
     // Fetch pages associated with the subject
-    $page_set = find_pages_by_subject_id($subject_id, ['visible' => $visible]);
+    $page_set = $app['pageService']->findPagesBySubjectId($subject_id, ['visible' => $visible]);
     $page = mysqli_fetch_assoc($page_set); // first page
     mysqli_free_result($page_set);
     if (!$page) {
@@ -51,12 +59,12 @@ if (isset($_GET['id'])) {
 
 ?>
 
-<?php include('../templates/layouts/header.php'); ?>
+<?php include('../templates/shared/header.php'); ?>
 
 <?php
     // If previewing, show an alert
-    if (is_preview()) {
-        show_preview_alert();
+    if ($app['pageService']->is_preview()) {
+        $app['pageService']->show_preview_alert();
     }
 ?>
 
@@ -81,7 +89,7 @@ if (isset($_GET['id'])) {
         </div><!-- end .page-content -->
           <?php
           if ($loggedIn) {
-              echo '<a class="action btn btn-info mt-4" href="' . url_for('/staff/pages/edit.php?id=' . h(u($page_id))) . '">Edit Page</a>';
+              echo '<a class="action btn btn-info mt-4" href="' . url_for('/staff/pages/edit.php?id=' . h(urlencode((string)$page_id))) . '">Edit Page</a>';
           }
           ?>
       </div><!-- end .col-md-9 -->
@@ -89,4 +97,4 @@ if (isset($_GET['id'])) {
   </div>
 </div>
 
-<?php include('../templates/layouts/footer.php'); ?>
+<?php include('../templates/shared/footer.php'); ?>

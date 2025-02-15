@@ -1,6 +1,8 @@
 <?php
 
-require_once('../../../src/initialize.php');
+// require_once('../../../src/initialize.php');
+$app = require_once(__DIR__ . '/../../../config/bootstrap.php');
+$pages = $app['pageService']->findAllPages();
 
 if (!isset($_GET['id'])) {
     redirect_to(url_for('/staff/pages/index.php'));

@@ -2,36 +2,34 @@
   // Default values to prevent errors
   $page_id = $page_id ?? '';
   $subject_id = $subject_id ?? '';
-  $visible = $visible ?? true;
+  $visible = !$app['pageService']->is_preview();
+  $subjects = $app['pageService']->findAllSubjects();
 ?>
 
 <div class="sidebar">
-  <?php $nav_subjects = find_all_subjects(['visible' => $visible]); ?>
   <ul class="list-group subjects">
-    <?php while($nav_subject = mysqli_fetch_assoc($nav_subjects)) { ?>
-      <?php // if(!$nav_subject['visible']) { continue; } ?>
-      <li class="list-group-item <?php if($nav_subject['id'] == $subject_id) { echo 'selected'; } ?>">
-        <a href="<?php echo url_for('page.php?subject_id=' . h(u($nav_subject['id']))); ?>">
-          <?php echo h($nav_subject['menu_name']); ?>
+    <?php foreach($subjects as $subject) { ?>
+      <li class="list-group-item <?php if($subject['id'] == $subject_id) { echo 'selected'; } ?>">
+        <a href="<?php echo url_for('/page.php?subject_id=' . h(urlencode((string)$subject['id']))); ?>">
+          <?php echo h($subject['menu_name']); ?>
         </a>
 
-        <?php if($nav_subject['id'] == $subject_id) { ?>
-          <?php $nav_pages = find_pages_by_subject_id($nav_subject['id'], ['visible' => $visible]); ?>
+        <?php if($subject['id'] == $subject_id) { ?>
+          <?php 
+          $nav_pages = $app['pageService']->findPagesBySubjectId($subject['id'], ['visible' => $visible]); 
+          ?>
           <ul class="pages">
-            <?php while($nav_page = mysqli_fetch_assoc($nav_pages)) { ?>
-              <?php // if(!$nav_page['visible']) { continue; } ?>
+            <?php foreach($nav_pages as $nav_page) { ?>
               <li class="<?php if($nav_page['id'] == $page_id) { echo 'selected'; } ?>">
-                <a href="<?php echo url_for('page.php?id=' . h(u($nav_page['id']))); ?>">
+                <a href="<?php echo url_for('page.php?id=' . h(urlencode((string)$nav_page['id']))); ?>">
                   <?php echo h($nav_page['menu_name']); ?>
                 </a>
               </li>
-            <?php } // while $nav_pages ?>
+            <?php } ?>
           </ul>
-          <?php mysqli_free_result($nav_pages); ?>
-        <?php } // if($nav_subject['id'] == $subject_id) ?>
+        <?php } ?>
 
       </li>
-    <?php } // while $nav_subjects ?>
+    <?php } // foreach $subjects ?>
   </ul>
-  <?php mysqli_free_result($nav_subjects); ?>
 </div>

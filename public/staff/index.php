@@ -1,17 +1,15 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-
-use Fivetwofive\KrateCMS\UserManager;
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
 try {
     // Initialize the UserManager with the existing $db connection
-    $userManager = new UserManager($db);
+    $userManager = $app['userManager'];
 
     // Ensure the user is logged in
     $userManager->checkLoggedIn();
 
     $page_title = 'Staff Menu';
-    include('../../templates/layouts/header.php');
+    include('../../templates/shared/header.php');
 } catch (Exception $e) {
     error_log("Staff page error: " . $e->getMessage());
     header("Location: /users/login.php");
@@ -33,4 +31,4 @@ try {
     </div>
 </div>
 
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php include('../../templates/shared/footer.php'); ?>
