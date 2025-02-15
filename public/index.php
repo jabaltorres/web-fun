@@ -19,7 +19,9 @@ try {
         $app['htmlHelper'],
         $app['settingsManager'],
         $app['socialLinksService'],
-        $app['urlHelper']
+        $app['urlHelper'],
+        $app['userManager'],
+        $app['config']
     );
 
     // Call the index method

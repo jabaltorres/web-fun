@@ -6,6 +6,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
+## [0.1.3] - 2024-01-17
+
+### Changed
+- Consolidated header and footer templates
+  - Merged layouts/header.php into shared/header.php
+  - Merged layouts/footer.php into shared/footer.php
+  - Updated styling for consistent look
+- Enhanced template dependency management
+  - Added proper service checks in templates
+  - Improved error handling for missing services
+- Updated navigation structure
+  - Moved main navigation to component
+  - Improved admin and auth button styling
+  - Fixed login/logout URL paths
+
+### Added
+- GitHub repository links in footer
+- Conditional audio player component
+- Service availability checks in templates
+
+### Fixed
+- Missing dependencies in RecordController
+  - Added userManager and config dependencies
+  - Updated constructor and view variables
+- Improved template organization
+  - Proper closing HTML tags
+  - Better component separation
+  - Consistent styling classes
+
 ## [0.1.2] - 2024-01-16
 
 ### Changed

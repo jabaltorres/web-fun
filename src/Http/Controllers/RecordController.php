@@ -19,6 +19,8 @@ class RecordController
     private $settingsManager;
     private $socialLinksService;
     private UrlHelper $urlHelper;
+    private $userManager;
+    private array $config;
 
     public function __construct(
         RecordService $recordService,
@@ -27,7 +29,9 @@ class RecordController
         HtmlHelper $htmlHelper,
         $settingsManager,
         $socialLinksService,
-        UrlHelper $urlHelper
+        UrlHelper $urlHelper,
+        $userManager,
+        array $config
     ) {
         $this->recordService = $recordService;
         $this->requestHelper = $requestHelper;
@@ -36,6 +40,8 @@ class RecordController
         $this->settingsManager = $settingsManager;
         $this->socialLinksService = $socialLinksService;
         $this->urlHelper = $urlHelper;
+        $this->userManager = $userManager;
+        $this->config = $config;
     }
 
     /**
@@ -52,6 +58,9 @@ class RecordController
         $settingsManager = $this->settingsManager;
         $socialLinksService = $this->socialLinksService;
         $urlHelper = $this->urlHelper;
+        $sessionHelper = $this->sessionHelper;
+        $userManager = $this->userManager;
+        $config = $this->config;
 
         include(ROOT_PATH . '/templates/records/index.php');
     }
