@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Fivetwofive\KrateCMS\Services;
 
+use Exception;
 use Fivetwofive\KrateCMS\Core\Database\DatabaseConnection;
 use Fivetwofive\KrateCMS\Models\Record;
 
@@ -10,20 +11,18 @@ class RecordService
 {
     private DatabaseConnection $db;
     
+    // Constructor to initialize the database connection and ensure the table exists
     public function __construct(DatabaseConnection $db)
     {
         $this->db = $db;
         $this->ensureTableExists();
     }
     
-    public function getDb(): DatabaseConnection
-    {
-        return $this->db;
-    }
-    
     /**
-     * @param string|null $searchTerm
-     * @return Record[]
+     * Find all records, optionally filtered by a search term
+     * 
+     * @param string|null $searchTerm Optional search term for filtering records
+     * @return Record[] Array of Record objects
      */
     public function findAll(?string $searchTerm = null): array
     {
@@ -59,11 +58,18 @@ class RecordService
             }
             
             return $records;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return [];
         }
     }
-    
+
+    /**
+     * Find a record by its ID
+     *
+     * @param int $id Record ID to search for
+     * @return Record|null The found Record object or null if not found
+     * @throws Exception
+     */
     public function findById(int $id): ?Record
     {
         $stmt = $this->db->prepare(
@@ -81,11 +87,11 @@ class RecordService
     }
 
     /**
-     * Create a new record
+     * Create a new record in the database
      * 
-     * @param array<string, mixed> $data Record data
-     * @return Record
-     * @throws \Exception if creation fails
+     * @param array<string, mixed> $data Record data to be inserted
+     * @return Record The created Record object
+     * @throws Exception if creation fails
      */
     public function create(array $data): Record
     {
@@ -120,7 +126,7 @@ class RecordService
         );
 
         if (!$stmt->execute()) {
-            throw new \Exception("Failed to create record: " . $stmt->error);
+            throw new Exception("Failed to create record: " . $stmt->error);
         }
 
         $id = $stmt->insert_id;
@@ -130,18 +136,18 @@ class RecordService
     }
 
     /**
-     * Delete a record by ID
+     * Delete a record by its ID
      * 
      * @param int $id Record ID to delete
      * @return bool True if deletion was successful
-     * @throws \Exception if deletion fails
+     * @throws Exception if deletion fails
      */
     public function delete(int $id): bool
     {
         // First get the record to check if it exists and get image paths
         $record = $this->findById($id);
         if (!$record) {
-            throw new \Exception("Record not found");
+            throw new Exception("Record not found");
         }
 
         // Prepare and execute delete statement
@@ -149,7 +155,7 @@ class RecordService
         $stmt->bind_param('i', $id);
 
         if (!$stmt->execute()) {
-            throw new \Exception("Failed to delete record: " . $stmt->error);
+            throw new Exception("Failed to delete record: " . $stmt->error);
         }
 
         // Delete associated images if they exist
@@ -171,19 +177,19 @@ class RecordService
     }
 
     /**
-     * Update a record
+     * Update an existing record
      * 
      * @param int $id Record ID to update
      * @param array<string, mixed> $data Updated record data
-     * @return Record Updated record
-     * @throws \Exception if update fails
+     * @return Record Updated Record object
+     * @throws Exception if update fails
      */
     public function update(int $id, array $data): Record
     {
         // First check if record exists
         $record = $this->findById($id);
         if (!$record) {
-            throw new \Exception("Record not found");
+            throw new Exception("Record not found");
         }
 
         $sql = "UPDATE vinyl_records SET 
@@ -197,7 +203,7 @@ class RecordService
 
         $stmt = $this->db->prepare($sql);
         if (!$stmt) {
-            throw new \Exception("Failed to prepare statement: " . $this->db->getConnection()->error);
+            throw new Exception("Failed to prepare statement: " . $this->db->getConnection()->error);
         }
 
         // Required fields
@@ -243,11 +249,11 @@ class RecordService
             $bpm,
             $id
         )) {
-            throw new \Exception("Failed to bind parameters: " . $stmt->error);
+            throw new Exception("Failed to bind parameters: " . $stmt->error);
         }
 
         if (!$stmt->execute()) {
-            throw new \Exception("Failed to update record: " . $stmt->error);
+            throw new Exception("Failed to update record: " . $stmt->error);
         }
 
         // Handle image cleanup
@@ -269,6 +275,7 @@ class RecordService
         return $this->findById($id);
     }
 
+    // Ensure the vinyl_records table exists in the database
     private function ensureTableExists(): void
     {
         try {
@@ -308,12 +315,13 @@ class RecordService
                 // Insert test data
                 $this->insertTestData();
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             error_log("Error ensuring table exists: " . $e->getMessage());
             throw $e;
         }
     }
 
+    // Insert test data into the vinyl_records table
     private function insertTestData(): void
     {
         try {
@@ -323,7 +331,7 @@ class RecordService
             
             $this->db->query($sql);
             error_log("Test data inserted successfully");
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             error_log("Error inserting test data: " . $e->getMessage());
             throw $e;
         }
