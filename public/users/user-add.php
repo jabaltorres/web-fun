@@ -1,11 +1,18 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+declare(strict_types=1);
+
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
 use Fivetwofive\KrateCMS\UserManager;
 
 try {
     // Initialize the UserManager
-    $userManager = new UserManager($db);
+    $userManager = $app['userManager'] = $userManager;
 
     // Generate CSRF token
     if (!isset($_SESSION['csrf_token'])) {
@@ -45,7 +52,7 @@ try {
     $error_message = $e->getMessage();
 }
 
-include('../../templates/layouts/header.php');
+include('../../src/Views/templates/header.php');
 ?>
 
   <div class="container py-5">
@@ -97,4 +104,4 @@ include('../../templates/layouts/header.php');
       <?php endif; ?>
   </div>
 
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php include('../../src/Views/templates/footer.php'); ?>
