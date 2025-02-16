@@ -1,5 +1,7 @@
 <?php
 // Access services from the bootstrap
+global $settingsManager, $sessionHelper, $userManager, $htmlHelper, $urlHelper;
+
 $siteName = $settingsManager->getSetting('site_name') ?? 'KrateCMS';
 $isLoggedIn = $sessionHelper->isLoggedIn();
 $isAdmin = $userManager->isAdmin($sessionHelper->getCurrentUserId() ?? 0);
@@ -26,13 +28,9 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $htmlHelper->escape($siteName) ?></title>
     
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= $urlHelper->urlFor('/assets/css/style.css') ?>?v=<?= time() ?>">
     <link rel="stylesheet" href="<?= STYLES_PATH ?>/public.css">
-    <link rel="stylesheet" href="<?= STYLES_PATH ?>/simple.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     
     <!-- TinyMCE -->
