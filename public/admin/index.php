@@ -1,105 +1,101 @@
 <?php
 declare(strict_types=1);
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-
-use Fivetwofive\KrateCMS\UserManager;
-use Fivetwofive\KrateCMS\KrateSettings;
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
 try {
-    // Initialize the UserManager with the existing $db connection
-    $userManager = new UserManager($db);
-
+    // Extract required services
+    $urlHelper = $app['urlHelper'];
+    $htmlHelper = $app['htmlHelper'];
+    $sessionHelper = $app['sessionHelper'];
+    $requestHelper = $app['requestHelper'];
+    $userManager = $app['userManager'];
+    $settingsManager = $app['settingsManager'];
+    $config = $app['config'];
+    
     // Enforce login and admin access
-    $userManager->checkLoggedIn();
+    if (!$sessionHelper->isLoggedIn()) {
+        $sessionHelper->setMessage('Please login to access admin area');
+        $urlHelper->redirect('/users/login.php');
+    }
     
     // Get user status
-    $loggedIn = $userManager->isLoggedIn();
-    $isAdmin = isset($_SESSION['user_id']) ? $userManager->isAdmin($_SESSION['user_id']) : false;
+    $loggedIn = $sessionHelper->isLoggedIn();
+    $userId = $sessionHelper->getCurrentUserId();
+    $isAdmin = $userId ? $userManager->isAdmin($userId) : false;
     
     // If not admin, redirect to regular dashboard
     if (!$isAdmin) {
-        header('Location: /dashboard');
-        exit;
+        $sessionHelper->setMessage('Access denied. Admin privileges required.');
+        $urlHelper->redirect('/dashboard');
     }
 
     // Fetch users only if admin (with error handling)
     $users = null;
     if ($isAdmin) {
         $result = $userManager->getAllUsers();
-        $users = $result ? $result : null;
+        $users = $result ?: null;
     }
 
     // Fetch all settings
-    $settings = KrateSettings::getInstance($db)->getAllSettings($isAdmin);
+    $settings = $settingsManager->getAllSettings($isAdmin);
 
-    // Add this after the user check and before fetching settings
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-        $settings = KrateSettings::getInstance($db);
+    // Handle POST requests
+    if ($requestHelper->isPost() && $requestHelper->post('action')) {
+        $action = $requestHelper->post('action');
         
-        switch ($_POST['action']) {
-            case 'edit_setting':
-                try {
-                    $success = $settings->setSetting(
-                        $_POST['setting_key'],
-                        $_POST['setting_value'],
-                        $_POST['setting_type'],
-                        $_POST['category'],
-                        $_POST['description'],
-                        isset($_POST['is_private']),
-                        $_SESSION['user_id']
+        try {
+            switch ($action) {
+                case 'edit_setting':
+                    $success = $settingsManager->setSetting(
+                        $requestHelper->post('setting_key'),
+                        $requestHelper->post('setting_value'),
+                        $requestHelper->post('setting_type'),
+                        $requestHelper->post('category'),
+                        $requestHelper->post('description'),
+                        (bool)$requestHelper->post('is_private'),
+                        $userId
                     );
                     
                     if (!$success) {
                         throw new Exception('Failed to update setting');
                     }
                     
-                    $_SESSION['message'] = "Setting updated successfully";
-                    header('Location: ' . $_SERVER['PHP_SELF']);
-                    exit;
+                    $sessionHelper->setMessage('Setting updated successfully');
+                    $urlHelper->redirect($_SERVER['PHP_SELF']);
+                    break;
                     
-                } catch (Exception $e) {
-                    $error = $e->getMessage();
-                }
-                break;
-                
-            case 'delete_setting':
-                try {
-                    if ($settings->deleteSetting($_POST['setting_key'])) {
-                        $_SESSION['message'] = "Setting deleted successfully";
-                        header('Location: ' . $_SERVER['PHP_SELF']);
-                        exit;
+                case 'delete_setting':
+                    if ($settingsManager->deleteSetting($requestHelper->post('setting_key'))) {
+                        $sessionHelper->setMessage('Setting deleted successfully');
+                        $urlHelper->redirect($_SERVER['PHP_SELF']);
                     }
                     throw new Exception('Failed to delete setting');
-                } catch (Exception $e) {
-                    $error = $e->getMessage();
-                }
-                break;
+                    break;
 
-            case 'add_setting':
-                try {
-                    $success = $settings->setSetting(
-                        $_POST['setting_key'],
-                        $_POST['setting_value'],
-                        $_POST['setting_type'],
-                        $_POST['category'],
-                        $_POST['description'],
-                        isset($_POST['is_private']),
-                        $_SESSION['user_id']
+                case 'add_setting':
+                    $success = $settingsManager->setSetting(
+                        $requestHelper->post('setting_key'),
+                        $requestHelper->post('setting_value'),
+                        $requestHelper->post('setting_type'),
+                        $requestHelper->post('category'),
+                        $requestHelper->post('description'),
+                        (bool)$requestHelper->post('is_private'),
+                        $userId
                     );
                     
                     if (!$success) {
                         throw new Exception('Failed to add setting');
                     }
                     
-                    $_SESSION['message'] = "Setting added successfully";
-                    header('Location: ' . $_SERVER['PHP_SELF']);
-                    exit;
-                    
-                } catch (Exception $e) {
-                    $error = $e->getMessage();
-                }
-                break;
+                    $sessionHelper->setMessage('Setting added successfully');
+                    $urlHelper->redirect($_SERVER['PHP_SELF']);
+                    break;
+            }
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            $sessionHelper->setMessage("Error: {$error}");
         }
     }
 
@@ -107,20 +103,16 @@ try {
     $pageTitle = 'Admin Dashboard | ' . $config['site']['name'];
     $pageDescription = 'Administrative dashboard for ' . $config['site']['name'];
 
-    // Include header with page metadata
-    include_once('../../templates/layouts/header.php');
-    
-    // Include admin dashboard template
-    include_once('../../templates/admin/dashboard.php');
-    
-    // Include footer
-    include_once('../../templates/layouts/footer.php');
+    // Include templates
+    include(ROOT_PATH . '/templates/shared/header.php');
+    include(ROOT_PATH . '/templates/admin/dashboard.php');
+    include(ROOT_PATH . '/templates/shared/footer.php');
 
 } catch (Exception $e) {
     // Log the error
-    error_log($e->getMessage());
+    error_log("Admin Dashboard Error: " . $e->getMessage());
     
-    // Show error page
-    http_response_code(500);
-    include_once('../../templates/errors/500.php');
+    // Set error message and redirect
+    $sessionHelper->setMessage("An error occurred: " . $e->getMessage());
+    $urlHelper->redirect('/index.php');
 }
