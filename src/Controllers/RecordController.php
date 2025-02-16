@@ -49,8 +49,13 @@ class RecordController
      */
     public function index(): void
     {
+        // Retrieve the search term from the request
         $searchTerm = $this->requestHelper->get('search');
+        
+        // Fetch all records based on the search term
         $records = $this->recordService->findAll($searchTerm);
+        
+        // Check if the user is logged in
         $loggedIn = $this->sessionHelper->isLoggedIn();
 
         // Make helpers available to the view
@@ -62,6 +67,7 @@ class RecordController
         $userManager = $this->userManager;
         $config = $this->config;
 
-        include(ROOT_PATH . '/templates/records/index.php');
+        // Include the view file to render the records
+        include(ROOT_PATH . '/src/Views/records/index.php');
     }
 }

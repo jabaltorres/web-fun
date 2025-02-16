@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
+
 // Ensure these variables are defined
 $settingsManager = $settingsManager ?? null;
 $htmlHelper = $htmlHelper ?? null;
-$searchTerm = $searchTerm ?? '';
 $records = $records ?? [];
 $loggedIn = $loggedIn ?? false;
 
@@ -13,11 +14,9 @@ if ($htmlHelper === null || $settingsManager === null) {
 
 error_log("Template variables:");
 error_log("records: " . print_r($records, true));
-error_log("searchTerm: " . ($searchTerm ?? 'null'));
 error_log("loggedIn: " . ($loggedIn ? 'true' : 'false'));
 
-include(ROOT_PATH . '/templates/shared/header.php');
-include(ROOT_PATH . '/templates/components/hero.php'); 
-include(ROOT_PATH . '/templates/components/record_table.php');
-include(ROOT_PATH . '/templates/shared/footer.php'); 
-?>
+include(ROOT_PATH . '/src/Views/templates/header.php');
+include(ROOT_PATH . '/src/Views/records/hero.php');
+include(ROOT_PATH . '/src/Views/records/record_table.php');
+include(ROOT_PATH . '/src/Views/templates/footer.php');

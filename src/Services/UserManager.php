@@ -362,12 +362,21 @@ class UserManager
             );
         }
 
+        // Prepare the SQL statement
         $stmt = $this->db->prepare(
             "UPDATE users 
              SET first_name = ?, last_name = ?, email = ?, role = ? 
              WHERE user_id = ?"
         );
-        $stmt->bind_param("ssssi", $profileData['first_name'], $profileData['last_name'], $profileData['email'], $profileData['role'] ?? 'Standard User', $userId);
+
+        // Bind parameters individually
+        $firstName = $profileData['first_name'];
+        $lastName = $profileData['last_name'];
+        $email = $profileData['email'];
+        $role = $profileData['role'] ?? 'Standard User'; // Default role if not provided
+
+        // Bind parameters by reference
+        $stmt->bind_param("ssssi", $firstName, $lastName, $email, $role, $userId);
 
         return $stmt->execute();
     }

@@ -1,11 +1,10 @@
 <?php
 // Access services from the bootstrap
-global $settingsManager, $sessionHelper, $userManager, $htmlHelper, $urlHelper;
-
 $siteName = $settingsManager->getSetting('site_name') ?? 'KrateCMS';
 $isLoggedIn = $sessionHelper->isLoggedIn();
 $isAdmin = $userManager->isAdmin($sessionHelper->getCurrentUserId() ?? 0);
 $isDarkMode = $settingsManager->getSetting('dark_mode', false);
+
 
 // Get logo and site info from config
 $logoUrl = $config['site']['logo_url'] ?? '';

@@ -1,5 +1,8 @@
 <?php
 // Ensure these variables are passed in
+global $htmlHelper, $settingsManager;
+$searchTerm = $searchTerm ?? '';
+
 $siteName = $htmlHelper->escape($settingsManager->getSetting('site_name'));
 $siteTagline = $htmlHelper->escape($settingsManager->getSetting('site_tagline'));
 ?>
