@@ -31,10 +31,11 @@ use Fivetwofive\KrateCMS\Services\SocialLinksService;
 use Fivetwofive\KrateCMS\Services\RecordService;
 use Fivetwofive\KrateCMS\Services\UserManager;
 use Fivetwofive\KrateCMS\Models\KrateSettings;
-use Fivetwofive\KrateCMS\Http\Controllers\RecordController;
+use Fivetwofive\KrateCMS\Controllers\RecordController;
 use Fivetwofive\KrateCMS\Models\Record;
 use Fivetwofive\KrateCMS\Services\PageService;
 use Fivetwofive\KrateCMS\Services\SubjectService;
+
 // Initialize the application container
 $app = [];
 
