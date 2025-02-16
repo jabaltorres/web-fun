@@ -12,6 +12,7 @@ use Fivetwofive\KrateCMS\Controllers\RecordController;
 use Fivetwofive\KrateCMS\Services\RecordService;
 
 try {
+    // Initialize the RecordController with required services from the app container
     $recordController = new RecordController(
         $app['recordService'],
         $app['requestHelper'],
@@ -24,11 +25,15 @@ try {
         $app['config']
     );
 
-    // Call the index method
+    // Call the index method of the RecordController
     $recordController->index();
 } catch (Exception $e) {
+    // Log the error message to the error log
     error_log("Error in index page: " . $e->getMessage());
+
+    // Display the error message to the user
     echo "Error: " . $e->getMessage();
+
+    // Terminate the script
     exit;
 }
-?>
