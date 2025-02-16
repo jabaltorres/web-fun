@@ -4,13 +4,6 @@ declare(strict_types=1);
 // Load bootstrap and get application container
 $app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
-use Fivetwofive\KrateCMS\Services\UserManager;
-use Fivetwofive\KrateCMS\Services\RecordService;
-use Fivetwofive\KrateCMS\Core\Helpers\RequestHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\HtmlHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\UrlHelper;
-use Fivetwofive\KrateCMS\Core\Helpers\SessionHelper;
-
 try {
     // Extract all required services
     $urlHelper = $app['urlHelper'];
