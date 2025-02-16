@@ -2,7 +2,6 @@
     <head>
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/public.css">
-        <link rel="stylesheet" href="/assets/css/simple.css" media="all">
     </head>
     <body id="page-scratch" class="">
         <div class="container py-5">
