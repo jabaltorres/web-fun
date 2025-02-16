@@ -1,7 +1,12 @@
 <?php
 declare(strict_types=1);
 
-require_once(__DIR__ . '/../src/initialize.php');
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../config/bootstrap.php');
 
 // Add error reporting for debugging
 error_reporting(E_ALL);
