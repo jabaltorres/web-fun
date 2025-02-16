@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Fivetwofive\KrateCMS\Core\Auth;
+namespace Fivetwofive\KrateCMS\Services;
 
 class AdminAuthService
 {
