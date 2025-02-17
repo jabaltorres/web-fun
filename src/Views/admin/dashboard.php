@@ -16,10 +16,10 @@
             case 'edit_setting':
                 if (isset($_POST['setting_id'], $_POST['setting_value'])) {
                     $setting_id = filter_var($_POST['setting_id'], FILTER_SANITIZE_NUMBER_INT);
-                    $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
-                    $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
-                    $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
-                    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+                    $setting_value = trim(htmlspecialchars($_POST['setting_value'], ENT_QUOTES, 'UTF-8'));
+                    $setting_type = trim(htmlspecialchars($_POST['setting_type'], ENT_QUOTES, 'UTF-8'));
+                    $category = trim(htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'));
+                    $description = trim(htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8'));
                     $is_private = isset($_POST['is_private']) ? 1 : 0;
 
                     $sql = "UPDATE settings 
@@ -42,11 +42,11 @@
 
             case 'add_setting':
                 if (isset($_POST['setting_key'], $_POST['setting_value'])) {
-                    $setting_key = filter_var($_POST['setting_key'], FILTER_SANITIZE_STRING);
-                    $setting_value = filter_var($_POST['setting_value'], FILTER_SANITIZE_STRING);
-                    $setting_type = filter_var($_POST['setting_type'], FILTER_SANITIZE_STRING);
-                    $category = filter_var($_POST['category'], FILTER_SANITIZE_STRING);
-                    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+                    $setting_key = trim(htmlspecialchars($_POST['setting_key'], ENT_QUOTES, 'UTF-8'));
+                    $setting_value = trim(htmlspecialchars($_POST['setting_value'], ENT_QUOTES, 'UTF-8'));
+                    $setting_type = trim(htmlspecialchars($_POST['setting_type'], ENT_QUOTES, 'UTF-8'));
+                    $category = trim(htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'));
+                    $description = trim(htmlspecialchars($_POST['description'], ENT_QUOTES, 'UTF-8'));
                     $is_private = isset($_POST['is_private']) ? 1 : 0;
 
                     $sql = "INSERT INTO settings 
@@ -94,7 +94,8 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-4">Admin Dashboard</h1>
+            <h1 class="mb-4"><?= $pageTitle ?></h1>
+            <p class="mb-4 h4"><?= $pageDescription ?></p>
             
             <!-- Dark Mode Toggle Button -->
             <button id="darkModeToggle" class="btn btn-secondary mb-4">Toggle Dark Mode</button>

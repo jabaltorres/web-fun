@@ -11,7 +11,7 @@ $columns = [
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>All Users</h3>
-    <span class="text-muted"><?= $users->num_rows ?> users found</span>
+    <span class="text-muted"><?= $users ? $users->num_rows : 0 ?> users found</span>
 </div>
 
 <table class="table table-striped">
@@ -19,7 +19,7 @@ $columns = [
         <tr>
             <?php foreach ($columns as $field => $label): ?>
                 <th>
-                    <a href="<?= $userController->getSortUrl($field, $sortField, $sortOrder, $search, $roleFilter) ?>" 
+                    <a href="<?= $userController->getSortUrl($field, $sortField, $sortOrder, $search, $roleFilter) ?>"
                        class="text-white text-decoration-none">
                         <?= $label ?> <?= $userController->getSortIndicator($field, $sortField, $sortOrder) ?>
                     </a>

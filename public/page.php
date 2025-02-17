@@ -17,4 +17,4 @@ $controller = new \Fivetwofive\KrateCMS\Controllers\PageController(
 $viewData = $controller->show();
 
 // Render view
-require_once(__DIR__ . '/../templates/views/page/show.php');
+require_once(__DIR__ . '/../src/Views/page/show.php');

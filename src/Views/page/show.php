@@ -12,7 +12,7 @@
  */
 ?>
 
-<?php include(__DIR__ . '/../../shared/header.php'); ?>
+<?php include(__DIR__ . '/../templates/header.php'); ?>
 
 <?php if ($viewData['isPreview']): ?>
     <?php $app['pageService']->show_preview_alert(); ?>
@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <?php include(__DIR__ . '/../../components/nav_public.php'); ?>
+        <?php include(__DIR__ . '/../templates/nav_public.php'); ?>
       </div>
 
       <div class="col-md-9">
@@ -33,7 +33,7 @@
               echo strip_tags($viewData['page']['content'], $allowed_tags);
               ?>
           <?php else: ?>
-              <?php include(__DIR__ . '/../../views/page/static_homepage.php'); ?>
+              <?php include(__DIR__ . '/../partials/home/static_homepage.php'); ?>
           <?php endif; ?>
         </div>
 
@@ -48,4 +48,4 @@
   </div>
 </div>
 
-<?php include(__DIR__ . '/../../shared/footer.php'); ?> 
+<?php include(__DIR__ . '/../templates/footer.php'); ?>

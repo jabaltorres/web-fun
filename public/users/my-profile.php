@@ -1,14 +1,18 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+declare(strict_types=1);
 
-use Fivetwofive\KrateCMS\KrateUserManager;
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
 try {
     // Initialize the KrateUserManager
-    $userManager = new KrateUserManager($db);
 
     // Ensure the user is logged in
-    $userManager->checkLoggedIn();
+    $userManager = $app['userManager'];
 
     // Fetch user details
     $userDetails = $userManager->getUserDetails($_SESSION['user_id']);
@@ -22,7 +26,7 @@ try {
     $error = "An error occurred while loading your profile.";
 }
 
-include('../../templates/layouts/header.php');
+include(ROOT_PATH . '/templates/shared/header.php');
 ?>
 
 <div class="container py-5">
@@ -43,4 +47,4 @@ include('../../templates/layouts/header.php');
   <?php endif; ?>
 </div>
 
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php include(ROOT_PATH . '/templates/shared/footer.php'); ?>

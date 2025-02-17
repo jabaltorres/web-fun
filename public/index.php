@@ -11,21 +11,11 @@ $app = require_once(__DIR__ . '/../config/bootstrap.php');
 use Fivetwofive\KrateCMS\Controllers\RecordController;
 use Fivetwofive\KrateCMS\Core\Router;
 
-// Define constants for magic values
-const TEST_ROUTE = '/test-route';
-const REDIRECT_URL = '/test.php';
-
 // Initialize the router
-$router = new Router();
+$router = new Router(); // Create a new Router instance directly
 
-// Define the test route with a redirect
-$router->addRoute('GET', TEST_ROUTE, fn() => redirect(REDIRECT_URL));
-
-// Function to handle redirection
-function redirect(string $url): void {
-    header("Location: $url");
-    exit();
-}
+// Load routes with router in scope
+require_once __DIR__ . '/../src/Routes/web.php';
 
 // Move the routing resolution before the RecordController logic
 try {

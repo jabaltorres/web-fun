@@ -135,4 +135,9 @@ class DatabaseConnection
     {
         return $this->connection->error;
     }
+
+    public function num_rows($result): int
+    {
+        return mysqli_num_rows($result); // Assuming you're using MySQLi
+    }
 } 

@@ -19,11 +19,11 @@ class KrateSettings {
         $this->db = $db;
         $this->loadSettings();
     }
-    
+
     /**
      * Get singleton instance
-     * 
-     * @param \mysqli $db Database connection
+     *
+     * @param DatabaseConnection $db Database connection
      * @return self
      */
     public static function getInstance(DatabaseConnection $db): self {
@@ -32,7 +32,7 @@ class KrateSettings {
         }
         return self::$instance;
     }
-    
+
     /**
      * Load all settings from database
      */
