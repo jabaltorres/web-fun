@@ -21,7 +21,7 @@ function redirect(string $url): void {
 }
 
 // Define a route for the admin area
-$router->get('/admin', function() use ($app) {
+$router->get('/admin/dashboard', function() use ($app) {
     try {
         // Instantiate the AdminController
         $adminController = new AdminController($app);
@@ -30,4 +30,8 @@ $router->get('/admin', function() use ($app) {
         error_log("Error in admin index: " . $e->getMessage());
         // Optionally, handle the error response
     }
+});
+
+$router->get('/admin/index.php', function() use ($app) {
+    echo "Admin index route hit";
 });

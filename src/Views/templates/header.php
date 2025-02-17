@@ -57,7 +57,7 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
                         <?php include(ROOT_PATH . '/templates/components/nav_main.php'); ?>
                         <?php if ($isAdmin): ?>
                             <li class="nav-item">
-                                <a href="<?= $urlHelper->urlFor('/admin/index.php') ?>" class="btn btn-secondary">
+                                <a href="<?= $urlHelper->urlFor('/admin/dashboard') ?>" class="btn btn-secondary">
                                     Admin Dashboard
                                 </a>
                             </li>
