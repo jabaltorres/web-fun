@@ -3,14 +3,14 @@
 
   Key Principles
   - Write concise, technical responses with accurate PHP examples.
-  - Follow Laravel best practices and conventions.
+  - Follow PHP best practices and conventions.
   - Use object-oriented programming with a focus on SOLID principles.
   - Prefer iteration and modularization over duplication.
   - Use descriptive variable and method names.
   - Use lowercase with dashes for directories (e.g., app/Http/Controllers).
   - Favor dependency injection and service containers.
 
-  PHP/Laravel
+  PHP
   - Use PHP 7.4 features
   - Use strict typing (declare(strict_types=1))
   - Leverage type hints for parameters, properties, and return types
