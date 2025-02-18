@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-// src/Http/Controllers/RecordController.php
 
 namespace Fivetwofive\KrateCMS\Controllers;
 
@@ -51,7 +50,7 @@ class RecordController
     {
         // Retrieve the search term from the request
         $searchTerm = $this->requestHelper->get('search');
-        
+
         // Fetch all records based on the search term
         $records = $this->recordService->findAll($searchTerm);
         
