@@ -77,8 +77,8 @@
                 break;
         }
 
-        // Redirect to prevent form resubmission
-        header('Location: ' . $_SERVER['PHP_SELF']);
+        // Redirect back to the dashboard with an absolute path
+        header('Location: /admin/dashboard');
         exit;
     }
 

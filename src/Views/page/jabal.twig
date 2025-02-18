@@ -1,0 +1,51 @@
+{% extends "layouts/basic.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block description %}{{ description }}{% endblock %}
+
+{# Add page-specific styles if needed #}
+{% block styles %}
+    <style>
+        .container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to the Jabal Page!</h1>
+    <h2>User Information</h2>
+    <ul>
+        <li><strong>First Name:</strong> {{ first_name }}</li>
+        <li><strong>Last Name:</strong> {{ last_name }}</li>
+        <li><strong>Email:</strong> {{ email }}</li>
+        <li><strong>Phone:</strong> {{ phone }}</li>
+        <li><strong>Message:</strong> {{ message }}</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Example of adding page-specific JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form validation
+        const forms = document.getElementsByClassName('needs-validation');
+        Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    });
+</script>
+{% endblock %} 

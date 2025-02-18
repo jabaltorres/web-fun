@@ -17,6 +17,6 @@ error_log("records: " . print_r($records, true));
 error_log("loggedIn: " . ($loggedIn ? 'true' : 'false'));
 
 include(ROOT_PATH . '/src/Views/templates/header.php');
-include(ROOT_PATH . '/src/Views/records/hero.php');
-include(ROOT_PATH . '/src/Views/records/record_table.php');
+include(ROOT_PATH . '/src/Views/records/partials/hero.php');
+include(ROOT_PATH . '/src/Views/records/partials/record_table.php');
 include(ROOT_PATH . '/src/Views/templates/footer.php');

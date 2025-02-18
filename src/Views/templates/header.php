@@ -29,7 +29,6 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= $urlHelper->urlFor('/assets/css/style.css') ?>?v=<?= time() ?>">
-    <link rel="stylesheet" href="<?= STYLES_PATH ?>/public.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     
     <!-- TinyMCE -->
@@ -54,7 +53,7 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
-                        <?php include(ROOT_PATH . '/templates/components/nav_main.php'); ?>
+                        <li><?php include(ROOT_PATH . '/src/Views/partials/nav/nav_main.php'); ?></li>
                         <?php if ($isAdmin): ?>
                             <li class="nav-item">
                                 <a href="<?= $urlHelper->urlFor('/admin/dashboard') ?>" class="btn btn-secondary">
