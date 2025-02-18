@@ -68,6 +68,7 @@ $displayPort = ($protocol === 'http' && $port == 80 ||
                 $protocol === 'https' && $port == 443) 
                 ? '' : ":{$port}";
 $baseUrl = "{$protocol}://{$serverName}{$displayPort}";
+//$baseUrl = "{$protocol}://{$serverName}";
 
 $publicEnd = strpos($_SERVER['SCRIPT_NAME'], '/public');
 $docRoot = ($publicEnd !== false) ? substr($_SERVER['SCRIPT_NAME'], 0, $publicEnd) : '';
@@ -122,12 +123,12 @@ $app['subjectService'] = new SubjectService($app['databaseConnection']);
 
 // Define path constants
 define('PRIVATE_PATH', ROOT_PATH . '/src');
-define('STYLES_PATH', $baseUrl . '/assets/css');
-define('SCRIPTS_PATH', $baseUrl . '/assets/js');
+// define('STYLES_PATH', $baseUrl . '/assets/css');
+// define('SCRIPTS_PATH', $baseUrl . '/assets/js');
 define('IMAGES_PATH', $baseUrl . '/assets/images');
 
 // Initialize Twig
-$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . '/templates');
+$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . '/src/Views');
 $twig = new \Twig\Environment($loader, [
     'cache' => ROOT_PATH . '/cache/twig',
     'debug' => $_ENV['APP_ENV'] ?? 'development' !== 'production',
@@ -171,6 +172,9 @@ function redirect_to(string $location): never {
     global $urlHelper;
     $urlHelper->redirect($location);
 }
+
+// After initializing Twig
+$app['twig'] = $twig;
 
 // Return the application container
 return $app; 
