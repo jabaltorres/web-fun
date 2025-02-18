@@ -35,7 +35,7 @@ if (!$page) {
 ?>
 
 <?php $page_title = 'Show Page'; ?>
-<?php include('../../../templates/shared/header.php'); ?>
+<?php include('../../../src/Views/templates/header.php'); ?>
 
 <div id="content" class="container">
     <div class="row">
@@ -81,4 +81,4 @@ if (!$page) {
     </div>
 </div>
 
-<?php include('../../../templates/shared/footer.php'); ?>
+<?php include('../../../src/Views/templates/footer.php'); ?>

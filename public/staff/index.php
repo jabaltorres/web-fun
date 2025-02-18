@@ -9,7 +9,7 @@ try {
     $userManager->checkLoggedIn();
 
     $page_title = 'Staff Menu';
-    include('../../templates/shared/header.php');
+    include('../../src/Views/templates/header.php');
 } catch (Exception $e) {
     error_log("Staff page error: " . $e->getMessage());
     header("Location: /users/login.php");
@@ -31,4 +31,4 @@ try {
     </div>
 </div>
 
-<?php include('../../templates/shared/footer.php'); ?>
+<?php include('../../src/Views/templates/footer.php'); ?>
