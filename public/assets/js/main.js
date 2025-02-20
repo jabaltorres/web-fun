@@ -4887,5 +4887,3 @@ Tooltips.init();
     }
   });
 })(jQuery);
-
-console.log("The app.js file is loaded");

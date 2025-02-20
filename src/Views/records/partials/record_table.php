@@ -5,17 +5,19 @@ if (!isset($records, $urlHelper, $htmlHelper, $loggedIn)) {
 }
 ?>
 
-<div class="container record-table-container py-4 border mb-5">
+<div class="container record-table-container py-4 mb-5">
     <div class="row">
         <div class="col-12 col-md-6">
             <h2>All Vinyl Records</h2>
         </div>
 
-        <div class="col-12 col-md-6">
-            <div class="action text-right">
-                <a class="btn btn-primary mb-4" href="<?= $urlHelper->urlFor('records/add.php') ?>">Add New Record</a>
-            </div>
-        </div>
+        <?php if ($loggedIn): ?>
+          <div class="col-12 col-md-6">
+              <div class="action text-right">
+                  <a class="btn btn-primary mb-4" href="<?= $urlHelper->urlFor('records/add.php') ?>">Add New Record</a>
+              </div>
+          </div>
+        <?php endif; ?>
     </div>
 
     <div class="row">
