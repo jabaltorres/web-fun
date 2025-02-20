@@ -52,7 +52,7 @@ try {
     }
 
     // Include the header with access to all services
-    include(ROOT_PATH . '/templates/shared/header.php');
+    include(ROOT_PATH . '/src/Views/templates/header.php');
 } catch (Exception $e) {
     error_log("Login error: " . $e->getMessage());
     $error = "An error occurred during login. Please try again.";
@@ -105,4 +105,4 @@ try {
     <?php endif; ?>
 </div>
 
-<?php include(ROOT_PATH . '/templates/shared/footer.php'); ?>
+<?php include(ROOT_PATH . '/src/Views/templates/footer.php'); ?>

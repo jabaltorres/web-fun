@@ -1,12 +1,18 @@
 <?php
-// Require initialization file
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
+declare(strict_types=1);
+
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../config/bootstrap.php');
 
 use Fivetwofive\KrateCMS\UserManager;
 
 try {
     // Initialize the UserManager with the existing $db connection
-    $userManager = new UserManager($db);
+    $userManager = $app['userManager'];
 
     // Use isLoggedIn to check if the user is logged in for conditional content display
     $loggedIn = $userManager->isLoggedIn();
@@ -16,14 +22,14 @@ try {
     $error = "An error occurred while loading the page.";
 }
 
-include('../templates/layouts/header.php');
+include(ROOT_PATH . '/src/Views/templates/header.php');
 ?>
 
     <div id="main" class="py-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <?php include('../templates/components/nav_public.php'); ?>
+                    <?php include(ROOT_PATH . '/src/Views/templates/nav_public.php'); ?>
                 </div>
                 <div class="col-md-9 ">
                     <div class="page-content">
@@ -34,4 +40,4 @@ include('../templates/layouts/header.php');
         </div>
     </div>
 
-<?php include('../templates/layouts/footer.php'); ?>
+<?php include(ROOT_PATH . '/src/Views/templates/footer.php'); ?>

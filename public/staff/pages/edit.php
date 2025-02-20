@@ -82,7 +82,7 @@ $page_title = 'Edit Page';
 
 ?>
 
-<?php include('../../../templates/shared/header.php'); ?>
+<?php include('../../../src/Views/templates/header.php'); ?>
 
 <script>
   tinymce.init({
@@ -168,4 +168,4 @@ $page_title = 'Edit Page';
     </div>
 </div>
 
-<?php include('../../../templates/shared/footer.php'); ?>
+<?php include('../../../src/Views/templates/footer.php'); ?>

@@ -22,7 +22,7 @@ if (!isset($socialLinksService) || !isset($htmlHelper) || !isset($config) || !is
     <?php include ROOT_PATH . '/templates/components/audio-player.php'; ?>
 <?php endif; ?>
 
-<script src="<?= SCRIPTS_PATH ?>/main.min.js"></script>
+<script src="<?= $urlHelper->urlFor('/assets/js/main.min.js') ?>"></script>
 
 </body>
 </html>

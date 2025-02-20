@@ -6,7 +6,7 @@ $subjects = $app['subjectService']->findAllSubjects();
 ?>
 
 <?php $page_title = 'Pages'; ?>
-<?php include('../../../templates/shared/header.php'); ?>
+<?php include('../../../src/Views/templates/header.php'); ?>
 
 <div id="content" class="container py-5">
     <div class="row">
@@ -50,4 +50,4 @@ $subjects = $app['subjectService']->findAllSubjects();
     </div>
 </div>
 
-<?php include('../../../templates/shared/footer.php'); ?>
+<?php include('../../../src/Views/templates/footer.php'); ?>

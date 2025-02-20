@@ -13,7 +13,7 @@
 
 $page_id = $viewData['page_id'] ?? '';
 $subject_id = $viewData['subject_id'] ?? '';
-$visible = $viewData['visible'];
+$visible = $viewData['visible'] ?? false;
 $subjects = $app['subjectService']->findAllSubjects();
 ?>
 
