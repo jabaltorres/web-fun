@@ -1,143 +1,182 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/Fivetwofive/KrateCMS/UserManager.php');
+declare(strict_types=1);
 
-use Fivetwofive\KrateCMS\UserManager;
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
-// Initialize the UserManager with the existing $db connection
-$userManager = new UserManager($db);
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+// Get services from the container
+$contactManager = $app['contactManager'];
+$userManager = $app['userManager'];
+$urlHelper = $app['urlHelper'];
 
-// Use isLoggedIn to check if the user is logged in for conditional content display
-$loggedIn = $userManager->isLoggedIn();
+// At the top with other use statements
+use Fivetwofive\KrateCMS\Middleware\AuthMiddleware;
+use Fivetwofive\KrateCMS\Controllers\ContactController;
 
-// Check if the user is an administrator
-$isAdmin = $userManager->isAdmin($_SESSION['user_id']);
+try {
+    // Check authentication
+    AuthMiddleware::requireLogin($userManager);
 
-$title = "Contact Page";
-$page_heading = "This is the Contacts Page";
-$page_subheading = "Welcome to the Contacts page";
-$custom_class = "contacts-page";
+    // Initialize the ContactController
+    $contactController = new ContactController($contactManager);
+    
+    // Get view data from controller
+    $viewData = $contactController->index();
+    
+    // Extract variables for the view
+    extract($viewData);
 
-// Retrieve sort parameter from GET request or default to 'id'
-$sort = isset($_GET['sort']) ? $_GET['sort'] : 'id';
-
-// Fetch contacts with the specified sorting (assuming find_all_contacts() is already implemented)
-$contact_set = find_all_contacts($sort);
-
-include('../../templates/layouts/header.php');
+    include('../../src/Views/templates/header.php');
 ?>
 
-  <div class="<?php echo $custom_class; ?> container">
+    <div class="<?php echo h($custom_class); ?> container">
+        <section class="py-4 mb-2">
+            <h1 class="h2"><?php echo h($page_heading); ?></h1>
+            <p class="lead"><?php echo h($page_subheading); ?></p>
+        </section>
 
-    <section class="py-4 mb-2">
-        <?php
-        include('../../templates/components/headline.php');
-        include('../../templates/components/nav_contacts.php');
-        ?>
-    </section>
+        <div class="row mb-4">
+            <div class="col">
+                <form action="<?= $urlHelper->urlFor('/contacts/index.php'); ?>" method="get" class="form-inline">
+                    <div class="input-group mr-2">
+                        <input type="text" name="search" class="form-control" 
+                               placeholder="Search contacts..." 
+                               value="<?= h($searchTerm); ?>">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <?php if (!empty($searchTerm)): ?>
+                                <a href="<?= $urlHelper->urlFor('/contacts/index.php'); ?>" 
+                                   class="btn btn-secondary">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
 
-    <div class="row">
-      <div class="col">
-        <form action="index.php" method="get">
-          <div class="form-row">
-            <div class="col">
-              <span class="font-weight-bold">Sort</span>
+                    <select id="sort" class="form-control mr-2" name="sort">
+                        <option value="id" <?php echo $sort === 'id' ? 'selected' : ''; ?>>ID</option>
+                        <option value="first_name" <?php echo $sort === 'first_name' ? 'selected' : ''; ?>>First Name</option>
+                        <option value="last_name" <?php echo $sort === 'last_name' ? 'selected' : ''; ?>>Last Name</option>
+                        <option value="email" <?php echo $sort === 'email' ? 'selected' : ''; ?>>Email</option>
+                        <option value="favorite" <?php echo $sort === 'favorite' ? 'selected' : ''; ?>>Favorite</option>
+                    </select>
+
+                    <select id="direction" class="form-control mr-2" name="direction">
+                        <option value="asc" <?php echo $direction === 'asc' ? 'selected' : ''; ?>>Ascending</option>
+                        <option value="desc" <?php echo $direction === 'desc' ? 'selected' : ''; ?>>Descending</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary">Sort</button>
+                </form>
             </div>
-          </div>
-          <div class="form-row align-items-center">
-            <div class="col">
-              <label for="sort" class="sr-only">Sort by:</label>
-              <select id="sort" class="custom-select" name="sort">
-                <option value="id" <?php echo ($sort == 'id') ? 'selected' : ''; ?>>ID</option>
-                <option value="first_name" <?php echo ($sort == 'first_name') ? 'selected' : ''; ?>>First Name</option>
-                <option value="last_name" <?php echo ($sort == 'last_name') ? 'selected' : ''; ?>>Last Name</option>
-                <option value="email" <?php echo ($sort == 'email') ? 'selected' : ''; ?>>Email</option>
-                <option value="favorite" <?php echo ($sort == 'favorite') ? 'selected' : ''; ?>>Favorite</option>
-              </select>
-            </div>
+
             <div class="col-auto">
-              <button type="submit" class="btn btn-primary">Sort</button>
+                <a href="contact-add.php" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Add New Contact
+                </a>
             </div>
-          </div>
-        </form>
-      </div>
+        </div>
 
-      <div class="col">
-        <form action="search-results.php" method="get">
-          <div class="form-row">
-            <div class="col">
-              <span class="font-weight-bold">Search</span>
+        <?php if (!empty($searchTerm)): ?>
+            <div class="alert alert-info">
+                <i class="fas fa-search"></i> 
+                Search results for: <strong><?= h($searchTerm) ?></strong>
+                <span class="badge badge-pill badge-secondary ml-2">
+                    <?= (string)$contact_set->num_rows ?> results
+                </span>
             </div>
-          </div>
-          <div class="form-row align-items-center">
-            <div class="col">
-              <label for="search" class="sr-only">Search:</label>
-              <input type="text" id="search" class="form-control" name="search" placeholder="Search contacts..." required>
-            </div>
-            <div class="col-auto">
-              <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-          </div>
-        </form>
-      </div>
+        <?php endif; ?>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <?php
+                        $columns = [
+                            'id' => 'ID',
+                            'first_name' => 'First Name', 
+                            'last_name' => 'Last Name',
+                            'email' => 'Email',
+                            'favorite' => 'Favorite'
+                        ];
+
+                        foreach ($columns as $column => $label): 
+                            $newDirection = ($sort === $column && $direction === 'asc') ? 'desc' : 'asc';
+                            $sortIcon = '';
+                            
+                            if ($sort === $column) {
+                                $sortIcon = $direction === 'asc' ? 
+                                    '<i class="fas fa-sort-up ml-1"></i>' : 
+                                    '<i class="fas fa-sort-down ml-1"></i>';
+                            } else {
+                                $sortIcon = '<i class="fas fa-sort ml-1 text-muted"></i>';
+                            }
+                        ?>
+                            <th>
+                                <a href="?sort=<?= $column ?>&direction=<?= $newDirection ?><?= $searchTerm ? '&search=' . h($searchTerm) : '' ?>" 
+                                   class="text-white d-flex align-items-center sortable-header"
+                                   role="button"
+                                   aria-sort="<?= $sort === $column ? ($direction === 'asc' ? 'ascending' : 'descending') : 'none' ?>"
+                                   title="Sort by <?= $label ?>">
+                                    <?= h($label) ?>
+                                    <span class="sort-icon"><?= $sortIcon ?></span>
+                                </a>
+                            </th>
+                        <?php endforeach; ?>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($contact = $contact_set->fetch_assoc()) : ?>
+                        <tr>
+                            <td><?= h((string)$contact['id']); ?></td>
+                            <td><?= h($contact['first_name']); ?></td>
+                            <td><?= h($contact['last_name']); ?></td>
+                            <td>
+                                <a href="mailto:<?= h($contact['email']); ?>">
+                                    <?= h($contact['email']); ?>
+                                </a>
+                            </td>
+                            <td>
+                                <i class="fas fa-<?= $contact['favorite'] ? 'star text-warning' : 'star-o'; ?>"></i>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="contact-show.php?id=<?= h((string)$contact['id']); ?>" 
+                                       class="btn btn-info" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="contact-edit.php?id=<?= h((string)$contact['id']); ?>" 
+                                       class="btn btn-warning" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="contact-delete.php?id=<?= h((string)$contact['id']); ?>" 
+                                       class="btn btn-danger" title="Delete"
+                                       onclick="return confirm('Are you sure you want to delete this contact?');">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                    <?php $contact_set->free(); ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <section class="mt-4">
-      <h4 class="mb-2 h4 font-weight-bold">Contact Entries</h4>
-      <p>This uses the `find_all_contacts()` function from the `query_functions.php` file.</p>
-      <table class="table table-striped border">
-        <thead class="thead-light">
-        <tr>
-          <th scope="col"><a href="#" class="sort-header" data-sort="id">ID</a></th>
-          <th scope="col"><a href="#" class="sort-header" data-sort="first_name">First Name</a></th>
-          <th scope="col"><a href="#" class="sort-header" data-sort="last_name">Last Name</a></th>
-          <th scope="col"><a href="#" class="sort-header" data-sort="email">Email</a></th>
-          <th scope="col"><a href="#" class="sort-header" data-sort="favorite">Favorite</a></th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <?php while ($contact = mysqli_fetch_assoc($contact_set)) : ?>
-          <tr>
-            <td><?php echo h($contact['id']); ?></td>
-            <td><?php echo h($contact['first_name']); ?></td>
-            <td><?php echo h($contact['last_name']); ?></td>
-            <td>
-              <a href="/contacts/contact-message.php?id=<?php echo h($contact['id']); ?>"><?php echo h($contact['email']); ?></a>
-            </td>
-            <td><?php echo $contact['favorite'] ? 'Yes' : 'No'; ?></td>
-            <td>
-              <a href="<?php echo url_for('/contacts/contact-show.php?id=' . h(u($contact['id']))); ?>"
-                 class="btn btn-info btn-sm">View</a>
-              <a href="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($contact['id']))); ?>"
-                 class="btn btn-warning btn-sm">Edit</a>
-              <a href="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>"
-                 class="btn btn-danger btn-sm">Delete</a>
-            </td>
-          </tr>
-        <?php endwhile; ?>
-        <?php mysqli_free_result($contact_set); ?>
-        </tbody>
-      </table>
-    </section>
-  </div><!-- end .container -->
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Attach click event to all elements with class 'sort-header'
-      const sortableHeaders = document.querySelectorAll('.sort-header');
-      sortableHeaders.forEach(function(header) {
-        header.addEventListener('click', function(e) {
-          e.preventDefault(); // Prevent default link behavior
-          const sortKey = this.getAttribute('data-sort'); // Get the sorting key from the data attribute
-          window.location.href = `?sort=${sortKey}`; // Redirect to the same page with the new sort parameter
-        });
-      });
-    });
-  </script>
-
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php 
+    include('../../src/Views/templates/footer.php');
+} catch (Exception $e) {
+    // Log the error
+    error_log($e->getMessage());
+    // Redirect to error page
+    redirect_to('/error.php');
+}
+?>

@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # [Unreleased]
 
+## [0.1.5] - 2025-02-16
+
+### Added
+- Implemented comprehensive contact management system:
+  - Added ContactController for handling contact-related requests
+  - Created ContactManager service for contact operations
+  - Added new contact views and templates:
+    - Contact listing page
+    - Contact details view
+    - Contact message interface
+    - Contact removal confirmation
+- Enhanced SASS styling structure for contact pages
+- Added proper header template integration for contact section
+
+### Changed
+- Refactored contact-related operations into dedicated service layer
+- Improved contact form handling and validation
+- Updated header template to include contact navigation items
+
+### Security
+- Implemented proper input validation for contact forms
+- Added CSRF protection for contact operations
+- Enhanced access control for contact management
+
 ## [0.1.4] - 2025-02-15
 
 ### Changed

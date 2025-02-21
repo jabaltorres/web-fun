@@ -1,184 +1,206 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/Fivetwofive/KrateCMS/UserManager.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php'); // Autoload Postmark
+declare(strict_types=1);
 
-use Fivetwofive\KrateCMS\UserManager;
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
+
+// Get services from the container
+$contactManager = $app['contactManager'];
+$userManager = $app['userManager'];
+$urlHelper = $app['urlHelper'];
+
+use Fivetwofive\KrateCMS\Middleware\AuthMiddleware;
 use Postmark\PostmarkClient;
 
-// Initialize the UserManager with the existing $db connection
-$userManager = new UserManager($db);
+try {
+    // Check authentication
+    AuthMiddleware::requireLogin($userManager);
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+    // Get contact ID from URL parameters
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    
+    if ($id === 0) {
+        throw new InvalidArgumentException('Invalid contact ID');
+    }
 
-// Initialize variables
-$output_form = false;
-$subject = '';
-$text = '';
-
-// Validate 'id' from GET and ensure it's a positive integer
-if (isset($_GET['id']) && filter_var($_GET['id'], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]])) {
-    $id = intval($_GET['id']);
-    $contact = find_contact_by_id($id);
+    // Fetch contact data
+    $contact = $contactManager->findContactById($id);
+    
     if (!$contact) {
-        // Contact not found, redirect to contacts list
-        redirect_to(url_for('/contacts/index.php'));
+        throw new RuntimeException('Contact not found');
     }
-} else {
-    // Invalid or missing 'id', redirect to contacts list
-    redirect_to(url_for('/contacts/index.php'));
-}
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize and validate input data
-    $from = 'info@fivetwofive.com'; // Ensure this is a verified sender in Postmark
-    $subject = trim($_POST['subject'] ?? '');
-    $text = $_POST['message'] ?? ''; // HTML content from TinyMCE
     $errors = [];
+    $success = false;
 
-    // Check for empty fields
-    if (empty($subject)) {
-        $errors[] = 'Please provide an email subject.';
-    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Sanitize and validate input data
+        $from = $_ENV['MAIL_FROM_ADDRESS'] ?? 'info@fivetwofive.com';
+        $subject = trim($_POST['subject'] ?? '');
+        $text = $_POST['message'] ?? '';
 
-    if (empty($text)) {
-        $errors[] = 'Please provide the email body text.';
-    }
-
-    // If there are errors, display them
-    if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo '<div class="alert alert-warning p-4 mb-4 text-center">' . h($error) . '</div>';
+        // Validate inputs
+        if (empty($subject)) {
+            $errors[] = 'Please provide an email subject.';
         }
-        $output_form = true;
-    } else {
-        // Get Postmark API token
-        $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'] ?? '';
-        if (empty($postmarkApiToken)) {
-            echo '<div class="alert alert-danger p-4 text-center">Email sending configuration is missing.</div>';
-            $output_form = true;
-        } else {
-            $client = new PostmarkClient($postmarkApiToken);
+        if (empty($text)) {
+            $errors[] = 'Please provide the email body text.';
+        }
 
-            // Get the contact details from the database
-            $to = $contact['email'];
-            $first_name = $contact['first_name'];
-            $last_name = $contact['last_name'];
-
-            // Prepare the email body
-            $html_body = "<p>Dear " . h($first_name) . " " . h($last_name) . ",</p>" . $text;
-            $text_body = "Dear " . $first_name . " " . $last_name . ",\n\n" . strip_tags($text);
+        if (empty($errors)) {
+            $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'] ?? '';
+            
+            if (empty($postmarkApiToken)) {
+                throw new RuntimeException('Email sending configuration is missing.');
+            }
 
             try {
-                // Send email using Postmark
+                $client = new PostmarkClient($postmarkApiToken);
+
+                // Prepare email content
+                $html_body = "<p>Dear " . h($contact['first_name']) . " " . h($contact['last_name']) . ",</p>" . $text;
+                $text_body = "Dear " . $contact['first_name'] . " " . $contact['last_name'] . ",\n\n" . strip_tags($text);
+
+                // Send email
                 $sendResult = $client->sendEmail(
-                    $from,       // From email (verified sender)
-                    $to,         // To email
-                    $subject,    // Subject
-                    $html_body,  // HTML body
-                    $text_body   // Text body
+                    $from,
+                    $contact['email'],
+                    $subject,
+                    $html_body,
+                    $text_body
                 );
 
-                // Check the response for success
                 if ($sendResult->ErrorCode === 0) {
-                    echo '<div class="alert alert-success p-4 mb-0 text-center">Message sent successfully to: ' . h($to) . '</div>';
+                    $_SESSION['message'] = 'Message sent successfully.';
+                    redirect_to('/contacts/index.php');
                 } else {
-                    echo '<div class="alert alert-danger p-4 mb-0 text-center">Failed to send message: ' . h($sendResult->Message) . '</div>';
+                    throw new RuntimeException('Failed to send message: ' . $sendResult->Message);
                 }
             } catch (Exception $e) {
-                echo '<div class="alert alert-danger p-4 mb-0 text-center">An error occurred while sending the message: ' . h($e->getMessage()) . '</div>';
+                $errors[] = 'Failed to send message: ' . $e->getMessage();
             }
         }
     }
-} else {
-    $output_form = true;
-}
 
-$title = "Contact Message";
-$page_heading = "Contact Message";
-$page_subheading = "Send a message to your contact";
-$custom_class = "contact-message-page";
+    $title = "Send Message";
+    $page_heading = "Send Message";
+    $page_subheading = "Send a message to " . h($contact['first_name']) . " " . h($contact['last_name']);
+    $custom_class = "contact-message-page";
 
-include('../../templates/layouts/header.php');
+    // Start output buffering
+    ob_start();
+    
+    include('../../src/Views/templates/header.php');
 ?>
 
-    <script>
-        tinymce.init({
-            selector: 'textarea.wysiwyg',
-            plugins: [
-                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link',
-                'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount', 'code',
-            ],
-            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | ' +
-                'bullist numlist outdent indent | link image | code codesample',
-            menubar: false,
-            height: 600
-        });
-    </script>
+<div class="container py-5 <?php echo h($custom_class); ?>">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2"><?php echo h($page_heading); ?></h1>
+                <a class="btn btn-outline-primary" href="<?= $urlHelper->urlFor('/contacts/index.php'); ?>">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
 
-    <div class="container py-5 <?php echo h($custom_class); ?>">
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <?php foreach ($errors as $error): ?>
+                            <li><?php echo h($error); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
-        <section>
-            <?php include('../../templates/components/headline.php'); ?>
-        </section>
-
-        <div class="row">
-            <div class="col">
-
-                <section class="mb-4 d-none">
-                    <!-- Displaying user information securely -->
-                    <p>User Id: <?php echo h($_SESSION['user_id']); ?></p>
-                    <p>User Username: <?php echo h($_SESSION['username']); ?></p>
-                    <p>User First Name: <?php echo h($_SESSION['first_name']); ?></p>
-                </section>
-
-                <section>
-                    <div class="content w-75 mx-auto">
-                        <?php if ($output_form): ?>
-                            <form method="post" action="<?php echo url_for('/contacts/contact-message.php?id=' . h(u($contact['id']))); ?>" onsubmit="return validateForm();">
-
-                                <div class="h5">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name']); ?></div>
-                                <div class="h5 mb-3">Email Address: <?php echo h($contact['email']); ?></div>
-
-                                <hr>
-
-                                <div class="form-group">
-                                    <label for="subject">Subject</label>
-                                    <select class="form-control" name="subject" id="subject" required>
-                                        <option value="" disabled <?php echo $subject == '' ? 'selected' : ''; ?>>Select a subject</option>
-                                        <option value="Hello" <?php echo $subject == 'Hello' ? 'selected' : ''; ?>>Hello</option>
-                                        <option value="Compliment" <?php echo $subject == 'Compliment' ? 'selected' : ''; ?>>Compliment</option>
-                                        <option value="Insult" <?php echo $subject == 'Insult' ? 'selected' : ''; ?>>Insult</option>
-                                        <option value="Inquiry" <?php echo $subject == 'Inquiry' ? 'selected' : ''; ?>>Inquiry</option>
-                                        <option value="Sales Pitch" <?php echo $subject == 'Sales Pitch' ? 'selected' : ''; ?>>Sales Pitch</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="message">Your Message</label>
-                                    <textarea class="form-control wysiwyg" id="message" name="message" rows="5" ><?php echo h($text); ?></textarea>
-                                </div>
-
-                                <input class="btn btn-primary" type="submit" name="submit" value="Send Message" />
-                            </form>
-
-                            <script>
-                                function validateForm() {
-                                    tinymce.triggerSave();
-                                    var messageContent = document.getElementById('message').value.trim();
-                                    if (messageContent === '') {
-                                        alert('Please enter your message.');
-                                        return false; // Prevent form submission
-                                    }
-                                    return true; // Allow form submission
-                                }
-                            </script>
-                        <?php endif; ?>
+            <div class="card">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h3 class="h5">Recipient Details</h3>
+                        <p class="mb-1">
+                            <strong>Name:</strong> <?php echo h($contact['first_name']) . " " . h($contact['last_name']); ?>
+                        </p>
+                        <p class="mb-0">
+                            <strong>Email:</strong> <?php echo h($contact['email']); ?>
+                        </p>
                     </div>
-                </section>
-            </div><!-- end .col -->
-        </div><!-- end .row -->
 
-    </div><!-- end .container -->
-<?php include('../../templates/layouts/footer.php'); ?>
+                    <form method="post" action="<?= $urlHelper->urlFor('/contacts/contact-message.php?id=' . $contact['id']); ?>" 
+                          onsubmit="return validateForm();">
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select class="form-control" name="subject" id="subject" required>
+                                <option value="" disabled selected>Select a subject</option>
+                                <option value="Hello">Hello</option>
+                                <option value="Compliment">Compliment</option>
+                                <option value="Inquiry">Inquiry</option>
+                                <option value="Sales Pitch">Sales Pitch</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control wysiwyg" id="message" name="message" 
+                                      rows="10"><?php echo h($_POST['message'] ?? ''); ?></textarea>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    tinymce.init({
+        selector: 'textarea.wysiwyg',
+        plugins: [
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link',
+            'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount', 'code'
+        ],
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | ' +
+                'bullist numlist outdent indent | link image | code codesample',
+        menubar: false,
+        height: 400,
+        setup: function(editor) {
+            editor.on('change', function() {
+                editor.save();
+            });
+        }
+    });
+
+    function validateForm() {
+        tinymce.triggerSave();
+        var messageContent = document.getElementById('message').value.trim();
+        if (messageContent === '') {
+            alert('Please enter your message.');
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<?php
+    include('../../src/Views/templates/footer.php');
+    
+    // End output buffering and flush
+    ob_end_flush();
+} catch (Exception $e) {
+    // Log the error
+    error_log($e->getMessage());
+    // Clean output buffer
+    ob_end_clean();
+    // Redirect to error page
+    redirect_to('/error.php');
+}
+?>

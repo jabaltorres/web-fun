@@ -5,7 +5,6 @@ $isLoggedIn = $sessionHelper->isLoggedIn();
 $isAdmin = $userManager->isAdmin($sessionHelper->getCurrentUserId() ?? 0);
 $isDarkMode = $settingsManager->getSetting('dark_mode', false);
 
-
 // Get logo and site info from config
 $logoUrl = $config['site']['logo_url'] ?? '';
 $siteDisplayName = $config['site']['name'] ?? $siteName;
@@ -27,15 +26,21 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $htmlHelper->escape($siteName) ?></title>
     
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= $urlHelper->urlFor('/assets/css/style.css') ?>?v=<?= time() ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/9b6vdo6p51qb89toe164crjl7qyvmjbnp3qyv43i0d4wp3mw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
 </head>
 <body class="<?= $isDarkMode ? 'dark-mode' : '' ?>">
-    <header class="">
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="<?= $urlHelper->urlFor('/index.php') ?>">
@@ -87,5 +92,3 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
             <?= $htmlHelper->escape($sessionMessage) ?>
         </div>
     <?php endif; ?>
-</body>
-</html> 

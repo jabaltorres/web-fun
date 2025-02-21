@@ -433,3 +433,38 @@ body.dark-mode {
 }
 
 
+.card .fas {
+  font-size: 1rem;
+}
+
+
+/* Sortable table headers - Contacts */
+.sortable-header {
+  transition: background-color 0.2s ease;
+  text-decoration: none !important;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-radius: 0.25rem;
+}
+
+.sortable-header:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sort-icon {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.5;
+}
+
+.sortable-header:hover .sort-icon,
+th[aria-sort="ascending"] .sort-icon,
+th[aria-sort="descending"] .sort-icon {
+  opacity: 1;
+}
+
+/* Ensure consistent width for sort icons */
+.sort-icon .fas {
+  width: 1em;
+  text-align: center;
+} 

@@ -30,11 +30,13 @@ use Fivetwofive\KrateCMS\Models\KrateSettings;
 use Fivetwofive\KrateCMS\Controllers\RecordController;
 use Fivetwofive\KrateCMS\Models\Record;
 use Fivetwofive\KrateCMS\Services\UserManager;
+use Fivetwofive\KrateCMS\Services\ContactManager;
 use Fivetwofive\KrateCMS\Services\RecordService;
 use Fivetwofive\KrateCMS\Services\SocialLinksService;
 use Fivetwofive\KrateCMS\Services\AdminAuthService;
 use Fivetwofive\KrateCMS\Services\PageService;
 use Fivetwofive\KrateCMS\Services\SubjectService;
+use Fivetwofive\KrateCMS\Services\RankingService;
 
 // Initialize the application container
 $app = [];
@@ -93,6 +95,12 @@ $socialLinksService = new SocialLinksService($settingsManager, $htmlHelper);
 $recordService = new RecordService($dbConnection);
 $userManager = new UserManager($dbConnection, $_ENV['POSTMARK_API_TOKEN'] ?? null);
 
+// Initialize ContactManager
+$contactManager = new ContactManager($dbConnection);
+
+// Initialize RankingService
+$rankingService = new RankingService($dbConnection);
+
 // Site configuration with database settings integration
 $config = [
     'site' => [
@@ -114,8 +122,10 @@ $config = [
 $app['socialLinksService'] = $socialLinksService;
 $app['recordService'] = $recordService;
 $app['userManager'] = $userManager;
+$app['contactManager'] = $contactManager;
 $app['urlHelper'] = $urlHelper;
 $app['config'] = $config;
+$app['rankingService'] = $rankingService;
 
 // Add to service container
 $app['pageService'] = new PageService($app['databaseConnection']);

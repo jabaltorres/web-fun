@@ -1,133 +1,224 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/Fivetwofive/KrateCMS/UserManager.php');
+declare(strict_types=1);
 
-use Fivetwofive\KrateCMS\UserManager;
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
-// Initialize the UserManager with the existing $db connection
-$userManager = new UserManager($db);
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+// Get services from the container
+$contactManager = $app['contactManager'];
+$userManager = $app['userManager'];
+$urlHelper = $app['urlHelper'];
 
-if (!isset($_GET['id'])) {
-    redirect_to(url_for('/index.php'));
-}
-$id = $_GET['id'];
+use Fivetwofive\KrateCMS\Middleware\AuthMiddleware;
 
-if (is_post_request()) {
+try {
+    // Check authentication
+    AuthMiddleware::requireLogin($userManager);
 
-    $contact = [];
-    $contact['id'] = $id;
-    $contact['first_name'] = $_POST['first_name'] ?? '';
-    $contact['last_name'] = $_POST['last_name'] ?? '';
-    $contact['email'] = $_POST['email'] ?? '';
-    $contact['comments'] = $_POST['comments'] ?? '';
-    $contact['contact_number'] = $_POST['contact_number'] ?? '';
-    $contact['rank_id'] = $_POST['rank_id'] ?? '';
-    $contact['favorite'] = isset($_POST['favorite']) ? 1 : 0; // Add favorite status from checkbox
+    // Get contact ID from URL parameters
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    
+    if ($id === 0) {
+        throw new InvalidArgumentException('Invalid contact ID');
+    }
 
-    // File upload handling
-    if (!empty($_FILES['image']['name'])) {
-        $file_tmp = $_FILES['image']['tmp_name'];
-        $file_ext = strtolower(end(explode('.',$_FILES['image']['name'])));
+    $errors = [];
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Process form submission
+        $contact = [
+            'id' => $id,
+            'first_name' => $_POST['first_name'] ?? '',
+            'last_name' => $_POST['last_name'] ?? '',
+            'email' => $_POST['email'] ?? '',
+            'comments' => $_POST['comments'] ?? '',
+            'contact_number' => $_POST['contact_number'] ?? '',
+            'rank_id' => $_POST['rank_id'] ?? null,
+            'favorite' => isset($_POST['favorite']) ? 1 : 0
+        ];
 
-        $extensions= array("jpeg","jpg","png");
-        if(in_array($file_ext, $extensions) === false){
-            $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-        }
+        // Handle file upload
+        if (!empty($_FILES['image']['name'])) {
+            $uploadDir = __DIR__ . '/uploads/';
+            $fileInfo = pathinfo($_FILES['image']['name']);
+            $extension = strtolower($fileInfo['extension']);
 
-        if(empty($errors)==true){
-            $new_filename = uniqid('img_', true) . '.' . $file_ext;
-            $file_destination = 'uploads/' . $new_filename;
-            if(move_uploaded_file($file_tmp, $file_destination)) {
-                $contact['image'] = $new_filename;  // Update array to include image file name
+            // Validate file extension
+            $allowedExtensions = ['jpeg', 'jpg', 'png'];
+            if (!in_array($extension, $allowedExtensions, true)) {
+                throw new InvalidArgumentException('Invalid file type. Please upload a JPEG or PNG file.');
+            }
+
+            // Generate unique filename
+            $newFilename = uniqid('img_', true) . '.' . $extension;
+            $destination = $uploadDir . $newFilename;
+
+            // Move uploaded file
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $destination)) {
+                $contact['image'] = $newFilename;
             } else {
-                $errors[] = "Failed to move uploaded file.";
+                throw new RuntimeException('Failed to move uploaded file.');
             }
         }
-    }
 
-    $result = update_contact($contact);
-    if($result === true) {
-        redirect_to(url_for('/contacts/index.php'));
+        try {
+            $contactManager->updateContact($contact);
+            redirect_to(url_for('/contacts/index.php'));
+        } catch (InvalidArgumentException $e) {
+            $errors = explode(', ', $e->getMessage());
+        }
     } else {
-        $errors = $result;
-        //var_dump($errors);
+        // Fetch existing contact data
+        $contact = $contactManager->findContactById($id);
+        
+        if (!$contact) {
+            throw new RuntimeException('Contact not found');
+        }
     }
 
-} else {
+    $title = "Edit Contact";
+    $page_heading = "Edit Contact";
+    $page_subheading = "Update contact information";
+    $custom_class = "edit-contact-page";
 
-    $contact = find_contact_by_id($id);
-
-}
-
-$title = "Edit Contact";
-$page_heading = "Edit the contact";
-$page_subheading = "Test the database functionality";
-$custom_class = "edit-contact-page";
-
-include('../../templates/layouts/header.php');
-
+    include('../../src/Views/templates/header.php');
 ?>
 
-<div class="container py-5 <?php echo $custom_class; ?>">
+    <div class="container py-5 <?php echo h($custom_class); ?>">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h2"><?php echo h($page_heading); ?></h1>
+                    <a class="btn btn-outline-primary" href="<?php echo url_for('/contacts/index.php'); ?>">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
 
-    <section id="form-section">
-        <?php include('../../templates/components/headline.php'); ?>
+                <?php if (!empty($errors)): ?>
+                    <div class="alert alert-danger">
+                        <ul class="mb-0">
+                            <?php foreach ($errors as $error): ?>
+                                <li><?php echo h($error); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
 
-        <?php echo display_errors($errors); ?>
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-4 text-center mb-3">
+                                    <?php if (!empty($contact['image'])): ?>
+                                        <img src="<?php echo url_for('/contacts/uploads/' . h($contact['image'])); ?>" 
+                                             alt="Current contact image" 
+                                             class="img-fluid rounded mb-3">
+                                    <?php else: ?>
+                                        <img src="<?php echo url_for('/assets/images/no-image.png'); ?>" 
+                                             alt="No image available" 
+                                             class="img-fluid rounded mb-3">
+                                    <?php endif; ?>
+                                    
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="image" name="image">
+                                        <label class="custom-file-label" for="image">Choose file</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="favorite" 
+                                                   name="favorite" <?php echo ($contact['favorite'] ? 'checked' : ''); ?>>
+                                            <label class="custom-control-label" for="favorite">Mark as Favorite</label>
+                                        </div>
+                                    </div>
 
-        <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
+                                    <div class="form-group">
+                                        <label for="first_name">First Name</label>
+                                        <input type="text" class="form-control" id="first_name" name="first_name" 
+                                               value="<?php echo h($contact['first_name']); ?>" required>
+                                    </div>
 
-        <form id="form" method="post" action="<?php echo url_for('/contacts/contact-edit.php?id=' . h(u($id))); ?>" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="last_name">Last Name</label>
+                                        <input type="text" class="form-control" id="last_name" name="last_name" 
+                                               value="<?php echo h($contact['last_name']); ?>" required>
+                                    </div>
 
-            <div class="contact-image">
-                <img src="<?php echo url_for('contacts/uploads/' . $contact['image']); ?>" alt="image" class="mb-4" style="max-width: 200px; display: block; margin: 0 auto;">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" 
+                                               value="<?php echo h($contact['email']); ?>" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="contact_number">Contact Number</label>
+                                        <input type="tel" class="form-control" id="contact_number" name="contact_number" 
+                                               value="<?php echo h($contact['contact_number']); ?>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="comments">Comments</label>
+                                        <textarea class="form-control" id="comments" name="comments" 
+                                                  rows="3"><?php echo h($contact['comments']); ?></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="rank_id">Rank</label>
+                                        <select class="form-control" id="rank_id" name="rank_id">
+                                            <option value="">No Ranking</option>
+                                            <?php 
+                                            try {
+                                                $rankings = $app['rankingService']->getAllRankings();
+                                                foreach ($rankings as $ranking): 
+                                            ?>
+                                                <option value="<?php echo h($ranking['rank_id']); ?>"
+                                                    <?php echo ($contact['rank_id'] == $ranking['rank_id']) ? 'selected' : ''; ?>>
+                                                    <?php echo h($ranking['rank_description']); ?>
+                                                </option>
+                                            <?php 
+                                                endforeach;
+                                            } catch (Exception $e) {
+                                                error_log('Failed to load rankings: ' . $e->getMessage());
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-right mt-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <label for="favorite">Favorite:</label>
-            <input type="checkbox" id="favorite" name="favorite" <?php echo ($contact['favorite'] ? 'checked' : ''); ?>><br />
+    <script>
+        // Update file input label with selected filename
+        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+            var fileName = e.target.files[0].name;
+            var label = e.target.nextElementSibling;
+            label.innerHTML = fileName;
+        });
+    </script>
 
-            <label for="first_name">First name:</label>
-            <input type="text" name="first_name" value="<?php echo h($contact['first_name']); ?>" /><br />
-
-            <label for="last_name">Last name:</label>
-            <input type="text" name="last_name" value="<?php echo h($contact['last_name']); ?>" /><br />
-
-            <label for="contact_number">Contact Number:</label>
-            <input type="text" name="contact_number" value="<?php echo h($contact['contact_number']); ?>" /><br />
-
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value="<?php echo h($contact['email']); ?>" /><br />
-
-            <label for="comments">Comment:</label>
-            <textarea id="comments" name="comments"><?php echo h($contact['comments']); ?></textarea><br />
-
-            <label for="rank_id">Rank:</label>
-            <select name="rank_id" id="rank_id">
-                <!-- Option for no ranking -->
-                <option value="">No Ranking</option>
-                <?php
-                $rankings = find_all_rankings(); // Assume this function fetches ranking data correctly
-                foreach ($rankings as $ranking) {
-                    echo "<option value=\"" . h($ranking['rank_id']) . "\"";
-                    if (isset($contact['rank_id']) && $ranking['rank_id'] == $contact['rank_id']) {
-                        echo " selected";
-                    }
-                    echo ">" . h($ranking['rank_description']) . "</option>";
-                }
-                ?>
-            </select><br />
-
-            <label for="image">Upload Image:</label>
-            <input type="file" name="image" id="image"><br />
-
-            <input type="submit" name="submit" value="Edit Contact" id="button" class="btn btn-warning" />
-            <a class="btn btn-danger" href="<?php echo url_for('/contacts/contact-remove.php'); ?>">Delete Contact(s)</a>
-
-        </form>
-    </section>
-</div>
-
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php 
+    include('../../src/Views/templates/footer.php');
+} catch (Exception $e) {
+    // Log the error
+    error_log($e->getMessage());
+    // Redirect to error page
+    redirect_to('/error.php');
+}
+?>
