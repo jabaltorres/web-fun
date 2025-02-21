@@ -1,98 +1,206 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/Fivetwofive/KrateCMS/UserManager.php');
+declare(strict_types=1);
 
-use Fivetwofive\KrateCMS\UserManager;
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
-// Initialize the UserManager with the existing $db connection
-$userManager = new UserManager($db);
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+// Get services from the container
+$contactManager = $app['contactManager'];
+$userManager = $app['userManager'];
+$urlHelper = $app['urlHelper'];
+$sessionHelper = $app['sessionHelper'];
 
-$title = "DB Test Page";
-// this is for <title>
+use Postmark\PostmarkClient;
+use Fivetwofive\KrateCMS\Middleware\AuthMiddleware;
 
-$page_heading = "This is the DB Test page";
-// This is for breadcrumbs if I want a custom title other than the default
+try {
+    // Check authentication with admin requirement
+    AuthMiddleware::requireLogin($userManager, true);
 
-$page_subheading = "Welcome to the DB test page";
-// This is the subheading
+    $errors = [];
+    $success = false;
 
-$custom_class = "db-test-page";
-//custom CSS for this page only
-include('../../templates/layouts/header.php');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Sanitize and validate input data
+        $from = $_ENV['MAIL_FROM_ADDRESS'] ?? 'info@fivetwofive.com';
+        $subject = trim($_POST['subject'] ?? '');
+        $text = $_POST['message'] ?? '';
+
+        // Validate inputs
+        if (empty($subject)) {
+            $errors[] = 'Please provide an email subject.';
+        }
+        if (empty($text)) {
+            $errors[] = 'Please provide the email body text.';
+        }
+
+        if (empty($errors)) {
+            $postmarkApiToken = $_ENV['POSTMARK_API_TOKEN'] ?? '';
+            
+            if (empty($postmarkApiToken)) {
+                throw new RuntimeException('Email sending configuration is missing.');
+            }
+
+            try {
+                $client = new PostmarkClient($postmarkApiToken);
+                $contacts = $contactManager->findAllContacts('email');
+                $sentCount = 0;
+                $failedCount = 0;
+
+                while ($contact = $contacts->fetch_assoc()) {
+                    // Prepare email content for each contact
+                    $html_body = "<p>Dear " . h($contact['first_name']) . " " . h($contact['last_name']) . ",</p>" . $text;
+                    $text_body = "Dear " . $contact['first_name'] . " " . $contact['last_name'] . ",\n\n" . strip_tags($text);
+
+                    try {
+                        // Send email
+                        $sendResult = $client->sendEmail(
+                            $from,
+                            $contact['email'],
+                            $subject,
+                            $html_body,
+                            $text_body
+                        );
+
+                        if ($sendResult->ErrorCode === 0) {
+                            $sentCount++;
+                        } else {
+                            $failedCount++;
+                            error_log("Failed to send to {$contact['email']}: {$sendResult->Message}");
+                        }
+                    } catch (Exception $e) {
+                        $failedCount++;
+                        error_log("Error sending to {$contact['email']}: " . $e->getMessage());
+                    }
+                }
+
+                if ($sentCount > 0) {
+                    $success = true;
+                    $_SESSION['message'] = "Successfully sent {$sentCount} messages" . 
+                                         ($failedCount > 0 ? " ({$failedCount} failed)" : "");
+                } else {
+                    throw new RuntimeException('Failed to send any messages');
+                }
+            } catch (Exception $e) {
+                $errors[] = 'Failed to send messages: ' . $e->getMessage();
+            }
+        }
+    }
+
+    $title = "Mass Email";
+    $page_heading = "Send Mass Email";
+    $page_subheading = "Send an email to all contacts";
+    $custom_class = "contact-blast-page";
+
+    // Start output buffering
+    ob_start();
+    
+    include('../../src/Views/templates/header.php');
 ?>
-    <div class="container py-5 <?php echo $custom_class; ?>">
 
-  <section>
-    <h2 class="h3"><span class="font-weight-bold">Private:</span> For Test use ONLY</h2>
-    <p>Write and send an email to contact list members.</p>
+<div class="container py-5 <?php echo h($custom_class); ?>">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2"><?php echo h($page_heading); ?></h1>
+                <a class="btn btn-outline-primary" href="<?= $urlHelper->urlFor('/contacts/index.php'); ?>">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
 
-      <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo; Back to List</a>
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Warning:</strong> This will send an email to all contacts in the system.
+            </div>
 
-    <?php
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <?php foreach ($errors as $error): ?>
+                            <li><?php echo h($error); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
-      if (isset($_POST['submit'])) {
-        $from = 'jabaltorre@gmail.com';
-        $subject = $_POST['subject'];
-        $text = $_POST['emailtext'];
-        $output_form = false;
+            <?php if ($success): ?>
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> Messages sent successfully!
+                </div>
+            <?php endif; ?>
 
-        if (empty($subject) && empty($text)) {
-          // We know both $subject AND $text are blank
-          echo '<div class="border border-warning p-4 mb-4">You forgot the email subject and body text.</div>';
-          $output_form = true;
-        }
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" action="<?= $urlHelper->urlFor('/contacts/contact-blast.php'); ?>" 
+                          onsubmit="return validateForm();">
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" class="form-control" id="subject" name="subject" 
+                                   value="<?= h($_POST['subject'] ?? ''); ?>" required>
+                        </div>
 
-        if (empty($subject) && (!empty($text))) {
-            echo '<div class="border border-warning p-4 mb-4">You forgot the email subject.</div>';
-          $output_form = true;
-        }
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control wysiwyg" id="message" name="message" 
+                                      rows="10"><?php echo h($_POST['message'] ?? ''); ?></textarea>
+                        </div>
 
-        if ( (!empty($subject)) && empty($text) ) {
-            echo '<div class="border border-warning p-4 mb-4">You forgot the email body text.</div>';
-          $output_form = true;
-        }
-
-      } else {
-        $output_form = true;
-        $subject = '';
-        $text = '';
-      }
-
-      if ( (!empty($subject)) && (!empty($text)) ) {
-        $dbc = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME)
-          or die('Error connecting to MySQL server.');
-
-        $query = "SELECT * FROM contact_list";
-        $result = mysqli_query($dbc, $query)
-          or die('Error querying database.');
-
-        while ($row = mysqli_fetch_array($result)){
-          $to = $row['email'];
-          $first_name = $row['first_name'];
-          $last_name = $row['last_name'];
-          $msg = "Dear $first_name $last_name,\n$text";
-          mail($to, $subject, $msg, 'From:' . $from);
-          echo 'Email sent to: ' . $to . '<br />';
-        }
-
-        mysqli_close($dbc);
-      }
-    ?>
-
-    <?php if ($output_form): ?>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <label for="subject">Subject of email:</label>
-            <input id="subject" name="subject" type="text" value="<?php echo $subject; ?>" size="30" />
-            <label for="emailtext">Body of email:</label>
-            <textarea id="email-text" name="emailtext" rows="8" cols="40"><?php echo $text; ?></textarea>
-            <input class="btn btn-primary" type="submit" name="submit" value="Submit" />
-        </form>
-    <?php endif; ?>
-
-  </section>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Send to All Contacts
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<?php include('../../templates/layouts/footer.php'); ?>
+<script>
+    tinymce.init({
+        selector: 'textarea.wysiwyg',
+        plugins: [
+            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link',
+            'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount', 'code'
+        ],
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | ' +
+                'bullist numlist outdent indent | link image | code codesample',
+        menubar: false,
+        height: 400,
+        setup: function(editor) {
+            editor.on('change', function() {
+                editor.save();
+            });
+        }
+    });
+
+    function validateForm() {
+        tinymce.triggerSave();
+        var messageContent = document.getElementById('message').value.trim();
+        if (messageContent === '') {
+            alert('Please enter your message.');
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<?php
+    include('../../src/Views/templates/footer.php');
+    
+    // End output buffering and flush
+    ob_end_flush();
+} catch (Exception $e) {
+    // Log the error
+    error_log($e->getMessage());
+    // Clean output buffer
+    ob_end_clean();
+    // Redirect to error page
+    redirect_to('/error.php');
+}
+?>

@@ -1,99 +1,148 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/initialize.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/../src/Fivetwofive/KrateCMS/UserManager.php');
+declare(strict_types=1);
 
-use Fivetwofive\KrateCMS\UserManager;
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
-// Initialize the UserManager with the existing $db connection
-$userManager = new UserManager($db);
+// Load bootstrap and get application container
+$app = require_once(__DIR__ . '/../../config/bootstrap.php');
 
-// Ensure the user is logged in
-$userManager->checkLoggedIn();
+// Get services from the container
+$contactManager = $app['contactManager'];
+$userManager = $app['userManager'];
+$urlHelper = $app['urlHelper'];
 
-if (!isset($_GET['id'])) {
-    redirect_to(url_for('/staff/subjects/index.php'));
-}
-$id = $_GET['id'];
+use Fivetwofive\KrateCMS\Middleware\AuthMiddleware;
 
-if (is_post_request()) {
-    $result = delete_contact($id);
-    redirect_to(url_for('/contacts/index.php'));
-} else {
-    $subject = find_contact_by_id($id);
-}
+try {
+    // Check authentication
+    AuthMiddleware::requireLogin($userManager);
 
-$contact = find_contact_by_id($id);
+    // Get contact ID from URL parameters
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    
+    if ($id === 0) {
+        throw new InvalidArgumentException('Invalid contact ID');
+    }
 
-$title = "DB Test | Delete Contact";
-// this is for <title>
+    // Handle POST request (actual deletion)
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        try {
+            if ($contactManager->deleteContact($id)) {
+                $_SESSION['message'] = 'Contact deleted successfully';
+                redirect_to('/contacts/index.php');
+            }
+        } catch (Exception $e) {
+            error_log('Failed to delete contact: ' . $e->getMessage());
+            $_SESSION['error'] = 'Failed to delete contact';
+            redirect_to('/contacts/index.php');
+        }
+    }
 
-$page_heading = "Delete Contact";
-// This is for breadcrumbs if I want a custom title other than the default
+    // Fetch contact data for confirmation page
+    $contact = $contactManager->findContactById($id);
+    
+    if (!$contact) {
+        throw new RuntimeException('Contact not found');
+    }
 
-$page_subheading = "Welcome to the DB test page";
-// This is the subheading
+    $title = "Delete Contact";
+    $page_heading = "Delete Contact";
+    $page_subheading = "Confirm contact deletion";
+    $custom_class = "delete-contact-page";
 
-$custom_class = "db-test-page";
-//custom CSS for this page only
-
-include('../../templates/layouts/header.php');
+    // Start output buffering
+    ob_start();
+    
+    include('../../src/Views/templates/header.php');
 ?>
 
-  <div class="container py-5 <?php echo $custom_class; ?>">
-
-    <section>
-        <?php include('../../templates/components/headline.php'); ?>
-        <?php include('../../templates/components/nav_contacts.php'); ?>
-    </section>
-
+<div class="container py-5 <?php echo h($custom_class); ?>">
     <div class="row">
-      <div class="col">
-        <section>
-          <div id="content" class="">
-            <a class="btn btn-outline-info mb-4 font-weight-bold" href="<?php echo url_for('/contacts/index.php'); ?>">&laquo;
-              Back to List</a>
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2"><?php echo h($page_heading); ?></h1>
+                <a class="btn btn-outline-primary" href="<?= $urlHelper->urlFor('/contacts/index.php'); ?>">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
 
-            <div class="contact show mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Warning:</strong> This action cannot be undone.
+                    </div>
 
-              <h1 class="h3 text-danger font-weight-bold">Delete Contact</h1>
-              <p>Are you sure you want to delete this contact?</p>
+                    <h2 class="h4 mb-4">Are you sure you want to delete this contact?</h2>
 
-              <form action="<?php echo url_for('/contacts/contact-delete.php?id=' . h(u($contact['id']))); ?>"
-                    method="post">
+                    <dl class="row">
+                        <dt class="col-sm-3">Name</dt>
+                        <dd class="col-sm-9">
+                            <?php echo h($contact['first_name']) . " " . h($contact['last_name']); ?>
+                        </dd>
 
-                <p class="h4">Contact: <?php echo h($contact['first_name']) . " " . h($contact['last_name']); ?></p>
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9">
+                            <?php if ($contact['email']): ?>
+                                <a href="mailto:<?php echo h($contact['email']); ?>">
+                                    <?php echo h($contact['email']); ?>
+                                </a>
+                            <?php else: ?>
+                                <span class="text-muted">No email address</span>
+                            <?php endif; ?>
+                        </dd>
 
-                <div class="attributes mb-4">
-                  <dl class="mb-2">
-                    <dt>First Name</dt>
-                    <dd class="font-weight-bold h5"><?php echo h($contact['first_name']); ?></dd>
-                  </dl>
-                  <dl class="mb-2">
-                    <dt>Last Name</dt>
-                    <dd class="font-weight-bold h5"><?php echo h($contact['last_name']); ?></dd>
-                  </dl>
-                  <dl class="mb-2">
-                    <dt>Email</dt>
-                    <dd class="font-weight-bold h5"><?php echo h($contact['email']); ?></dd>
-                  </dl>
+                        <dt class="col-sm-3">Contact Number</dt>
+                        <dd class="col-sm-9">
+                            <?php if ($contact['contact_number']): ?>
+                                <a href="tel:<?php echo h($contact['contact_number']); ?>">
+                                    <?php echo h($contact['contact_number']); ?>
+                                </a>
+                            <?php else: ?>
+                                <span class="text-muted">No contact number</span>
+                            <?php endif; ?>
+                        </dd>
 
-                  <dl class="mb-2">
-                    <dt>Comments</dt>
-                    <dd class="font-weight-bold h5"><?php echo h($contact['comments']); ?></dd>
-                  </dl>
-                </div><!-- end .attributes -->
+                        <?php if ($contact['comments']): ?>
+                            <dt class="col-sm-3">Comments</dt>
+                            <dd class="col-sm-9">
+                                <?php echo h($contact['comments']); ?>
+                            </dd>
+                        <?php endif; ?>
+                    </dl>
 
-                <div id="operations">
-                  <input type="submit" name="commit" class="btn btn-danger" value="Delete Contact"/>
+                    <form action="<?= $urlHelper->urlFor('/contacts/contact-delete.php?id=' . $contact['id']); ?>" 
+                          method="post" 
+                          class="mt-4">
+                        <div class="d-flex justify-content-between">
+                            <a href="<?= $urlHelper->urlFor('/contacts/index.php'); ?>" 
+                               class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Delete Contact
+                            </button>
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-              </form>
-            </div><!-- end .contact -->
-
-          </div><!-- end #content -->
-        </section>
-      </div><!-- end .col -->
-    </div><!-- end .row -->
-
-  </div><!-- end .container -->
-<?php include('../../templates/layouts/footer.php'); ?>
+<?php
+    include('../../src/Views/templates/footer.php');
+    
+    // End output buffering and flush
+    ob_end_flush();
+} catch (Exception $e) {
+    // Log the error
+    error_log($e->getMessage());
+    // Clean output buffer
+    ob_end_clean();
+    // Redirect to error page
+    redirect_to('/error.php');
+}
+?>
