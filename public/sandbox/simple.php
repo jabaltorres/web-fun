@@ -1,7 +1,6 @@
 <html>
     <head>
         <link rel="stylesheet" href="/assets/css/style.css">
-        <link rel="stylesheet" href="/assets/css/public.css">
     </head>
     <body id="page-scratch" class="">
         <div class="container py-5">

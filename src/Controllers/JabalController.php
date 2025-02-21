@@ -11,34 +11,34 @@ class JabalController
     private string $title;
     private string $description;
     private string $bodyClass;
-    private string $first_name; 
-    private string $last_name;
-    private string $email;
-    private string $phone;
-    private string $message;
+    private string $user_first_name; 
+    private string $user_last_name;
+    private string $user_email;
+    private string $user_phone;
+    private string $user_message;
     private \Twig\Environment $twig;
     
-    public function __construct(string $first_name, string $last_name, string $email, string $phone, string $message, \Twig\Environment $twig, string $title, string $description, string $bodyClass)
+    public function __construct(array $jabal_data, \Twig\Environment $twig, array $page_data)
     {
-        $this->first_name = $first_name;
-        $this->last_name = $last_name;
-        $this->email = $email;
-        $this->phone = $phone;
-        $this->message = $message;
-        $this->title = $title;
-        $this->description = $description;
-        $this->bodyClass = $bodyClass;
+        $this->user_first_name = $jabal_data['first_name'];
+        $this->user_last_name = $jabal_data['last_name'];
+        $this->user_email = $jabal_data['email'];
+        $this->user_phone = $jabal_data['phone'];
+        $this->user_message = $jabal_data['message'];
+        $this->title = $page_data['title'];
+        $this->description = $page_data['description'];
+        $this->bodyClass = $page_data['bodyClass'];
         $this->twig = $twig;
     }
 
     private function getViewData(): array
     {
         return [
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'message' => $this->message,
+            'user_first_name' => $this->user_first_name,
+            'user_last_name' => $this->user_last_name,
+            'user_email' => $this->user_email,
+            'user_phone' => $this->user_phone,
+            'user_message' => $this->user_message,
             'title' => $this->title,
             'description' => $this->description,
             'bodyClass' => $this->bodyClass,

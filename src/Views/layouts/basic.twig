@@ -11,7 +11,6 @@
         
         {# CSS #}
         <link rel="stylesheet" href="/assets/css/style.css">
-        <link rel="stylesheet" href="/assets/css/public.css">
         
         {# Additional CSS #}
         {% block styles %}{% endblock %}
@@ -21,7 +20,7 @@
         {% include 'components/header.twig' %}
         
         {# Main Content #}
-        <main id="main-content">
+        <main id="main-content" class="mb-2">
             {% block content %}
             <!-- Default content can go here -->
             {% endblock %}

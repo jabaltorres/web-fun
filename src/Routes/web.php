@@ -49,16 +49,22 @@ $router->get('/admin/index', function() use ($app) {
 
 // Jabal route
 $router->get('/jabal', function() use ($app) {
-    $first_name = 'John';
-    $last_name = 'Doe';
-    $email = 'john.doe@example.com';
-    $phone = '123-456-7890';
-    $message = 'Hello, world!';
-    $title = 'Jabal Page';
-    $description = 'This is the Jabal page';
-    $bodyClass = 'jabal-page';
-    
+
+    $jabal_data = [
+        'first_name' => 'John',
+        'last_name' => 'Doe',
+        'email' => 'john.doe@example.com',
+        'phone' => '123-456-7890',
+        'message' => 'Hello, world!',
+    ];
+
+    $page_data = [
+        'title' => 'Jabal Page',
+        'description' => 'This is the Jabal page',
+        'bodyClass' => 'jabal-page',
+    ];
+
     // Pass the individual parameters and Twig environment to the JabalController constructor
-    $jabalController = new JabalController($first_name, $last_name, $email, $phone, $message, $app['twig'], $title, $description, $bodyClass);
+    $jabalController = new JabalController($jabal_data, $app['twig'], $page_data);
     $jabalController->index();
 });
