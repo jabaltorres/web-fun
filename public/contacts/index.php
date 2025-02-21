@@ -80,6 +80,9 @@ try {
                 <a href="contact-add.php" class="btn btn-success">
                     <i class="fas fa-plus"></i> Add New Contact
                 </a>
+                <a href="contact-blast.php" class="btn btn-dark">
+                    <i class="fas fa-envelope"></i> Email Blast
+                </a>
             </div>
         </div>
 
