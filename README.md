@@ -1,30 +1,56 @@
 # To install:  
-- Clone the repo. I have this project located in my `Sites` directory.
 - `cd` into the directory and run `npm install`.
 - After all of the dependencies have been installed run `gulp`.
 - All of the processes will run and should open a new browser tab to `localhost:3000`.
 - You're good to go.
 
 ## DB Credentials
-db_credentials.php has been ignored. It should live in `private/db_credentials` and look like this:
-
-    <?php
-        if ($server_name == $enviro_prod){
-            define ("DB_SERVER", "000.000.000.000");
-            define ("DB_USER", "YOUR NAME");
-            define ("DB_PASS", "YOUR PASS");
-            define ("DB_NAME", "YOUR DB NAME");
-        } else {
-            define ("DB_SERVER", "localhost");
-            define ("DB_USER", "root");
-            define ("DB_PASS", "root");
-            define ("DB_NAME", "lorem_test_db");
-        }
-    ?>
+- .env file has been added to the root of the project.
  
 ## Notes
-- I'm currently using Node version 18 on my iMac to  is to run gulp locally.
-- This codebase is a work in progress. I'm currently working on the `users` section of the site.
 - This project uses Bootstrap 4.6.2 and jQuery 3.7.1.
-- I had to export the database from the production server and import it into my local iMac environment.
-- On my PC, I had to use `ddev exec mysqldump -u root -proot kratecms > kratecms.sql` to export the database.
+- Use `ddev exec mysqldump -u root -proot db > db.sql` to export the database.
+
+=======================================================
+
+# KrateCMS
+
+**Welcome to KrateCMS**  
+KrateCMS is a lightweight, flexible content management system designed to help users efficiently manage data and content. Built for scalability and ease of use, KrateCMS empowers both individuals and businesses to organize their information with minimal technical effort. Whether you're tracking personal collections or managing large-scale projects, KrateCMS provides the tools to handle it all.
+
+## Features
+- **Customizable Content Types**: Define and organize content to fit your unique needs.
+- **User Role Management**: Control access and permissions with a simple role-based system.
+- **Search and Filter**: Quickly find and sort through data with advanced search functionalities.
+- **Secure Cloud Hosting**: Safeguard your data with modern security practices and reliable cloud infrastructure.
+
+## Installation
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/username/kratecms.git
+   ```
+2. Navigate into the project directory:  
+   ```bash
+   cd kratecms
+   ```
+3. Install dependencies using Composer:  
+   ```bash
+   composer install
+   ```
+4. Set up your database and configure the `.env` file with your database credentials.
+
+5. Run the database migrations:  
+   ```bash
+   php artisan migrate
+   ```
+
+6. Start the development server:  
+   ```bash
+   php -S localhost:8000
+   ```
+
+## Contributing
+We welcome contributions to KrateCMS! If you have ideas for new features or improvements, feel free to submit a pull request. Please review our contributing guidelines before submitting any changes.
+
+## License
+KrateCMS is licensed under the MIT License. For more details, refer to the LICENSE file.

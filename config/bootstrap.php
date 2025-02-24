@@ -33,7 +33,6 @@ use Fivetwofive\KrateCMS\Services\UserManager;
 use Fivetwofive\KrateCMS\Services\ContactManager;
 use Fivetwofive\KrateCMS\Services\RecordService;
 use Fivetwofive\KrateCMS\Services\SocialLinksService;
-use Fivetwofive\KrateCMS\Services\AdminAuthService;
 use Fivetwofive\KrateCMS\Services\PageService;
 use Fivetwofive\KrateCMS\Services\SubjectService;
 use Fivetwofive\KrateCMS\Services\RankingService;
@@ -82,7 +81,6 @@ $htmlHelper = new HtmlHelper();
 $sessionHelper = new SessionHelper();
 $requestHelper = new RequestHelper();
 $validationService = new ValidationService();
-$adminAuthService = new AdminAuthService();
 
 // Add helpers to the app container
 $app['requestHelper'] = $requestHelper;
@@ -128,14 +126,11 @@ $app['config'] = $config;
 $app['rankingService'] = $rankingService;
 
 // Add to service container
-$app['pageService'] = new PageService($app['databaseConnection']);
-$app['subjectService'] = new SubjectService($app['databaseConnection']);
+// $app['pageService'] = new PageService($app['databaseConnection']);
+// $app['subjectService'] = new SubjectService($app['databaseConnection']);
 
 // Define path constants
 define('PRIVATE_PATH', ROOT_PATH . '/src');
-// define('STYLES_PATH', $baseUrl . '/assets/css');
-// define('SCRIPTS_PATH', $baseUrl . '/assets/js');
-define('IMAGES_PATH', $baseUrl . '/assets/images');
 
 // Initialize Twig
 $loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . '/src/Views');

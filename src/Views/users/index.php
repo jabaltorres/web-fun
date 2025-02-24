@@ -24,9 +24,16 @@ use Fivetwofive\KrateCMS\Controllers\UserController;
         </section>
 
         <section class="mb-4">
-            User ID: <?php echo $_SESSION['user_id'] . '</br>'; ?>
-            Username: <?php echo $_SESSION['username'] . '</br>'; ?>
-            Role: <?php echo $_SESSION['role'] ?? 'No role'; ?><br>
+            <div>
+                User ID: <?php echo $_SESSION['user_id']; ?>
+            </div>
+            <div>
+                Username: <?php echo $_SESSION['username']; ?>
+            </div>
+            <div class="mb-3">
+                Role: <?php echo $_SESSION['role'] ?? 'No role'; ?>
+            </div>
+            <a class="btn btn-primary" href="user-add.php">Add User</a>
         </section>
     <?php endif; ?>
 
