@@ -25,14 +25,8 @@ const paths = {
         src: [
             "public/assets/js/vendor/jquery-3.2.1.min.js",
             "public/assets/js/vendor/modernizr-3.5.0.min.js",
-            "public/assets/js/vendor/mustache-2.3.0.min.js",
             "public/assets/js/vendor/bootstrap.js",
-            "public/assets/js/vendor/slick.min.js",
-            "public/assets/js/vendor/spin.min.js",
             "public/assets/js/plugins.js",
-            "public/assets/js/bigFlipper.js",
-            "public/assets/js/hostInfo.js",
-            "public/assets/js/toolTips.js",
             "public/assets/js/app.js",
         ],
         lint: [

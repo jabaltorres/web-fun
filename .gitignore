@@ -24,3 +24,6 @@ composer.lock
 # Ignore Records uploads
 /public/records/uploads/
 /public/uploads/
+
+# Ignore Contacts uploads
+/public/contacts/uploads/

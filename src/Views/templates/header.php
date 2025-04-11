@@ -58,7 +58,7 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
-                        <li><?php include(ROOT_PATH . '/src/Views/partials/nav/nav_main.php'); ?></li>
+                
                         <?php if ($isAdmin): ?>
                             <li class="nav-item">
                                 <a href="<?= $urlHelper->urlFor('/admin/dashboard') ?>" class="btn btn-secondary">
@@ -85,10 +85,8 @@ $siteDisplayName = $config['site']['name'] ?? $siteName;
         <?php include(ROOT_PATH . '/templates/components/nav_admins.php'); ?>
     <?php endif; ?>
 
-    <?php 
-    $sessionMessage = $sessionHelper->getAndClearMessage();
-    if ($sessionMessage): ?>
-        <div id="message" class="alert alert-success" role="alert">
+    <?php $sessionMessage = $sessionHelper->getAndClearMessage(); if ($sessionMessage): ?>
+        <div id="message" class="alert alert-success container" role="alert">
             <?= $htmlHelper->escape($sessionMessage) ?>
         </div>
     <?php endif; ?>
